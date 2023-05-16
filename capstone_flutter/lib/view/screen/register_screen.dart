@@ -14,7 +14,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         title: Text('Register'),
       ),
-      body: SafeArea(child: Column()),
+      body: SafeArea(
+          child: Column(
+        children: [Text('Hi'), Text('Ngantuk')],
+      )),
     );
   }
 }
