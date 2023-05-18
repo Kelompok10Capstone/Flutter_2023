@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HelpScreen()));
+                                builder: (context) => HelpScreen()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
