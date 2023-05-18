@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/profile_screen/profile_screen.dart';
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const ProfileScreen(),
     );
   }
 }

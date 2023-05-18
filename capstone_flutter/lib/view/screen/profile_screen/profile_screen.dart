@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -10,6 +11,196 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Profil',
+          style: blackFont18.copyWith(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+              width: 80,
+              child: Image.asset('assets/profile.png'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Ijat Sutrisno',
+              style: blackFont16,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              '082267548923',
+              style: blackFont16.copyWith(
+                  fontSize: 14, fontWeight: FontWeight.w400),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 70,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: blueColor),
+              ),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  'Ubah Profile',
+                  style: TextStyle(
+                    fontSize: 8,
+                    fontWeight: FontWeight.w400,
+                    color: blueColor,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24, right: 24),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 190,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 15, bottom: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Pengaturan Keamanan',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 15, bottom: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Syarat dan Ketentuan',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 15, bottom: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Kebijakan Keamanan',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 15, bottom: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Bantuan',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 200,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 52,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(blueColor)),
+                    onPressed: () {},
+                    child: Text(
+                      'Keluar',
+                      style: whiteFont14,
+                    )),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
