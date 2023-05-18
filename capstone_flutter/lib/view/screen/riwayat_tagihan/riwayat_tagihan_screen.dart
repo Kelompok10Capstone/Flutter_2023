@@ -12,11 +12,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Riwayat Tagihan'),
       ),
       body: SafeArea(
           child: Column(
-        children: [Text('Hi'), Text('Ngantuk')],
+        children: [Text('Hi'), Text('Makan')],
       )),
     );
   }
