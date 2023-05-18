@@ -44,7 +44,15 @@ class _PdamScreenState extends State<PdamScreen> {
               TextField(
                 controller: wilayahController,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegionScreen()));
+                    },
+                    child: const Icon(Icons.search),
+                  ),
                   hintText: 'Cari Wilayah',
                   filled: false,
                   border: OutlineInputBorder(
