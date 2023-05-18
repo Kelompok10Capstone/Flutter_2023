@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
+import 'package:capstone_flutter/view/screen/profile_screen/change_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'Profil',
           style: blackFont18.copyWith(color: Colors.black),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
@@ -57,7 +59,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 border: Border.all(color: blueColor),
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChangeProfileScreen()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   elevation: 0,
@@ -177,27 +185,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 200,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 52,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 30),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(blueColor),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Keluar',
+                        style: whiteFont14,
+                      ),
+                    ),
+                  ),
                 ),
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(blueColor)),
-                    onPressed: () {},
-                    child: Text(
-                      'Keluar',
-                      style: whiteFont14,
-                    )),
               ),
-            )
+            ),
           ],
         ),
       ),
