@@ -1,5 +1,6 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/change_profile_screen.dart';
+import 'package:capstone_flutter/view/screen/profile_screen/security_policy_screen.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/security_setting_screen.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/terms_condition_screen.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SecurityPolicyScreen()));
+                      },
                       child: Padding(
                         padding: const EdgeInsets.only(
                             left: 10, top: 15, bottom: 15, right: 15),
