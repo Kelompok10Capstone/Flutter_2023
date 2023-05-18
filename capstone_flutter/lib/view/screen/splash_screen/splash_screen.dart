@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
 import '../onboarding_screen/onboarding_screen.dart';
 
-class SplashScreem extends StatefulWidget {
-  const SplashScreem({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SplashScreem> createState() => _SplashScreemState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreemState extends State<SplashScreem> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
