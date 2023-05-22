@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/pdam_screen/pin_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
@@ -200,10 +201,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               backgroundColor: MaterialStateProperty.all(blueColor),
             ),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const PaymentDetail()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const PinScreen()));
             },
             child: Text(
               'Yuk Bayar!',
