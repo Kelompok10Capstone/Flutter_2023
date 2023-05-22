@@ -1,8 +1,11 @@
+import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
+  static const String route = "/onboarding";
 
   @override
   // ignore: library_private_types_in_public_api
@@ -14,9 +17,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   final List<String> imagePaths = [
-    'assets/onboarding1.png',
-    'assets/onboarding2.png',
-    'assets/onboarding3.png',
+    'assets/images/ic_onboarding1.png',
+    'assets/images/ic_onboarding2.png',
+    'assets/images/ic_onboarding3.png',
   ];
 
   final List<String> titles = [
@@ -30,6 +33,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     'Skuypay sudah melakukan tahapan pengujian\nkeamanan oleh tim hacker internasional',
     'Lebih mudah dalam melakukan semua pembayaran\nserta aman dan terintegrasi',
   ];
+
+  // untuk skip onbording ke register
+  _storeOnboardingInfo() async {
+    print('Shared pref called');
+    int isViewed = 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+    print(prefs.getInt('onBoard'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +82,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(blueColor),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       'Daftar',
                       style: whiteFont14,
@@ -80,20 +98,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           if (_currentPage == 2)
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(
+                top: 20,
+                bottom: 20,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Sudah punya akun? ',
-                    style: blackFont16.copyWith(fontSize: 12),
+                    style: blackFont16.copyWith(
+                      fontSize: 12,
+                    ),
                   ),
                   InkWell(
                     onTap: () {},
                     child: Text(
                       'Masuk',
-                      style:
-                          blackFont16.copyWith(fontSize: 12, color: blueColor),
+                      style: blackFont16.copyWith(
+                        fontSize: 12,
+                        color: blueColor,
+                      ),
                     ),
                   ),
                 ],
@@ -118,10 +143,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 top: 52,
                 right: 26,
                 child: index < 2
-                    ? Text('Lewati',
-                        style: blackFont16.copyWith(
-                          color: index == 0 ? Colors.white : Colors.black,
-                        ))
+                    ? TextButton(
+                        onPressed: () {
+                          /// skip onboarding -> daftar
+                          _storeOnboardingInfo();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(),
+                            ),
+                          );
+                        },
+                        child: Text('Lewati',
+                            style: blackFont16.copyWith(
+                              color: index == 0 ? Colors.white : Colors.black,
+                            )))
                     : Container(),
               ),
             ],
@@ -138,7 +173,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           style: blackFont16.copyWith(fontWeight: FontWeight.w400),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 233),
+        const SizedBox(height: 100),
       ],
     );
   }
@@ -154,7 +189,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget buildIndicator(int index) {
-    double size = 8.0;
+    double size = 15.0;
     bool isCurrentPage = index == _currentPage;
     return Container(
       width: size,
