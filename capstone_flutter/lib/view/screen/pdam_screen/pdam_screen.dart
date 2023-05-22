@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/pdam_screen/payment_detail.dart';
 import 'package:capstone_flutter/view/screen/pdam_screen/region_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -109,7 +110,7 @@ class _PdamScreenState extends State<PdamScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const RegionScreen()));
+                      builder: (context) => const PaymentDetail()));
             },
             child: Text(
               'Lanjutkan',
