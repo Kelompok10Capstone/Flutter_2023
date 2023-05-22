@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/const/theme.dart';
 import '../onboarding_screen/onboarding_screen.dart';
@@ -41,9 +42,17 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/logo_skuypay.png',
+                'assets/images/ic_logo_skuypay.png',
                 width: 210,
                 height: 299,
+              ),
+              Text(
+                'SkuyPay',
+                style: GoogleFonts.roboto(
+                  color: const Color(0xff2B3990),
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(
                 height: 162,
@@ -66,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                 width: 134,
                 height: 30,
-                child: Image.asset('assets/logo_bawah.png'),
+                child: Image.asset('assets/images/ic_logo_bawah.png'),
               )
             ],
           ),
