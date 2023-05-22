@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/pdam_screen/success_transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,8 +19,8 @@ class _IlustrationSuccessState extends State<IlustrationSuccess> {
       body: Column(
         children: [
           Padding(
-            padding:
-                const EdgeInsets.only(top: 200, bottom: 0, left: 50, right: 50),
+            padding: const EdgeInsets.only(
+                top: 200, bottom: 10, left: 66, right: 66),
             child: Image.asset(
               'assets/cihuy_selamat.png',
             ),
@@ -48,10 +49,10 @@ class _IlustrationSuccessState extends State<IlustrationSuccess> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const PaymentDetail()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SuccessTransaction()));
             },
             child: Text(
               'Cek Transaksi',
