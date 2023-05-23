@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/view/screen/register_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
+import '../login_screen/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -171,7 +172,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: blackText12,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Masuk',
                         style: blueFont12,
