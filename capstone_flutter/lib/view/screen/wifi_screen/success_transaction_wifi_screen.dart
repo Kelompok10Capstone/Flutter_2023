@@ -57,7 +57,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
                 width: double.infinity,
-                height: 300,
+                height: 330,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
@@ -67,11 +67,11 @@ class SuccessTransactionWifi extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'No. Pelanggan',
+                            'Tanggal',
                             style: blackFont14,
                           ),
                           Text(
-                            '0006510482742',
+                            '06-05-2023',
                             style: blackFont14,
                           ),
                         ],
@@ -99,11 +99,11 @@ class SuccessTransactionWifi extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Periode Tagihan',
+                            'Penyedia Layanan',
                             style: blackFont14,
                           ),
                           Text(
-                            'Mei 2023',
+                            'Indihome',
                             style: blackFont14,
                           ),
                         ],
@@ -115,11 +115,11 @@ class SuccessTransactionWifi extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Denda',
+                            'No. Pelanggan',
                             style: blackFont14,
                           ),
                           Text(
-                            '-',
+                            '0000 2984 0368',
                             style: blackFont14,
                           ),
                         ],
@@ -136,6 +136,22 @@ class SuccessTransactionWifi extends StatelessWidget {
                           ),
                           Text(
                             'Ijat Sutresno',
+                            style: blackFont14,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Nominal',
+                            style: blackFont14,
+                          ),
+                          Text(
+                            'Rp 130.000',
                             style: blackFont14,
                           ),
                         ],
