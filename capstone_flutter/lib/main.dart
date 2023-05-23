@@ -18,17 +18,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ModalBottomWifi(),
-      // initialRoute: "/",
-      // routes: {
-      //   "/": (context) => const SplashScreen(),
-      //   // OnboardingScreen.route: (context) => const OnboardingScreen(),
-      //   // RegisterScreen.route: (context) => const RegisterScreen(),
-      //   // OtpScreen.route: (context) => const OtpScreen(),
-      //   // FormRegisterScreen.route: (context) => const FormRegisterScreen(),
-      //   // BerhasilRegisterScreen.route: (context) =>
-      //   //     const BerhasilRegisterScreen(),
-      // },
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const SplashScreen(),
+        // OnboardingScreen.route: (context) => const OnboardingScreen(),
+        // RegisterScreen.route: (context) => const RegisterScreen(),
+        // OtpScreen.route: (context) => const OtpScreen(),
+        // FormRegisterScreen.route: (context) => const FormRegisterScreen(),
+        // BerhasilRegisterScreen.route: (context) =>
+        //     const BerhasilRegisterScreen(),
+      },
     );
   }
 }
