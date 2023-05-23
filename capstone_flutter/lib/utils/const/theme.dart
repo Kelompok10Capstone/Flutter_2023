@@ -11,7 +11,7 @@ TextStyle whiteFont12E =
     GoogleFonts.roboto().copyWith(fontSize: 12, fontWeight: FontWeight.w400);
 TextStyle whiteFont12 =
     GoogleFonts.roboto().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
-<<<<<<< HEAD
+
 TextStyle whiteFont12M =
     GoogleFonts.roboto().copyWith(fontSize: 12, fontWeight: FontWeight.w700);
 TextStyle whiteFont14 =
@@ -24,12 +24,7 @@ TextStyle whiteFont18 =
     GoogleFonts.roboto().copyWith(fontSize: 18, fontWeight: FontWeight.w700);
 TextStyle whiteFont25 =
     GoogleFonts.poppins().copyWith(fontSize: 25, fontWeight: FontWeight.w500);
-=======
 
-TextStyle whiteFont14 =
-    GoogleFonts.roboto().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
-
->>>>>>> 4f46d0f2154ede38ae5b57e03060213cf8d27a76
 TextStyle blackFont16 =
     GoogleFonts.roboto().copyWith(fontSize: 16, fontWeight: FontWeight.w700);
 

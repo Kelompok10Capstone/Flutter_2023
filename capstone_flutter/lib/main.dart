@@ -1,13 +1,11 @@
-<<<<<<< HEAD
-=======
 import 'package:capstone_flutter/view/screen/bpjs_screen/modal_bottom_bpjs_screen.dart';
 import 'package:capstone_flutter/view/screen/pin_screen/modal_bottom_create_pin_screen.dart';
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
 import 'package:capstone_flutter/view/screen/token_screen/modal_bottom_token_screen.dart';
 import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
->>>>>>> 4f46d0f2154ede38ae5b57e03060213cf8d27a76
 import 'package:flutter/material.dart';
 import 'view/screen/home_screen/home_screen.dart';
+import 'view/screen/onboarding_screen/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,10 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-<<<<<<< HEAD
-      home: const NavBar(),
-=======
-      home: ModalBottomToken(),
+      home: OnboardingScreen(),
       // initialRoute: "/",
       // routes: {
       //   "/": (context) => const SplashScreen(),
@@ -39,7 +34,6 @@ class MyApp extends StatelessWidget {
       //   // BerhasilRegisterScreen.route: (context) =>
       //   //     const BerhasilRegisterScreen(),
       // },
->>>>>>> 4f46d0f2154ede38ae5b57e03060213cf8d27a76
     );
   }
 }

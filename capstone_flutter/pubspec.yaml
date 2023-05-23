@@ -36,12 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   supercharged: ^2.1.1
   google_fonts: ^4.0.4
-<<<<<<< HEAD
   carousel_slider: ^4.2.1
-=======
   shared_preferences: ^2.1.0
   pinput: ^2.2.31
->>>>>>> 4f46d0f2154ede38ae5b57e03060213cf8d27a76
 
 dev_dependencies:
   flutter_test:
