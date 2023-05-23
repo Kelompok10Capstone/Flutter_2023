@@ -1,18 +1,17 @@
 import 'package:capstone_flutter/view/screen/pdam_screen/payment_method_screen..dart';
-import 'package:capstone_flutter/view/screen/pdam_screen/region_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../utils/const/theme.dart';
 
-class PaymentDetail extends StatefulWidget {
-  const PaymentDetail({super.key});
+class PaymentDetailPdam extends StatefulWidget {
+  const PaymentDetailPdam({super.key});
 
   @override
-  State<PaymentDetail> createState() => _PaymentDetailState();
+  State<PaymentDetailPdam> createState() => _PaymentDetailPdamState();
 }
 
-class _PaymentDetailState extends State<PaymentDetail> {
+class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
   TextEditingController wilayahController = TextEditingController();
   TextEditingController pelangganController = TextEditingController();
   TextEditingController promoController = TextEditingController();
@@ -44,27 +43,6 @@ class _PaymentDetailState extends State<PaymentDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 50),
-              TextField(
-                controller: wilayahController,
-                decoration: InputDecoration(
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegionScreen()));
-                    },
-                    child: const Icon(Icons.search),
-                  ),
-                  hintText: 'PDAM Tirta Kerta Rahaja, Kab. Tangerang',
-                  filled: false,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
               Text(
                 'No. Pelanggan',
                 style: blackFont16.copyWith(fontWeight: FontWeight.w700),
@@ -139,140 +117,180 @@ class _PaymentDetailState extends State<PaymentDetail> {
                 ],
               ),
               const SizedBox(height: 5),
-              Text(
-                'Silahkan masukkan kode promo yang kamu punya',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w400),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'DETAIL PEMBAYARAN',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w500),
+              Container(
+                width: double.infinity,
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.amber[100],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(
+                        Icons.warning_amber_outlined,
+                        size: 15,
+                        color: Colors.amber,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Silahkan masukkan kode promo yang kamu punya',
+                        style:
+                            blackFont12.copyWith(fontWeight: FontWeight.w400),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(
-                height: 5,
+                height: 20,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 280,
+                height: 235,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
                 ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, top: 15, bottom: 15, right: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Harga Tagihan',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Text(
-                            '63.000',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, top: 15, bottom: 15, right: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Periode Tagihan',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Text(
-                            'Mei 2023',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, top: 15, bottom: 15, right: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Denda',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Text(
-                            '-',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, top: 15, bottom: 15, right: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Nama',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Text(
-                            'Ijat Sutresno',
-                            style: blackFont16.copyWith(
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Divider(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.green[100],
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        height: 52,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                child: Text(
-                                  'Total',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                child: Text(
-                                  'Rp 65.500',
-                                ),
-                              ),
-                            ],
-                          ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, top: 15, bottom: 15, right: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          'DETAIL PEMBAYARAN',
+                          style:
+                              blackFont16.copyWith(fontWeight: FontWeight.w700),
                         ),
                       ),
-                    ),
-                  ],
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Divider(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 5, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Harga Tagihan',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              '63.000',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Periode Tagihan',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              'Mei 2023',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Denda',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              '-',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Nama',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              'Ijat Sutresno',
+                              style: blackFont16.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Divider(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green[100],
+                          ),
+                          width: MediaQuery.of(context).size.width,
+                          height: 40,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Text(
+                                    'Total',
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Text(
+                                    'Rp 65.500',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
