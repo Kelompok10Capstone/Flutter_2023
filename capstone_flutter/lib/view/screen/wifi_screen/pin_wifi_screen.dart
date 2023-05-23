@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
@@ -103,10 +104,10 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const SuccessTransaction()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const IlustrationSuccessWifi()));
             },
             child: Text(
               'Lanjutkan',
