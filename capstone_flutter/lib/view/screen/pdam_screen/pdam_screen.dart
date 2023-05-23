@@ -110,7 +110,7 @@ class _PdamScreenState extends State<PdamScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PaymentDetail()));
+                      builder: (context) => const PaymentDetailPdam()));
             },
             child: Text(
               'Lanjutkan',
