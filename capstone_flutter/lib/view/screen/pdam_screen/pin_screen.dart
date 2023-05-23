@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/view/screen/pdam_screen/ilustration_success_screen.dart';
+import 'package:capstone_flutter/view/screen/pdam_screen/success_transaction_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -43,91 +44,78 @@ class _PinScreenState extends State<PinScreen> {
         ),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                'Masukkan kode PIN kamu!',
-                style: blackFont14,
-              ),
-              const SizedBox(height: 70),
-              Pinput(
-                controller: otpController,
-                length: 5,
-                showCursor: true,
-                defaultPinTheme: PinTheme(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                  ),
-                  textStyle: const TextStyle(
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              'Masukkan kode PIN kamu!',
+              style: blackFont14,
+            ),
+            const SizedBox(height: 70),
+            Pinput(
+              controller: otpController,
+              length: 5,
+              showCursor: true,
+              defaultPinTheme: PinTheme(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
                     color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                    width: 1,
                   ),
                 ),
-                onChanged: (String value) {
-                  setState(() {
-                    if (value.isEmpty) {
-                      otpController.text = '-';
-                    }
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 500,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const IlustrationSuccess(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2B3990),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 155,
-                    vertical: 18,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Text(
-                  'Lanjutkan',
-                  style: whiteFont15,
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Belum dapat kode nih? ',
-                    style: blackText12,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      'Kirim ulang dong',
-                      style: blueFont12,
-                    ),
-                  ),
-                ],
+              onChanged: (String value) {
+                setState(() {
+                  if (value.isEmpty) {
+                    otpController.text = '-';
+                  }
+                });
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Lupa kode PIN?',
+              style: blueFont12,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 30, left: 24, right: 24),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 52,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-            ],
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const IlustrationSuccess()));
+            },
+            child: Text(
+              'Lanjutkan',
+              style: whiteFont14,
+            ),
           ),
         ),
       ),
