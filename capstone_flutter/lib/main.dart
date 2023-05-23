@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
+import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,20 +13,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SkuyPay App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: "/",
-        routes: {
-          "/": (context) => const SplashScreen(),
-          // OnboardingScreen.route: (context) => const OnboardingScreen(),
-          // RegisterScreen.route: (context) => const RegisterScreen(),
-          // OtpScreen.route: (context) => const OtpScreen(),
-          // FormRegisterScreen.route: (context) => const FormRegisterScreen(),
-          // BerhasilRegisterScreen.route: (context) =>
-          //     const BerhasilRegisterScreen(),
-        });
+      debugShowCheckedModeBanner: false,
+      title: 'SkuyPay App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ModalBottomWifi(),
+      // initialRoute: "/",
+      // routes: {
+      //   "/": (context) => const SplashScreen(),
+      //   // OnboardingScreen.route: (context) => const OnboardingScreen(),
+      //   // RegisterScreen.route: (context) => const RegisterScreen(),
+      //   // OtpScreen.route: (context) => const OtpScreen(),
+      //   // FormRegisterScreen.route: (context) => const FormRegisterScreen(),
+      //   // BerhasilRegisterScreen.route: (context) =>
+      //   //     const BerhasilRegisterScreen(),
+      // },
+    );
   }
 }
