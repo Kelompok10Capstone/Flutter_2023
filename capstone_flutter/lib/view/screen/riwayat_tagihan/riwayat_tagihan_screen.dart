@@ -11,7 +11,8 @@ class _RiwayatTagihanScreenState extends State<RiwayatTagihanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Riwayat Tagihan"),
+      appBar: AppBar(
+        title: const Text("Riwayat Tagihan"),
       ),
     );
   }
