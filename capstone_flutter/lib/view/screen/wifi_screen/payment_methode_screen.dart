@@ -197,8 +197,11 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
           width: MediaQuery.of(context).size.width,
           height: 52,
           child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(blueColor),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             onPressed: () {
               Navigator.push(
