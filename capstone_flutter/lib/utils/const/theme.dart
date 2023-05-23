@@ -3,6 +3,7 @@ import 'package:supercharged/supercharged.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color blueColor = "2B3990".toColor();
+Color lightBlueColor = "B7E3F5".toColor();
 
 TextStyle blackFont18 =
     GoogleFonts.roboto().copyWith(fontSize: 18, fontWeight: FontWeight.w700);
