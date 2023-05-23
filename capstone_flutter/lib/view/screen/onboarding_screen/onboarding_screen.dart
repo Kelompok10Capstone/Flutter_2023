@@ -78,8 +78,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             child: _currentPage == 2
                 ? ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(blueColor),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: blueColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: () {
                       Navigator.of(context).push(
