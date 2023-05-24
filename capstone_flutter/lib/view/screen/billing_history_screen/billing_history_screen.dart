@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class BillingHistory extends StatefulWidget {
+  const BillingHistory({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<BillingHistory> createState() => _BillinngHistoryState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _BillinngHistoryState extends State<BillingHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Riwayat Tagihan'),
+        backgroundColor: Colors.white,
+        centerTitle: true,
       ),
       body: SafeArea(
           child: Column(
