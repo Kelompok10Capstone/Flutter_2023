@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:capstone_flutter/view/screen/pdam_screen/pdam_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -218,7 +219,7 @@ class SuccessTransaction extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const PdamScreen()));
+                  MaterialPageRoute(builder: (context) => const NavBar()));
             },
             child: Text(
               'Selesai',

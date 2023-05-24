@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
+import '../home_screen/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -118,7 +119,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   /// Navigasi menggunakan route
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NavBar(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff2B3990),
                       padding: EdgeInsets.symmetric(

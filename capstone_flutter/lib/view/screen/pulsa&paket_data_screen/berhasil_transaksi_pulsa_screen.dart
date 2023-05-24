@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
 
@@ -164,10 +165,12 @@ class BerhasilTransaksiPulsa extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const ModalBottomBpjs()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NavBar(),
+                ),
+              );
             },
             child: Text(
               'Selesai',

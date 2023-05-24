@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/login_screen/login_screen.dart';
 import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -115,7 +116,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       'Masuk',
                       style: blackFont16.copyWith(

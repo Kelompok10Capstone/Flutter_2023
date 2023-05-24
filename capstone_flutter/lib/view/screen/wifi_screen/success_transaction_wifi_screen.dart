@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -233,10 +234,12 @@ class SuccessTransactionWifi extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ModalBottomWifi()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const NavBar()));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => const ModalBottomWifi()));
             },
             child: Text(
               'Selesai',

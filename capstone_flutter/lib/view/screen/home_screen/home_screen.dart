@@ -1,6 +1,13 @@
+import 'package:capstone_flutter/view/screen/pdam_screen/pdam_screen.dart';
+import 'package:capstone_flutter/view/screen/profile_screen/profile_screen.dart';
+import 'package:capstone_flutter/view/screen/riwayat_tagihan/riwayat_tagihan_screen.dart';
+import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
+import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
+import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
+import '../token_screen/modal_bottom_token_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -240,7 +247,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Colors.green.withOpacity(0.5),
                                         highlightColor:
                                             Colors.blue.withOpacity(0.4),
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PulsaDanPaketDataScreen(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -294,7 +308,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Colors.green.withOpacity(0.5),
                                         highlightColor:
                                             Colors.blue.withOpacity(0.4),
-                                        onTap: () {},
+                                        onTap: () {
+                                          //ModalBottomBpjs
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ModalBottomBpjs(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -316,13 +338,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Image(
-                                          image: AssetImage(
-                                            'assets/flash_on.png',
-                                          ),
-                                          fit: BoxFit.contain,
-                                          height: 30,
-                                          width: 30,
+                                        image: AssetImage(
+                                          'assets/flash_on.png',
                                         ),
+                                        fit: BoxFit.contain,
+                                        height: 30,
+                                        width: 30,
+                                      ),
                                       const SizedBox(
                                         height: 7,
                                       ),
@@ -344,7 +366,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Colors.green.withOpacity(0.5),
                                       highlightColor:
                                           Colors.blue.withOpacity(0.4),
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ModalBottomToken(),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
@@ -399,7 +429,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Colors.green.withOpacity(0.5),
                                         highlightColor:
                                             Colors.blue.withOpacity(0.4),
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ModalBottomWifi(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -447,7 +485,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Colors.green.withOpacity(0.5),
                                         highlightColor:
                                             Colors.blue.withOpacity(0.4),
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PdamScreen()));
+                                        },
                                       ),
                                     ),
                                   ),
@@ -590,8 +634,8 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
+    const RiwayatTagihanScreen(),
+    const ProfileScreen(),
   ];
 
   @override

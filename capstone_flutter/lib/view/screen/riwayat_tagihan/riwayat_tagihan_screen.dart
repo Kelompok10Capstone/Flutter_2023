@@ -14,6 +14,9 @@ class _RiwayatTagihanScreenState extends State<RiwayatTagihanScreen> {
       appBar: AppBar(
         title: const Text("Riwayat Tagihan"),
       ),
+      body: Center(
+        child: Text("Riwayat Tagihan"),
+      ),
     );
   }
 }
