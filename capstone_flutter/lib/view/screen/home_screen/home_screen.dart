@@ -4,10 +4,14 @@ import 'package:capstone_flutter/view/screen/riwayat_tagihan/riwayat_tagihan_scr
 import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../utils/const/theme.dart';
 import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
+import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
 import '../token_screen/modal_bottom_token_screen.dart';
+import '../token_screen/product_detail_screen.dart';
+import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +28,25 @@ final List<String> imageList = [
   'assets/promo_5.png',
 ];
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  TabController? _tabController;
+  TextEditingController pelangganControllerToken = TextEditingController();
+  TextEditingController pelangganControllerBpjs = TextEditingController();
+  TextEditingController pelangganControllerWifi = TextEditingController();
+  @override
+  void dispose() {
+    pelangganControllerBpjs.dispose();
+    _tabController?.dispose();
+    pelangganControllerToken.dispose();
+    pelangganControllerWifi.dispose();
+  }
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -309,13 +331,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         highlightColor:
                                             Colors.blue.withOpacity(0.4),
                                         onTap: () {
-                                          //ModalBottomBpjs
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ModalBottomBpjs(),
-                                            ),
-                                          );
+                                          _showModalBottomSheetBpjs(context);
+                                          // //ModalBottomBpjs
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         const ModalBottomBpjs(),
+                                          //   ),
+                                          // );
                                         },
                                       ),
                                     ),
@@ -367,13 +390,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       highlightColor:
                                           Colors.blue.withOpacity(0.4),
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ModalBottomToken(),
-                                          ),
-                                        );
+                                        _showModalBottomSheetToken(context);
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) =>
+                                        //         const ModalBottomToken(),
+                                        //   ),
+                                        // );
                                       },
                                     ),
                                   ),
@@ -430,13 +454,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         highlightColor:
                                             Colors.blue.withOpacity(0.4),
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ModalBottomWifi(),
-                                            ),
-                                          );
+                                          _showModalBottomSheetWifi();
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         const ModalBottomWifi(),
+                                          //   ),
+                                          // );
                                         },
                                       ),
                                     ),
@@ -611,6 +636,311 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showModalBottomSheetToken(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2.85,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      'Listrik',
+                      style: blackFont18,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TabBar(
+                    controller: _tabController,
+                    indicator: UnderlineTabIndicator(
+                      borderSide: BorderSide(color: blueColor, width: 2),
+                    ),
+                    tabs: [
+                      Tab(
+                        child: Text(
+                          'Token',
+                          style: blackFont14,
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                          'Tagihan',
+                          style: blackFont14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        _buildTokenTab(context),
+                        _buildTagihanTab(),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 52,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductDetailScreen()));
+                        },
+                        child: Text(
+                          'Lanjutkan',
+                          style: whiteFont14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetBpjs(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 3.5,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    'BPJS Kesehatan',
+                    style: blackText24,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'No. Pelanggan',
+                  style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: TextField(
+                    controller: pelangganControllerToken,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: blackFont16,
+                      hintText: 'Masukkan No Pelanggan',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PaymentDetailBpjs()));
+                      },
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont14,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetWifi() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 3.5,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    'WIFI',
+                    style: blackText24,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'No. Pelanggan',
+                  style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: TextField(
+                    controller: pelangganControllerWifi,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: blackFont16,
+                      hintText: 'Masukkan No Pelanggan',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PaymentDetailWifi()));
+                      },
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont14,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTokenTab(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 3.5,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'No. Pelanggan',
+              style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black),
+              ),
+              child: TextField(
+                controller: pelangganControllerToken,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: blackFont16,
+                  hintText: 'Masukkan No Pelanggan',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTagihanTab() {
+    return Center(
+      child: Text(
+        'Tagihan',
+        style: blackFont16,
       ),
     );
   }
