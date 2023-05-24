@@ -22,6 +22,8 @@ TextStyle whiteFont15 = GoogleFonts.roboto()
 // color blue
 TextStyle blueFont12 = GoogleFonts.roboto().copyWith(
     fontSize: 12, fontWeight: FontWeight.w700, color: const Color(0xff2B3990));
+TextStyle blueFont14 = GoogleFonts.roboto().copyWith(
+    fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff2B3990));
 TextStyle blueFont16 = GoogleFonts.roboto().copyWith(
     fontSize: 16, fontWeight: FontWeight.w700, color: const Color(0xff2B3990));
 
