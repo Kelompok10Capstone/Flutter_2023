@@ -5,6 +5,7 @@ import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_scree
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/const/theme.dart';
 import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
@@ -66,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen>
                       height: 253,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 22, top: 45),
+                      padding: EdgeInsets.only(left: 22.w, top: 45.w),
                       child: Container(
-                        height: 75,
-                        width: 75,
+                        height: 75.w,
+                        width: 75.w,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
                               image: AssetImage('assets/profile_home.png')),
@@ -109,15 +110,18 @@ class _HomeScreenState extends State<HomeScreen>
                             color: Colors.white, size: 28),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 110, left: 17),
-                      child: Image(
-                        image: AssetImage(
-                          'assets/motif_polos.png',
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 110, left: 17),
+                        child: Image(
+                          image: AssetImage(
+                            'assets/motif_polos.png',
+                          ),
+                          fit: BoxFit.cover,
+                          height: 270,
+                          width: 360,
                         ),
-                        fit: BoxFit.cover,
-                        height: 270,
-                        width: 360,
                       ),
                     ),
                     Padding(

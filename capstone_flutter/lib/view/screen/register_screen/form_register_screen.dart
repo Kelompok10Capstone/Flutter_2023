@@ -150,47 +150,49 @@ class _FormRegisterScreenState extends State<FormRegisterScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Nama',
-                style: blackFormFont12,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              fullNameField,
-              const SizedBox(height: 10),
-              Text(
-                'No.HP',
-                style: blackFormFont12,
-              ),
-              const SizedBox(height: 5),
-              phonelField,
-              const SizedBox(height: 10),
-              Text(
-                'Kata Sandi',
-                style: blackFormFont12,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              passwordField,
-              const SizedBox(height: 10),
-              Text(
-                'Ketik Ulang Kata Sandi',
-                style: blackFormFont12,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              confirmPasswordField,
-              const SizedBox(
-                height: 300,
-              ),
-              ElevatedButton(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Nama',
+              style: blackFormFont12,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            fullNameField,
+            const SizedBox(height: 10),
+            Text(
+              'No.HP',
+              style: blackFormFont12,
+            ),
+            const SizedBox(height: 5),
+            phonelField,
+            const SizedBox(height: 10),
+            Text(
+              'Kata Sandi',
+              style: blackFormFont12,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            passwordField,
+            const SizedBox(height: 10),
+            Text(
+              'Ketik Ulang Kata Sandi',
+              style: blackFormFont12,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            confirmPasswordField,
+            const SizedBox(
+              height: 300,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -200,10 +202,10 @@ class _FormRegisterScreenState extends State<FormRegisterScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff2B3990),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 125,
-                    vertical: 18,
-                  ),
+                  // padding: const EdgeInsets.symmetric(
+                  //   horizontal: 125,
+                  //   vertical: 18,
+                  // ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -213,8 +215,8 @@ class _FormRegisterScreenState extends State<FormRegisterScreen> {
                   style: whiteFont15,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
