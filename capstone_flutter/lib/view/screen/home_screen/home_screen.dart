@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     Image.asset(
                       'assets/motif_berwarna.png',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       height: 253,
                     ),
                     Padding(
@@ -616,7 +616,7 @@ class _HomeScreenState extends State<HomeScreen>
                 height: 160,
                 aspectRatio: 16 / 9,
                 scrollDirection: Axis.horizontal,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
+                // scrollPhysics: const NeverScrollableScrollPhysics(),
                 viewportFraction: 0.9,
                 pauseAutoPlayOnTouch: true,
                 autoPlayAnimationDuration: const Duration(seconds: 1),
