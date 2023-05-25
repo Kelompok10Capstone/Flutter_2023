@@ -5,6 +5,7 @@ import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_scree
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/const/theme.dart';
 import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
@@ -60,14 +61,14 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     Image.asset(
                       'assets/motif_berwarna.png',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       height: 253,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 22, top: 45),
+                      padding: EdgeInsets.only(left: 22.w, top: 45.w),
                       child: Container(
-                        height: 75,
-                        width: 75,
+                        height: 75.w,
+                        width: 75.w,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
                               image: AssetImage('assets/profile_home.png')),
@@ -107,15 +108,18 @@ class _HomeScreenState extends State<HomeScreen>
                             color: Colors.white, size: 28),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 110, left: 17),
-                      child: Image(
-                        image: AssetImage(
-                          'assets/motif_polos.png',
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 110, left: 17),
+                        child: Image(
+                          image: AssetImage(
+                            'assets/motif_polos.png',
+                          ),
+                          fit: BoxFit.cover,
+                          height: 270,
+                          width: 360,
                         ),
-                        fit: BoxFit.cover,
-                        height: 270,
-                        width: 360,
                       ),
                     ),
                     Padding(
@@ -614,7 +618,7 @@ class _HomeScreenState extends State<HomeScreen>
                 height: 160,
                 aspectRatio: 16 / 9,
                 scrollDirection: Axis.horizontal,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
+                // scrollPhysics: const NeverScrollableScrollPhysics(),
                 viewportFraction: 0.9,
                 pauseAutoPlayOnTouch: true,
                 autoPlayAnimationDuration: const Duration(seconds: 1),
@@ -734,6 +738,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _showModalBottomSheetBpjs(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -742,72 +747,85 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       builder: (BuildContext context) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 3.5,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    'BPJS Kesehatan',
-                    style: blackText24,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'No. Pelanggan',
-                  style: blackFont16.copyWith(fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: TextField(
-                    controller: pelangganControllerToken,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: blackFont16,
-                      hintText: 'Masukkan No Pelanggan',
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Adjust bottom padding based on keyboard height
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 250,
+            // height: MediaQuery.of(context).size.height / 2.7,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      'BPJS Kesehatan',
+                      style: blackText24.copyWith(fontSize: 18),
                     ),
                   ),
-                ),
-                const SizedBox(height: 25),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 52,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: blueColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  const SizedBox(height: 20),
+                  Text(
+                    'No. Pelanggan',
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: TextField(
+                      controller: pelangganControllerBpjs,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: blackFont12,
+                        hintText: 'Masukkan No Pelanggan',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                  )),
+                  // const SizedBox(height: 25),
+
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 52,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PaymentDetailBpjs()));
+                        },
+                        child: Text(
+                          'Lanjutkan',
+                          style: whiteFont14,
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const PaymentDetailBpjs()));
-                      },
-                      child: Text(
-                        'Lanjutkan',
-                        style: whiteFont14,
-                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

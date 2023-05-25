@@ -44,7 +44,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
               const SizedBox(height: 50),
               Text(
                 'No. Pelanggan',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Container(
@@ -60,7 +60,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintStyle: blackFont16,
+                    hintStyle: blackFont12,
                     hintText: '00028394376',
                   ),
                 ),
@@ -70,7 +70,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
               ),
               Text(
                 'Kode Promo',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Row(
@@ -87,7 +87,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                       controller: promoController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintStyle: blackFont16,
+                        hintStyle: blackFont12,
                         hintText: 'CONTOH: PROMOINGAZI',
                       ),
                     ),
@@ -115,7 +115,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
               ),
               const SizedBox(height: 5),
               Container(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 height: 30,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -136,8 +136,8 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                       ),
                       Text(
                         'Silahkan masukkan kode promo yang kamu punya',
-                        style:
-                            blackFont12.copyWith(fontWeight: FontWeight.w400),
+                        style: blackFont12.copyWith(
+                            fontWeight: FontWeight.w400, fontSize: 10),
                       ),
                       const Spacer(),
                     ],
@@ -149,7 +149,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 295,
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -165,7 +165,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                         child: Text(
                           'DETAIL PEMBAYARAN',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w700),
+                              blackFont12.copyWith(fontWeight: FontWeight.w700),
                         ),
                       ),
                       const Padding(
@@ -182,12 +182,12 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           children: [
                             Text(
                               'No. VA Kel',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '123456789',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -201,12 +201,12 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           children: [
                             Text(
                               'No. Pelanggan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '00028394376',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -220,12 +220,12 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           children: [
                             Text(
                               'Biaya BPJS',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Rp 123.000',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -239,12 +239,12 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           children: [
                             Text(
                               'Biaya Admin',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Rp 2.500',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -258,12 +258,12 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           children: [
                             Text(
                               'Periode',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '1 Bulan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -277,12 +277,12 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           children: [
                             Text(
                               'Jumlah Keluarga',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '3',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -295,7 +295,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -306,17 +306,23 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: Text(
-                                    'Total',
+                                    'Total tagihan',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: Text(
                                     'Rp 132.500',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
@@ -333,7 +339,8 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 30, left: 24, right: 24),
+        padding:
+            const EdgeInsets.only(bottom: 30, left: 24, right: 24, top: 10),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 52,

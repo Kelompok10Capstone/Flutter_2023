@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/view/screen/login_screen/login_screen.dart';
 import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
 
@@ -69,20 +70,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           // const SizedBox(height: 20),
           buildPageIndicator(),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            width: double.infinity,
-            height: 52,
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            width: double.infinity.w,
+            height: 52.w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.w),
             ),
             child: _currentPage == 2
                 ? ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: blueColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.w),
                       ),
                     ),
                     onPressed: () {
@@ -102,9 +103,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           if (_currentPage == 2)
             Padding(
-              padding: const EdgeInsets.only(
-                top: 20,
-                bottom: 20,
+              padding: EdgeInsets.only(
+                top: 20.w,
+                bottom: 20.w,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text(
                     'Sudah punya akun? ',
                     style: blackFont16.copyWith(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                     ),
                   ),
                   InkWell(
@@ -127,7 +128,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Text(
                       'Masuk',
                       style: blackFont16.copyWith(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: blueColor,
                       ),
                     ),
@@ -151,8 +152,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               Image.asset(imagePath),
               Positioned(
-                top: 52,
-                right: 26,
+                top: 52.w,
+                right: 26.w,
                 child: index < 2
                     ? TextButton(
                         onPressed: () {
@@ -173,18 +174,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 57),
+        SizedBox(height: 57.w),
         Text(
           title,
           style: blackFont18,
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24.w),
         Text(
           description,
-          style: blackFont16.copyWith(fontWeight: FontWeight.w400),
+          style: blackFont14.copyWith(fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 100),
+        SizedBox(height: 100.w),
       ],
     );
   }
@@ -200,12 +201,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget buildIndicator(int index) {
-    double size = 15.0;
+    double size = 15.0.w;
     bool isCurrentPage = index == _currentPage;
     return Container(
       width: size,
       height: size,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isCurrentPage ? blueColor : Colors.grey,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,27 +7,27 @@ Color blueColor = "2B3990".toColor();
 Color lightBlueColor = "B7E3F5".toColor();
 
 TextStyle blackFont18 =
-    GoogleFonts.roboto().copyWith(fontSize: 18, fontWeight: FontWeight.w700);
+    GoogleFonts.roboto().copyWith(fontSize: 18.sp, fontWeight: FontWeight.w700);
 TextStyle whiteFont12E =
-    GoogleFonts.roboto().copyWith(fontSize: 12, fontWeight: FontWeight.w400);
+    GoogleFonts.roboto().copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400);
 TextStyle whiteFont12 =
-    GoogleFonts.roboto().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
+    GoogleFonts.roboto().copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400);
 
 TextStyle whiteFont12M =
-    GoogleFonts.roboto().copyWith(fontSize: 12, fontWeight: FontWeight.w700);
+    GoogleFonts.roboto().copyWith(fontSize: 12.sp, fontWeight: FontWeight.w700);
 TextStyle whiteFont14 =
-    GoogleFonts.roboto().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
+    GoogleFonts.roboto().copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400);
 TextStyle whiteFont16 =
-    GoogleFonts.roboto().copyWith(fontSize: 16, fontWeight: FontWeight.w400);
+    GoogleFonts.roboto().copyWith(fontSize: 16.sp, fontWeight: FontWeight.w400);
 TextStyle whiteFont16M =
-    GoogleFonts.roboto().copyWith(fontSize: 16, fontWeight: FontWeight.w700);
+    GoogleFonts.roboto().copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700);
 TextStyle whiteFont18 =
-    GoogleFonts.roboto().copyWith(fontSize: 18, fontWeight: FontWeight.w700);
+    GoogleFonts.roboto().copyWith(fontSize: 18.sp, fontWeight: FontWeight.w700);
 TextStyle whiteFont25 =
-    GoogleFonts.poppins().copyWith(fontSize: 25, fontWeight: FontWeight.w500);
+    GoogleFonts.poppins().copyWith(fontSize: 25.sp, fontWeight: FontWeight.w500);
 
 TextStyle blackFont16 =
-    GoogleFonts.roboto().copyWith(fontSize: 16, fontWeight: FontWeight.w700);
+    GoogleFonts.roboto().copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700);
 
 /// Tambahan text dari iyan
 // color white
