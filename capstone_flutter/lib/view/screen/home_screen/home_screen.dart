@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen>
   TextEditingController pelangganControllerWifi = TextEditingController();
   @override
   void dispose() {
-    super.dispose();
     pelangganControllerBpjs.dispose();
     _tabController?.dispose();
     pelangganControllerToken.dispose();
@@ -45,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    super.initState();
     _tabController = TabController(length: 2, vsync: this);
   }
 
