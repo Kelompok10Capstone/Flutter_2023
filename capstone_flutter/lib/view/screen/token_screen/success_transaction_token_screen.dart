@@ -15,7 +15,7 @@ class SuccessTransactionToken extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 100,
+                height: 66,
               ),
               const Icon(
                 Icons.check_circle,
@@ -23,14 +23,14 @@ class SuccessTransactionToken extends StatelessWidget {
                 size: 80,
               ),
               const SizedBox(
-                height: 50,
+                height: 32,
               ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
                 width: double.infinity,
-                height: 400,
+                height: 375,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
@@ -39,27 +39,27 @@ class SuccessTransactionToken extends StatelessWidget {
                       Center(
                         child: Text(
                           'Transaksi Berhasil',
-                          style: blackFont18,
+                          style: blackFont16,
                         ),
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             '04 Mei 2023 . 20.28',
-                            style: blackFont12,
+                            style: blackFont12.copyWith(fontSize: 10),
                           ),
                           Text(
                             'SkuyPay 0857xxxx2345',
-                            style: blackFont12,
+                            style: blackFont12.copyWith(fontSize: 10),
                           )
                         ],
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 16,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -69,7 +69,7 @@ class SuccessTransactionToken extends StatelessWidget {
                             color: lightBlueColor,
                           ),
                           width: MediaQuery.of(context).size.width,
-                          height: 52,
+                          height: 36,
                           child: Center(
                             child: Padding(
                               padding:
@@ -84,7 +84,8 @@ class SuccessTransactionToken extends StatelessWidget {
                                         horizontal: 15),
                                     child: Text(
                                       '1259 6254 9268 0172 5936',
-                                      style: blackFont16,
+                                      style: blackFont12.copyWith(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   const Spacer(),
@@ -100,11 +101,11 @@ class SuccessTransactionToken extends StatelessWidget {
                         children: [
                           Text(
                             'No. Meter',
-                            style: blackFont14,
+                            style: blackFont12,
                           ),
                           Text(
                             '3297651038328',
-                            style: blackFont14,
+                            style: blackFont12,
                           ),
                         ],
                       ),
@@ -116,11 +117,11 @@ class SuccessTransactionToken extends StatelessWidget {
                         children: [
                           Text(
                             'No. Pelanggan',
-                            style: blackFont14,
+                            style: blackFont12,
                           ),
                           Text(
                             '0006510482742',
-                            style: blackFont14,
+                            style: blackFont12,
                           ),
                         ],
                       ),
@@ -138,11 +139,11 @@ class SuccessTransactionToken extends StatelessWidget {
                         children: [
                           Text(
                             'Nominal',
-                            style: blackFont14,
+                            style: blackFont12,
                           ),
                           Text(
                             'Rp 22.500',
-                            style: blackFont14,
+                            style: blackFont12,
                           ),
                         ],
                       ),
@@ -160,7 +161,7 @@ class SuccessTransactionToken extends StatelessWidget {
                             color: Colors.green[100],
                           ),
                           width: MediaQuery.of(context).size.width,
-                          height: 52,
+                          height: 34,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,7 +171,8 @@ class SuccessTransactionToken extends StatelessWidget {
                                       horizontal: 15),
                                   child: Text(
                                     'Total',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
@@ -178,7 +180,8 @@ class SuccessTransactionToken extends StatelessWidget {
                                       horizontal: 15),
                                   child: Text(
                                     'Rp 22.500',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
