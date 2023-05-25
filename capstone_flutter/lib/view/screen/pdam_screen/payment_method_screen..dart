@@ -33,11 +33,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             const SizedBox(height: 50),
             Text(
               'Dari PT SOLUSINDO JAYA',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+              style: blackFont12.copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
               'PDAM 0006510482742',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w400),
+              style: blackFont12.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
             Container(
@@ -55,7 +55,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     children: [
                       Text(
                         'Konfirmasi Pembayaran Anda',
-                        style: blackFont16,
+                        style:
+                            blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Icon(Icons.help_outline)
                     ],
@@ -66,20 +67,20 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             const SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 95,
+              height: 85,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, top: 15, bottom: 15),
+                padding: const EdgeInsets.only(left: 10, top: 15, bottom: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Pembayaran',
-                      style: blackFont16,
+                      style: blackFont12.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +92,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         Text(
                           'Saldo SkuyPay (Rp 150.000)',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         const Spacer(),
                         Radio(
@@ -114,7 +115,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 130,
+              height: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey),
@@ -128,7 +129,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   children: [
                     Text(
                       'Biaya Detail',
-                      style: blackFont16,
+                      style: blackFont12.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -139,12 +140,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         Text(
                           'Jumlah',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
                           'Rp 65.500',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -157,12 +158,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         Text(
                           'Promo',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
                           '-',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -175,12 +176,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         Text(
                           'Total',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Rp 65.500',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -197,8 +198,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           width: MediaQuery.of(context).size.width,
           height: 52,
           child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(blueColor),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             onPressed: () {
               Navigator.push(context,
