@@ -43,6 +43,7 @@ class _RegionScreenState extends State<RegionScreen> {
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
                     hintText: 'Cari Wilayah',
+                    hintStyle: blackFont12.copyWith(color: Colors.grey),
                     filled: false,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -65,7 +66,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -86,7 +87,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -107,7 +108,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -128,7 +129,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -149,7 +150,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -170,7 +171,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -191,7 +192,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -212,7 +213,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -233,7 +234,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -254,7 +255,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],
@@ -275,7 +276,7 @@ class _RegionScreenState extends State<RegionScreen> {
                       Text(
                         'Kab. Tanggerang',
                         style:
-                            blackFont16.copyWith(fontWeight: FontWeight.w400),
+                            blackFont14.copyWith(fontWeight: FontWeight.w400),
                       ),
                       const Spacer(), // Menggunakan Spacer agar teks berada di sebelah kiri
                     ],

@@ -33,11 +33,11 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
             const SizedBox(height: 50),
             Text(
               'Dari PT SOLUSINDO JAYA',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+              style: blackFont12.copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
               'Indihome 0000 2984 0368',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w400),
+              style: blackFont12.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
             Container(
@@ -55,7 +55,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                     children: [
                       Text(
                         'Konfirmasi Pembayaran Anda',
-                        style: blackFont16,
+                        style:
+                            blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Icon(Icons.help_outline)
                     ],
@@ -66,20 +67,20 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
             const SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 95,
+              height: 85,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, top: 15, bottom: 15),
+                padding: const EdgeInsets.only(left: 10, top: 15, bottom: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Pembayaran',
-                      style: blackFont16,
+                      style: blackFont12.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +92,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                         Text(
                           'Saldo SkuyPay (Rp 150.000)',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         const Spacer(),
                         Radio(
@@ -114,7 +115,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 130,
+              height: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey),
@@ -128,7 +129,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                   children: [
                     Text(
                       'Biaya Detail',
-                      style: blackFont16,
+                      style: blackFont12.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -139,12 +140,12 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                         Text(
                           'Jumlah',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
                           'Rp 132.500',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -157,12 +158,12 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                         Text(
                           'Promo',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
                           '-',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -175,12 +176,12 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                         Text(
                           'Total',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Rp 132.500',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w400),
+                              blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

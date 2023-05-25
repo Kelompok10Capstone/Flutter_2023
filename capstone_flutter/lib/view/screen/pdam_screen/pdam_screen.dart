@@ -55,6 +55,7 @@ class _PdamScreenState extends State<PdamScreen> {
                     child: const Icon(Icons.search),
                   ),
                   hintText: 'Cari Wilayah',
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
                   filled: false,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -65,7 +66,7 @@ class _PdamScreenState extends State<PdamScreen> {
               const SizedBox(height: 20),
               Text(
                 'No. Pelanggan',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Container(
@@ -81,7 +82,7 @@ class _PdamScreenState extends State<PdamScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintStyle: blackFont16,
+                    hintStyle: blackFont12.copyWith(color: Colors.grey),
                     hintText: 'Masukkan No Pelanggan',
                   ),
                 ),
@@ -103,8 +104,11 @@ class _PdamScreenState extends State<PdamScreen> {
           width: MediaQuery.of(context).size.width,
           height: 52,
           child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(blueColor),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             onPressed: () {
               Navigator.push(
