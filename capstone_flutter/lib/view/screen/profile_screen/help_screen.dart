@@ -10,7 +10,7 @@ class HelpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Profil',
+          'Bantuan',
           style: blackFont18.copyWith(color: Colors.black),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
@@ -29,7 +29,7 @@ class HelpScreen extends StatelessWidget {
                 Text(
                   'Halo Ijat',
                   style:
-                      whiteFont14.copyWith(color: Colors.white, fontSize: 18),
+                      whiteFont14.copyWith(color: Colors.white, fontSize: 16),
                 ),
                 const SizedBox(
                   height: 5,
@@ -37,7 +37,7 @@ class HelpScreen extends StatelessWidget {
                 Text(
                   'Ada yang bisa kami bantu?',
                   style:
-                      whiteFont14.copyWith(color: Colors.white, fontSize: 18),
+                      whiteFont14.copyWith(color: Colors.white, fontSize: 16),
                 ),
                 const SizedBox(
                   height: 10,
@@ -45,18 +45,23 @@ class HelpScreen extends StatelessWidget {
                 Text(
                   'Kamu bisa cari dan baca topik yang ingin\nditanyakan',
                   style:
-                      whiteFont14.copyWith(color: Colors.white, fontSize: 16),
+                      whiteFont14.copyWith(color: Colors.white, fontSize: 12),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 Container(
-                  color: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
                   child: TextField(
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search),
                       hintText: 'Coba cari "Transfer"',
+                      hintStyle: blackFont16.copyWith(
+                          fontSize: 12, color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -70,7 +75,7 @@ class HelpScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 200,
+            top: 180,
             left: 0,
             right: 0,
             child: Container(
@@ -85,12 +90,14 @@ class HelpScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Pertanyaan paling dicari',
-                        style: blackFont18,
+                        style: blackFont18.copyWith(fontSize: 14),
                       ),
                       const SizedBox(
                         height: 20,
@@ -112,7 +119,7 @@ class HelpScreen extends StatelessWidget {
                               Text(
                                 'Mengapa transaksi pembayaran saya tidak berhasil?',
                                 style: blackFont16.copyWith(
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                               const Icon(
                                 Icons.arrow_forward_ios,
@@ -138,7 +145,7 @@ class HelpScreen extends StatelessWidget {
                               Text(
                                 'Apakah ada biaya tambahan yang harus saya bayar',
                                 style: blackFont16.copyWith(
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                               const Icon(
                                 Icons.arrow_forward_ios,
@@ -165,7 +172,7 @@ class HelpScreen extends StatelessWidget {
                               Text(
                                 'Apa yang harus saya lakukan jika tagihan yang saya\nbayar tidak terverifikasi oleh pihak yang menerima\npembayaran?',
                                 style: blackFont16.copyWith(
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                               const Icon(
                                 Icons.arrow_forward_ios,
@@ -191,7 +198,7 @@ class HelpScreen extends StatelessWidget {
                               Text(
                                 'Mengapa transaksi pembayaran saya tidak berhasil?',
                                 style: blackFont16.copyWith(
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                               const Icon(
                                 Icons.arrow_forward_ios,
@@ -217,7 +224,7 @@ class HelpScreen extends StatelessWidget {
                               Text(
                                 'Apakah ada promo atau diskon spesial untuk\npembayaran tagihan tertentu?',
                                 style: blackFont16.copyWith(
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                               const Icon(
                                 Icons.arrow_forward_ios,
@@ -231,14 +238,15 @@ class HelpScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           'Lihat Semua',
-                          style: blackFont16.copyWith(color: blueColor),
+                          style: blackFont16.copyWith(
+                              color: blueColor, fontSize: 12),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           'Layanan Pengaduan Konsumen',
-                          style: blackFont18,
+                          style: blackFont16,
                         ),
                       ),
                       Padding(
@@ -255,7 +263,9 @@ class HelpScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                const Spacer(),
                                 Image.asset('assets/icon_bantuan2.png'),
+                                const Spacer(),
                                 Center(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,

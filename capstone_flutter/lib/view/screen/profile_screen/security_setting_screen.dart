@@ -22,12 +22,13 @@ class SecuritySettingScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 24, right: 24, top: 50),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 95,
+          height: 110,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.grey),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
                 onTap: () {

@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 50,
             ),
             SizedBox(
-              width: 80,
+              width: 60,
               child: Image.asset('assets/profile.png'),
             ),
             const SizedBox(
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Text(
               'Ijat Sutrisno',
-              style: blackFont16,
+              style: blackFont16.copyWith(fontSize: 14),
             ),
             const SizedBox(
               height: 10,
@@ -50,13 +50,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text(
               '082267548923',
               style: blackFont16.copyWith(
-                  fontSize: 14, fontWeight: FontWeight.w400),
+                  fontSize: 12, fontWeight: FontWeight.w400),
             ),
             const SizedBox(
               height: 20,
             ),
             Container(
-              width: 70,
+              width: 80,
               height: 30,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -94,12 +94,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 190,
+                height: 210,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
                       onTap: () {
@@ -215,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 30),
+                  padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 52,
