@@ -153,7 +153,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 270,
+                height: 285,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -162,6 +162,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                   padding: const EdgeInsets.only(
                       left: 10, top: 15, bottom: 15, right: 15),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(

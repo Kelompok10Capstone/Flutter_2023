@@ -58,10 +58,11 @@ class SuccessTransactionWifi extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
                 width: double.infinity,
-                height: 305,
+                height: 320,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
