@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/view/screen/bpjs_screen/modal_bottom_bpjs_screen.dart';
+import 'package:capstone_flutter/view/screen/pdam_screen/pdam_screen.dart';
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
 import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ModalBottomBpjs(),
+      home: PdamScreen(),
       // initialRoute: "/",
       // routes: {
       //   "/": (context) => const SplashScreen(),

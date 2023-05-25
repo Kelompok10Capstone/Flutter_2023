@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/view/screen/pdam_screen/payment_method_screen..dart';
+import 'package:capstone_flutter/view/screen/pdam_screen/region_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -43,9 +44,33 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 50),
+              TextField(
+                controller: wilayahController,
+                decoration: InputDecoration(
+                  prefixIcon: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegionScreen()));
+                    },
+                    child: const Icon(Icons.search),
+                  ),
+                  hintText: 'PDAM Tirta Kerta Rahaja, Kab. Tangerang',
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
+                  filled: false,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Text(
                 'No. Pelanggan',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
               Container(
@@ -61,17 +86,17 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintStyle: blackFont16,
+                    hintStyle: blackFont12.copyWith(color: Colors.grey),
                     hintText: '0006510482742',
                   ),
                 ),
               ),
               const SizedBox(
-                height: 24,
+                height: 16,
               ),
               Text(
                 'Kode Promo',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont14.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Row(
@@ -90,7 +115,7 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintStyle: blackFont16,
+                        hintStyle: blackFont12.copyWith(color: Colors.grey),
                         hintText: 'CONTOH: PROMOINGAZI',
                       ),
                     ),
@@ -99,8 +124,11 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                     width: MediaQuery.of(context).size.width / 5,
                     height: 52,
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(blueColor),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                       onPressed: () {
                         // Navigator.push(
@@ -139,8 +167,8 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                       ),
                       Text(
                         'Silahkan masukkan kode promo yang kamu punya',
-                        style:
-                            blackFont12.copyWith(fontWeight: FontWeight.w400),
+                        style: blackFont12.copyWith(
+                            fontWeight: FontWeight.w400, fontSize: 10),
                       ),
                       const Spacer(),
                     ],
@@ -152,7 +180,7 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 235,
+                height: 225,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -168,7 +196,7 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                         child: Text(
                           'DETAIL PEMBAYARAN',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w700),
+                              blackFont12.copyWith(fontWeight: FontWeight.w700),
                         ),
                       ),
                       const Padding(
@@ -185,12 +213,12 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                           children: [
                             Text(
                               'Harga Tagihan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '63.000',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -204,12 +232,12 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                           children: [
                             Text(
                               'Periode Tagihan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Mei 2023',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -223,12 +251,12 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                           children: [
                             Text(
                               'Denda',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '-',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -242,12 +270,12 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                           children: [
                             Text(
                               'Nama',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Ijat Sutresno',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -271,17 +299,23 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: Text(
                                     'Total',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: Text(
                                     'Rp 65.500',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
@@ -303,8 +337,11 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
           width: MediaQuery.of(context).size.width,
           height: 52,
           child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(blueColor),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             onPressed: () {
               Navigator.push(
