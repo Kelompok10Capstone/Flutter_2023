@@ -47,74 +47,85 @@ class _ModalBottomBpjsState extends State<ModalBottomBpjs> {
         ),
       ),
       builder: (BuildContext context) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 3.5,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    'BPJS Kesehatan',
-                    style: blackText24,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'No. Pelanggan',
-                  style: blackFont16.copyWith(fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: TextField(
-                    controller: pelangganController,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: blackFont16,
-                      hintText: 'Masukkan No Pelanggan',
+        return ListView(
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 2,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        'BPJS Kesehatan',
+                        style: blackText24,
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 25),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 52,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: blueColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    const SizedBox(height: 20),
+                    Text(
+                      'No. Pelanggan',
+                      style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: TextField(
+                        controller: pelangganController,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintStyle: blackFont16,
+                          hintText: 'Masukkan No Pelanggan',
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const PaymentDetailBpjs()));
-                      },
-                      child: Text(
-                        'Lanjutkan',
-                        style: whiteFont14,
+                    ),
+                    Expanded(
+                        child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                    )),
+                    // const SizedBox(height: 25),
+
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 52,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: blueColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PaymentDetailBpjs()));
+                          },
+                          child: Text(
+                            'Lanjutkan',
+                            style: whiteFont14,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );
