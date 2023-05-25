@@ -57,10 +57,11 @@ class SuccessTransaction extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
                 width: double.infinity,
-                height: 275,
+                height: 290,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
