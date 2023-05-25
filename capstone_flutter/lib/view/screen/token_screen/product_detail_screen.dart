@@ -163,7 +163,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.black)),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +188,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                       '${data['hargaCoret']}',
                       style: blackFont16.copyWith(
                         color: Colors.grey,
-                        fontSize: 10,
+                        fontSize: 9,
                         decoration: TextDecoration.lineThrough,
                       ),
                     ),

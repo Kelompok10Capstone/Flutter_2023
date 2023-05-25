@@ -152,7 +152,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 325,
+                height: 340,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -161,6 +161,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                   padding: const EdgeInsets.only(
                       left: 10, top: 15, bottom: 15, right: 15),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -380,7 +381,8 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 30, left: 24, right: 24),
+        padding:
+            const EdgeInsets.only(bottom: 30, left: 24, right: 24, top: 10),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 52,
