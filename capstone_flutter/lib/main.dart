@@ -20,29 +20,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(360, 800),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SkuyPay App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: SplashScreen(),
-        // initialRoute: "/",
-        // routes: {
-        //   "/": (context) => const SplashScreen(),
-        //   // OnboardingScreen.route: (context) => const OnboardingScreen(),
-        //   // RegisterScreen.route: (context) => const RegisterScreen(),
-        //   // OtpScreen.route: (context) => const OtpScreen(),
-        //   // FormRegisterScreen.route: (context) => const FormRegisterScreen(),
-        //   // BerhasilRegisterScreen.route: (context) =>
-        //   //     const BerhasilRegisterScreen(),
-        // },
-      );
-      },     
+          debugShowCheckedModeBanner: false,
+          title: 'SkuyPay App',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: SplashScreen(),
+          // initialRoute: "/",
+          // routes: {
+          //   "/": (context) => const SplashScreen(),
+          //   // OnboardingScreen.route: (context) => const OnboardingScreen(),
+          //   // RegisterScreen.route: (context) => const RegisterScreen(),
+          //   // OtpScreen.route: (context) => const OtpScreen(),
+          //   // FormRegisterScreen.route: (context) => const FormRegisterScreen(),
+          //   // BerhasilRegisterScreen.route: (context) =>
+          //   //     const BerhasilRegisterScreen(),
+          // },
+        );
+      },
     );
   }
 }
