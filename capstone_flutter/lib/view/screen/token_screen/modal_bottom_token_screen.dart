@@ -60,7 +60,7 @@ class _ModalBottomTokenState extends State<ModalBottomToken>
         return SingleChildScrollView(
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 2.85,
+            height: 300,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 5),
               child: Column(
