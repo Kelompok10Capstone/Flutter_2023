@@ -149,7 +149,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 590,
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -339,7 +339,8 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 30, left: 24, right: 24),
+        padding:
+            const EdgeInsets.only(bottom: 30, left: 24, right: 24, top: 10),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 52,

@@ -22,6 +22,7 @@ class _ModalBottomBpjsState extends State<ModalBottomBpjs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -39,6 +40,7 @@ class _ModalBottomBpjsState extends State<ModalBottomBpjs> {
 
   void _showModalBottomSheet() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -47,85 +49,87 @@ class _ModalBottomBpjsState extends State<ModalBottomBpjs> {
         ),
       ),
       builder: (BuildContext context) {
-        return ListView(
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        'BPJS Kesehatan',
-                        style: blackText24,
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Adjust bottom padding based on keyboard height
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 250,
+            // height: MediaQuery.of(context).size.height / 2.7,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      'BPJS Kesehatan',
+                      style: blackText24,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'No. Pelanggan',
+                    style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: TextField(
+                      controller: pelangganController,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: blackFont16,
+                        hintText: 'Masukkan No Pelanggan',
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'No. Pelanggan',
-                      style: blackFont16.copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 5),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black),
-                      ),
-                      child: TextField(
-                        controller: pelangganController,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintStyle: blackFont16,
-                          hintText: 'Masukkan No Pelanggan',
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                        child: SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                    )),
-                    // const SizedBox(height: 25),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
+                  ),
+                  Expanded(
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 52,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: blueColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                    height: MediaQuery.of(context).size.height,
+                  )),
+                  // const SizedBox(height: 25),
+
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 52,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PaymentDetailBpjs()));
-                          },
-                          child: Text(
-                            'Lanjutkan',
-                            style: whiteFont14,
-                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PaymentDetailBpjs()));
+                        },
+                        child: Text(
+                          'Lanjutkan',
+                          style: whiteFont14,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         );
       },
     );
