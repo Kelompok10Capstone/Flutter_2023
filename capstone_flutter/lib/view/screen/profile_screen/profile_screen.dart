@@ -216,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 30),
+                  padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 52,
