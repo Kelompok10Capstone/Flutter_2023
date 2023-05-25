@@ -62,7 +62,7 @@ class SuccessTransactionBpjs extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 625,
+                height: 255,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(

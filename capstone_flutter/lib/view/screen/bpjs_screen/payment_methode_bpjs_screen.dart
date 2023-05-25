@@ -69,7 +69,7 @@ class _PaymentMethodBpjsState extends State<PaymentMethodBpjs> {
               const SizedBox(height: 20),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 780,
+                height: 85,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -118,7 +118,7 @@ class _PaymentMethodBpjsState extends State<PaymentMethodBpjs> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 750,
+                height: 120,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
