@@ -45,7 +45,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               const SizedBox(height: 50),
               Text(
                 'No. Pelanggan',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Container(
@@ -61,7 +61,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintStyle: blackFont16,
+                    hintStyle: blackFont12.copyWith(color: Colors.grey),
                     hintText: '0006510482742',
                   ),
                 ),
@@ -71,7 +71,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               ),
               Text(
                 'Kode Promo',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont14.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Row(
@@ -88,7 +88,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                       controller: pelangganController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintStyle: blackFont16,
+                        hintStyle: blackFont12.copyWith(color: Colors.grey),
                         hintText: 'CONTOH: PROMOINGAZI',
                       ),
                     ),
@@ -97,8 +97,11 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                     width: MediaQuery.of(context).size.width / 5,
                     height: 52,
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(blueColor),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                       onPressed: () {
                         // Navigator.push(
@@ -137,8 +140,8 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                       ),
                       Text(
                         'Silahkan masukkan kode promo yang kamu punya',
-                        style:
-                            blackFont12.copyWith(fontWeight: FontWeight.w400),
+                        style: blackFont12.copyWith(
+                            fontWeight: FontWeight.w400, fontSize: 10),
                       ),
                       const Spacer(),
                     ],
@@ -150,7 +153,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 295,
+                height: 270,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -166,7 +169,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                         child: Text(
                           'DETAIL PEMBAYARAN',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w700),
+                              blackFont12.copyWith(fontWeight: FontWeight.w700),
                         ),
                       ),
                       const Padding(
@@ -183,12 +186,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                           children: [
                             Text(
                               'Tanggal',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '06-05-2023',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -202,12 +205,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                           children: [
                             Text(
                               'Penyedia Layanan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Indihome',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -221,12 +224,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                           children: [
                             Text(
                               'no. Pelanggan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '0000 2984 0368',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -240,12 +243,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                           children: [
                             Text(
                               'Nama',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Ijat Sutresno',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -259,12 +262,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                           children: [
                             Text(
                               'Nominal',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Rp 130.000',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -278,12 +281,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                           children: [
                             Text(
                               'Biaya Admin',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Rp 2.500',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -303,21 +306,27 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                             color: Colors.green[100],
                           ),
                           width: MediaQuery.of(context).size.width,
-                          height: 40,
+                          height: 34,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: Text(
                                     'Total',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: Text(
                                     'Rp 132.500',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
