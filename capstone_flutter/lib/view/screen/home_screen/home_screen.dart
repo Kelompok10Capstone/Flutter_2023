@@ -646,6 +646,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _showModalBottomSheetToken(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -655,6 +656,11 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       builder: (BuildContext context) {
         return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Adjust bottom padding based on keyboard height
+          ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 2.85,
@@ -695,7 +701,7 @@ class _HomeScreenState extends State<HomeScreen>
                     child: TabBarView(
                       controller: _tabController,
                       children: [
-                        _buildTokenTab(context),
+                        _buildTokenTab(),
                         _buildTagihanTab(),
                       ],
                     ),
@@ -931,7 +937,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildTokenTab(BuildContext context) {
+  Widget _buildTokenTab() {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height / 3.5,
@@ -942,7 +948,7 @@ class _HomeScreenState extends State<HomeScreen>
           children: [
             Text(
               'No. Pelanggan',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+              style: blackFont14.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 5),
             Container(
@@ -958,7 +964,7 @@ class _HomeScreenState extends State<HomeScreen>
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintStyle: blackFont16,
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
                   hintText: 'Masukkan No Pelanggan',
                 ),
               ),

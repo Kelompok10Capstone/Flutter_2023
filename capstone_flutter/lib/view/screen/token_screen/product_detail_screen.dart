@@ -69,7 +69,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintStyle: blackFont16,
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
                   hintText: '0000 2984 0368',
                 ),
               ),
@@ -79,7 +79,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             Text(
               'Silahkan masukkan nomor pelanggan',
-              style: blackFont14,
+              style: blackFont12,
             ),
             const SizedBox(height: 20),
             TabBar(
@@ -150,6 +150,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
+        childAspectRatio: 3 / 2,
       ),
       itemCount: dummyToken.length,
       itemBuilder: (context, index) {
@@ -177,7 +178,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   children: [
                     Text(
                       '${data['hargaJual']}',
-                      style: blueFont16,
+                      style: blueFont16.copyWith(
+                          color: lightBlueTokenColor, fontSize: 14),
                     ),
                     const SizedBox(
                       width: 10,
@@ -186,6 +188,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                       '${data['hargaCoret']}',
                       style: blackFont16.copyWith(
                         color: Colors.grey,
+                        fontSize: 10,
                         decoration: TextDecoration.lineThrough,
                       ),
                     ),

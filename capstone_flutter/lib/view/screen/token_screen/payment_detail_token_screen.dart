@@ -44,7 +44,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
               const SizedBox(height: 50),
               Text(
                 'No. Pelanggan',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Container(
@@ -60,7 +60,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintStyle: blackFont16,
+                    hintStyle: blackFont12,
                     hintText: '0000 2984 0368',
                   ),
                 ),
@@ -70,7 +70,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
               ),
               Text(
                 'Kode Promo',
-                style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont14.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
               Row(
@@ -87,7 +87,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                       controller: promoController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintStyle: blackFont16,
+                        hintStyle: blackFont12.copyWith(color: Colors.grey),
                         hintText: 'CONTOH: PROMOINGAZI',
                       ),
                     ),
@@ -96,8 +96,11 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                     width: MediaQuery.of(context).size.width / 5,
                     height: 52,
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(blueColor),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                       onPressed: () {
                         // Navigator.push(
@@ -136,8 +139,8 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                       ),
                       Text(
                         'Silahkan masukkan kode promo yang kamu punya',
-                        style:
-                            blackFont12.copyWith(fontWeight: FontWeight.w400),
+                        style: blackFont12.copyWith(
+                            fontWeight: FontWeight.w400, fontSize: 10),
                       ),
                       const Spacer(),
                     ],
@@ -149,7 +152,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 355,
+                height: 325,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -165,7 +168,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                         child: Text(
                           'DETAIL PEMBAYARAN',
                           style:
-                              blackFont16.copyWith(fontWeight: FontWeight.w700),
+                              blackFont12.copyWith(fontWeight: FontWeight.w700),
                         ),
                       ),
                       const Padding(
@@ -182,12 +185,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'Tanggal',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '04-05-2023',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -201,12 +204,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'Penyedia Layanan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'PLN Prabayar',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -220,12 +223,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'No. Meter',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '2136 2938 9836',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -239,12 +242,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'No. Pelanggan',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               '0000 2984 0368',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -258,12 +261,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'Nama',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Ijat Sutresno',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -277,12 +280,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'Tarif/Daya',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'R1/000001300 VA',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -296,12 +299,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'Nominal',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Rp 20.000',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -315,12 +318,12 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                           children: [
                             Text(
                               'Biaya Admin',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
                               'Rp 2.500',
-                              style: blackFont16.copyWith(
+                              style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -340,7 +343,7 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                             color: Colors.green[100],
                           ),
                           width: MediaQuery.of(context).size.width,
-                          height: 40,
+                          height: 34,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -350,7 +353,8 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                                       horizontal: 15),
                                   child: Text(
                                     'Total',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
@@ -358,7 +362,8 @@ class _PaymentDetailTokenState extends State<PaymentDetailToken> {
                                       horizontal: 15),
                                   child: Text(
                                     'Rp 132.500',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],

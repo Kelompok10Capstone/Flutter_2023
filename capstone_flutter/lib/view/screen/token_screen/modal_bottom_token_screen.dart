@@ -150,7 +150,7 @@ class _ModalBottomTokenState extends State<ModalBottomToken>
           children: [
             Text(
               'No. Pelanggan',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+              style: blackFont14.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 5),
             Container(
@@ -166,7 +166,7 @@ class _ModalBottomTokenState extends State<ModalBottomToken>
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintStyle: blackFont16,
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
                   hintText: 'Masukkan No Pelanggan',
                 ),
               ),
