@@ -18,7 +18,7 @@ class SuccessTransactionBpjs extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 100,
+                height: 70,
               ),
               const Icon(
                 Icons.check_circle,
@@ -26,7 +26,7 @@ class SuccessTransactionBpjs extends StatelessWidget {
                 size: 80,
               ),
               const SizedBox(
-                height: 50,
+                height: 25,
               ),
               Text(
                 'Transaksi Kamu Berhasil',
@@ -42,11 +42,15 @@ class SuccessTransactionBpjs extends StatelessWidget {
                   children: [
                     Text(
                       '04 Mei 2023 . 20.28',
-                      style: blackFont12,
+                      style: blackFont12
+                          .copyWith(fontWeight: FontWeight.w500)
+                          .copyWith(fontSize: 10),
                     ),
                     Text(
                       'SkuyPay 0857xxxx2345',
-                      style: blackFont12,
+                      style: blackFont12
+                          .copyWith(fontWeight: FontWeight.w500)
+                          .copyWith(fontSize: 10),
                     )
                   ],
                 ),
@@ -58,8 +62,8 @@ class SuccessTransactionBpjs extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
-                width: double.infinity,
-                height: 300,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height - 625,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
@@ -70,11 +74,13 @@ class SuccessTransactionBpjs extends StatelessWidget {
                         children: [
                           Text(
                             'No. VA Kel',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                           Text(
                             '123456789',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -86,11 +92,13 @@ class SuccessTransactionBpjs extends StatelessWidget {
                         children: [
                           Text(
                             'No. Pelanggan',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                           Text(
                             '00028394376',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -102,11 +110,13 @@ class SuccessTransactionBpjs extends StatelessWidget {
                         children: [
                           Text(
                             'Biaya Premi',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                           Text(
                             'Rp 123.000',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -118,11 +128,13 @@ class SuccessTransactionBpjs extends StatelessWidget {
                         children: [
                           Text(
                             'Biaya Admin',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                           Text(
                             'Rp 2.500',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -134,11 +146,13 @@ class SuccessTransactionBpjs extends StatelessWidget {
                         children: [
                           Text(
                             'Periode',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                           Text(
                             '1 Bulan',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -150,19 +164,15 @@ class SuccessTransactionBpjs extends StatelessWidget {
                         children: [
                           Text(
                             'Jumlah Keluarga',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                           Text(
                             '3',
-                            style: blackFont14,
+                            style: blackFont12.copyWith(
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Divider(
-                        color: Colors.grey,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -172,7 +182,7 @@ class SuccessTransactionBpjs extends StatelessWidget {
                             color: Colors.green[100],
                           ),
                           width: MediaQuery.of(context).size.width,
-                          height: 52,
+                          height: 30,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -181,8 +191,9 @@ class SuccessTransactionBpjs extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    'Total',
-                                    style: blackFont16,
+                                    'Total Tagihan',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
@@ -190,7 +201,8 @@ class SuccessTransactionBpjs extends StatelessWidget {
                                       horizontal: 15),
                                   child: Text(
                                     'Rp 125.500',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
