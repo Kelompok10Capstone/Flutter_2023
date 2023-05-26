@@ -115,32 +115,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 5),
                   passwordField,
-                  const SizedBox(height: 270),
+                  const SizedBox(height: 165),
 
                   /// Navigasi menggunakan route
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NavBar(),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavBar(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff2B3990),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff2B3990),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.35,
-                        // horizontal: 126,
-                        vertical: 18,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont15,
                       ),
-                    ),
-                    child: Text(
-                      'Lanjutkan',
-                      style: whiteFont15,
                     ),
                   ),
                   const SizedBox(height: 10),

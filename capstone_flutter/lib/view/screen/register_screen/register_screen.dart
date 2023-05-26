@@ -32,26 +32,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: SizedBox(
-            width: 400,
-            height: 700,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   'assets/images/ic_logo_skuypay.png',
-                  height: 100,
-                  width: 100,
+                  height: 104,
+                  width: 63,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Text(
                   'SkuyPay!',
                   style: blueFont16,
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 22),
                 Align(
                   alignment: Alignment.centerLeft,
                   widthFactor: 1.8,
@@ -62,11 +61,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 // SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 60,
+                      SizedBox(
+                        width: 53,
                         child: TextFormField(
                           autofocus: false,
                           controller: phoneController,
@@ -75,8 +75,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           // enabled: false,
                           decoration: InputDecoration(
                             contentPadding:
-                                const EdgeInsets.fromLTRB(15, 0, 10, 0),
+                                const EdgeInsets.fromLTRB(15, 0, 15, 0),
                             hintText: "+62",
+                            hintStyle: blackFont12.copyWith(color: Colors.grey),
                             // labelText: "Password",
                             filled: true,
                             fillColor: Colors.white,
@@ -100,8 +101,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Container(
-                        width: 249,
+                      SizedBox(
+                        width: 300,
                         child: TextFormField(
                           autofocus: false,
                           controller: phoneController,
@@ -136,31 +137,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 350,
+                  height: 250,
                 ),
 
                 /// Navigasi menggunakan route
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const OtpScreen(),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const OtpScreen(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff2B3990),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff2B3990),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 140,
-                      vertical: 18,
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                    child: Text(
+                      'Daftar',
+                      style: whiteFont15,
                     ),
-                  ),
-                  child: Text(
-                    'Daftar',
-                    style: whiteFont15,
                   ),
                 ),
                 const SizedBox(height: 10),

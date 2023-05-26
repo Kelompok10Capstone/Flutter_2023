@@ -95,29 +95,32 @@ class _OtpScreenState extends State<OtpScreen> {
                 },
               ),
               const SizedBox(
-                height: 430,
+                height: 330,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const FormRegisterScreen(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const FormRegisterScreen(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff2B3990),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2B3990),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 125,
-                    vertical: 18,
+                    child: Text(
+                      'Lanjutkan',
+                      style: whiteFont15,
+                    ),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Text(
-                  'Lanjutkan',
-                  style: whiteFont15,
                 ),
               ),
               const SizedBox(height: 10),

@@ -186,37 +186,40 @@ class _FormRegisterScreenState extends State<FormRegisterScreen> {
               height: 5,
             ),
             confirmPasswordField,
-            const SizedBox(
-              height: 300,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const BerhasilRegisterScreen(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2B3990),
-                  // padding: const EdgeInsets.symmetric(
-                  //   horizontal: 125,
-                  //   vertical: 18,
-                  // ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+            // const SizedBox(
+            //   height: 200,
+            // ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 52,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const BerhasilRegisterScreen(),
                 ),
-                child: Text(
-                  'Lanjutkan',
-                  style: whiteFont15,
-                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xff2B3990),
+              // padding: const EdgeInsets.symmetric(
+              //   horizontal: 125,
+              //   vertical: 18,
+              // ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
-          ],
+            child: Text(
+              'Lanjutkan',
+              style: whiteFont15,
+            ),
+          ),
         ),
       ),
     );
