@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/const/theme.dart';
@@ -43,8 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset(
                 'assets/images/ic_logo_skuypay.png',
-                width: 210,
-                height: 299,
+                width: 210.w,
+                height: 299.w,
               ),
               Text(
                 'SkuyPay',
@@ -55,18 +56,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               const SizedBox(
-                height: 162,
+                height: 150,
               ),
               Text(
-                'SkuyPay is licensed and supervised by the Financial',
+                'SkuyPay memiliki lisensi dan diawasi oleh Otoritas',
                 style: blackFont16.copyWith(color: Colors.grey, fontSize: 14),
               ),
               Text(
-                'Services Authority (OJK) and is a member of the',
+                'Jasa Keuangan (OJK) dan merupakan anggota',
                 style: blackFont16.copyWith(color: Colors.grey, fontSize: 14),
               ),
               Text(
-                'Deposit Insurance Corporation (LPS)',
+                'Lembaga Penjamin Simpanan (LPS).',
                 style: blackFont16.copyWith(color: Colors.grey, fontSize: 14),
               ),
               const SizedBox(
