@@ -104,10 +104,10 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
               ),
             ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PinAddedScreen()));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => const PinAddedScreen()));
             },
             child: Text(
               'Lanjutkan',
