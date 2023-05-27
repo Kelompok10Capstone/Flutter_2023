@@ -20,6 +20,7 @@ class _ModalBottomTokenState extends State<ModalBottomToken>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _tabController?.index = 1;
   }
 
   @override
@@ -178,10 +179,39 @@ class _ModalBottomTokenState extends State<ModalBottomToken>
   }
 
   Widget _buildTagihanTab() {
-    return Center(
-      child: Text(
-        'Tagihan',
-        style: blackFont16,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 3.5,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'No. Pelanggan',
+              style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black),
+              ),
+              child: TextField(
+                controller: pelangganController,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
+                  hintText: 'Masukkan No Pelanggan',
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
