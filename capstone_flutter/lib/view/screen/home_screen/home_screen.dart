@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/const/theme.dart';
 import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
+import '../pin_screen/input_pin_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
 import '../token_screen/modal_bottom_token_screen.dart';
 import '../token_screen/product_detail_screen.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen>
   TextEditingController pelangganControllerToken = TextEditingController();
   TextEditingController pelangganControllerBpjs = TextEditingController();
   TextEditingController pelangganControllerWifi = TextEditingController();
+
   @override
   void dispose() {
     pelangganControllerBpjs.dispose();
@@ -45,6 +47,10 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _showModalBottomSheetCreatePin();
+    // });
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -930,6 +936,82 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ],
               ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetCreatePin() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 270,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Image.asset(
+                    'assets/create_pin.png',
+                    scale: 4,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(
+                    'Buat Kode PIN Kamu Dulu Yuk!',
+                    style: blackText16,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(
+                    'Dengan membuat kode PIN Anda dapat meningkatkan keamanan akun.',
+                    style: blackFont14,
+                  ),
+                ),
+                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const InputPinScreen()));
+                      },
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont14,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );

@@ -55,7 +55,7 @@ class _PinAddedScreenState extends State<PinAddedScreen> {
       builder: (BuildContext context) {
         return SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 3.5,
+          height: 250,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
             child: Column(

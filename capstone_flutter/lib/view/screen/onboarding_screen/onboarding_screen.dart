@@ -185,7 +185,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           style: blackFont14.copyWith(fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 100.w),
+        // SizedBox(height: 100.w),
       ],
     );
   }
@@ -201,7 +201,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget buildIndicator(int index) {
-    double size = 15.0.w;
+    double size = 10.0.w;
     bool isCurrentPage = index == _currentPage;
     return Container(
       width: size,
