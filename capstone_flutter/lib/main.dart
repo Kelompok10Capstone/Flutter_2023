@@ -1,4 +1,4 @@
-import 'package:capstone_flutter/view/screen/billing_history_screen/billing_history_screen.dart';
+import 'package:capstone_flutter/view/screen/promo_screen/all_promo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const BillingHistory(),
+            home: const AllPromoScreen(),
           );
         },
       );

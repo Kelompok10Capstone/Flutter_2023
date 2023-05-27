@@ -17,5 +17,7 @@ TextStyle blackFont16G =
 TextStyle blackFont20 =
     GoogleFonts.roboto().copyWith(fontSize: 20.sp, fontWeight: FontWeight.w700);
 
+TextStyle whiteFont14 =
+    GoogleFonts.roboto().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
 TextStyle whiteFont16 =
     GoogleFonts.roboto().copyWith(fontSize: 16.sp, fontWeight: FontWeight.w400);
