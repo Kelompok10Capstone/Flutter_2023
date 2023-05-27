@@ -10,6 +10,7 @@ import '../../../utils/const/theme.dart';
 import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
+import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/modal_bottom_token_screen.dart';
 import '../token_screen/product_detail_screen.dart';
 import '../wifi_screen/payment_detail_screen.dart';
@@ -33,19 +34,24 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
   TextEditingController pelangganControllerToken = TextEditingController();
+  TextEditingController pelangganControllerTagihanListrik =
+      TextEditingController();
   TextEditingController pelangganControllerBpjs = TextEditingController();
   TextEditingController pelangganControllerWifi = TextEditingController();
+
   @override
   void dispose() {
     pelangganControllerBpjs.dispose();
     _tabController?.dispose();
     pelangganControllerToken.dispose();
+    pelangganControllerTagihanListrik.dispose();
     pelangganControllerWifi.dispose();
   }
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
+    // _tabController?.index = 0;
   }
 
   @override
@@ -720,11 +726,35 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
+                          if (_tabController?.index == 0) {
+                            // Jika tab Token aktif, arahkan pengguna ke layar Token
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ProductDetailScreen()));
+                                builder: (context) => ProductDetailScreen(),
+                              ),
+                            );
+                          } else if (_tabController?.index == 1) {
+                            // Jika tab Tagihan aktif, arahkan pengguna ke layar Tagihan
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailPembayaranTagihanListrik(),
+                              ),
+                            );
+                          }
+
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const ProductDetailScreen()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const DetailPembayaranTagihanListrik()));
                         },
                         child: Text(
                           'Lanjutkan',
@@ -976,10 +1006,39 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildTagihanTab() {
-    return Center(
-      child: Text(
-        'Tagihan',
-        style: blackFont16,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 3.5,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'No. Pelanggan',
+              style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black),
+              ),
+              child: TextField(
+                controller: pelangganControllerTagihanListrik,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
+                  hintText: 'Masukkan No Pelanggan',
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1003,7 +1062,8 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const RiwayatTagihanScreen(),
+    const HomeScreen(),
+    // const RiwayatTagihanScreen(),
     const ProfileScreen(),
   ];
 
