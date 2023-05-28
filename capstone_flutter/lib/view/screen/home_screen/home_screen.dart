@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void dispose() {
+    super.dispose();
     pelangganControllerBpjs.dispose();
     _tabController?.dispose();
     pelangganControllerToken.dispose();
