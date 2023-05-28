@@ -1,4 +1,4 @@
-import 'package:capstone_flutter/view/screen/forgot_pin_screen/new%20_pin_screen.dart';
+import 'package:capstone_flutter/view/screen/forgot_pin_screen/new_pin_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';

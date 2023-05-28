@@ -1,16 +1,17 @@
+import 'package:capstone_flutter/view/screen/edit_password_screen/enter_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../utils/const/theme.dart';
 
-class RepeatPin extends StatefulWidget {
-  const RepeatPin({super.key});
+class PinCodeScreen extends StatefulWidget {
+  const PinCodeScreen({super.key});
 
   @override
-  State<RepeatPin> createState() => _RepeatPinState();
+  State<PinCodeScreen> createState() => _PinCodeScreenState();
 }
 
-class _RepeatPinState extends State<RepeatPin> {
+class _PinCodeScreenState extends State<PinCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,17 +30,8 @@ class _RepeatPinState extends State<RepeatPin> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  'Ulangi sekali lagi!',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-              ),
-            ),
             Padding(
-              padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
               child: Form(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,42 +177,11 @@ class _RepeatPinState extends State<RepeatPin> {
                           if (value.length == 1) {
                             FocusScope.of(context).nextFocus();
                           }
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  content: SizedBox(
-                                    width: 260,
-                                    height: 170,
-                                    child: Column(
-                                      children: [
-                                        const Padding(
-                                          padding:
-                                              EdgeInsets.only(top: 20),
-                                          child: Image(
-                                            image:
-                                                AssetImage('assets/ceklis.png'),
-                                            fit: BoxFit.contain,
-                                            width: 90,
-                                            height: 90,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          'Yey! Kode PIN baru kamu sudah tersimpan',
-                                          style: blackFont14G.copyWith(
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const EnterNewPassword()),
+                          );
                         },
                         decoration: const InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -247,6 +208,15 @@ class _RepeatPinState extends State<RepeatPin> {
                     ),
                   ],
                 ),
+              ),
+            ),
+
+            Padding(padding: const EdgeInsets.only(top: 60),
+            child: GestureDetector(
+              onTap: () {},
+              child: Text('Lupa Kode PIN?',
+              style: blackFont14.copyWith(color: blueColor),
+              ),
               ),
             ),
           ],
