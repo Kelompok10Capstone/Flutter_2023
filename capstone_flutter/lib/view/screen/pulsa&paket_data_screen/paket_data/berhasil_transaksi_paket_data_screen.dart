@@ -1,15 +1,17 @@
+import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../utils/const/theme.dart';
 
-class BerhasilTransaksiPulsa extends StatefulWidget {
-  const BerhasilTransaksiPulsa({super.key});
+class BerhasilTransaksiPaketDataListrik extends StatefulWidget {
+  const BerhasilTransaksiPaketDataListrik({super.key});
 
   @override
-  State<BerhasilTransaksiPulsa> createState() => _BerhasilTransaksiPulsaState();
+  State<BerhasilTransaksiPaketDataListrik> createState() =>
+      _BerhasilTransaksiPaketDataListrikState();
 }
 
-class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
+class _BerhasilTransaksiPaketDataListrikState
+    extends State<BerhasilTransaksiPaketDataListrik> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +84,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Pulsa 5000',
+                              'Data 2GB',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -120,7 +122,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Rp 6.500',
+                              'Rp 10.000',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -155,7 +157,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    'Rp 6.500',
+                                    'Rp 10.000',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.bold),
                                   ),

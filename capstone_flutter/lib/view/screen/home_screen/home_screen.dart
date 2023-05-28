@@ -736,7 +736,8 @@ class _HomeScreenState extends State<HomeScreen>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProductDetailScreen(),
+                                builder: (context) =>
+                                    const ProductDetailScreen(),
                               ),
                             );
                           } else if (_tabController?.index == 1) {
@@ -745,21 +746,10 @@ class _HomeScreenState extends State<HomeScreen>
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    DetailPembayaranTagihanListrik(),
+                                    const DetailPembayaranTagihanListrik(),
                               ),
                             );
                           }
-
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const ProductDetailScreen()));
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const DetailPembayaranTagihanListrik()));
                         },
                         child: Text(
                           'Lanjutkan',

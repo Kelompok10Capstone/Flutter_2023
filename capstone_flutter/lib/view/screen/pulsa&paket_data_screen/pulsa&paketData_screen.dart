@@ -5,6 +5,7 @@ import '../../../utils/const/theme.dart';
 import '../../../view_model/dummy_data.dart';
 import '../../../view_model/dummy_pulsa.dart';
 import 'detail_pembayaran_pulsa_screen.dart';
+import 'paket_data/detail_pembayaran_paket_data_screen.dart';
 
 class PulsaDanPaketDataScreen extends StatefulWidget {
   const PulsaDanPaketDataScreen({super.key});
@@ -38,6 +39,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Pulsa & Paket Data',
@@ -72,6 +74,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
                       hintText: "+62",
+                      hintStyle: blackFont14.copyWith(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -94,8 +97,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   width: 10,
                 ),
                 Container(
-                  width: 249,
-                  // width: double.infinity,
+                  width: MediaQuery.of(context).size.width - 110,
+                  // width: 249,
                   child: TextFormField(
                     autofocus: false,
                     controller: phoneController,
@@ -103,8 +106,9 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                     keyboardType: TextInputType.number,
                     // textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      hintText: "Nomor Telepon",
+                      contentPadding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                      hintText: 'Contoh: 81234567890',
+                      hintStyle: blackFont12.copyWith(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -189,12 +193,31 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
               ),
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DetailPembayaranPulsaScreen(),
-                ),
-              );
+              if (_tabController?.index == 0) {
+                // Jika tab Token aktif, arahkan pengguna ke layar Pulsa
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DetailPembayaranPulsaScreen(),
+                  ),
+                );
+              } else if (_tabController?.index == 1) {
+                // Jika tab Tagihan aktif, arahkan pengguna ke layar paket data
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const DetailPembayaranPaketDataScreen(),
+                  ),
+                );
+              }
+
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const DetailPembayaranPulsaScreen(),
+              //   ),
+              // );
             },
             child: Text(
               'Lanjutkan',
@@ -217,7 +240,6 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
       itemCount: dummyPulsaData.length,
       itemBuilder: (context, index) {
         final data = dummyPulsaData[index];
-        // bool isItemSelected = false;
 
         return GestureDetector(
           onTap: () {
@@ -300,44 +322,68 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
       itemBuilder: (context, index) {
         final data = dummyPaketData[index];
 
-        return Container(
-          // width: 15,
-          // height: 10,
-          decoration: BoxDecoration(
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              dummyPaketData[index]['isSelected'] =
+                  !dummyPaketData[index]['isSelected'];
+            });
+          },
+          child: Container(
+            // width: 15,
+            // height: 10,
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.black)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${data['nominal']} GB',
-                  style: blackFont18,
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${data['hargaJual']}',
-                      style: blueFont16,
+              border: Border.all(
+                color: dummyPaketData[index]['isSelected'] == true
+                    ? const Color(0xff2B3990)
+                    : Colors.black,
+              ),
+              color: dummyPaketData[index]['isSelected'] == true
+                  ? const Color(0xff2B3990)
+                  : Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${data['nominal']} GB',
+                    style: blackFont18.copyWith(
+                      color: dummyPaketData[index]['isSelected'] == true
+                          ? Colors.white
+                          : Colors.black,
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '${data['hargaCoret']}',
-                      style: blackFont16.copyWith(
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${data['hargaJual']}',
+                        style: blueFont14.copyWith(
+                          color: dummyPaketData[index]['isSelected'] == true
+                              ? Colors.white
+                              : const Color(0xff2B3990),
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-              ],
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '${data['hargaCoret']}',
+                        style: blackFont12.copyWith(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );

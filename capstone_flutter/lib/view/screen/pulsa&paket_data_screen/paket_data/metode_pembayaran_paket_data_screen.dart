@@ -1,18 +1,17 @@
-import 'package:capstone_flutter/view/screen/pulsa&paket_data_screen/pin_pulsa_screen.dart';
+import 'package:capstone_flutter/utils/const/theme.dart';
+import 'package:capstone_flutter/view/screen/pulsa&paket_data_screen/paket_data/pin_paket_data_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/const/theme.dart';
-
-class MetodePembayaranPulsaScreen extends StatefulWidget {
-  const MetodePembayaranPulsaScreen({super.key});
+class MetodePembayaranPaketDataScreen extends StatefulWidget {
+  const MetodePembayaranPaketDataScreen({super.key});
 
   @override
-  State<MetodePembayaranPulsaScreen> createState() =>
-      _MetodePembayaranPulsaScreenState();
+  State<MetodePembayaranPaketDataScreen> createState() =>
+      _MetodePembayaranPaketDataScreenState();
 }
 
-class _MetodePembayaranPulsaScreenState
-    extends State<MetodePembayaranPulsaScreen> {
+class _MetodePembayaranPaketDataScreenState
+    extends State<MetodePembayaranPaketDataScreen> {
   String? selectedRadio;
 
   @override
@@ -38,7 +37,7 @@ class _MetodePembayaranPulsaScreenState
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xffFDE7AA),
+                color: Color(0xffFDE7AA),
               ),
               width: MediaQuery.of(context).size.width,
               height: 52,
@@ -53,7 +52,7 @@ class _MetodePembayaranPulsaScreenState
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      const Icon(Icons.help_outline)
+                      Icon(Icons.help_outline)
                     ],
                   ),
                 ),
@@ -123,12 +122,14 @@ class _MetodePembayaranPulsaScreenState
                     Padding(
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: Text(
-                        'Detail',
+                        'Detail Pembayaran',
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: Row(
@@ -140,14 +141,16 @@ class _MetodePembayaranPulsaScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Pulsa 5000',
+                            'Data 2 GB',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: Row(
@@ -159,14 +162,16 @@ class _MetodePembayaranPulsaScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Rp 6.500',
+                            'Rp 10.000',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: Row(
@@ -197,7 +202,7 @@ class _MetodePembayaranPulsaScreenState
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           // color: Colors.green[100],
-                          color: const Color(0xffBADDB1),
+                          color: Color(0xffBADDB1),
                         ),
                         width: MediaQuery.of(context).size.width,
                         height: 34,
@@ -218,7 +223,7 @@ class _MetodePembayaranPulsaScreenState
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
-                                  'Rp 6.500',
+                                  'Rp 10.000',
                                   style: blackFont14.copyWith(
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -249,11 +254,9 @@ class _MetodePembayaranPulsaScreenState
             ),
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PinPulsaScreen(),
-                ),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PinPaketDataScreen()));
             },
             child: Text(
               'Yuk Bayar!',

@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import '../../../utils/const/theme.dart';
-import 'metode_pembayaran_pulsa_screen.dart';
+import '../../../../utils/const/theme.dart';
+import 'metode_pembayaran_paket_data_screen.dart';
 
-class DetailPembayaranPulsaScreen extends StatefulWidget {
-  const DetailPembayaranPulsaScreen({super.key});
+class DetailPembayaranPaketDataScreen extends StatefulWidget {
+  const DetailPembayaranPaketDataScreen({super.key});
 
   @override
-  State<DetailPembayaranPulsaScreen> createState() =>
-      _DetailPembayaranPulsaScreenState();
+  State<DetailPembayaranPaketDataScreen> createState() =>
+      _DetailPembayaranPaketDataScreenState();
 }
 
-class _DetailPembayaranPulsaScreenState
-    extends State<DetailPembayaranPulsaScreen> {
-  // text editing controller
+class _DetailPembayaranPaketDataScreenState
+    extends State<DetailPembayaranPaketDataScreen> {
   TextEditingController promoController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
+
     promoController.dispose();
   }
 
@@ -136,7 +137,7 @@ class _DetailPembayaranPulsaScreenState
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 150,
+                height: 240,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
@@ -159,11 +160,89 @@ class _DetailPembayaranPulsaScreenState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Pulsa 5000',
+                              'TLKM2GB',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  Colors.black.withOpacity(0.1), // Warna shadow
+                              spreadRadius: 2, // Penyebaran shadow
+                              blurRadius: 4, // Jarak blur shadow
+                              offset:
+                                  Offset(0, 2), // Posisi offset shadow (x, y)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.white,
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, top: 8, right: 15),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Rincian Paket',
+                                    style: blackText13,
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Reguler',
+                                      style: blackFont12.copyWith(
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    Text(
+                                      '2 GB',
+                                      style: blackFont12.copyWith(
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Midnight',
+                                      style: blackFont12.copyWith(
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    Text(
+                                      ' - ',
+                                      style: blackFont12.copyWith(
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
@@ -197,7 +276,7 @@ class _DetailPembayaranPulsaScreenState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Rp 6.500',
+                              'Rp 10.000',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -237,7 +316,7 @@ class _DetailPembayaranPulsaScreenState
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12),
                                   child: Text(
-                                    'Rp 6.500',
+                                    'Rp 10.000',
                                     style: blackFont14.copyWith(
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -272,7 +351,7 @@ class _DetailPembayaranPulsaScreenState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MetodePembayaranPulsaScreen(),
+                  builder: (context) => const MetodePembayaranPaketDataScreen(),
                 ),
               );
             },

@@ -1,19 +1,17 @@
+import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:pinput/pinput.dart';
 
-import '../../../utils/const/theme.dart';
-import 'ilustration_sukses_pulsa_screen.dart';
+import 'ilustration_sukses_paket_data_screen.dart';
 
-class PinPulsaScreen extends StatefulWidget {
-  const PinPulsaScreen({super.key});
+class PinPaketDataScreen extends StatefulWidget {
+  const PinPaketDataScreen({super.key});
 
   @override
-  State<PinPulsaScreen> createState() => _PinPulsaScreenState();
+  State<PinPaketDataScreen> createState() => _PinPaketDataScreenState();
 }
 
-class _PinPulsaScreenState extends State<PinPulsaScreen> {
+class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
   final TextEditingController otpController = TextEditingController();
 
   @override
@@ -107,7 +105,8 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const IlustrationSuksesPulsa(),
+                  builder: (context) =>
+                      const IlustrationSuksesPaketDataScreen(),
                 ),
               );
             },

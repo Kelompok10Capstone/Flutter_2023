@@ -1,10 +1,10 @@
-import 'package:capstone_flutter/view/screen/pulsa&paket_data_screen/berhasil_transaksi_pulsa_screen.dart';
+import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/const/theme.dart';
+import 'berhasil_transaksi_paket_data_screen.dart';
 
-class IlustrationSuksesPulsa extends StatelessWidget {
-  const IlustrationSuksesPulsa({super.key});
+class IlustrationSuksesPaketDataScreen extends StatelessWidget {
+  const IlustrationSuksesPaketDataScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,8 @@ class IlustrationSuksesPulsa extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const BerhasilTransaksiPulsa(),
+                  builder: (context) =>
+                      const BerhasilTransaksiPaketDataListrik(),
                 ),
               );
             },
