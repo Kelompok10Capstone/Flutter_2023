@@ -3,6 +3,8 @@ import 'package:capstone_flutter/view/screen/billing_history_screen/billing_hist
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'view/screen/top_up_screen/top_up_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
