@@ -18,43 +18,69 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // email field
-    final emailField = FractionallySizedBox(
-      widthFactor: 1.0,
-      child: TextFormField(
-        autofocus: false,
-        controller: emailController,
-        keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Email",
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+    final emailField = TextFormField(
+      autofocus: false,
+      controller: emailController,
+      keyboardType: TextInputType.emailAddress,
+      // validator: (value) {
+      //   if (value!.isEmpty) {
+      //     return ("Please Enter Your Email");
+      //   }
+      //   // reg expression for email validation
+      //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+      //     return ("Please Enter a valid email");
+      //   }
+      //   return null;
+      // },
+      // onSaved: (value) {
+      //   emailController.text = value!;
+      // },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
+        hintText: 'skuypay@gmail.com',
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );
 
     // password field
-    final passwordField = FractionallySizedBox(
-      widthFactor: 1.0,
-      child: TextFormField(
-        autofocus: false,
-        controller: passwordController,
-        obscureText: true,
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Enter Your Password",
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+    final passwordField = TextFormField(
+      autofocus: false,
+      controller: passwordController,
+      obscureText: true,
+      // validator: (value) {
+      //   RegExp regex = new RegExp(r'^.{6,}$');
+      //   if (value!.isEmpty) {
+      //     return ("Password is required for login");
+      //   }
+      //   if (!regex.hasMatch(value)) {
+      //     return ("Enter Valid Password(Min. 6 Character)");
+      //   }
+      // },
+      // onSaved: (value) {
+      //   passwordController.text = value!;
+      // },
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
+        hintText: "Enter Your Password",
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );
@@ -114,25 +140,38 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 5),
                   passwordField,
-                  const SizedBox(height: 270),
-
-                  /// Navigasi menggunakan route
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff2B3990),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.35,
-                        // horizontal: 126,
-                        vertical: 18,
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            const EdgeInsets.only(bottom: 10, left: 24, right: 24, top: 20),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 80,
+          child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      onPressed: () {},
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont14,
                       ),
-                    ),
-                    child: Text(
-                      'Lanjutkan',
-                      style: whiteFont15,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -141,9 +180,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         'Lupa E-mail? ',
-                        style: blackText12,
+                        style: blackFont12,
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {},
                         child: Text(
                           'Atur Ulang',
@@ -151,10 +190,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ],
-                  ),
+                  )
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ),
