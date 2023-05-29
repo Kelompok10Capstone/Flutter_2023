@@ -44,9 +44,9 @@ class _TopUpScreenState extends State<TopUpScreen> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ReplenishFunds()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ReplenishFunds()));
                 },
                 child: Row(
                   children: [
