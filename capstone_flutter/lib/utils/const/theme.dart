@@ -63,3 +63,11 @@ TextStyle blackFontAppbar18 = GoogleFonts.roboto()
     .copyWith(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black);
 TextStyle blackText24 = GoogleFonts.roboto().copyWith(
     fontSize: 24, fontWeight: FontWeight.w700, color: const Color(0xff111111));
+
+Color redColor = "D13217".toColor();
+TextStyle blackFont14G =
+    GoogleFonts.roboto().copyWith(fontSize: 14.sp, fontWeight: FontWeight.w700);
+TextStyle blackFont16G =
+    GoogleFonts.roboto().copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700);
+TextStyle blackFont20 =
+    GoogleFonts.roboto().copyWith(fontSize: 20.sp, fontWeight: FontWeight.w700);

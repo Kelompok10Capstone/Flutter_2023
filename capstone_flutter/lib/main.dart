@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
+import 'package:capstone_flutter/view/screen/billing_history_screen/billing_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,5 +37,19 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+//         designSize: const Size(360, 800),
+//         minTextAdapt: true,
+//         splitScreenMode: true,
+//         builder: (context, child) {
+//           return MaterialApp(
+//             debugShowCheckedModeBanner: false,
+//             title: 'SkuyPay App',
+//             theme: ThemeData(
+//               primarySwatch: Colors.blue,
+//             ),
+//             home: const BillingHistory(),
+//           );
+//         },
+//       );
   }
 }
