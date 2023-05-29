@@ -13,6 +13,7 @@ import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
 import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/product_detail_screen.dart';
 import '../top_up_screen/replenish_funds_screen.dart';
+import '../top_up_screen/top_up_screen.dart';
 import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -204,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ReplenishFunds()));
+                                builder: (context) => const TopUpScreen()));
                       },
                       child: const Padding(
                         padding: EdgeInsets.only(top: 252, left: 314),
