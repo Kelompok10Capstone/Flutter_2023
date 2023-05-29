@@ -1,19 +1,18 @@
 import 'package:capstone_flutter/view/screen/pdam_screen/pdam_screen.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/profile_screen.dart';
-import 'package:capstone_flutter/view/screen/riwayat_tagihan/riwayat_tagihan_screen.dart';
-import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/const/theme.dart';
-import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
+import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pin_screen/input_pin_screen.dart';
+import '../promo_screen/all_promo_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
 import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
-import '../token_screen/modal_bottom_token_screen.dart';
 import '../token_screen/product_detail_screen.dart';
+import '../top_up_screen/replenish_funds_screen.dart';
 import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -200,13 +199,21 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 252, left: 314),
-                      child: SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: Icon(Icons.add_card_outlined,
-                            color: Color(0xFFFCDB80), size: 26),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ReplenishFunds()));
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 252, left: 314),
+                        child: SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: Icon(Icons.add_card_outlined,
+                              color: Color(0xFFFCDB80), size: 26),
+                        ),
                       ),
                     ),
                     Padding(
@@ -598,7 +605,13 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 555, left: 280),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AllPromoScreen()));
+                        },
                         child: Row(
                           children: [
                             Text(
@@ -647,6 +660,7 @@ class _HomeScreenState extends State<HomeScreen>
                       fit: BoxFit.contain,
                     ),
                   ),
+                  onTap: () {},
                 );
               },
             ),
@@ -1134,7 +1148,7 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const HomeScreen(),
+    const BillingHistory(),
     // const RiwayatTagihanScreen(),
     const ProfileScreen(),
   ];

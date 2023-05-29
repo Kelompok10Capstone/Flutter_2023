@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
+import '../edit_password_screen/enter_password_screen.dart';
+import '../forgot_pin_screen/forgot_pin_screen.dart';
 
 class SecuritySettingScreen extends StatelessWidget {
   const SecuritySettingScreen({super.key});
@@ -32,10 +34,10 @@ class SecuritySettingScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const SecuritySettingScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EnterNewPassword()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -57,7 +59,12 @@ class SecuritySettingScreen extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ForgotPinScreen()));
+                },
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 10, top: 15, bottom: 15, right: 15),

@@ -19,6 +19,7 @@ class _BillinngHistoryState extends State<BillingHistory> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           iconTheme: const IconThemeData(
             color: Colors.black,
           ),
