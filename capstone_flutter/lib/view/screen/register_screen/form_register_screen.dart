@@ -6,7 +6,6 @@ import '../../../utils/const/theme.dart';
 
 class FormRegisterScreen extends StatefulWidget {
   const FormRegisterScreen({super.key});
-  static const String route = "/form_register";
 
   @override
   State<FormRegisterScreen> createState() => _FormRegisterScreenState();
@@ -151,70 +150,70 @@ class _FormRegisterScreenState extends State<FormRegisterScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Nama',
-                style: blackFormFont12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Nama',
+              style: blackFormFont12,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            fullNameField,
+            const SizedBox(height: 10),
+            Text(
+              'No.HP',
+              style: blackFormFont12,
+            ),
+            const SizedBox(height: 5),
+            phonelField,
+            const SizedBox(height: 10),
+            Text(
+              'Kata Sandi',
+              style: blackFormFont12,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            passwordField,
+            const SizedBox(height: 10),
+            Text(
+              'Ketik Ulang Kata Sandi',
+              style: blackFormFont12,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            confirmPasswordField,
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            const EdgeInsets.only(bottom: 30, left: 24, right: 24, top: 10),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 52,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              fullNameField,
-              const SizedBox(height: 10),
-              Text(
-                'No.HP',
-                style: blackFormFont12,
-              ),
-              const SizedBox(height: 5),
-              phonelField,
-              const SizedBox(height: 10),
-              Text(
-                'Kata Sandi',
-                style: blackFormFont12,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              passwordField,
-              const SizedBox(height: 10),
-              Text(
-                'Ketik Ulang Kata Sandi',
-                style: blackFormFont12,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              confirmPasswordField,
-              const SizedBox(
-                height: 300,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const BerhasilRegisterScreen(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2B3990),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 125,
-                    vertical: 18,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BerhasilRegisterScreen(),
                 ),
-                child: Text(
-                  'Lanjutkan',
-                  style: whiteFont15,
-                ),
-              ),
-            ],
+              );
+            },
+            child: Text(
+              'Lanjutkan',
+              style: whiteFont14,
+            ),
           ),
         ),
       ),

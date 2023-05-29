@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^4.0.4
   shared_preferences: ^2.1.0
   pinput: ^2.2.31
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
   flutter_test:
