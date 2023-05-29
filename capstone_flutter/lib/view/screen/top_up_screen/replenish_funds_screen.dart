@@ -10,7 +10,7 @@ class ReplenishFunds extends StatefulWidget {
 }
 
 class _ReplenishFundsState extends State<ReplenishFunds> {
-  List<Item> _data = generateItems();
+  final List<Item> _data = generateItems();
 
   @override
   Widget build(BuildContext context) {
@@ -135,13 +135,13 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ExpansionPanelList(
                     elevation: 1,
-                    expandedHeaderPadding: EdgeInsets.all(0),
+                    expandedHeaderPadding: const EdgeInsets.all(0),
                     expansionCallback: (int index, bool isExpanded) {
                       setState(() {
                         _data[index].isExpanded = !isExpanded;
