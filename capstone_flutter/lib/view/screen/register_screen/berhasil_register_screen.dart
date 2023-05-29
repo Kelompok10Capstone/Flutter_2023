@@ -26,7 +26,8 @@ class _BerhasilRegisterScreenState extends State<BerhasilRegisterScreen> {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 20),
                     child: Image.asset(
                       'assets/images/ic_berhasil_register.png',
                     ),
@@ -44,11 +45,9 @@ class _BerhasilRegisterScreenState extends State<BerhasilRegisterScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NavBar(),
-                    )
-                  );
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const NavBar(),
+                  ));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff2B3990),

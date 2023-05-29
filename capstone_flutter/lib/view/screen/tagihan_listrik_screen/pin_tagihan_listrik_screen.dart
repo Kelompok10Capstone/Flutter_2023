@@ -32,7 +32,7 @@ class _PinTagihanListrikScreenState extends State<PinTagihanListrikScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Metode Pembayaran',
+          'Kode PIN',
           style: blackFont18.copyWith(color: Colors.black),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
