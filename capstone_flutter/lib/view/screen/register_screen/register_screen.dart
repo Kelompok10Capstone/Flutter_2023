@@ -12,12 +12,10 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   // text editing controller
-  final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
   @override
   void dispose() {
-    phoneController.dispose();
     emailController.dispose();
     super.dispose();
   }
@@ -150,7 +148,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: blackFont12,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Masuk',
                           style: blueFont12,

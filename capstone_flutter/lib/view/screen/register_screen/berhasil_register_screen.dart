@@ -49,12 +49,12 @@ class _BerhasilRegisterScreenState extends State<BerhasilRegisterScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const BerhasilTransaksiPulsa(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NavBar(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
