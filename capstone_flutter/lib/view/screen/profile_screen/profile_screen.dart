@@ -5,6 +5,9 @@ import 'package:capstone_flutter/view/screen/profile_screen/security_policy_scre
 import 'package:capstone_flutter/view/screen/profile_screen/security_setting_screen.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/terms_condition_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../login_screen/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -227,7 +230,97 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(blueColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            content: SizedBox(
+                              height: MediaQuery.of(context).size.height / 30,
+                              child: Center(
+                                child: Text(
+                                  'Ingin keluar dari Skuypay?',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            actions: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.white),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          side: const BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      fixedSize: MaterialStateProperty.all(
+                                        const Size(115, 40),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Batal',
+                                      style: blackFont14,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen(),
+                                        ),
+                                      );
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        const Color(0xffD13217),
+                                      ),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          side: const BorderSide(
+                                            color: Color(0xffD13217),
+                                          ),
+                                        ),
+                                      ),
+                                      fixedSize: MaterialStateProperty.all(
+                                        const Size(115, 40),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Keluar',
+                                      style: whiteFont14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                       child: Text(
                         'Keluar',
                         style: whiteFont14,
