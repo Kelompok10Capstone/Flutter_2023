@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../utils/const/theme.dart';
+import 'atur_ulang_screen.dart';
 
 class InputPinAturUlangScreen extends StatefulWidget {
   const InputPinAturUlangScreen({super.key});
@@ -84,10 +85,6 @@ class _InputPinAturUlangScreenState extends State<InputPinAturUlangScreen> {
             const SizedBox(
               height: 20,
             ),
-            // Text(
-            //   'Lupa kode PIN?',
-            //   style: blueFont12,
-            // ),
           ],
         ),
       ),
@@ -104,10 +101,12 @@ class _InputPinAturUlangScreenState extends State<InputPinAturUlangScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const ReinputPinScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AturUlangScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
