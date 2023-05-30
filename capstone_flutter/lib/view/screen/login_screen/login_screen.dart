@@ -168,7 +168,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavBar(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Lanjutkan',
                         style: whiteFont14,
