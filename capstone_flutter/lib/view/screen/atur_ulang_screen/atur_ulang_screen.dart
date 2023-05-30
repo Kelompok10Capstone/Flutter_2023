@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
+import 'atur_ulang_no_hp_screen.dart';
 
 class AturUlangScreen extends StatefulWidget {
   const AturUlangScreen({super.key});
@@ -151,12 +152,12 @@ class _AturUlangScreenState extends State<AturUlangScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const AturUlangScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AturUlangNomorHpScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
