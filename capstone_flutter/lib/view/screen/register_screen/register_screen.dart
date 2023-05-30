@@ -13,181 +13,154 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   // text editing controller
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    phoneController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // email field
+    final emailField = TextFormField(
+      autofocus: false,
+      controller: emailController,
+      keyboardType: TextInputType.emailAddress,
+      // validator: (value) {
+      //   if (value!.isEmpty) {
+      //     return ("Please Enter Your Email");
+      //   }
+      //   // reg expression for email validation
+      //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+      //     return ("Please Enter a valid email");
+      //   }
+      //   return null;
+      // },
+      // onSaved: (value) {
+      //   emailController.text = value!;
+      // },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
+        hintText: 'skuypay@gmail.com',
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
         title: Text(
           'Daftar',
-          style: blackFontAppbar18,
+          style: blackFont18.copyWith(color: Colors.black),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        centerTitle: true,
         elevation: 0,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            width: 400,
-            height: 700,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/ic_logo_skuypay.png',
-                  height: 100,
-                  width: 100,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'SkuyPay!',
-                  style: blueFont16,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  widthFactor: 1.8,
-                  child: Text(
-                    'Masukkan nomor SkuyPay kamu!',
-                    style: blackFont12,
-                  ),
-                ),
-                // SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 60,
-                        child: TextFormField(
-                          autofocus: false,
-                          controller: phoneController,
-                          obscureText: true,
-                          textInputAction: TextInputAction.next,
-                          // enabled: false,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(15, 0, 10, 0),
-                            hintText: "+62",
-                            // labelText: "Password",
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide:
-                                  const BorderSide(color: Colors.black12),
-                            ),
-                          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset(
+                'assets/images/ic_logo_skuypay.png',
+                height: 100,
+                width: 100,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Text(
+                'SkuyPay!',
+                style: blueFont16,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 28),
+            Center(
+              child: Text(
+                'Kode OTP akan dikirim melalui E-mail kamu',
+                style: blackFont12,
+              ),
+            ),
+            const SizedBox(height: 22),
+            Text(
+              'E-mail*',
+              style: blackFont14,
+            ),
+            const SizedBox(height: 8),
+            emailField,
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            const EdgeInsets.only(bottom: 10, left: 24, right: 24, top: 20),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 80,
+          child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 249,
-                        child: TextFormField(
-                          autofocus: false,
-                          controller: phoneController,
-                          obscureText: true,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            hintText: "Nomor Telepon",
-                            // labelText: "Password",
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 350,
-                ),
-
-                /// Navigasi menggunakan route
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const OtpScreen(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff2B3990),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 140,
-                      vertical: 18,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text(
-                    'Daftar',
-                    style: whiteFont15,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Sudah punya akun? ',
-                      style: blackText12,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
+                            builder: (context) => const OtpScreen(),
                           ),
                         );
                       },
                       child: Text(
-                        'Masuk',
-                        style: blueFont12,
+                        'Lanjutkan',
+                        style: whiteFont14,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sudah punya akun? ',
+                        style: blackFont12,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'Masuk',
+                          style: blueFont12,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
           ),
         ),
       ),

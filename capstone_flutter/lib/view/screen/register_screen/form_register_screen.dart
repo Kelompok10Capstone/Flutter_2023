@@ -186,37 +186,35 @@ class _FormRegisterScreenState extends State<FormRegisterScreen> {
               height: 5,
             ),
             confirmPasswordField,
-            const SizedBox(
-              height: 300,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const BerhasilRegisterScreen(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2B3990),
-                  // padding: const EdgeInsets.symmetric(
-                  //   horizontal: 125,
-                  //   vertical: 18,
-                  // ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Text(
-                  'Lanjutkan',
-                  style: whiteFont15,
-                ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            const EdgeInsets.only(bottom: 30, left: 24, right: 24, top: 10),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 52,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
-          ],
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BerhasilRegisterScreen(),
+                ),
+              );
+            },
+            child: Text(
+              'Lanjutkan',
+              style: whiteFont14,
+            ),
+          ),
         ),
       ),
     );
