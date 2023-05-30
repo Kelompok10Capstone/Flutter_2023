@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
+import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 import '../home_screen/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -191,7 +192,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: blackFont12,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const InputPinAturUlangScreen(),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Atur Ulang',
                           style: blueFont12,
