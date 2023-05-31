@@ -79,7 +79,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                             Radius.circular(10),
                           ),
                         ),
-                        labelText: 'Kata Sandi',
+                        hintText: 'Kata Sandi',
                         suffixIcon: IconButton(
                             icon: Icon(
                               _obscureText
@@ -124,7 +124,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                               Radius.circular(10),
                             ),
                           ),
-                          labelText: 'Kata Sandi',
+                          hintText: 'Kata Sandi',
                           suffixIcon: IconButton(
                               icon: Icon(
                                 _obscureText
@@ -151,12 +151,13 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30, top: 320),
+            Container(
+              margin: const EdgeInsets.only(top: 330, left: 16, right: 16, bottom: 40),
+              width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 120, vertical: 17),
+                      const EdgeInsets.symmetric(vertical: 19),
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

@@ -61,7 +61,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                       decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
-                        labelText: 'Kata Sandi',
+                        hintText: 'Kata Sandi',
                         suffixIcon: IconButton(
                             icon: Icon(
                               _obscureText
@@ -87,22 +87,21 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40, top: 470),
+            Container(
+              margin: const EdgeInsets.only(top: 480, left: 16, right: 16, bottom: 40),
+              width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 120, vertical: 17),
+                      const EdgeInsets.symmetric(vertical: 19),
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NewPin()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const NewPin()));
                 },
                 child: Text(
                   'Lanjutkan',
