@@ -127,16 +127,19 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: const Padding(
-                        padding: EdgeInsets.only(top: 110, left: 17),
+                      borderRadius: BorderRadius.circular(20),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 110,
+                        ),
                         child: Image(
-                          image: AssetImage(
+                          image: const AssetImage(
                             'assets/motif_polos.png',
                           ),
                           fit: BoxFit.cover,
-                          height: 270,
-                          width: 360,
+                          height: MediaQuery.of(context).size.height *
+                              0.34, // Misalnya, setinggi 35% dari tinggi layar
+                          width: MediaQuery.of(context).size.width * 1,
                         ),
                       ),
                     ),
@@ -679,10 +682,9 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   onTap: () {
                     Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AllPromoScreen()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllPromoScreen()));
                   },
                 );
               },
