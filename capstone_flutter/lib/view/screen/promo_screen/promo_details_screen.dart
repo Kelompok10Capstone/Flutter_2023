@@ -12,6 +12,7 @@ class PromoDetails extends StatefulWidget {
 class _PromoDetailsState extends State<PromoDetails> {
   @override
   Widget build(BuildContext context) {
+        double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -167,11 +168,13 @@ class _PromoDetailsState extends State<PromoDetails> {
               ],
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(top: 150),
+            Container(
+              margin: EdgeInsets.only(
+                  top: height * 0.19, left: 16, right: 16, bottom: 0),
+              width: double.infinity,
               child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 17),
+                padding: const EdgeInsets.symmetric(vertical: 19),
                 backgroundColor: blueColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
