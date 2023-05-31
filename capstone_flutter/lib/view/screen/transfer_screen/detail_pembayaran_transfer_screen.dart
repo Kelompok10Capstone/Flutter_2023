@@ -114,7 +114,7 @@ class _DetailPembayaranTransferScreenState
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(top: height * 0.5),
+            margin: EdgeInsets.only(top: height * 0.48),
             padding: const EdgeInsets.all(30),
             decoration: const BoxDecoration(
               color: Colors.white,
