@@ -14,6 +14,7 @@ import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/product_detail_screen.dart';
 import '../top_up_screen/replenish_funds_screen.dart';
 import '../top_up_screen/top_up_screen.dart';
+import '../transfer_screen/transfer_screen.dart';
 import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -181,13 +182,23 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 252, left: 254),
-                      child: SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: Icon(Icons.send_to_mobile_outlined,
-                            color: Color(0xFFFCDB80), size: 26),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TransferScreen(),
+                          ),
+                        );
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 252, left: 254),
+                        child: SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: Icon(Icons.send_to_mobile_outlined,
+                              color: Color(0xFFFCDB80), size: 26),
+                        ),
                       ),
                     ),
                     Padding(
