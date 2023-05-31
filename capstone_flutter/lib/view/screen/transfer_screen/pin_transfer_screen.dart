@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
+import 'package:capstone_flutter/view/screen/transfer_screen/ilustration_sukses_transfer.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
@@ -100,12 +101,12 @@ class _PinTransferScreenState extends State<PinTransferScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const IlustrationSuksesPulsa(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const IlustrationSuksesTransfer(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
