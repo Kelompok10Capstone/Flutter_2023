@@ -24,6 +24,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -79,7 +80,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                             Radius.circular(10),
                           ),
                         ),
-                        labelText: 'Kata Sandi',
+                        hintText: 'Kata Sandi',
                         suffixIcon: IconButton(
                             icon: Icon(
                               _obscureText
@@ -124,7 +125,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                               Radius.circular(10),
                             ),
                           ),
-                          labelText: 'Kata Sandi',
+                          hintText: 'Kata Sandi',
                           suffixIcon: IconButton(
                               icon: Icon(
                                 _obscureText
@@ -151,12 +152,13 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30, top: 320),
+            Container(
+              margin: EdgeInsets.only(
+                  top: height * 0.42, left: 16, right: 16, bottom: 40),
+              width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 120, vertical: 17),
+                  padding: const EdgeInsets.symmetric(vertical: 19),
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -164,41 +166,39 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                 ),
                 onPressed: () {
                   showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          content: SizedBox(
+                            width: 260,
+                            height: 170,
+                            child: Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Image(
+                                    image: AssetImage('assets/ceklis.png'),
+                                    fit: BoxFit.contain,
+                                    width: 90,
+                                    height: 90,
                                   ),
-                                  content: SizedBox(
-                                    width: 260,
-                                    height: 170,
-                                    child: Column(
-                                      children: [
-                                        const Padding(
-                                          padding:
-                                              EdgeInsets.only(top: 20),
-                                          child: Image(
-                                            image:
-                                                AssetImage('assets/ceklis.png'),
-                                            fit: BoxFit.contain,
-                                            width: 90,
-                                            height: 90,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          'Yey! Kata Sandi Berhasil Diubah',
-                                          style: blackFont14G.copyWith(
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'Yey! Kata Sandi Berhasil Diubah',
+                                  style: blackFont14G.copyWith(
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
                 },
                 child: Text(
                   'Lanjutkan',

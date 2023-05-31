@@ -23,6 +23,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -59,7 +60,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                       decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
-                        labelText: 'Kata Sandi',
+                        hintText: 'Kata Sandi',
                         suffixIcon: IconButton(
                             icon: Icon(
                               _obscureText
@@ -85,22 +86,21 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40, top: 470),
+            Container(
+              margin: EdgeInsets.only(top: height * 0.62, left: 16, right: 16),
+              width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 120, vertical: 17),
+                      const EdgeInsets.symmetric(vertical: 19),
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NewPin()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const NewPin()));
                 },
                 child: Text(
                   'Lanjutkan',
