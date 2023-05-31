@@ -85,12 +85,12 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: EdgeInsets.only(left: 22.w, top: 45.w),
                       child: Container(
-                        height: 75.w,
-                        width: 75.w,
+                        height: 75.h,
+                        width: 65.w,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
                               image: AssetImage('assets/profile_home.png')),
-                          borderRadius: BorderRadius.circular(37),
+                          borderRadius: BorderRadius.circular(50),
                           border: Border.all(
                             color: const Color(0xFF1D2660),
                             style: BorderStyle.solid,
@@ -132,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 1,
+                        
                         child: AspectRatio(
                           aspectRatio: 17 / 11,
                           child: Image.asset(
