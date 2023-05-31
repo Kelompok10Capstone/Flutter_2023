@@ -127,10 +127,10 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 110,
                       ),
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * 1,
                         
                         child: AspectRatio(
