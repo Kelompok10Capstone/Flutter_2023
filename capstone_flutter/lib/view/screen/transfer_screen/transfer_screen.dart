@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/transfer_screen/detail_pembayaran_transfer_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
@@ -149,7 +150,7 @@ class _TransferScreenState extends State<TransferScreen> {
                 hintText: 'Tulis Catatan : Jajan',
                 hintStyle: blackFont14.copyWith(color: Colors.grey),
                 filled: true,
-                fillColor: const Color(0xffFFFFFF),
+                fillColor: Colors.grey[200],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -178,12 +179,12 @@ class _TransferScreenState extends State<TransferScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const BerhasilRegisterScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DetailPembayaranTransferScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',

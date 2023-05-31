@@ -55,6 +55,8 @@ TextStyle blackText13 = GoogleFonts.roboto().copyWith(
     fontSize: 13, fontWeight: FontWeight.w700, color: const Color(0xff111111));
 TextStyle blackFont14 = GoogleFonts.roboto()
     .copyWith(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black);
+TextStyle blackFont15 = GoogleFonts.roboto()
+    .copyWith(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black);
 TextStyle blackText16 = GoogleFonts.roboto().copyWith(
     fontSize: 16, fontWeight: FontWeight.w700, color: const Color(0xff111111));
 TextStyle blackFontt16 = GoogleFonts.roboto().copyWith(
