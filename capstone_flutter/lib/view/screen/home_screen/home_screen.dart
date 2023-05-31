@@ -72,10 +72,16 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Stack(
                   children: [
-                    Image.asset(
-                      'assets/motif_berwarna.png',
-                      fit: BoxFit.contain,
-                      height: 253,
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      child: AspectRatio(
+                        aspectRatio: 15.5 / 10,
+                        child: Image.asset(
+                          'assets/motif_berwarna.png',
+                          fit: BoxFit.contain,
+                          height: 253,
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 22.w, top: 45.w),

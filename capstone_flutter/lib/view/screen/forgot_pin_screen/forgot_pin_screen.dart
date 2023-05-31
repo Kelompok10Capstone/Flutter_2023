@@ -40,13 +40,11 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20, left: 10),
-                child: Text(
-                  'Masukkan Kata Sandi untuk bisa lanjut ubah Kode Pin, ya.',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                'Masukkan Kata Sandi untuk bisa lanjut ubah Kode Pin, ya.',
+                style: blackFont14.copyWith(color: Colors.black),
               ),
             ),
             Padding(
