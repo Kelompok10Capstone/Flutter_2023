@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/transfer_screen/pin_transfer_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
@@ -216,12 +217,12 @@ class _DetailPembayaranTransferScreenState
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const DetailPembayaranTransferScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PinTransferScreen(),
+                ),
+              );
             },
             child: Text(
               'Transfer',
