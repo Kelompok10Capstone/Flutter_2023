@@ -23,6 +23,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -41,7 +42,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20, left: 10),
                 child: Text(
                   'Masukkan Kata Sandi untuk bisa lanjut ubah Kode Pin, ya.',
                   style: blackFont14.copyWith(color: Colors.black),
@@ -88,7 +89,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 480, left: 16, right: 16, bottom: 40),
+              margin: EdgeInsets.only(top: height * 0.62, left: 16, right: 16),
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
