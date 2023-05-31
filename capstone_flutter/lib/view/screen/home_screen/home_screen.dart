@@ -75,11 +75,10 @@ class _HomeScreenState extends State<HomeScreen>
                     Container(
                       width: MediaQuery.of(context).size.width * 1,
                       child: AspectRatio(
-                        aspectRatio: 15.5 / 10,
+                        aspectRatio: 17 / 11,
                         child: Image.asset(
                           'assets/motif_berwarna.png',
                           fit: BoxFit.contain,
-                          height: 253,
                         ),
                       ),
                     ),
