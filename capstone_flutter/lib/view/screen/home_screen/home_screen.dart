@@ -126,30 +126,28 @@ class _HomeScreenState extends State<HomeScreen>
                             color: Colors.white, size: 28),
                       ),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 110,
-                        ),
-                        child: Image(
-                          image: const AssetImage(
-                            'assets/motif_polos.png',
-                          ),
-                          fit: BoxFit.cover,
-                          height: MediaQuery.of(context).size.height *
-                              0.34, // Misalnya, setinggi 35% dari tinggi layar
-                          width: MediaQuery.of(context).size.width * 1,
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 110,
+                      ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: AspectRatio(
+                          aspectRatio: 17 / 11,
+                          child: Image.asset(
+                              'assets/motif_polos.png',
+                            fit: BoxFit.cover,
+                            ),
                         ),
                       ),
-                    ),
+                      ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 168, left: 18),
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.22, left: MediaQuery.of(context).size.width * 0.06),
                       child: Row(
                         children: [
                           Container(
                             height: 2,
-                            width: MediaQuery.of(context).size.width * 0.10,
+                            width: MediaQuery.of(context).size.width * 0.11,
                             color: Colors.white,
                           ),
                           Padding(
@@ -162,10 +160,10 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 16),
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.04),
                             child: Container(
                               height: 2,
-                              width: MediaQuery.of(context).size.height * 0.293,
+                              width: MediaQuery.of(context).size.height * 0.275,
                               color: Colors.white,
                             ),
                           ),
