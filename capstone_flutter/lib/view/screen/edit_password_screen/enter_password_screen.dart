@@ -152,7 +152,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 320),
+              padding: const EdgeInsets.only(bottom: 30, top: 320),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:

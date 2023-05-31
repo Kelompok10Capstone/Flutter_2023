@@ -88,7 +88,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 480),
+              padding: const EdgeInsets.only(bottom: 40, top: 470),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
