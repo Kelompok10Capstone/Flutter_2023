@@ -170,7 +170,7 @@ class _PromoDetailsState extends State<PromoDetails> {
 
             Container(
               margin: EdgeInsets.only(
-                  top: height * 0.19, left: 16, right: 16, bottom: 0),
+                  top: height * 0.18, left: 16, right: 16, bottom: 40),
               width: double.infinity,
               child: ElevatedButton(
               style: ElevatedButton.styleFrom(
