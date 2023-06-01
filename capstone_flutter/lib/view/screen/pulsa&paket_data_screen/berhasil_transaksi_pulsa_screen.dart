@@ -2,9 +2,14 @@ import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
 
-class BerhasilTransaksiPulsa extends StatelessWidget {
+class BerhasilTransaksiPulsa extends StatefulWidget {
   const BerhasilTransaksiPulsa({super.key});
 
+  @override
+  State<BerhasilTransaksiPulsa> createState() => _BerhasilTransaksiPulsaState();
+}
+
+class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +24,11 @@ class BerhasilTransaksiPulsa extends StatelessWidget {
               ),
               const Icon(
                 Icons.check_circle,
-                color: Colors.green,
+                color: Color(0xff76BB63),
                 size: 80,
               ),
               const SizedBox(
-                height: 50,
+                height: 24,
               ),
               Text(
                 'Transaksi Kamu Berhasil',
@@ -49,76 +54,90 @@ class BerhasilTransaksiPulsa extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 12,
+                height: 10,
               ),
               Container(
+                width: MediaQuery.of(context).size.width,
+                height: 170,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.black)),
-                width: double.infinity,
-                height: 208,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey),
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.only(
+                      left: 10, top: 15, bottom: 15, right: 15),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'produk',
-                            style: blackFont14,
-                          ),
-                          Text(
-                            'Pulsa 5000',
-                            style: blackFont14,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'No. Handphone',
-                            style: blackFont14,
-                          ),
-                          Text(
-                            '085278xxxxx',
-                            style: blackFont14,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Harga',
-                            style: blackFont14,
-                          ),
-                          Text(
-                            'Rp 6.500',
-                            style: blackFont14,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 5, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Produk',
+                              style: blackFont12.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              'Pulsa 5000',
+                              style: blackFont12.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15, bottom: 15),
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 15, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'No. Handphone',
+                              style: blackFont12.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              '085278xxxxx',
+                              style: blackFont12.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 15, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Harga',
+                              style: blackFont12.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              'Rp 6.500',
+                              style: blackFont12.copyWith(
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 21),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 5, 5),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.green[100],
+                            // color: Colors.green[100],
+                            color: Color(0xffBADDB1),
                           ),
                           width: MediaQuery.of(context).size.width,
-                          height: 52,
+                          height: 34,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +147,8 @@ class BerhasilTransaksiPulsa extends StatelessWidget {
                                       horizontal: 15),
                                   child: Text(
                                     'Total Tagihan',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
@@ -136,7 +156,8 @@ class BerhasilTransaksiPulsa extends StatelessWidget {
                                       horizontal: 15),
                                   child: Text(
                                     'Rp 6.500',
-                                    style: blackFont16,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
@@ -147,7 +168,7 @@ class BerhasilTransaksiPulsa extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

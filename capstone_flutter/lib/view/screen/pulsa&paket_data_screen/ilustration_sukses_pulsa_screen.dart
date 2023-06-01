@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
 
-class IlustrationSuksesPulsa extends StatefulWidget {
+class IlustrationSuksesPulsa extends StatelessWidget {
   const IlustrationSuksesPulsa({super.key});
 
-  @override
-  State<IlustrationSuksesPulsa> createState() => _IlustrationSuksesPulsaState();
-}
-
-class _IlustrationSuksesPulsaState extends State<IlustrationSuksesPulsa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +23,7 @@ class _IlustrationSuksesPulsaState extends State<IlustrationSuksesPulsa> {
             'Cihuyy ! Selamat',
             style: blackText24,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 16),
           Text(
             'Transaksi kamu berhasil',
             style: blackFontt16,

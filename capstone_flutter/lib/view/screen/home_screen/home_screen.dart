@@ -1,18 +1,20 @@
 import 'package:capstone_flutter/view/screen/pdam_screen/pdam_screen.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/profile_screen.dart';
-import 'package:capstone_flutter/view/screen/riwayat_tagihan/riwayat_tagihan_screen.dart';
-import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/const/theme.dart';
-import '../bpjs_screen/modal_bottom_bpjs_screen.dart';
+import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pin_screen/input_pin_screen.dart';
+import '../promo_screen/all_promo_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
-import '../token_screen/modal_bottom_token_screen.dart';
+import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/product_detail_screen.dart';
+import '../top_up_screen/replenish_funds_screen.dart';
+import '../top_up_screen/top_up_screen.dart';
+import '../transfer_screen/transfer_screen.dart';
 import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
   TextEditingController pelangganControllerToken = TextEditingController();
+  TextEditingController pelangganControllerTagihanListrik =
+      TextEditingController();
   TextEditingController pelangganControllerBpjs = TextEditingController();
   TextEditingController pelangganControllerWifi = TextEditingController();
 
@@ -43,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
     pelangganControllerBpjs.dispose();
     _tabController?.dispose();
     pelangganControllerToken.dispose();
+    pelangganControllerTagihanListrik.dispose();
     pelangganControllerWifi.dispose();
   }
 
@@ -53,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
     //   _showModalBottomSheetCreatePin();
     // });
     _tabController = TabController(length: 2, vsync: this);
+    // _tabController?.index = 0;
   }
 
   @override
@@ -66,10 +72,15 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Stack(
                   children: [
-                    Image.asset(
-                      'assets/motif_berwarna.png',
-                      fit: BoxFit.contain,
-                      height: 253,
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      child: AspectRatio(
+                        aspectRatio: 17 / 11,
+                        child: Image.asset(
+                          'assets/motif_berwarna.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 22.w, top: 45.w),
@@ -116,16 +127,19 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: const Padding(
-                        padding: EdgeInsets.only(top: 110, left: 17),
+                      borderRadius: BorderRadius.circular(20),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 110,
+                        ),
                         child: Image(
-                          image: AssetImage(
+                          image: const AssetImage(
                             'assets/motif_polos.png',
                           ),
                           fit: BoxFit.cover,
-                          height: 270,
-                          width: 360,
+                          height: MediaQuery.of(context).size.height *
+                              0.34, // Misalnya, setinggi 35% dari tinggi layar
+                          width: MediaQuery.of(context).size.width * 1,
                         ),
                       ),
                     ),
@@ -176,13 +190,23 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 252, left: 254),
-                      child: SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: Icon(Icons.send_to_mobile_outlined,
-                            color: Color(0xFFFCDB80), size: 26),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TransferScreen(),
+                          ),
+                        );
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 252, left: 254),
+                        child: SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: Icon(Icons.send_to_mobile_outlined,
+                              color: Color(0xFFFCDB80), size: 26),
+                        ),
                       ),
                     ),
                     Padding(
@@ -195,13 +219,21 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 252, left: 314),
-                      child: SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: Icon(Icons.add_card_outlined,
-                            color: Color(0xFFFCDB80), size: 26),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TopUpScreen()));
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 252, left: 314),
+                        child: SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: Icon(Icons.add_card_outlined,
+                              color: Color(0xFFFCDB80), size: 26),
+                        ),
                       ),
                     ),
                     Padding(
@@ -593,7 +625,13 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 555, left: 280),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AllPromoScreen()));
+                        },
                         child: Row(
                           children: [
                             Text(
@@ -642,6 +680,12 @@ class _HomeScreenState extends State<HomeScreen>
                       fit: BoxFit.contain,
                     ),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllPromoScreen()));
+                  },
                 );
               },
             ),
@@ -727,11 +771,25 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
+                          if (_tabController?.index == 0) {
+                            // Jika tab Token aktif, arahkan pengguna ke layar Token
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ProductDetailScreen()));
+                                builder: (context) =>
+                                    const ProductDetailScreen(),
+                              ),
+                            );
+                          } else if (_tabController?.index == 1) {
+                            // Jika tab Tagihan aktif, arahkan pengguna ke layar Tagihan
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const DetailPembayaranTagihanListrik(),
+                              ),
+                            );
+                          }
                         },
                         child: Text(
                           'Lanjutkan',
@@ -1059,10 +1117,39 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildTagihanTab() {
-    return Center(
-      child: Text(
-        'Tagihan',
-        style: blackFont16,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 3.5,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'No. Pelanggan',
+              style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black),
+              ),
+              child: TextField(
+                controller: pelangganControllerTagihanListrik,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: blackFont12.copyWith(color: Colors.grey),
+                  hintText: 'Masukkan No Pelanggan',
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1086,7 +1173,8 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const RiwayatTagihanScreen(),
+    const BillingHistory(),
+    // const RiwayatTagihanScreen(),
     const ProfileScreen(),
   ];
 

@@ -32,28 +32,26 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
         title: Text(
           'Kode PIN',
-          style: blackFontAppbar18,
+          style: blackFont18.copyWith(color: Colors.black),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        centerTitle: true,
         elevation: 0,
       ),
       body: Center(
         child: Column(
           children: [
             const SizedBox(
-              height: 30,
+              height: 12,
             ),
             Text(
               'Masukkan kode PIN kamu!',
               style: blackFont14,
             ),
-            const SizedBox(height: 70),
+            const SizedBox(height: 55),
             Pinput(
               controller: otpController,
               length: 5,
@@ -84,7 +82,7 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
               },
             ),
             const SizedBox(
-              height: 20,
+              height: 26,
             ),
             Text(
               'Lupa kode PIN?',
@@ -107,9 +105,11 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
             ),
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const IlustrationSuksesPulsa()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const IlustrationSuksesPulsa(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',

@@ -1,7 +1,5 @@
 import 'package:capstone_flutter/view/screen/register_screen/form_register_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../utils/const/theme.dart';
@@ -94,50 +92,62 @@ class _OtpScreenState extends State<OtpScreen> {
                   });
                 },
               ),
-              const SizedBox(
-                height: 330,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const FormRegisterScreen(),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            const EdgeInsets.only(bottom: 10, left: 24, right: 24, top: 20),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 80,
+          child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff2B3990),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormRegisterScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont14,
                       ),
                     ),
-                    child: Text(
-                      'Lanjutkan',
-                      style: whiteFont15,
-                    ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Belum dapat kode nih? ',
-                    style: blackText12,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      'Kirim ulang dong',
-                      style: blueFont12,
-                    ),
-                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Belum dapat kode nih? ',
+                        style: blackFont12,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'Kirim ulang dong',
+                          style: blueFont12,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ],

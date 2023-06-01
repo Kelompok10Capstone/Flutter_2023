@@ -36,5 +36,19 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+//         designSize: const Size(360, 800),
+//         minTextAdapt: true,
+//         splitScreenMode: true,
+//         builder: (context, child) {
+//           return MaterialApp(
+//             debugShowCheckedModeBanner: false,
+//             title: 'SkuyPay App',
+//             theme: ThemeData(
+//               primarySwatch: Colors.blue,
+//             ),
+//             home: const BillingHistory(),
+//           );
+//         },
+//       );
   }
 }
