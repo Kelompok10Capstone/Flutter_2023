@@ -1,20 +1,16 @@
-// ignore_for_file: avoid_print, unnecessary_nullable_for_final_variable_declarations, prefer_const_constructors
-
 import 'dart:convert';
+import 'dart:io';
+import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:capstone_flutter/view/screen/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart' as http_io;
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../view/screen/login_screen/login_screen.dart';
 
 class LoginController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  //* Save Token
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> loginWithEmail(BuildContext context) async {
     try {
@@ -28,47 +24,65 @@ class LoginController {
         'password': passwordController.text,
       };
 
-      http.Response response = await http.post(
+      // Create an IOClient with a HttpClient that ignores certificate verification
+      http.Client client = http_io.IOClient(
+        HttpClient()
+          ..badCertificateCallback =
+              (X509Certificate cert, String host, int port) => true,
+      );
+
+      http.Response response = await client.post(
         url,
         body: jsonEncode(body),
         headers: headers,
       );
-      print('Response status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      // print('Response status code: ${response.statusCode}');
+      // print('Response body: ${response.body}');
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        if (json['meta']['code'] == 200) {
-          var token = json['data']['access_token'];
-          print(token);
-          final SharedPreferences? prefs = await _prefs;
+        if (json['metadata']?['status'] == 200) {
+          var data = json['data'];
+          var token = data['token'];
 
-          await prefs?.setString('token', token);
+          // print(token);
+
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('token', token);
 
           emailController.clear();
           passwordController.clear();
+
           // ignore: use_build_context_synchronously
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => NavBar()),
+            MaterialPageRoute(builder: (context) => const NavBar()),
             (route) => false,
           );
         } else {
-          throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
+          var errorMessage = json['metadata']?['message']?.toString() ??
+              "Unknown Error Occurred";
+          throw errorMessage;
         }
       } else {
-        throw jsonDecode(response.body)["message"] ??
-            "Email atau password salah!";
+        var errorMessage = jsonDecode(response.body)?["message"]?.toString() ??
+            "Email or password is incorrect!";
+        throw errorMessage;
       }
     } catch (e) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
       showDialog(
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: Text('Error'),
-            contentPadding: EdgeInsets.all(20),
+            title: Text(
+              'Error',
+              style: blackFont18,
+            ),
+            contentPadding: const EdgeInsets.all(20),
             children: [Text(e.toString())],
           );
         },
@@ -78,7 +92,8 @@ class LoginController {
 }
 
 class ApiEndPoints {
-  static final String baseUrl = 'https://pay.mjcreativa.com/api/';
+  static const String baseUrl = 'https://34.101.160.237:2424/api/v1/';
+  // ignore: library_private_types_in_public_api
   static _AuthEndPoints authEndpoints = _AuthEndPoints();
 
   static Future<String> getAuthToken() async {
@@ -90,5 +105,4 @@ class ApiEndPoints {
 class _AuthEndPoints {
   final String registerEmail = 'register';
   final String loginEmail = 'login';
-  final String getKaryawan = 'employee';
 }
