@@ -145,15 +145,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      // onPressed: () => loginController.loginWithEmail(context),
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NavBar()),
-                          (route) => false,
-                        );
-                      },
+                      onPressed: () => loginController.loginWithEmail(context),
+                      // onPressed: () {
+                      //   Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const NavBar()),
+                      //     (route) => false,
+                      //   );
+                      // },
 
                       child: Text(
                         'Lanjutkan',
