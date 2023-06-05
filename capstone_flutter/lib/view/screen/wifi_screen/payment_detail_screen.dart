@@ -42,10 +42,10 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 10),
               Text(
                 'No. Pelanggan',
-                style: blackFont12.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 5),
               Container(
@@ -71,7 +71,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               ),
               Text(
                 'Kode Promo',
-                style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont14.copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 5),
               Row(
