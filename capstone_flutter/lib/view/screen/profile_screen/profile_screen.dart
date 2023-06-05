@@ -6,6 +6,7 @@ import 'package:capstone_flutter/view/screen/profile_screen/security_setting_scr
 import 'package:capstone_flutter/view/screen/profile_screen/terms_condition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../login_screen/login_screen.dart';
 
@@ -17,6 +18,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -286,14 +288,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginScreen(),
-                                        ),
-                                      );
+                                    onPressed: () async {
+                                      //* back to login page
+                                      // ignore: unnecessary_nullable_for_final_variable_declarations
+                                      final SharedPreferences? prefs =
+                                          await _prefs;
+                                      prefs?.clear();
+                                      // ignore: use_build_context_synchronously
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginScreen()),
+                                          (route) => false);
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:
