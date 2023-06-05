@@ -117,7 +117,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   Widget _buildTokenTab() {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2.2,
+      height: MediaQuery.of(context).size.height / 1.9,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
