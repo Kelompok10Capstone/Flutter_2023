@@ -30,7 +30,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
             Text(
               'Dari PT SOLUSINDO JAYA',
               style: blackFont12.copyWith(fontWeight: FontWeight.w700),

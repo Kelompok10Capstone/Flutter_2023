@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../model/apis/api_login.dart';
+import '../../../models/apis/api_login_model.dart';
 import '../../../utils/const/theme.dart';
 import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 import '../home_screen/home_screen.dart';
@@ -35,19 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
       autofocus: false,
       controller: loginController.emailController,
       keyboardType: TextInputType.emailAddress,
-      // validator: (value) {
-      //   if (value!.isEmpty) {
-      //     return ("Please Enter Your Email");
-      //   }
-      //   // reg expression for email validation
-      //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-      //     return ("Please Enter a valid email");
-      //   }
-      //   return null;
-      // },
-      // onSaved: (value) {
-      //   emailController.text = value!;
-      // },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
@@ -65,18 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
       autofocus: false,
       controller: loginController.passwordController,
       obscureText: true,
-      // validator: (value) {
-      //   RegExp regex = new RegExp(r'^.{6,}$');
-      //   if (value!.isEmpty) {
-      //     return ("Password is required for login");
-      //   }
-      //   if (!regex.hasMatch(value)) {
-      //     return ("Enter Valid Password(Min. 6 Character)");
-      //   }
-      // },
-      // onSaved: (value) {
-      //   passwordController.text = value!;
-      // },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
@@ -172,6 +146,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onPressed: () => loginController.loginWithEmail(context),
+                      // onPressed: () {
+                      //   Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const NavBar()),
+                      //     (route) => false,
+                      //   );
+                      // },
+
                       child: Text(
                         'Lanjutkan',
                         style: whiteFont14,

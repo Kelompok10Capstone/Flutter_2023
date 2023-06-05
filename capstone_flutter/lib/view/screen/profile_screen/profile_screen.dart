@@ -23,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Profil',
           style: blackFont18.copyWith(color: Colors.black),
@@ -229,8 +230,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(blueColor),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                       onPressed: () {
                         showDialog(
@@ -286,6 +290,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ElevatedButton(
                                     onPressed: () async {
                                       //* back to login page
+                                      // ignore: unnecessary_nullable_for_final_variable_declarations
                                       final SharedPreferences? prefs =
                                           await _prefs;
                                       prefs?.clear();

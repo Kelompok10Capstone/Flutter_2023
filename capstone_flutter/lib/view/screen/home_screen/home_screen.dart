@@ -32,6 +32,22 @@ final List<String> imageList = [
   'assets/promo_5.png',
 ];
 
+String? selectedMonth;
+List<String> months = [
+  'Januari',
+  'Februari',
+  'Maret',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Agustus',
+  'September',
+  'Oktober',
+  'November',
+  'Desember'
+];
+
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
@@ -85,12 +101,12 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: EdgeInsets.only(left: 22.w, top: 45.w),
                       child: Container(
-                        height: 75.w,
-                        width: 75.w,
+                        height: 75.h,
+                        width: 65.w,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
                               image: AssetImage('assets/profile_home.png')),
-                          borderRadius: BorderRadius.circular(37),
+                          borderRadius: BorderRadius.circular(50),
                           border: Border.all(
                             color: const Color(0xFF1D2660),
                             style: BorderStyle.solid,
@@ -126,30 +142,30 @@ class _HomeScreenState extends State<HomeScreen>
                             color: Colors.white, size: 28),
                       ),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 110,
-                        ),
-                        child: Image(
-                          image: const AssetImage(
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 110,
+                      ),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: AspectRatio(
+                          aspectRatio: 17 / 11,
+                          child: Image.asset(
                             'assets/motif_polos.png',
+                            fit: BoxFit.cover,
                           ),
-                          fit: BoxFit.cover,
-                          height: MediaQuery.of(context).size.height *
-                              0.34, // Misalnya, setinggi 35% dari tinggi layar
-                          width: MediaQuery.of(context).size.width * 1,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 168, left: 18),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.22,
+                          left: MediaQuery.of(context).size.width * 0.06),
                       child: Row(
                         children: [
                           Container(
                             height: 2,
-                            width: MediaQuery.of(context).size.width * 0.10,
+                            width: MediaQuery.of(context).size.width * 0.11,
                             color: Colors.white,
                           ),
                           Padding(
@@ -162,10 +178,11 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 16),
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.04),
                             child: Container(
                               height: 2,
-                              width: MediaQuery.of(context).size.height * 0.293,
+                              width: MediaQuery.of(context).size.height * 0.275,
                               color: Colors.white,
                             ),
                           ),
@@ -826,7 +843,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 250,
+            height: 350,
             // height: MediaQuery.of(context).size.height / 2.7,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
@@ -842,7 +859,7 @@ class _HomeScreenState extends State<HomeScreen>
                   const SizedBox(height: 20),
                   Text(
                     'No. Pelanggan',
-                    style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 5),
                   Container(
@@ -860,6 +877,46 @@ class _HomeScreenState extends State<HomeScreen>
                         border: InputBorder.none,
                         hintStyle: blackFont12,
                         hintText: 'Masukkan No Pelanggan',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Periode',
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: selectedMonth,
+                        hint: Text(
+                          'Pilih Bulan',
+                          style: blackFont12,
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedMonth = value!;
+                          });
+                        },
+                        items: months.map((String month) {
+                          return DropdownMenuItem<String>(
+                            value: month,
+                            child: Text(
+                              month,
+                              style: blackFont12,
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),

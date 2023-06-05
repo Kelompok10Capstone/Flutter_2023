@@ -43,26 +43,29 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
-              TextField(
-                controller: wilayahController,
-                decoration: InputDecoration(
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegionScreen()));
-                    },
-                    child: const Icon(Icons.search),
-                  ),
-                  hintText: 'PDAM Tirta Kerta Rahaja, Kab. Tangerang',
-                  hintStyle: blackFont12.copyWith(color: Colors.grey),
-                  filled: false,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
+              const SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black),
+                ),
+                child: TextField(
+                  controller: wilayahController,
+                  decoration: InputDecoration(
+                      prefixIcon: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const RegionScreen()));
+                        },
+                        child: const Icon(Icons.search),
+                      ),
+                      hintText: 'PDAM Tirta Kerta Rahaja, Kab. Tangerang',
+                      hintStyle: blackFont12.copyWith(color: Colors.grey),
+                      focusedBorder: InputBorder.none),
                 ),
               ),
               const SizedBox(
@@ -70,7 +73,7 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
               ),
               Text(
                 'No. Pelanggan',
-                style: blackFont12.copyWith(fontWeight: FontWeight.bold),
+                style: blackFont12.copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 5),
               Container(
@@ -96,7 +99,7 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
               ),
               Text(
                 'Kode Promo',
-                style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+                style: blackFont14.copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 5),
               Row(
