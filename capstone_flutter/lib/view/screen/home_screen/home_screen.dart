@@ -911,7 +911,10 @@ class _HomeScreenState extends State<HomeScreen>
                         items: months.map((String month) {
                           return DropdownMenuItem<String>(
                             value: month,
-                            child: Text(month),
+                            child: Text(
+                              month,
+                              style: blackFont12,
+                            ),
                           );
                         }).toList(),
                       ),
