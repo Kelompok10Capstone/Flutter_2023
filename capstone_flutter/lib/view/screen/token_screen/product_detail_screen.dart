@@ -50,10 +50,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
             Text(
               'No. Pelanggan',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w700),
+              style: blackFont16.copyWith(fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 5),
             Container(
