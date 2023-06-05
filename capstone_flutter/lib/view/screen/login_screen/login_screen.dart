@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../models/apis/api_login_model.dart';
 import '../../../utils/const/theme.dart';
 import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 import '../home_screen/home_screen.dart';
@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  LoginController loginController = LoginController();
   // form key
   final _formKey = GlobalKey<FormState>();
 
@@ -31,21 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
     // email field
     final emailField = TextFormField(
       autofocus: false,
-      controller: emailController,
+      controller: loginController.emailController,
       keyboardType: TextInputType.emailAddress,
-      // validator: (value) {
-      //   if (value!.isEmpty) {
-      //     return ("Please Enter Your Email");
-      //   }
-      //   // reg expression for email validation
-      //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-      //     return ("Please Enter a valid email");
-      //   }
-      //   return null;
-      // },
-      // onSaved: (value) {
-      //   emailController.text = value!;
-      // },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
@@ -61,20 +49,8 @@ class _LoginScreenState extends State<LoginScreen> {
     // password field
     final passwordField = TextFormField(
       autofocus: false,
-      controller: passwordController,
+      controller: loginController.passwordController,
       obscureText: true,
-      // validator: (value) {
-      //   RegExp regex = new RegExp(r'^.{6,}$');
-      //   if (value!.isEmpty) {
-      //     return ("Password is required for login");
-      //   }
-      //   if (!regex.hasMatch(value)) {
-      //     return ("Enter Valid Password(Min. 6 Character)");
-      //   }
-      // },
-      // onSaved: (value) {
-      //   passwordController.text = value!;
-      // },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
@@ -169,14 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NavBar(),
-                          ),
-                        );
-                      },
+                      onPressed: () => loginController.loginWithEmail(context),
                       child: Text(
                         'Lanjutkan',
                         style: whiteFont14,
