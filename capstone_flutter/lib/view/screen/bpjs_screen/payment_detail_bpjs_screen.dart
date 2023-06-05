@@ -41,7 +41,7 @@ class _PaymentDetailBpjsState extends State<PaymentDetailBpjs> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 10),
               Text(
                 'No. Pelanggan',
                 style: blackFont12.copyWith(fontWeight: FontWeight.w700),
