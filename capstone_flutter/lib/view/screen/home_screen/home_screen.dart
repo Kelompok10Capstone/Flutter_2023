@@ -32,6 +32,22 @@ final List<String> imageList = [
   'assets/promo_5.png',
 ];
 
+String? selectedMonth;
+List<String> months = [
+  'Januari',
+  'Februari',
+  'Maret',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Agustus',
+  'September',
+  'Oktober',
+  'November',
+  'Desember'
+];
+
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
@@ -132,18 +148,19 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 1,
-                        
                         child: AspectRatio(
                           aspectRatio: 17 / 11,
                           child: Image.asset(
-                              'assets/motif_polos.png',
+                            'assets/motif_polos.png',
                             fit: BoxFit.cover,
-                            ),
+                          ),
                         ),
                       ),
-                      ),
+                    ),
                     Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.22, left: MediaQuery.of(context).size.width * 0.06),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.22,
+                          left: MediaQuery.of(context).size.width * 0.06),
                       child: Row(
                         children: [
                           Container(
@@ -161,7 +178,8 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.04),
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.04),
                             child: Container(
                               height: 2,
                               width: MediaQuery.of(context).size.height * 0.275,
@@ -825,7 +843,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 250,
+            height: 350,
             // height: MediaQuery.of(context).size.height / 2.7,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
@@ -841,7 +859,7 @@ class _HomeScreenState extends State<HomeScreen>
                   const SizedBox(height: 20),
                   Text(
                     'No. Pelanggan',
-                    style: blackFont14.copyWith(fontWeight: FontWeight.w700),
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 5),
                   Container(
@@ -859,6 +877,43 @@ class _HomeScreenState extends State<HomeScreen>
                         border: InputBorder.none,
                         hintStyle: blackFont12,
                         hintText: 'Masukkan No Pelanggan',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Periode',
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: selectedMonth,
+                        hint: Text(
+                          'Pilih Bulan',
+                          style: blackFont12,
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedMonth = value!;
+                          });
+                        },
+                        items: months.map((String month) {
+                          return DropdownMenuItem<String>(
+                            value: month,
+                            child: Text(month),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
