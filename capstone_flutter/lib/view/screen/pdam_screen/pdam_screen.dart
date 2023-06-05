@@ -41,26 +41,29 @@ class _PdamScreenState extends State<PdamScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
-              TextField(
-                controller: wilayahController,
-                decoration: InputDecoration(
-                  prefixIcon: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegionScreen()));
-                    },
-                    child: const Icon(Icons.search),
-                  ),
-                  hintText: 'Cari Wilayah',
-                  hintStyle: blackFont12.copyWith(color: Colors.grey),
-                  filled: false,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
+              const SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black),
+                ),
+                child: TextField(
+                  controller: wilayahController,
+                  decoration: InputDecoration(
+                      prefixIcon: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const RegionScreen()));
+                        },
+                        child: const Icon(Icons.search),
+                      ),
+                      hintText: 'Cari Wilayah',
+                      hintStyle: blackFont12.copyWith(color: Colors.grey),
+                      focusedBorder: InputBorder.none),
                 ),
               ),
               const SizedBox(height: 20),
