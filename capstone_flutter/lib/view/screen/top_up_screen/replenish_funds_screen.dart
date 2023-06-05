@@ -175,7 +175,7 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
               padding: const EdgeInsets.only(top: 90, bottom: 40),
               child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 140, vertical: 17),
+                padding: const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
                 backgroundColor: blueColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
