@@ -37,17 +37,21 @@ class _RegionScreenState extends State<RegionScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                const SizedBox(height: 50),
-                TextField(
-                  controller: wilayahController,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: 'Cari Wilayah',
-                    hintStyle: blackFont12.copyWith(color: Colors.grey),
-                    filled: false,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: const BorderSide(color: Colors.black),
+                const SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: TextField(
+                    controller: wilayahController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      hintText: 'Cari Wilayah',
+                      hintStyle: blackFont12.copyWith(color: Colors.grey),
+                      focusedBorder: InputBorder.none,
                     ),
                   ),
                 ),
