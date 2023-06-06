@@ -27,10 +27,28 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  bool isValidEmail(String email) {
+    // Regex pattern untuk validasi email
+    final emailRegex =
+        r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$';
+
+    // Match email dengan regex pattern
+    final regex = RegExp(emailRegex);
+    return regex.hasMatch(email);
+  }
+
   @override
   Widget build(BuildContext context) {
     // email field
     final emailField = TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Email tidak boleh kosong';
+        } else if (!isValidEmail(value)) {
+          return 'Email tidak valid';
+        }
+        return null;
+      },
       autofocus: false,
       controller: loginController.emailController,
       keyboardType: TextInputType.emailAddress,
@@ -48,6 +66,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
     // password field
     final passwordField = TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Password tidak boleh kosong';
+        } else if (value.length < 3) {
+          return 'Password minimal 4 karakter';
+        }
+        return null;
+      },
       autofocus: false,
       controller: loginController.passwordController,
       obscureText: true,
@@ -82,8 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
+              key: _formKey,
               child: Column(
-                key: _formKey,
                 children: [
                   Image.asset(
                     'assets/images/ic_logo_skuypay.png',
@@ -145,7 +171,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () => loginController.loginWithEmail(context),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // Form valid, lakukan proses login
+                          loginController.loginWithEmail(context);
+                        }
+                      },
                       // onPressed: () {
                       //   Navigator.pushAndRemoveUntil(
                       //     context,
