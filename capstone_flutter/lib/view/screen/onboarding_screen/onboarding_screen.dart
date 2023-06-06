@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:capstone_flutter/view/screen/login_screen/login_screen.dart';
 import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,11 +38,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   // untuk skip onbording ke register
   _storeOnboardingInfo() async {
-    print('Shared pref called');
+    // print('Shared pref called');
     int isViewed = 2;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('onBoard', isViewed);
-    print(prefs.getInt('onBoard'));
+    // print(prefs.getInt('onBoard'));
+  }
+
+  late SharedPreferences prefs;
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeSharedPreferences();
+  }
+
+  void initializeSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (isLoggedIn) {
+      // Redirect to home page if user is already logged in
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) =>
+              const NavBar(), // Replace with your home screen widget
+        ),
+      );
+    }
   }
 
   @override
