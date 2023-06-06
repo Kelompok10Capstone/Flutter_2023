@@ -289,24 +289,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigator.of(context).push(
-                      //   PageRouteBuilder(
-                      //     pageBuilder:
-                      //         (context, animation, secondaryAnimation) {
-                      //       return const LoginScreen();
-                      //     },
-                      //     transitionsBuilder: (context, animation,
-                      //         secondaryAnimation, child) {
-                      //       final tween = Tween(
-                      //           begin: const Offset(0, 5),
-                      //           end: Offset.zero);
-                      //       return SlideTransition(
-                      //         position: animation.drive(tween),
-                      //         child: child,
-                      //       );
-                      //     },
-                      //   ),
-                      // );
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) {
+                            return const LoginScreen();
+                          },
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            final tween = Tween(
+                                begin: const Offset(0, 5), end: Offset.zero);
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     },
                     child: Text(
                       'Masuk',
