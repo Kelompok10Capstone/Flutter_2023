@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ChangeProfileScreen()),
+                        builder: (context) => const ChangeProfileScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HelpScreen()));
+                                builder: (context) => const HelpScreen()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
