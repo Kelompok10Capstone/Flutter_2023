@@ -247,35 +247,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 'Nama',
                 style: blackFormFont12,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               fullNameField,
               const SizedBox(height: 10),
               Text(
                 'E-mail',
                 style: blackFormFont12,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               emailField,
               const SizedBox(height: 10),
               Text(
                 'No. HP',
                 style: blackFormFont12,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               phonelField,
               const SizedBox(height: 10),
               Text(
                 'Kata Sandi',
                 style: blackFormFont12,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               passwordField,
               const SizedBox(height: 10),
               Text(
                 'Ketik Ulang Kata Sandi',
                 style: blackFormFont12,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               confirmPasswordField,
               const SizedBox(height: 30),
               daftarButton,
@@ -289,7 +289,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushAndRemoveUntil(
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) {
@@ -305,7 +305,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             );
                           },
                         ),
+                        (Route<dynamic> route) => false,
                       );
+                      // Navigator.of(context).push(
+                      //   PageRouteBuilder(
+                      //     pageBuilder:
+                      //         (context, animation, secondaryAnimation) {
+                      //       return const LoginScreen();
+                      //     },
+                      //     transitionsBuilder:
+                      //         (context, animation, secondaryAnimation, child) {
+                      //       final tween = Tween(
+                      //           begin: const Offset(0, 5), end: Offset.zero);
+                      //       return SlideTransition(
+                      //         position: animation.drive(tween),
+                      //         child: child,
+                      //       );
+                      //     },
+                      //   ),
+                      // );
                     },
                     child: Text(
                       'Masuk',

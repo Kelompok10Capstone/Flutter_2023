@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../models/apis/api_login_model.dart';
 import '../../../utils/const/theme.dart';
@@ -188,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // },
 
                       child: Text(
-                        'Lanjutkan',
+                        'Masuk',
                         style: whiteFont14,
                       ),
                     ),
@@ -206,8 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const InputPinAturUlangScreen(),
+                              builder: (context) => const RegisterScreen(),
                             ),
                           );
                         },
@@ -238,7 +238,14 @@ class _LoginScreenState extends State<LoginScreen> {
           style: blueFont12,
           textAlign: TextAlign.right,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InputPinAturUlangScreen(),
+            ),
+          );
+        },
       ),
     );
   }
