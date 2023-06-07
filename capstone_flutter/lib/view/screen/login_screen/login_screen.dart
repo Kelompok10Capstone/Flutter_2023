@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
-        hintText: "Enter Your Password",
+        hintText: 'Enter Your Password',
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 5),
                   emailField,
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 15),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -140,6 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 5),
                   passwordField,
+                  forgetPassword(context),
                 ],
               ),
             ),
@@ -179,13 +180,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Lupa E-mail? ',
+                        'Belum Punya Akun? ',
                         style: blackFont12,
                       ),
                       GestureDetector(
                         onTap: () {},
                         child: Text(
-                          'Atur Ulang',
+                          'Daftar',
                           style: blueFont12,
                         ),
                       ),
@@ -196,6 +197,22 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: Text(
+          "Lupa Password?",
+          style: blueFont12,
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () {},
       ),
     );
   }
