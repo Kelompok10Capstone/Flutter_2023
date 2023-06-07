@@ -52,126 +52,123 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: SizedBox(
-                width: 80,
-                child: Image.asset('assets/profile.png'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 50,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Nama*',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.black)),
-              child: TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintStyle: blackFont16,
-                    hintText: 'Ijat Sutrisno'),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Email*',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.black),
-                  color: Colors.grey[200]),
-              child: TextField(
-                controller: emailController,
-                enabled: false,
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintStyle: blackFont16,
-                    hintText: email),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Nomor Hp*',
-              style: blackFont16.copyWith(fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.black)),
-              child: TextField(
-                controller: handphoneController,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: blackFont16,
-                  hintText: '082267548923',
+              Center(
+                child: SizedBox(
+                  width: 80,
+                  child: Image.asset('assets/profile.png'),
                 ),
               ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 52,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: blueColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Simpan',
-                        style: whiteFont14,
-                      ),
-                    ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Nama*',
+                style: blackFont16.copyWith(fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black)),
+                child: TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: blackFont16,
+                      hintText: 'Ijat Sutrisno'),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Email*',
+                style: blackFont16.copyWith(fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200]),
+                child: TextField(
+                  controller: emailController,
+                  enabled: false,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: blackFont16,
+                      hintText: email),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Nomor Hp*',
+                style: blackFont16.copyWith(fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black)),
+                child: TextField(
+                  controller: handphoneController,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintStyle: blackFont16,
+                    hintText: '082267548923',
                   ),
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 10, 24, 20),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 52,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-          ],
+            onPressed: () {},
+            child: Text(
+              'Simpan',
+              style: whiteFont14,
+            ),
+          ),
         ),
       ),
     );

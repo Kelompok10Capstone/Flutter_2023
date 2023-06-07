@@ -288,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 blurRadius: 9,
                                 offset: const Offset(0, -8)),
                           ],
-                          color: const Color(0xFFEDF8FB),
+                          color: Colors.white,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(22),
                             topRight: Radius.circular(22),
