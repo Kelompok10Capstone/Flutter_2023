@@ -178,6 +178,7 @@ class _DetailPembayaranTransferScreenState
                       'Rp 900.000',
                       style: blackText16.copyWith(
                         fontWeight: FontWeight.w400,
+                        color: const Color(0xff6C6C6C),
                       ),
                     ),
                   ],
