@@ -1,8 +1,8 @@
+import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../models/apis/api_login_model.dart';
 import '../../../utils/const/theme.dart';
 import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
-import '../home_screen/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Lupa E-mail? ',
+                        'Belum mempunyai akun? ',
                         style: blackFont12,
                       ),
                       GestureDetector(
@@ -194,13 +194,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const InputPinAturUlangScreen(),
+                              builder: (context) => const RegisterScreen(),
                             ),
                           );
                         },
                         child: Text(
-                          'Atur Ulang',
+                          'Daftar',
                           style: blueFont12,
                         ),
                       ),

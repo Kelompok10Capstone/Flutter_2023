@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/const/theme.dart';
 
@@ -11,6 +12,21 @@ class ChangeProfileScreen extends StatefulWidget {
 }
 
 class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
+  late SharedPreferences _prefs;
+  String email = '';
+  @override
+  void initState() {
+    super.initState();
+    initial();
+  }
+
+  void initial() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      email = _prefs.getString('email').toString();
+    });
+  }
+
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController handphoneController = TextEditingController();
@@ -97,7 +113,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintStyle: blackFont16,
-                    hintText: 'dekremmah@gmail.com'),
+                    hintText: email),
               ),
             ),
             const SizedBox(

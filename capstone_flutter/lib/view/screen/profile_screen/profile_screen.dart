@@ -11,14 +11,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../login_screen/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late SharedPreferences _prefs;
+  String email = '';
+  @override
+  void initState() {
+    super.initState();
+    initial();
+  }
+
+  void initial() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      email = _prefs.getString('email').toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 20,
             ),
             Text(
-              'Ijat Sutrisno',
+              email,
               style: blackFont16.copyWith(fontSize: 14),
             ),
             const SizedBox(

@@ -48,8 +48,10 @@ class LoginController {
           // print(token);
 
           final SharedPreferences prefs = await SharedPreferences.getInstance();
+          String email = emailController.text;
           await prefs.setBool('isLoggedIn', true);
           await prefs.setString('token', token);
+          await prefs.setString('email', email);
 
           emailController.clear();
           passwordController.clear();

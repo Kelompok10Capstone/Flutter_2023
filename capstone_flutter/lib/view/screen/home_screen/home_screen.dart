@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
@@ -50,6 +51,16 @@ List<String> months = [
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+  late SharedPreferences _prefs;
+  String email = '';
+
+  void initial() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      email = _prefs.getString('email').toString();
+    });
+  }
+
   TabController? _tabController;
   TextEditingController pelangganControllerToken = TextEditingController();
   TextEditingController pelangganControllerTagihanListrik =
@@ -74,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
     //   _showModalBottomSheetCreatePin();
     // });
     _tabController = TabController(length: 2, vsync: this);
+    initial();
     // _tabController?.index = 0;
   }
 
@@ -118,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 58, left: 125),
                       child: Text(
-                        'Ijat Sutresno',
+                        email,
                         style: whiteFont18.copyWith(
                           color: Colors.white,
                         ),
