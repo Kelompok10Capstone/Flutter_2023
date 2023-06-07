@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/models/apis/api_register_model.dart';
 import 'package:capstone_flutter/view/screen/register_screen/berhasil_register_screen.dart';
 import 'package:capstone_flutter/view/screen/register_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,31 +13,14 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // text editing controller
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordEditingController =
-      TextEditingController();
-  final TextEditingController confirmPasswordEditingController =
-      TextEditingController();
-  final TextEditingController nameEditingController = TextEditingController();
-  final TextEditingController phoneEditingController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordEditingController.dispose();
-    confirmPasswordEditingController.dispose();
-    nameEditingController.dispose();
-    phoneEditingController.dispose();
-    super.dispose();
-  }
+  RegisterController registerController = RegisterController();
 
   @override
   Widget build(BuildContext context) {
     // full name field
     final fullNameField = TextFormField(
       autofocus: false,
-      controller: nameEditingController,
+      controller: registerController.nameController,
       keyboardType: TextInputType.name,
       // validator: (value) {
       //   RegExp regex = RegExp(r'^.{3,}$');
@@ -65,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // email field
     final emailField = TextFormField(
       autofocus: false,
-      controller: emailController,
+      controller: registerController.emailController,
       keyboardType: TextInputType.emailAddress,
       // validator: (value) {
       //   if (value!.isEmpty) {
@@ -91,39 +75,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
 
-    // phone field
-    final phonelField = TextFormField(
-      autofocus: false,
-      controller: phoneEditingController,
-      keyboardType: TextInputType.phone,
-      // validator: (value) {
-      //   if (value!.isEmpty) {
-      //     return ("Please Enter Your Phone Number");
-      //   }
-      //   // reg expression for email validation
-      //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-      //     return ("Please Enter a valid email");
-      //   }
-      //   return null;
-      // },
-      // onSaved: (value) {
-      //   phoneEditingController.text = value!;
-      // },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
-        filled: true,
-        fillColor: const Color(0xfFFFFFFF),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    );
+    // // phone field
+    // final phonelField = TextFormField(
+    //   autofocus: false,
+    //   controller: phoneEditingController,
+    //   keyboardType: TextInputType.phone,
+    //   // validator: (value) {
+    //   //   if (value!.isEmpty) {
+    //   //     return ("Please Enter Your Phone Number");
+    //   //   }
+    //   //   // reg expression for email validation
+    //   //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+    //   //     return ("Please Enter a valid email");
+    //   //   }
+    //   //   return null;
+    //   // },
+    //   // onSaved: (value) {
+    //   //   phoneEditingController.text = value!;
+    //   // },
+    //   textInputAction: TextInputAction.done,
+    //   decoration: InputDecoration(
+    //     contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
+    //     filled: true,
+    //     fillColor: const Color(0xfFFFFFFF),
+    //     border: OutlineInputBorder(
+    //       borderRadius: BorderRadius.circular(8),
+    //     ),
+    //   ),
+    // );
 
     // password field
     final passwordField = TextFormField(
       autofocus: false,
-      controller: passwordEditingController,
+      controller: registerController.passwordController,
       obscureText: true,
       // validator: (value) {
       //   RegExp regex = RegExp(r'^.{6,}$');
@@ -148,32 +132,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
 
-    //confirm password field
-    final confirmPasswordField = TextFormField(
-      autofocus: false,
-      controller: confirmPasswordEditingController,
-      // style: TextStyle(color: Colors.white.withOpacity(0.9)),
-      obscureText: true,
-      // validator: (value) {
-      //   if (confirmPasswordEditingController.text !=
-      //       passwordEditingController.text) {
-      //     return "Password don't match";
-      //   }
-      //   return null;
-      // },
-      // onSaved: (value) {
-      //   confirmPasswordEditingController.text = value!;
-      // },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
-        filled: true,
-        fillColor: const Color(0xffFFFFFF),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    );
+    // //confirm password field
+    // final confirmPasswordField = TextFormField(
+    //   autofocus: false,
+    //   controller: confirmPasswordEditingController,
+    //   // style: TextStyle(color: Colors.white.withOpacity(0.9)),
+    //   obscureText: true,
+    //   // validator: (value) {
+    //   //   if (confirmPasswordEditingController.text !=
+    //   //       passwordEditingController.text) {
+    //   //     return "Password don't match";
+    //   //   }
+    //   //   return null;
+    //   // },
+    //   // onSaved: (value) {
+    //   //   confirmPasswordEditingController.text = value!;
+    //   // },
+    //   textInputAction: TextInputAction.done,
+    //   decoration: InputDecoration(
+    //     contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
+    //     filled: true,
+    //     fillColor: const Color(0xffFFFFFF),
+    //     border: OutlineInputBorder(
+    //       borderRadius: BorderRadius.circular(8),
+    //     ),
+    //   ),
+    // );
 
     final daftarButton = Material(
       elevation: 3,
@@ -184,12 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         minWidth: MediaQuery.of(context).size.width,
         height: 52,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BerhasilRegisterScreen(),
-            ),
-          );
+          registerController.registerWithEmail(context);
         },
         child: Text(
           'Daftar',
@@ -257,12 +236,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 8),
               emailField,
               const SizedBox(height: 10),
-              Text(
-                'No. HP',
-                style: blackFormFont12,
-              ),
-              const SizedBox(height: 8),
-              phonelField,
+              // Text(
+              //   'No. HP',
+              //   style: blackFormFont12,
+              // ),
+              // const SizedBox(height: 8),
+              // phonelField,
               const SizedBox(height: 10),
               Text(
                 'Kata Sandi',
@@ -271,12 +250,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 8),
               passwordField,
               const SizedBox(height: 10),
-              Text(
-                'Ketik Ulang Kata Sandi',
-                style: blackFormFont12,
-              ),
-              const SizedBox(height: 8),
-              confirmPasswordField,
+              // Text(
+              //   'Ketik Ulang Kata Sandi',
+              //   style: blackFormFont12,
+              // ),
+              // const SizedBox(height: 8),
+              // confirmPasswordField,
               const SizedBox(height: 30),
               daftarButton,
               const SizedBox(height: 10),
