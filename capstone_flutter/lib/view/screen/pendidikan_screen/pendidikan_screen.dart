@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/pendidikan_screen/search_pendidikan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -92,23 +93,23 @@ class _PendidikanScreenState extends State<PendidikanScreen> {
                   decoration: InputDecoration(
                       prefixIcon: InkWell(
                         onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const RegionScreen(),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const SearchPendidikanScreen(),
+                            ),
+                          );
                         },
                         child: const Icon(Icons.search),
                       ),
-                      hintText: 'Cari Wilayah',
                       hintStyle: blackFont12.copyWith(color: Colors.grey),
                       focusedBorder: InputBorder.none),
                 ),
               ),
               const SizedBox(height: 20),
               Text(
-                'No. Pelanggan',
+                'No. Pembayaran',
                 style: blackFont12.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 5),
@@ -134,7 +135,7 @@ class _PendidikanScreenState extends State<PendidikanScreen> {
                 child: SizedBox(
                   width: 326,
                   height: 290,
-                  child: Image.asset('assets/icon_pdam1.png'),
+                  child: Image.asset('assets/ic_pendidikan.png'),
                 ),
               ),
             ],
