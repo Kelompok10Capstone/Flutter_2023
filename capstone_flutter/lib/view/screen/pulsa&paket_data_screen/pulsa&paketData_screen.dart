@@ -19,6 +19,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     with SingleTickerProviderStateMixin {
   // text editing controller
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController phone62Controller = TextEditingController();
 
   // tab controller
   TabController? _tabController;
@@ -34,6 +35,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     super.dispose();
     _tabController?.dispose();
     phoneController.dispose();
+    phone62Controller.dispose();
   }
 
   @override
@@ -66,28 +68,29 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                 Container(
                   width: 60,
                   child: TextFormField(
-                    autofocus: false,
+                    autofocus: true,
                     controller: phoneController,
                     obscureText: true,
-                    textInputAction: TextInputAction.next,
-                    // enabled: false,
+                    // textInputAction: TextInputAction.none,
+                    // keyboardType: TextInputType.none,
+                    enabled: false,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
+                      contentPadding: const EdgeInsets.fromLTRB(16, 0, 10, 0),
                       hintText: "+62",
                       hintStyle: blackFont14.copyWith(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(
                           color: Colors.black,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: Colors.black12),
                       ),
                     ),
@@ -101,10 +104,10 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   // width: 249,
                   child: TextFormField(
                     autofocus: false,
-                    controller: phoneController,
-                    obscureText: true,
+                    controller: phone62Controller,
+                    obscureText: false,
                     keyboardType: TextInputType.number,
-                    // textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                       hintText: 'Contoh: 81234567890',
@@ -112,16 +115,16 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(
                           color: Colors.black,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(
                           color: Colors.black,
                         ),
