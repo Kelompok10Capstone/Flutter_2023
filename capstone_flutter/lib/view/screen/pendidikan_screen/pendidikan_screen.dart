@@ -23,8 +23,14 @@ class PendidikanScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 100),
+            Image.asset(
+              'assets/404.png',
+              width: 200,
+              height: 200,
+            ),
             Text(
               'Oops',
               style: blackFont16.copyWith(color: Colors.black, fontSize: 18),
