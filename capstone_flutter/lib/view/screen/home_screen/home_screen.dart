@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/const/theme.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
+import '../pendidikan_screen/pendidikan_screen.dart';
 import '../pin_screen/input_pin_screen.dart';
 import '../promo_screen/all_promo_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
@@ -620,7 +621,13 @@ class _HomeScreenState extends State<HomeScreen>
                                           Colors.green.withOpacity(0.5),
                                       highlightColor:
                                           Colors.blue.withOpacity(0.4),
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const PendidikanScreen()));
+                                      },
                                     ),
                                   ),
                                 ),
