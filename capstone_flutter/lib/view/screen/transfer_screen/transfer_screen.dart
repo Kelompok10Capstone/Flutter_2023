@@ -13,6 +13,7 @@ class TransferScreen extends StatefulWidget {
 class _TransferScreenState extends State<TransferScreen> {
   // text editing controller
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController phone62Controller = TextEditingController();
   final TextEditingController catatanController = TextEditingController();
 
   @override
@@ -23,6 +24,7 @@ class _TransferScreenState extends State<TransferScreen> {
   @override
   void dispose() {
     phoneController.dispose();
+    phone62Controller.dispose();
     catatanController.dispose();
     super.dispose();
   }
@@ -48,7 +50,7 @@ class _TransferScreenState extends State<TransferScreen> {
           children: [
             const SizedBox(height: 15),
             Text(
-              'No. Telp*',
+              'No. Telp',
               style: blackFont14,
             ),
             const SizedBox(height: 8),
@@ -58,12 +60,12 @@ class _TransferScreenState extends State<TransferScreen> {
                   width: 60,
                   child: TextFormField(
                     autofocus: false,
-                    controller: phoneController,
+                    controller: phone62Controller,
                     obscureText: true,
                     textInputAction: TextInputAction.next,
                     enabled: false,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
+                      contentPadding: const EdgeInsets.fromLTRB(16, 0, 10, 0),
                       hintText: "+62",
                       hintStyle: blackFont14.copyWith(color: Colors.grey),
                       filled: true,
@@ -72,7 +74,7 @@ class _TransferScreenState extends State<TransferScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: Colors.black12),
                       ),
                     ),
@@ -83,13 +85,11 @@ class _TransferScreenState extends State<TransferScreen> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width - 110,
-                  // width: 249,
                   child: TextFormField(
                     autofocus: false,
                     controller: phoneController,
-                    obscureText: true,
                     keyboardType: TextInputType.number,
-                    // textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                       hintText: 'Contoh: 81234567890',
@@ -99,10 +99,16 @@ class _TransferScreenState extends State<TransferScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
+                      // enabledBorder: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(8),
+                      //   borderSide: const BorderSide(
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(
-                          color: Color(0xff2B3990),
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -133,7 +139,7 @@ class _TransferScreenState extends State<TransferScreen> {
             TextFormField(
               autofocus: false,
               controller: catatanController,
-              obscureText: true,
+              keyboardType: TextInputType.text,
               // validator: (value) {
               //   if (confirmPasswordEditingController.text !=
               //       passwordEditingController.text) {
@@ -157,7 +163,7 @@ class _TransferScreenState extends State<TransferScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: const BorderSide(
-                    color: Color(0xff2B3990),
+                    color: Colors.black,
                   ),
                 ),
               ),
