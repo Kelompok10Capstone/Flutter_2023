@@ -20,6 +20,7 @@ import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  set isPinCreated(bool isPinCreated) {}
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -51,6 +52,7 @@ List<String> months = [
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+  bool isPinCreated = false;
   late SharedPreferences _prefs;
   String email = '';
 
@@ -58,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen>
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       email = _prefs.getString('email').toString();
+      _prefs.getString('token').toString();
     });
   }
 
@@ -81,9 +84,13 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   _showModalBottomSheetCreatePin();
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (isPinCreated) {
+        _showModalBottomSheetPinAdded();
+      } else {
+        _showModalBottomSheetCreatePin();
+      }
+    });
     _tabController = TabController(length: 2, vsync: this);
     initial();
     // _tabController?.index = 0;
@@ -1131,6 +1138,80 @@ class _HomeScreenState extends State<HomeScreen>
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const InputPinScreen()));
+                      },
+                      child: Text(
+                        'Lanjutkan',
+                        style: whiteFont14,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetPinAdded() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 250,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Center(
+                  child: Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 60,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(
+                    'Oke! Kode PIN kamu sudah tersimpan',
+                    style: blackText16,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(
+                    'Lebih mudah dan aman menggunakan Kode PIN',
+                    style: blackFont14,
+                  ),
+                ),
+                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
                       },
                       child: Text(
                         'Lanjutkan',
