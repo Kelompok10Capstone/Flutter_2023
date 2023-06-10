@@ -19,7 +19,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late SharedPreferences _prefs;
-  String email = '';
+  String name = '';
+  String phone = '';
   @override
   void initState() {
     super.initState();
@@ -29,7 +30,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initial() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      email = _prefs.getString('email').toString();
+      name = _prefs.getString('name').toString();
+      phone = _prefs.getString('phone').toString();
+      _prefs.getString('token').toString();
     });
   }
 
@@ -61,14 +64,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 20,
             ),
             Text(
-              email,
+              name,
               style: blackFont16.copyWith(fontSize: 14),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              '082267548923',
+              phone,
               style: blackFont16.copyWith(
                   fontSize: 12, fontWeight: FontWeight.w400),
             ),

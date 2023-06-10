@@ -54,12 +54,14 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   bool isPinCreated = false;
   late SharedPreferences _prefs;
-  String email = '';
+  String name = '';
+  String phone = '';
 
   void initial() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      email = _prefs.getString('email').toString();
+      name = _prefs.getString('name').toString();
+      phone = _prefs.getString('phone').toString();
       _prefs.getString('token').toString();
     });
   }
@@ -137,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 58, left: 125),
                       child: Text(
-                        email,
+                        name,
                         style: whiteFont18.copyWith(
                           color: Colors.white,
                         ),
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 87, left: 125),
                       child: Text(
-                        '082267548923',
+                        phone,
                         style: whiteFont14.copyWith(
                           color: Colors.white,
                         ),

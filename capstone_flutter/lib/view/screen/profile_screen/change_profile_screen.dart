@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +14,10 @@ class ChangeProfileScreen extends StatefulWidget {
 
 class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
   late SharedPreferences _prefs;
+
   String email = '';
+  String name = '';
+  String phone = '';
   @override
   void initState() {
     super.initState();
@@ -23,7 +27,10 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
   void initial() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
+      name = _prefs.getString('name').toString();
+      phone = _prefs.getString('phone').toString();
       email = _prefs.getString('email').toString();
+      _prefs.getString('token').toString();
     });
   }
 
@@ -88,7 +95,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintStyle: blackFont16,
-                      hintText: 'Ijat Sutrisno'),
+                      hintText: name),
                 ),
               ),
               const SizedBox(
@@ -140,7 +147,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintStyle: blackFont16,
-                    hintText: '082267548923',
+                    hintText: phone,
                   ),
                 ),
               ),

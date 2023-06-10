@@ -45,27 +45,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     // print(prefs.getInt('onBoard'));
   }
 
-  late SharedPreferences prefs;
-  bool isLoggedIn = false;
+  late SharedPreferences _prefs;
+  late bool newUser;
 
   @override
   void initState() {
     super.initState();
-    initializeSharedPreferences();
+    checkLogin();
   }
 
-  void initializeSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-    isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-    if (isLoggedIn) {
-      // Redirect to home page if user is already logged in
+  void checkLogin() async {
+    _prefs = await SharedPreferences.getInstance();
+    newUser = _prefs.getBool('login') ?? true;
+
+    if (newUser == false) {
       // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) =>
-              const NavBar(), // Replace with your home screen widget
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const NavBar(),
+          ),
+          (route) => false);
     }
   }
 

@@ -1,6 +1,9 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:capstone_flutter/view/screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../models/apis/api_login_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../models/apis/login.dart';
+import '../../../models/user_model.dart';
 import '../../../utils/const/theme.dart';
 import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 
@@ -12,32 +15,35 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginController loginController = LoginController();
-  // form key
-  final _formKey = GlobalKey<FormState>();
+  final LoginController loginController = LoginController();
+  late SharedPreferences _prefs;
+  late bool newUser;
 
-  bool isValidEmail(String email) {
-    // Regex pattern untuk validasi email
-    const emailRegex =
-        r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$';
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
 
-    // Match email dengan regex pattern
-    final regex = RegExp(emailRegex);
-    return regex.hasMatch(email);
+  void checkLogin() async {
+    _prefs = await SharedPreferences.getInstance();
+    newUser = _prefs.getBool('login') ?? true;
+
+    if (newUser == false) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const NavBar(),
+          ),
+          (route) => false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // email field
     final emailField = TextFormField(
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Email tidak boleh kosong';
-        } else if (!isValidEmail(value)) {
-          return 'Email tidak valid';
-        }
-        return null;
-      },
       autofocus: false,
       controller: loginController.emailController,
       keyboardType: TextInputType.emailAddress,
@@ -55,14 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     // password field
     final passwordField = TextFormField(
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Password tidak boleh kosong';
-        } else if (value.length < 3) {
-          return 'Password minimal 4 karakter';
-        }
-        return null;
-      },
       autofocus: false,
       controller: loginController.passwordController,
       obscureText: true,
@@ -96,45 +94,42 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/ic_logo_skuypay.png',
-                    height: 100,
-                    width: 100,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/ic_logo_skuypay.png',
+                  height: 100,
+                  width: 100,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'SkuyPay!',
+                  style: blueFont16,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 15),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'E-mail',
+                    style: blackFont14,
                   ),
-                  const SizedBox(
-                    height: 20,
+                ),
+                const SizedBox(height: 5),
+                emailField,
+                const SizedBox(height: 24),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Password',
+                    style: blackFont14,
                   ),
-                  Text(
-                    'SkuyPay!',
-                    style: blueFont16,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 15),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'E-mail',
-                      style: blackFont14,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  emailField,
-                  const SizedBox(height: 24),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Password',
-                      style: blackFont14,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  passwordField,
-                ],
-              ),
+                ),
+                const SizedBox(height: 5),
+                passwordField,
+              ],
             ),
           ),
         ),
@@ -161,20 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Form valid, lakukan proses login
-                          loginController.loginWithEmail(context);
-                        }
+                        loginWithEmail(context);
                       },
-                      // onPressed: () {
-                      //   Navigator.pushAndRemoveUntil(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const NavBar()),
-                      //     (route) => false,
-                      //   );
-                      // },
-
                       child: Text(
                         'Lanjutkan',
                         style: whiteFont14,
@@ -212,5 +195,51 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> loginWithEmail(BuildContext context) async {
+    final String email = loginController.emailController.text;
+    final String password = loginController.passwordController.text;
+    final User? user = await loginController.loginUser(email, password);
+    print('user : $user');
+
+    if (user != null) {
+      _prefs.setBool('login', false);
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const NavBar(),
+        ),
+      );
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login Berhasil'),
+          backgroundColor: Colors.green,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } else {
+      // ignore: use_build_context_synchronously
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Unknown Error'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Tindakan yang akan dilakukan ketika tombol ditekan
+                  Navigator.of(context).pop(); // Menutup dialog
+                },
+                child: const Text('Try Again!'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }
