@@ -93,7 +93,7 @@ class LoginController {
 }
 
 class ApiEndPoints {
-  static const String baseUrl = 'https://34.101.160.237:2424/api/v1/';
+  static const String baseUrl = 'http://34.101.160.237:2424/api/v1/';
   // ignore: library_private_types_in_public_api
   static _AuthEndPoints authEndpoints = _AuthEndPoints();
 
