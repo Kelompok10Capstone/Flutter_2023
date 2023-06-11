@@ -100,7 +100,7 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                                 // color: blueColor,
                                 color:
                                     dummyPendidikan[index]['isSelected'] == true
-                                        ? Color(0xff727BB5)
+                                        ? const Color(0xff727BB5)
                                         : blueColor,
                               ),
                               borderRadius: BorderRadius.all(
@@ -108,8 +108,8 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                               ),
                               color:
                                   dummyPendidikan[index]['isSelected'] == true
-                                      ? Color(0xff727BB5)
-                                      : Color(0xFFFFFFFF),
+                                      ? const Color(0xff727BB5)
+                                      : const Color(0xFFFFFFFF),
                             ),
                             child: Text(
                               dummyPendidikan[index]['tingkat'],
@@ -166,7 +166,7 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                                       ],
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
-                                        color: Color(0xffD9D7D7),
+                                        color: const Color(0xffD9D7D7),
                                       ),
                                       color: Colors.white,
                                     ),

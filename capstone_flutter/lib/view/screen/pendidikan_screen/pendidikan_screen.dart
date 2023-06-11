@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/pendidikan_screen/detail_pembayaran_pendidikan_screen.dart';
 import 'package:capstone_flutter/view/screen/pendidikan_screen/search_pendidikan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,36 +40,6 @@ class _PendidikanScreenState extends State<PendidikanScreen> {
         ),
         elevation: 0,
       ),
-      // body: Center(
-      //   child: Column(
-      //     // mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       const SizedBox(height: 100),
-      //       Image.asset(
-      //         'assets/404.png',
-      //         width: 200,
-      //         height: 200,
-      //       ),
-      //       Text(
-      //         'Oops',
-      //         style: blackFont16.copyWith(color: Colors.black, fontSize: 18),
-      //       ),
-      //       const SizedBox(height: 10),
-      //       Text(
-      //         'Mohon maaf, terjadi gangguan pada sistem',
-      //         style: blackFont16.copyWith(color: Colors.grey, fontSize: 14),
-      //       ),
-      //       Text(
-      //         'kami. Mohon hubungi layanan pelanggan',
-      //         style: blackFont16.copyWith(color: Colors.grey, fontSize: 14),
-      //       ),
-      //       Text(
-      //         'untuk pengaduan masalah Anda.',
-      //         style: blackFont16.copyWith(color: Colors.grey, fontSize: 14),
-      //       ),
-      //     ],
-      //   ),
-      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -155,12 +126,13 @@ class _PendidikanScreenState extends State<PendidikanScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const PaymentDetailPdam(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const DetailPembayaranPendidikanScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
