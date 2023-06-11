@@ -1,4 +1,5 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
+import 'package:capstone_flutter/view/screen/pendidikan_screen/pin_screen.dart';
 import 'package:flutter/material.dart';
 
 class MetodePembayaranPendidikanScreen extends StatefulWidget {
@@ -207,13 +208,12 @@ class _MetodePembayaranPendidikanScreenState
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         const MetodePembayaranPendidikanScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const KodePinScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
