@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../utils/const/theme.dart';
+import 'metode_pembayaran_pendidikan_screen.dart';
 
 class DetailPembayaranPendidikanScreen extends StatefulWidget {
   const DetailPembayaranPendidikanScreen({super.key});
@@ -273,13 +274,13 @@ class _DetailPembayaranPendidikanScreenState
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         const DetailPembayaranPendidikanScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const MetodePembayaranPendidikanScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
