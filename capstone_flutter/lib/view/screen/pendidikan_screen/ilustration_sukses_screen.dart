@@ -1,3 +1,4 @@
+import 'package:capstone_flutter/view/screen/pendidikan_screen/berhasil_transaksi_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
@@ -42,13 +43,13 @@ class IlustrationSuksesScreen extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         const BerhasilTransaksiPaketDataListrik(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const BerhasilTransaksiPendidkanScreen(),
+                ),
+              );
             },
             child: Text(
               'Cek Transaksi',
