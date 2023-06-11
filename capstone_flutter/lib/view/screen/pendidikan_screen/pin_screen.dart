@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../utils/const/theme.dart';
+import 'ilustration_sukses_screen.dart';
 
 class KodePinScreen extends StatefulWidget {
   const KodePinScreen({super.key});
@@ -103,10 +104,12 @@ class _KodePinScreenState extends State<KodePinScreen> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const IlustrationSuccess()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const IlustrationSuksesScreen(),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',
