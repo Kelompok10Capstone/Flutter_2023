@@ -56,13 +56,21 @@ class _HomeScreenState extends State<HomeScreen>
   late SharedPreferences _prefs;
   String name = '';
   String phone = '';
+  String token = '';
+  String balance = '0';
 
   void initial() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       name = _prefs.getString('name').toString();
       phone = _prefs.getString('phone').toString();
+      token = _prefs.getString('token').toString();
+      balance = _prefs.getInt('balance').toString();
       _prefs.getString('token').toString();
+      print('nama : $name');
+      print('phone : $phone');
+      print('token : $token');
+      print('balance : $balance');
     });
   }
 
@@ -222,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 270, left: 44),
                       child: Text(
-                        'Rp 150.000',
+                        'Rp.$balance',
                         style: whiteFont25.copyWith(
                           color: Colors.white,
                         ),

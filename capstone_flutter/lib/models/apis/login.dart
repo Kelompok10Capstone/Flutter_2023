@@ -20,8 +20,7 @@ class LoginController {
       final jsonData = jsonDecode(response.body);
       print('Response body: ${response.body}');
       final user = User.fromJson(jsonData);
-      saveUserInfoToSharedPreferences(
-          user.name, user.phone, user.email, user.token);
+      saveUserInfoToSharedPreferences(user.token);
 
       // Mengirim permintaan ke URL lain saat login berhasil
       final profileUrl = Uri.parse('http://34.101.160.237:2424/api/v1/profile');
@@ -36,21 +35,21 @@ class LoginController {
       if (profileResponse.statusCode == 200) {
         final profileJsonData = jsonDecode(profileResponse.body);
         print('Profile Response body: ${profileResponse.body}');
-        final userId =
-            User.fromJson(profileJsonData); // Menggunakan model UserId
-        // print(userId.phone);
-        // print(userId.name);
-        // print(userId.email);
-        // print(userId
-        //     .token); // Tidak ada properti "token" pada model UserId, mungkin ada kesalahan di sini
+        final userId = User.fromJson(profileJsonData);
+        saveUserInfoToSharedPreferences2(
+          userId.name,
+          userId.phone,
+          userId.email,
+          userId.balance,
+        ); // Menggunakan model UserId
+        print(userId.phone);
+        print(userId.name);
+        print(userId.email);
+        print(userId.balance);
         // Proses data profile sesuai kebutuhan
       } else {
         print('Profile Response body: ${profileResponse.body}');
       }
-
-      print(user.phone);
-      print(user.name);
-      print(user.email);
       print(user.token);
       return user;
     } else {
@@ -59,13 +58,18 @@ class LoginController {
     }
   }
 
-  void saveUserInfoToSharedPreferences(
-      String name, String phone, String email, String token) async {
+  void saveUserInfoToSharedPreferences(String token) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
+
+  void saveUserInfoToSharedPreferences2(
+      String name, String phones, String email, int balance) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
-    await prefs.setString('phone', phone);
+    await prefs.setString('phone', phones);
     await prefs.setString('email', email);
-    await prefs.setString('token', token);
+    await prefs.setInt('balance', balance);
   }
 
   void dispose() {
