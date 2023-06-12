@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
+import '../atur_ulang_screen/email_screen.dart';
 import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 import '../home_screen/home_screen.dart';
 
@@ -196,8 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const InputPinAturUlangScreen(),
+                              builder: (context) => const EmailScreen(),
                             ),
                           );
                         },
