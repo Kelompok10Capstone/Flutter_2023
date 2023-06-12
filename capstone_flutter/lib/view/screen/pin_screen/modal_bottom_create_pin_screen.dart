@@ -102,7 +102,7 @@ class _ModalBottomCreatePinState extends State<ModalBottomCreatePin> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const InputPinScreen()));
+                                builder: (context) => InputPinScreen()));
                       },
                       child: Text(
                         'Lanjutkan',

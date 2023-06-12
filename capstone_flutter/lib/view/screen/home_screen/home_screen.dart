@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../models/apis/pin.dart';
 import '../../../utils/const/theme.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
@@ -54,16 +55,25 @@ List<String> months = [
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   bool isPinCreated = false;
+  bool isPinAdded = false;
   late SharedPreferences _prefs;
   String name = '';
   String phone = '';
+  String token = '';
+  String balance = '0';
 
   void initial() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       name = _prefs.getString('name').toString();
       phone = _prefs.getString('phone').toString();
+      token = _prefs.getString('token').toString();
+      balance = _prefs.getInt('balance').toString();
       _prefs.getString('token').toString();
+      print('nama : $name');
+      print('phone : $phone');
+      print('token : $token');
+      print('balance : $balance');
     });
   }
 
@@ -87,16 +97,32 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isPinCreated) {
-        _showModalBottomSheetPinAdded();
-      } else {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await initializeData(); // Panggil fungsi untuk inisialisasi data
+      bool pinStatus = await checkPinStatus(token);
+      setState(() {
+        isPinCreated = pinStatus;
+      });
+      if (!isPinCreated) {
         _showModalBottomSheetCreatePin();
+      } else if (isPinCreated && !isPinAdded) {
+        _showModalBottomSheetPinAdded();
+        setState(() {
+          isPinAdded = true;
+        });
       }
     });
     _tabController = TabController(length: 2, vsync: this);
-    initial();
-    // _tabController?.index = 0;
+  }
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = _prefs.getString('name') ?? '';
+      phone = _prefs.getString('phone') ?? '';
+      token = _prefs.getString('token') ?? '';
+      balance = _prefs.getInt('balance').toString();
+    });
   }
 
   @override
@@ -223,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 270, left: 44),
                       child: Text(
-                        'Rp 150.000',
+                        'Rp.$balance',
                         style: whiteFont25.copyWith(
                           color: Colors.white,
                         ),
@@ -1220,6 +1246,9 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       onPressed: () {
+                        setState(() {
+                          isPinAdded = true;
+                        });
                         Navigator.pop(context);
                       },
                       child: Text(

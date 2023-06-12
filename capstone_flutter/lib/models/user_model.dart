@@ -6,6 +6,7 @@ class User {
   final String password;
   final String token;
   final int balance;
+  final String pin;
   final String image;
   final String address;
   final String createdAt;
@@ -19,6 +20,7 @@ class User {
     required this.password,
     required this.token,
     required this.balance,
+    required this.pin,
     required this.image,
     required this.address,
     required this.createdAt,
@@ -35,6 +37,7 @@ class User {
       password: userData['password'] ?? '',
       token: userData['token'] ?? '',
       balance: userData['balance'] ?? 0,
+      pin: userData['pin'] ?? '',
       image: userData['image'] ?? '',
       address: userData['address'] ?? '',
       createdAt: userData['created_at'] ?? '',
