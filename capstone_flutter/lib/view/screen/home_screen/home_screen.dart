@@ -102,11 +102,13 @@ class _HomeScreenState extends State<HomeScreen>
       setState(() {
         isPinCreated = pinStatus;
       });
-      if (isPinCreated && isPinAdded) {
-        _showModalBottomSheetPinAdded();
-        isPinAdded = true; // Tandai bahwa bottom sheet sudah ditampilkan
-      } else if (!isPinCreated) {
+      if (!isPinCreated) {
         _showModalBottomSheetCreatePin();
+      } else if (isPinCreated && !isPinAdded) {
+        _showModalBottomSheetPinAdded();
+        setState(() {
+          isPinAdded = true;
+        });
       }
     });
     _tabController = TabController(length: 2, vsync: this);
@@ -1237,6 +1239,9 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       onPressed: () {
+                        setState(() {
+                          isPinAdded = true;
+                        });
                         Navigator.pop(context);
                       },
                       child: Text(
