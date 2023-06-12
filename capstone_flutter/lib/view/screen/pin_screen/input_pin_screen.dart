@@ -5,7 +5,7 @@ import 'package:pinput/pinput.dart';
 import '../../../utils/const/theme.dart';
 
 class InputPinScreen extends StatefulWidget {
-  const InputPinScreen({super.key});
+  const InputPinScreen({Key? key}) : super(key: key);
 
   @override
   State<InputPinScreen> createState() => _InputPinScreenState();
@@ -13,11 +13,6 @@ class InputPinScreen extends StatefulWidget {
 
 class _InputPinScreenState extends State<InputPinScreen> {
   final TextEditingController otpController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -47,10 +42,6 @@ class _InputPinScreenState extends State<InputPinScreen> {
             const SizedBox(
               height: 42,
             ),
-            // Text(
-            //   'Masukkan kode PIN kamu!',
-            //   style: blackFont14,
-            // ),
             const SizedBox(height: 70),
             Pinput(
               controller: otpController,
@@ -74,11 +65,9 @@ class _InputPinScreenState extends State<InputPinScreen> {
                 ),
               ),
               onChanged: (String value) {
-                setState(() {
-                  if (value.isEmpty) {
-                    otpController.text = '-';
-                  }
-                });
+                if (value.isEmpty) {
+                  otpController.text = '-';
+                }
               },
             ),
             const SizedBox(
@@ -104,10 +93,13 @@ class _InputPinScreenState extends State<InputPinScreen> {
               ),
             ),
             onPressed: () {
+              String pin = otpController.text;
+              print(pin);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ReinputPinScreen()));
+                      builder: (context) =>
+                          ReinputPinScreen(pinFromInputScreen: pin)));
             },
             child: Text(
               'Lanjutkan',

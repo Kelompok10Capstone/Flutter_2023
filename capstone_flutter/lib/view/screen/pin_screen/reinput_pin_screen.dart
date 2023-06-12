@@ -1,11 +1,17 @@
-import 'package:capstone_flutter/view/screen/pin_screen/pin_added_screen.dart';
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
+import 'package:capstone_flutter/view/screen/pin_screen/reinput_pin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/apis/create_pin.dart';
 import '../../../utils/const/theme.dart';
 
 class ReinputPinScreen extends StatefulWidget {
-  const ReinputPinScreen({super.key});
+  final String pinFromInputScreen;
+
+  const ReinputPinScreen({Key? key, required this.pinFromInputScreen})
+      : super(key: key);
 
   @override
   State<ReinputPinScreen> createState() => _ReinputPinScreenState();
@@ -13,16 +19,66 @@ class ReinputPinScreen extends StatefulWidget {
 
 class _ReinputPinScreenState extends State<ReinputPinScreen> {
   final TextEditingController otpController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  late PinController _pinController;
 
   @override
   void dispose() {
     otpController.dispose();
     super.dispose();
+  }
+
+  late SharedPreferences _prefs;
+  String token = '';
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      _pinController = PinController(token);
+      print(token);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData();
+  }
+
+  Future<void> _createPin() async {
+    final String pin = otpController.text;
+    final String originalPin = widget.pinFromInputScreen;
+    print(pin);
+    print(originalPin);
+
+    if (pin != originalPin) {
+      otpController.clear();
+      // Gagal membuat pin
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Pin tidak sesuai. Silakan coba lagi.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else if (pin == originalPin) {
+      final bool success = await _pinController.createPin(pin);
+      if (success) {
+        // Pin berhasil dibuat
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NavBar()),
+        );
+      } else {}
+    }
   }
 
   @override
@@ -45,11 +101,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
         child: Column(
           children: [
             const SizedBox(
-              height: 30,
-            ),
-            Text(
-              'Ulangi sekali lagi',
-              style: blackFont14,
+              height: 42,
             ),
             const SizedBox(height: 70),
             Pinput(
@@ -73,21 +125,10 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              onChanged: (String value) {
-                setState(() {
-                  if (value.isEmpty) {
-                    otpController.text = '-';
-                  }
-                });
-              },
             ),
             const SizedBox(
               height: 20,
             ),
-            // Text(
-            //   'Lupa kode PIN?',
-            //   style: blueFont12,
-            // ),
           ],
         ),
       ),
@@ -103,12 +144,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const PinAddedScreen()));
-            },
+            onPressed: _createPin,
             child: Text(
               'Lanjutkan',
               style: whiteFont14,
