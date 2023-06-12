@@ -22,6 +22,32 @@ class LoginController {
       final user = User.fromJson(jsonData);
       saveUserInfoToSharedPreferences(
           user.name, user.phone, user.email, user.token);
+
+      // Mengirim permintaan ke URL lain saat login berhasil
+      final profileUrl = Uri.parse('http://34.101.160.237:2424/api/v1/profile');
+      final profileHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization':
+            'Bearer ${user.token}', // Menggunakan token JWT pada header
+      };
+      final profileResponse =
+          await http.get(profileUrl, headers: profileHeaders);
+
+      if (profileResponse.statusCode == 200) {
+        final profileJsonData = jsonDecode(profileResponse.body);
+        print('Profile Response body: ${profileResponse.body}');
+        final userId =
+            User.fromJson(profileJsonData); // Menggunakan model UserId
+        // print(userId.phone);
+        // print(userId.name);
+        // print(userId.email);
+        // print(userId
+        //     .token); // Tidak ada properti "token" pada model UserId, mungkin ada kesalahan di sini
+        // Proses data profile sesuai kebutuhan
+      } else {
+        print('Profile Response body: ${profileResponse.body}');
+      }
+
       print(user.phone);
       print(user.name);
       print(user.email);
