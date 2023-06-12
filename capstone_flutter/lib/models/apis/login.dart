@@ -22,7 +22,7 @@ class LoginController {
       final user = User.fromJson(jsonData);
       saveUserInfoToSharedPreferences(
           user.name, user.phone, user.email, user.token);
-      print(user.phone);
+      // print(user.phone);
       print(user.name);
       print(user.email);
       print(user.token);
