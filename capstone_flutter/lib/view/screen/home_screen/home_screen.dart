@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../models/apis/pin.dart';
 import '../../../utils/const/theme.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
@@ -53,6 +54,7 @@ List<String> months = [
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   bool isPinCreated = false;
+  bool isPinAdded = false;
   late SharedPreferences _prefs;
   String name = '';
   String phone = '';
@@ -94,16 +96,30 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isPinCreated) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await initializeData(); // Panggil fungsi untuk inisialisasi data
+      bool pinStatus = await checkPinStatus(token);
+      setState(() {
+        isPinCreated = pinStatus;
+      });
+      if (isPinCreated && isPinAdded) {
         _showModalBottomSheetPinAdded();
-      } else {
+        isPinAdded = true; // Tandai bahwa bottom sheet sudah ditampilkan
+      } else if (!isPinCreated) {
         _showModalBottomSheetCreatePin();
       }
     });
     _tabController = TabController(length: 2, vsync: this);
-    initial();
-    // _tabController?.index = 0;
+  }
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = _prefs.getString('name') ?? '';
+      phone = _prefs.getString('phone') ?? '';
+      token = _prefs.getString('token') ?? '';
+      balance = _prefs.getInt('balance').toString();
+    });
   }
 
   @override

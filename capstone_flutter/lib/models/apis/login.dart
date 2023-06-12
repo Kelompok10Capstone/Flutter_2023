@@ -46,6 +46,7 @@ class LoginController {
         print(userId.name);
         print(userId.email);
         print(userId.balance);
+        print(userId.pin);
         // Proses data profile sesuai kebutuhan
       } else {
         print('Profile Response body: ${profileResponse.body}');
