@@ -147,14 +147,12 @@ class _HomeScreenState extends State<HomeScreen>
                       padding: const EdgeInsets.only(
                         top: 110,
                       ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: AspectRatio(
-                          aspectRatio: 17 / 11,
-                          child: Image.asset(
-                            'assets/motif_polos.png',
-                            fit: BoxFit.cover,
-                          ),
+                      child: Container(
+                        width: 360.w,
+                        height: 260.h,
+                        child: Image.asset(
+                          'assets/motif_polos.png',
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
