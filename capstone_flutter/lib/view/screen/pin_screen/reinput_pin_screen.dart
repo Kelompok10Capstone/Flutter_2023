@@ -75,7 +75,10 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
         // Pin berhasil dibuat
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const NavBar()),
+          MaterialPageRoute(
+              builder: (context) => const NavBar(
+                    initialIndex: 0,
+                  )),
         );
       } else {}
     }

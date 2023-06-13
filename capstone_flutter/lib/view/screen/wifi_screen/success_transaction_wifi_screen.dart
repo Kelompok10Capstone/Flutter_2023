@@ -237,8 +237,12 @@ class SuccessTransactionWifi extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const NavBar()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NavBar(
+                            initialIndex: 0,
+                          )));
               // Navigator.push(
               //     context,
               //     MaterialPageRoute(

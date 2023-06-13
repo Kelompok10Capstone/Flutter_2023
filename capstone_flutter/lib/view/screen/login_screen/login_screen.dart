@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const NavBar(),
+            builder: (context) => const NavBar(initialIndex: 0),
           ),
           (route) => false);
     }
@@ -209,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const NavBar(),
+          builder: (context) => NavBar(initialIndex: 0),
         ),
       );
       // ignore: use_build_context_synchronously

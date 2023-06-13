@@ -294,7 +294,7 @@ class _BerhasilTransaksiTagihanListrikState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NavBar(),
+                  builder: (context) => const NavBar(initialIndex: 0),
                 ),
               );
             },

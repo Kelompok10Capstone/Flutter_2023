@@ -46,7 +46,7 @@ class IlustrationSuksesTransfer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NavBar(),
+                  builder: (context) => const NavBar(initialIndex: 0),
                 ),
               );
             },
