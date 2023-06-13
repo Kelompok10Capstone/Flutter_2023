@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/login.dart';
 import '../../../models/user_model.dart';
 import '../../../utils/const/theme.dart';
+import '../atur_ulang_screen/email_screen.dart';
 import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -129,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 5),
                 passwordField,
+                forgetPassword(context),
               ],
             ),
           ),
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Belum mempunyai akun? ',
+                        'Belum Punya Akun? ',
                         style: blackFont12,
                       ),
                       GestureDetector(
@@ -241,5 +243,28 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       );
     }
+  }
+
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: Text(
+          "Lupa Kata Sandi?",
+          style: blueFont12,
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EmailScreen(),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

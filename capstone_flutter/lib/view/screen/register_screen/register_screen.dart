@@ -193,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushAndRemoveUntil(
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) {
@@ -209,6 +209,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             );
                           },
                         ),
+                        (Route<dynamic> route) => false,
                       );
                     },
                     child: Text(

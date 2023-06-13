@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 58, left: 125),
                       child: Text(
-                        name,
+                        name.toUpperCase(),
                         style: whiteFont18.copyWith(
                           color: Colors.white,
                         ),
