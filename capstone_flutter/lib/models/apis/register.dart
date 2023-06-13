@@ -9,6 +9,7 @@ class RegisterController {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   Future<User?> registerUser(
       String name, String email, String phone, String password) async {
