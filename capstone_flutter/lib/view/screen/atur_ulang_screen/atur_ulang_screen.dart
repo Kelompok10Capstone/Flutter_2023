@@ -188,7 +188,7 @@ class _AturUlangScreenState extends State<AturUlangScreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const NavBar(),
+                        builder: (context) => const NavBar(initialIndex: 0),
                       ),
                     );
                   });
