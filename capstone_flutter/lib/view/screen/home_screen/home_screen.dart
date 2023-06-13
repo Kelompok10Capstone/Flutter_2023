@@ -104,7 +104,9 @@ class _HomeScreenState extends State<HomeScreen>
         isPinCreated = pinStatus;
       });
       if (!isPinCreated) {
-        _showModalBottomSheetCreatePin();
+        Future.delayed(const Duration(seconds: 1), () {
+          _showModalBottomSheetCreatePin();
+        });
       } else if (isPinCreated && !isPinAdded) {
         _showModalBottomSheetPinAdded();
         setState(() {
@@ -1344,7 +1346,8 @@ class _HomeScreenState extends State<HomeScreen>
 }
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  final int initialIndex;
+  const NavBar({super.key, required this.initialIndex});
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -1352,6 +1355,12 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   void _navigateBottomBar(int index) {
     setState(() {

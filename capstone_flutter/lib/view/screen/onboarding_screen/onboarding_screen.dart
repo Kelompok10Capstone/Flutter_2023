@@ -63,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const NavBar(),
+            builder: (context) => const NavBar(initialIndex: 0),
           ),
           (route) => false);
     }
