@@ -368,6 +368,324 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+<<<<<<< HEAD
+=======
+                  const SizedBox(height: 5),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        _buildTokenTab(),
+                        _buildTagihanTab(),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 52,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_tabController?.index == 0) {
+                            // Jika tab Token aktif, arahkan pengguna ke layar Token
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ProductDetailScreen(),
+                              ),
+                            );
+                          } else if (_tabController?.index == 1) {
+                            // Jika tab Tagihan aktif, arahkan pengguna ke layar Tagihan
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const DetailPembayaranTagihanListrik(),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          'Lanjutkan',
+                          style: whiteFont14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetBpjs(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Adjust bottom padding based on keyboard height
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 350,
+            // height: MediaQuery.of(context).size.height / 2.7,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      'BPJS Kesehatan',
+                      style: blackText24.copyWith(fontSize: 18),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'No. Pelanggan',
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: TextField(
+                      controller: pelangganControllerBpjs,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: blackFont12,
+                        hintText: 'Masukkan No Pelanggan',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Periode',
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: selectedMonth,
+                        hint: Text(
+                          'Pilih Bulan',
+                          style: blackFont12,
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedMonth = value!;
+                          });
+                        },
+                        items: months.map((String month) {
+                          return DropdownMenuItem<String>(
+                            value: month,
+                            child: Text(
+                              month,
+                              style: blackFont12,
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                  )),
+                  // const SizedBox(height: 25),
+
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 52,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PaymentDetailBpjs()));
+                        },
+                        child: Text(
+                          'Lanjutkan',
+                          style: whiteFont14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetWifi() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Adjust bottom padding based on keyboard height
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 250,
+            // height: MediaQuery.of(context).size.height / 2.7,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      'WIFI',
+                      style: blackText16.copyWith(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'No. Pelanggan',
+                    style: blackFont14.copyWith(fontWeight: FontWeight.w400),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: TextField(
+                      controller: pelangganControllerWifi,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: blackFont12.copyWith(color: Colors.grey),
+                        hintText: 'Masukkan No Pelanggan',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                  )),
+                  // const SizedBox(height: 25),
+
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 52,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PaymentDetailWifi()));
+                        },
+                        child: Text('Lanjutkan', style: whiteFont14),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showModalBottomSheetCreatePin() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 270,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Image.asset(
+                    'assets/create_pin.png',
+                    scale: 4,
+                  ),
+>>>>>>> 239d8c112a3b19b7a7f3c3a60690744943c03ff9
                 ),
                 Padding(
                   padding: EdgeInsets.only(
