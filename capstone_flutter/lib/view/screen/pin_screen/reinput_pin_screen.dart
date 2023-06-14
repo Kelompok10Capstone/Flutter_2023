@@ -2,10 +2,12 @@ import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:capstone_flutter/view/screen/pin_screen/reinput_pin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/create_pin.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/app_manajer.dart';
 
 class ReinputPinScreen extends StatefulWidget {
   final String pinFromInputScreen;
@@ -72,6 +74,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
     } else if (pin == originalPin) {
       final bool success = await _pinController.createPin(pin);
       if (success) {
+        Provider.of<AppManajer>(context, listen: false).changePin(true);
         // Pin berhasil dibuat
         Navigator.push(
           context,

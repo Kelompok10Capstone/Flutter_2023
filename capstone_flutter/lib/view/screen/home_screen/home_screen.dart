@@ -4,9 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/app_manajer.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pendidikan_screen/pendidikan_screen.dart';
@@ -103,16 +105,28 @@ class _HomeScreenState extends State<HomeScreen>
       setState(() {
         isPinCreated = pinStatus;
       });
+      bool ispinAdded = false;
+      Future.microtask(() => ispinAdded =
+          Provider.of<AppManajer>(context, listen: false).ispinAdded);
+      // bool ispinAdded = Provider.of<AppManajer>(context, listen: false).ispinAdded;
       if (!isPinCreated) {
         Future.delayed(const Duration(seconds: 1), () {
           _showModalBottomSheetCreatePin();
         });
-      } else if (isPinCreated && !isPinAdded) {
-        _showModalBottomSheetPinAdded();
-        setState(() {
-          isPinAdded = true;
-        });
       }
+      if (isPinCreated && ispinAdded) {
+        _showModalBottomSheetPinAdded();
+      }
+      Future.microtask(() =>
+          Provider.of<AppManajer>(context, listen: false).changePin(false));
+
+      // else if (isPinCreated && !isPinAdded) {
+      //   print('pin created');
+      //   _showModalBottomSheetPinAdded();
+      //   setState(() {
+      //     isPinAdded = true;
+      //   });
+      // }
     });
     _tabController = TabController(length: 2, vsync: this);
   }

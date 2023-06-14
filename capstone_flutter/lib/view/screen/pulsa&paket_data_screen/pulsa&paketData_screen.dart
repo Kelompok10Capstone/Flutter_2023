@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../models/apis/pulsa_paket_data_api.dart';
+import '../../../models/network_respone.dart';
+import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/dummy_data.dart';
 import '../../../view_model/dummy_pulsa.dart';
@@ -214,13 +217,6 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   ),
                 );
               }
-
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const DetailPembayaranPulsaScreen(),
-              //   ),
-              // );
             },
             child: Text(
               'Lanjutkan',
@@ -258,11 +254,11 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: dummyPulsaData[index]['isSelected'] == true
-                    ? Color(0xff2B3990)
+                    ? const Color(0xff2B3990)
                     : Colors.black,
               ),
               color: dummyPulsaData[index]['isSelected'] == true
-                  ? Color(0xff2B3990)
+                  ? const Color(0xff2B3990)
                   : Colors.white,
             ),
             child: Padding(
@@ -288,7 +284,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                         style: blueFont14.copyWith(
                           color: dummyPulsaData[index]['isSelected'] == true
                               ? Colors.white
-                              : Color(0xff2B3990),
+                              : const Color(0xff2B3990),
                         ),
                       ),
                       const SizedBox(
