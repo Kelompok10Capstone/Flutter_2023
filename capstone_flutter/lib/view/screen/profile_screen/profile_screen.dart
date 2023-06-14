@@ -39,9 +39,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(
               height: 50,
             ),
-            SizedBox(
-              width: 60,
-              child: Image.asset('assets/profile.png'),
+            const CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage('assets/profile.png'),
             ),
             const SizedBox(
               height: 20,
