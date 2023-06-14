@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen>
                       child: AspectRatio(
                         aspectRatio: 18 / 11,
                         child: Image.asset(
-                          'assets/motif_berwarna.png',
+                          'assets/card1.png',
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -120,8 +120,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       width: 2,
                                     ),
                                     image: const DecorationImage(
-                                      image:
-                                          AssetImage('assets/profile_home.png'),
+                                      image: AssetImage('assets/card2.png'),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
