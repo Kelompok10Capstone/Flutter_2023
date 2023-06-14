@@ -120,7 +120,8 @@ class _HomeScreenState extends State<HomeScreen>
                                       width: 2,
                                     ),
                                     image: const DecorationImage(
-                                      image: AssetImage('assets/card2.png'),
+                                      image:
+                                          AssetImage('assets/profile_home.png'),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -166,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen>
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: const DecorationImage(
-                                  image: AssetImage('assets/motif_polos.png'),
+                                  image: AssetImage('assets/card2.png'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
