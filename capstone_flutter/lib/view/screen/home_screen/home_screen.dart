@@ -1107,10 +1107,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   builder: (context) =>
                                       const PaymentDetailWifi()));
                         },
-                        child: Text(
-                          'Lanjutkan',
-                          style: whiteFont14,
-                        ),
+                        child: Text('Lanjutkan', style: whiteFont14),
                       ),
                     ),
                   ),
