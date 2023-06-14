@@ -115,10 +115,8 @@ class _HomeScreenState extends State<HomeScreen>
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(32.5
                                         .w), // Setengah dari tinggi/lebar kontainer
-                                    border: Border.all(
-                                      color: blueColor,
-                                      width: 2,
-                                    ),
+                                    border:
+                                        Border.all(color: blueColor, width: 2),
                                     image: const DecorationImage(
                                       image:
                                           AssetImage('assets/profile_home.png'),
