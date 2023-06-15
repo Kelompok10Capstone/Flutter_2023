@@ -1,5 +1,5 @@
 class Urls {
-  static String baseUrl = 'https://be-golang.kucinghitam.tech/api/v1/';
+  static String baseUrl = 'http://34.101.78.228:2424/api/v1/';
 
   ///
   /// Endpoints =====================================================

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<bool> checkPinStatus(String token) async {
-  final profileUrl = Uri.parse('http://34.101.160.237:2424/api/v1/profile');
+  final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
   final profileHeaders = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $token',

@@ -13,7 +13,7 @@ class RegisterController {
   TextEditingController numberController = TextEditingController();
   Future<User?> registerUser(
       String name, String email, String phone, String password) async {
-    final url = Uri.parse('http://34.101.160.237:2424/api/v1/register');
+    final url = Uri.parse('http://34.101.78.228:2424/api/v1/register');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode(
         {'name': name, 'email': email, 'phone': phone, 'password': password});

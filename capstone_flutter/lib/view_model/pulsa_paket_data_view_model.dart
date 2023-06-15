@@ -1,34 +1,56 @@
 import 'package:capstone_flutter/models/apis/pulsa_paket_data_api.dart';
+import 'package:capstone_flutter/models/pulsa_paket_data.dart';
 import 'package:flutter/material.dart';
-
-import '../models/user_model.dart';
 
 enum PulsaPaketdataViewState {
   none,
+  result,
   loading,
   error,
 }
 
-class PulsaPaketDataViewModel with ChangeNotifier {
+class PulsaDanPaketDataViewModel with ChangeNotifier {
   PulsaPaketdataViewState _state = PulsaPaketdataViewState.none;
   PulsaPaketdataViewState get state => _state;
 
-  List<User> _users = [];
-  List<User> get users => _users;
+  List<PulsaPaketdataData> _users = [];
+  List<PulsaPaketdataData> get users => _users;
 
   changeState(PulsaPaketdataViewState s) {
     _state = s;
     notifyListeners();
   }
 
+  // void getPhone() {
+  //   changeState(PulsaPaketdataViewState.loading);
+  //   try {
+  //     const token = '';
+  //     PulsaPaketDataApi(token).getPulsaPaketData('').then((value) {
+  //       _users = value.data!;
+  //       if (_users.isEmpty) {
+  //         changeState(PulsaPaketdataViewState.none);
+  //       } else {
+  //         changeState(PulsaPaketdataViewState.result);
+  //       }
+  //       notifyListeners();
+  //     });
+  //   } catch (e) {
+  //     changeState(PulsaPaketdataViewState.error);
+  //   }
+  // }
+
   getPhone() async {
     changeState(PulsaPaketdataViewState.loading);
     try {
-      final token = '';
+      const token = '';
       final c = await PulsaPaketDataApi(token).getPulsaPaketData('');
-      _users = c as List<User>;
+      _users = c as List<PulsaPaketdataData>;
+      if (_users.isEmpty) {
+        changeState(PulsaPaketdataViewState.none);
+      } else {
+        changeState(PulsaPaketdataViewState.result);
+      }
       notifyListeners();
-      changeState(PulsaPaketdataViewState.none);
     } catch (e) {
       changeState(PulsaPaketdataViewState.error);
     }

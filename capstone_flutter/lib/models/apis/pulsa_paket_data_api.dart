@@ -1,8 +1,5 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-
 import '../../utils/const/urls.dart';
-import '../network_respone.dart';
 import '../pulsa_paket_data.dart';
 
 class PulsaPaketDataApi {
@@ -12,7 +9,8 @@ class PulsaPaketDataApi {
 
   Dio dioApi() {
     BaseOptions options = BaseOptions(
-      baseUrl: 'https://be-golang.kucinghitam.tech/api/v1/user/ppd',
+      // baseUrl: 'https://be-golang.kucinghitam.tech/api/v1/user/ppd',
+      baseUrl: Urls.baseUrl,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -25,7 +23,7 @@ class PulsaPaketDataApi {
 
   Future<PulsaPaketDataResponse> getPulsaPaketData(String query) async {
     final result = await _getRequest(
-      endpoint: '',
+      endpoint: Urls.pulsapaketdataList,
       params: {
         'type': 'paket_data',
         'provider': 'telkomsel',
@@ -47,35 +45,10 @@ class PulsaPaketDataApi {
           await dio.get(endpoint, queryParameters: params);
       return response;
     } catch (e) {
-      // Tangani error sesuai kebutuhan
+      if (e is DioException) {
+        print(e.response?.data);
+      }
       rethrow;
     }
   }
-
-  // Future<NetworkResponse> _getRequest({endpoint, param}) async {
-  //   try {
-  //     final dio = dioApi();
-  //     final result = await dio.get(endpoint, queryParameters: param);
-  //     return NetworkResponse.success(result.data);
-  //     // ignore: deprecated_member_use
-  //   } on DioError catch (e) {
-  //     // ignore: deprecated_member_use
-  //     if (e.type == DioErrorType.sendTimeout) {
-  //       return NetworkResponse.error(data: null, message: "request timeout");
-  //     }
-  //     return NetworkResponse.error(data: null, message: "request error dio");
-  //   } catch (e) {
-  //     return NetworkResponse.error(data: null, message: "other error");
-  //   }
-  // }
-
-  // Future<NetworkResponse> getPulsaPaketData() async {
-  //   final result = await _getRequest(
-  //     endpoint: Urls.pulsapaketdataList,
-  //     param: {
-  //       'type': 'paket_data',
-  //       'provider': 'telkomsel',
-  //     },
-  //   );
-  // }
 }
