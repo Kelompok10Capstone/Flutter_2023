@@ -718,19 +718,32 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           const Spacer(),
-                          Text(
-                            'Lihat Semua',
-                            style: whiteFont14.copyWith(
-                              color: const Color(0xFF2B3990),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AllPromoScreen()));
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Lihat Semua',
+                                  style: whiteFont14.copyWith(
+                                    color: const Color(0xFF2B3990),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: Color(0xFF2B3990),
+                                  size: 16,
+                                ),
+                              ],
                             ),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: Color(0xFF2B3990),
-                            size: 16,
                           ),
                         ],
                       ),
