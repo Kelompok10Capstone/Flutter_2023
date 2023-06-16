@@ -1,11 +1,16 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/payment_methode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/apis/wifi.dart';
+import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 
 class PaymentDetailWifi extends StatefulWidget {
-  const PaymentDetailWifi({super.key});
+  final String pelangganData;
+  const PaymentDetailWifi({Key? key, required this.pelangganData})
+      : super(key: key);
 
   @override
   State<PaymentDetailWifi> createState() => _PaymentDetailWifiState();
@@ -15,6 +20,37 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
   TextEditingController wilayahController = TextEditingController();
   TextEditingController pelangganController = TextEditingController();
   TextEditingController promoController = TextEditingController();
+
+  late SharedPreferences _prefs;
+  String token = '';
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      print(token);
+    });
+  }
+
+  Future<WiFiInquiryResponse?> inquireWiFiBill(
+      WiFiInquiryRequest request) async {
+    try {
+      final response = await WifiInquiryApi.inquireWiFiBill(request, token);
+      return response;
+    } catch (e) {
+      // Tangani jika terjadi kesalahan saat memanggil API
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData();
+    pelangganController.text = widget.pelangganData;
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -85,7 +121,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                       border: Border.all(color: Colors.grey),
                     ),
                     child: TextField(
-                      controller: pelangganController,
+                      controller: promoController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintStyle: blackFont12.copyWith(color: Colors.grey),
@@ -355,11 +391,62 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PaymentMethodWifi()));
+            onPressed: () async {
+              final request = WiFiInquiryRequest(
+                customerId: pelangganController.text,
+                discountId: promoController.text,
+                productId: 'BPJSKS',
+              );
+              try {
+                final response =
+                    await WifiInquiryApi.inquireWiFiBill(request, token);
+                if (response != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentMethodWifi(),
+                    ),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Error'),
+                        content: Text(
+                            'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              } catch (e) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Error'),
+                      content: Text(
+                          'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             child: Text(
               'Lanjutkan',

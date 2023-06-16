@@ -1110,8 +1110,10 @@ class _HomeScreenState extends State<HomeScreen>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const PaymentDetailWifi()));
+                                  builder: (context) => PaymentDetailWifi(
+                                        pelangganData:
+                                            pelangganControllerWifi.text,
+                                      )));
                         },
                         child: Text(
                           'Lanjutkan',
