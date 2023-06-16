@@ -291,84 +291,90 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, viewModel, _) {
         var pulsaPaketDataProvider = viewModel;
-        return pulsaPaketDataProvider.users.isEmpty
-            ? _buildEmptyTab()
-            : GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 3 / 2,
-                ),
-                itemCount: pulsaPaketDataProvider.users.length,
-                itemBuilder: (context, index) {
-                  final data = pulsaPaketDataProvider.users[index];
 
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        data.isActive = data.isActive! ? false : true;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: data.isActive == true
-                              ? const Color(0xff2B3990)
-                              : Colors.black,
+        if (pulsaPaketDataProvider.users.isEmpty) {
+          return _buildEmptyTab();
+        } else {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 3 / 2,
+            ),
+            itemCount: pulsaPaketDataProvider.users.length,
+            itemBuilder: (context, index) {
+              var data = pulsaPaketDataProvider.users[index];
+
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    data.isActive = data.isActive! ? false : true;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: data.isActive == true
+                          ? const Color(0xff2B3990)
+                          : Colors.black,
+                    ),
+                    color: data.isActive == true
+                        ? const Color(0xff2B3990)
+                        : Colors.white,
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          data.price! as String,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: data.isActive == true
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
-                        color: data.isActive == true
-                            ? const Color(0xff2B3990)
-                            : Colors.white,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               data.price! as String,
-                              style: blackFont18.copyWith(
+                              style: TextStyle(
+                                fontSize: 14,
                                 color: data.isActive == true
                                     ? Colors.white
-                                    : Colors.black,
+                                    : const Color(0xff2B3990),
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  data.price! as String,
-                                  style: blueFont14.copyWith(
-                                    color: data.isActive == true
-                                        ? Colors.white
-                                        : const Color(0xff2B3990),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  data.price! as String,
-                                  style: blackFont12.copyWith(
-                                    color: Colors.grey,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                                const Spacer(),
-                              ],
+                            const SizedBox(
+                              width: 10,
                             ),
+                            Text(
+                              data.price! as String,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            const Spacer(),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                  );
-                },
+                  ),
+                ),
               );
+            },
+          );
+        }
       },
     );
   }

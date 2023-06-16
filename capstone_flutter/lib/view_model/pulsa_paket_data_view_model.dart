@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/models/apis/pulsa_paket_data_api.dart';
 import 'package:capstone_flutter/models/pulsa_paket_data.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum PulsaPaketdataViewState {
   none,
@@ -21,28 +22,10 @@ class PulsaDanPaketDataViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  // void getPhone() {
-  //   changeState(PulsaPaketdataViewState.loading);
-  //   try {
-  //     const token = '';
-  //     PulsaPaketDataApi(token).getPulsaPaketData('').then((value) {
-  //       _users = value.data!;
-  //       if (_users.isEmpty) {
-  //         changeState(PulsaPaketdataViewState.none);
-  //       } else {
-  //         changeState(PulsaPaketdataViewState.result);
-  //       }
-  //       notifyListeners();
-  //     });
-  //   } catch (e) {
-  //     changeState(PulsaPaketdataViewState.error);
-  //   }
-  // }
-
   getPhone() async {
     changeState(PulsaPaketdataViewState.loading);
     try {
-      const token = '';
+      const token = 'token';
       final c = await PulsaPaketDataApi(token).getPulsaPaketData('');
       _users = c as List<PulsaPaketdataData>;
       if (_users.isEmpty) {

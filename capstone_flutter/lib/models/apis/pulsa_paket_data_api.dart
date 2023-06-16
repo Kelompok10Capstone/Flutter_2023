@@ -9,7 +9,6 @@ class PulsaPaketDataApi {
 
   Dio dioApi() {
     BaseOptions options = BaseOptions(
-      // baseUrl: 'https://be-golang.kucinghitam.tech/api/v1/user/ppd',
       baseUrl: Urls.baseUrl,
       headers: {
         'Content-Type': 'application/json',
@@ -52,3 +51,47 @@ class PulsaPaketDataApi {
     }
   }
 }
+
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+
+// class PulsaPaketDataApi {
+//   late String token;
+
+//   PulsaPaketDataApi(this.token);
+
+//   Future<http.Response> _getRequest({
+//     required String endpoint,
+//     Map<String, String>? params,
+//   }) async {
+//     final url = Uri.parse(endpoint);
+//     final response = await http.get(
+//       url,
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer $token',
+//       },
+//     );
+
+//     return response;
+//   }
+
+//   Future<PulsaPaketDataResponse> getPulsaPaketData(String query) async {
+//     final result = await _getRequest(
+//       endpoint: Urls.pulsapaketdataList,
+//       params: {
+//         'type': 'paket_data',
+//         'provider': 'telkomsel',
+//       },
+//     );
+
+//     if (result.statusCode == 200) {
+//       final responseData = json.decode(result.body);
+//       PulsaPaketDataResponse response =
+//           PulsaPaketDataResponse.fromJson(responseData);
+//       return response;
+//     } else {
+//       throw Exception('Failed to get pulsa paket data');
+//     }
+//   }
+// }
