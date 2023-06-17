@@ -314,9 +314,18 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
 
               return GestureDetector(
                 onTap: () {
-                  setState(() {
-                    data.isSelected = data.isSelected ? false : true;
-                  });
+                  if (data.isSelected == true) {
+                    setState(() {
+                      data.isSelected = false;
+                    });
+                  } else {
+                    setState(() {
+                      data.isSelected = true;
+                    });
+                  }
+                  // setState(() {
+                  //   data.isSelected = data.isSelected ? false : true;
+                  // });
                 },
                 child: Container(
                   decoration: BoxDecoration(

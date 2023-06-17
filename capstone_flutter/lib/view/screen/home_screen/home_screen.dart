@@ -23,7 +23,7 @@ import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  set isPinCreated(bool isPinCreated) {}
+  // set isPinCreated(bool isPinCreated) {}
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -98,26 +98,31 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
+    bool ispinAdded = context.read<AppManajer>().ispinAdded;
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await initializeData(); // Panggil fungsi untuk inisialisasi data
       bool pinStatus = await checkPinStatus(token);
       setState(() {
         isPinCreated = pinStatus;
       });
-      bool ispinAdded = false;
-      Future.microtask(() => ispinAdded =
-          Provider.of<AppManajer>(context, listen: false).ispinAdded);
+      // bool ispinAdded = false;
+      // Future.microtask(() => ispinAdded =
+      //     Provider.of<AppManajer>(context, listen: false).ispinAdded);
+
       // bool ispinAdded = Provider.of<AppManajer>(context, listen: false).ispinAdded;
       if (!isPinCreated) {
         Future.delayed(const Duration(seconds: 1), () {
           _showModalBottomSheetCreatePin();
         });
       }
+      print('isPinCreated: $isPinCreated\nispinAdded: $ispinAdded');
       if (isPinCreated && ispinAdded) {
+        print('_showModalBottomSheetPinAdded');
         _showModalBottomSheetPinAdded();
       }
-      Future.microtask(() =>
-          Provider.of<AppManajer>(context, listen: false).changePin(false));
+      // Future.microtask(() =>
+      //     Provider.of<AppManajer>(context, listen: false).changePin(false));
 
       // else if (isPinCreated && !isPinAdded) {
       //   print('pin created');
@@ -178,12 +183,20 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 58, left: 125),
-                      child: Text(
-                        name.toUpperCase(),
-                        style: whiteFont18.copyWith(
-                          color: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        Future.delayed(const Duration(seconds: 0), () {
+                          print(context.read<AppManajer>().ispinAdded);
+                          print(isPinCreated);
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 58, left: 125),
+                        child: Text(
+                          name.toUpperCase(),
+                          style: whiteFont18.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -1261,6 +1274,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       onPressed: () {
+                        context.read<AppManajer>().changePin(false);
                         setState(() {
                           isPinAdded = true;
                         });
@@ -1369,10 +1383,17 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
 
+  List<Widget> _pages = [];
+
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
+    _pages = [
+      const HomeScreen(),
+      const BillingHistory(),
+      const ProfileScreen(),
+    ];
   }
 
   void _navigateBottomBar(int index) {
@@ -1380,13 +1401,6 @@ class _NavBarState extends State<NavBar> {
       _selectedIndex = index;
     });
   }
-
-  final List<Widget> _pages = [
-    const HomeScreen(),
-    const BillingHistory(),
-    // const RiwayatTagihanScreen(),
-    const ProfileScreen(),
-  ];
 
   @override
   Widget build(BuildContext context) {

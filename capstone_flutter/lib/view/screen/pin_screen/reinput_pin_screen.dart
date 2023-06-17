@@ -73,8 +73,9 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
       );
     } else if (pin == originalPin) {
       final bool success = await _pinController.createPin(pin);
-      if (success) {
-        Provider.of<AppManajer>(context, listen: false).changePin(true);
+      if (success && context.mounted) {
+        // Provider.of<AppManajer>(context, listen: false).changePin(true);
+        context.read<AppManajer>().changePinTrue();
         // Pin berhasil dibuat
         Navigator.push(
           context,
@@ -97,9 +98,14 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text(
-          'Kode PIN',
-          style: blackFontAppbar18,
+        title: GestureDetector(
+          onTap: () {
+            context.read<AppManajer>().changePin(true);
+          },
+          child: Text(
+            'Kode PIN',
+            style: blackFontAppbar18,
+          ),
         ),
         elevation: 0,
       ),

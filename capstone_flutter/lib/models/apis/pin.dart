@@ -13,6 +13,8 @@ Future<bool> checkPinStatus(String token) async {
   if (profileResponse.statusCode == 200) {
     final profileJsonData = jsonDecode(profileResponse.body);
     final pin = profileJsonData['data']['pin'] as String;
+    print('pin: $pin');
+
     final isPinCreated = pin.isNotEmpty;
     return isPinCreated;
   } else {
