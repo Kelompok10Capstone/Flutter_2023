@@ -11,7 +11,7 @@ class BillingHistory extends StatefulWidget {
 }
 
 class _BillinngHistoryState extends State<BillingHistory> {
-  int _selectedTab = 0;
+  final int _selectedTab = 0;
 
   @override
   Widget build(BuildContext context) {

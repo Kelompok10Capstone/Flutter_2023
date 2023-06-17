@@ -1,6 +1,5 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/bpjs_screen/payment_detail_bpjs_screen.dart';
-import 'package:capstone_flutter/view/screen/wifi_screen/payment_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +22,7 @@ class _ModalBottomBpjsState extends State<ModalBottomBpjs> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: ElevatedButton(

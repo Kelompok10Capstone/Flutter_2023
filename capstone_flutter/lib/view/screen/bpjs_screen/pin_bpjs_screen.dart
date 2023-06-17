@@ -1,4 +1,3 @@
-import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 

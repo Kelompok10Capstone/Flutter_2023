@@ -1,6 +1,4 @@
-import 'package:capstone_flutter/view/screen/bpjs_screen/pin_bpjs_screen.dart';
 import 'package:capstone_flutter/view/screen/token_screen/pin_token_screen.dart';
-import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
@@ -60,7 +58,7 @@ class _PaymentMethodTokenState extends State<PaymentMethodToken> {
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.help_outline)
+                      const Icon(Icons.help_outline)
                     ],
                   ),
                 ),

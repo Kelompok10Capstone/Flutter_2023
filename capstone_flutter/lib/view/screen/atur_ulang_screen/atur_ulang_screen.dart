@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
 import '../home_screen/home_screen.dart';
-import 'atur_ulang_no_hp_screen.dart';
 
 class AturUlangScreen extends StatefulWidget {
   const AturUlangScreen({super.key});

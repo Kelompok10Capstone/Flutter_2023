@@ -81,7 +81,7 @@ class _DetailPembayaranTransferScreenState
                   child: Text(
                     'Rp 100.000',
                     style: blackText24.copyWith(
-                      color: Color(0xff8E8B8B),
+                      color: const Color(0xff8E8B8B),
                     ),
                   ),
                 ),

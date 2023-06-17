@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
+                  backgroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

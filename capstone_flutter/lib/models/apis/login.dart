@@ -73,6 +73,11 @@ class LoginController {
     await prefs.setInt('balance', balance);
   }
 
+  Future<String> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("token") ?? "";
+  }
+
   void dispose() {
     emailController.dispose();
     passwordController.dispose();

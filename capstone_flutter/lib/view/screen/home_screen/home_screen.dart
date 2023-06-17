@@ -17,7 +17,6 @@ import '../promo_screen/all_promo_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
 import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/product_detail_screen.dart';
-import '../top_up_screen/replenish_funds_screen.dart';
 import '../top_up_screen/top_up_screen.dart';
 import '../transfer_screen/transfer_screen.dart';
 import '../wifi_screen/payment_detail_screen.dart';
@@ -152,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 1,
                       child: AspectRatio(
                         aspectRatio: 17 / 11,

@@ -58,7 +58,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.help_outline)
+                      const Icon(Icons.help_outline)
                     ],
                   ),
                 ),

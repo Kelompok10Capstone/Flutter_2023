@@ -56,7 +56,7 @@ class _TransferScreenState extends State<TransferScreen> {
             const SizedBox(height: 8),
             Row(
               children: [
-                Container(
+                SizedBox(
                   width: 60,
                   child: TextFormField(
                     autofocus: false,
@@ -83,7 +83,7 @@ class _TransferScreenState extends State<TransferScreen> {
                 const SizedBox(
                   width: 10,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width - 110,
                   child: TextFormField(
                     autofocus: false,
@@ -132,7 +132,7 @@ class _TransferScreenState extends State<TransferScreen> {
             Text(
               '|Rp0',
               style: blackText24.copyWith(
-                color: Color(0xff8E8B8B),
+                color: const Color(0xff8E8B8B),
               ),
             ),
             const SizedBox(height: 12),

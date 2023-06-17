@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/apis/pulsa_paket_data_api.dart';
-import '../../../models/network_respone.dart';
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/dummy_data.dart';
-import '../../../view_model/dummy_pulsa.dart';
 import '../../../view_model/pulsa_paket_data_view_model.dart';
 import 'detail_pembayaran_pulsa_screen.dart';
 import 'paket_data/detail_pembayaran_paket_data_screen.dart';
@@ -55,9 +51,14 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          'Pulsa & Paket Data',
-          style: blackFont18.copyWith(color: Colors.black),
+        title: GestureDetector(
+          onTap: () async {
+            pulsaPaketDataProvider.getPhone();
+          },
+          child: Text(
+            'Pulsa & Paket Data',
+            style: blackFont18.copyWith(color: Colors.black),
+          ),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
@@ -79,7 +80,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 60,
                       child: TextFormField(
                         autofocus: true,
@@ -112,7 +113,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                     const SizedBox(
                       width: 10,
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width - 110,
                       // width: 249,
                       child: TextFormField(
@@ -164,11 +165,17 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                               : null,
                         ),
                         onChanged: (value) {
-                          setState(() {
-                            isPhoneNumberEntered = value.isNotEmpty;
-                            pulsaPaketDataProvider.users.clear();
+                          if (value.length <= 4) {
+                            setState(() {
+                              isPhoneNumberEntered = value.isNotEmpty;
+                              pulsaPaketDataProvider.users.clear();
+                            });
+                          }
+                        },
+                        onFieldSubmitted: (value) {
+                          if (value.length <= 4) {
                             pulsaPaketDataProvider.getPhone();
-                          });
+                          }
                         },
                       ),
                     ),
@@ -180,7 +187,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                 Text(
                   'Silahkan masukkan nomor Hp mu',
                   style: blackFont12.copyWith(
-                    color: Color(0xff6C6C6C),
+                    color: const Color(0xff6C6C6C),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -209,11 +216,10 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   builder: (context, pulsaPaketDataProvider, _) {
                     final List<PulsaPaketdataData> users =
                         pulsaPaketDataProvider.users;
-                    final int index =
+                    const int index =
                         0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
-                    final String providerText = users.isNotEmpty
-                        ? users[index].provider ?? 'Provider'
-                        : ' Provider';
+                    final String providerText =
+                        users.isNotEmpty ? users[index].provider : ' Provider';
                     return Text(
                       providerText,
                       style: blackFont16,
@@ -309,18 +315,18 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
               return GestureDetector(
                 onTap: () {
                   setState(() {
-                    data.isActive = data.isActive! ? false : true;
+                    data.isSelected = data.isSelected ? false : true;
                   });
                 },
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: data.isActive == true
+                      color: data.isSelected == true
                           ? const Color(0xff2B3990)
                           : Colors.black,
                     ),
-                    color: data.isActive == true
+                    color: data.isSelected == true
                         ? const Color(0xff2B3990)
                         : Colors.white,
                   ),
@@ -332,10 +338,10 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          data.price! as String,
+                          data.price.toString(),
                           style: TextStyle(
                             fontSize: 18,
-                            color: data.isActive == true
+                            color: data.isSelected == true
                                 ? Colors.white
                                 : Colors.black,
                           ),
@@ -345,10 +351,10 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              data.price! as String,
+                              'Rp.${data.price.toString()}',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: data.isActive == true
+                                color: data.isSelected == true
                                     ? Colors.white
                                     : const Color(0xff2B3990),
                               ),
@@ -357,9 +363,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                               width: 10,
                             ),
                             Text(
-                              data.price! as String,
-                              style: TextStyle(
-                                fontSize: 12,
+                              'Rp.${data.price.toString()}',
+                              style: blackFont12.copyWith(
                                 color: Colors.grey,
                                 decoration: TextDecoration.lineThrough,
                               ),
@@ -380,82 +385,93 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   }
 
   Widget _buildDataTab() {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 3 / 2,
-      ),
-      itemCount: dummyPaketData.length,
-      itemBuilder: (context, index) {
-        final data = dummyPaketData[index];
+    return Consumer<PulsaDanPaketDataViewModel>(
+      builder: (context, viewModel, _) {
+        var pulsaPaketDataProvider = viewModel;
 
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              dummyPaketData[index]['isSelected'] =
-                  !dummyPaketData[index]['isSelected'];
-            });
-          },
-          child: Container(
-            // width: 15,
-            // height: 10,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: dummyPaketData[index]['isSelected'] == true
-                    ? const Color(0xff2B3990)
-                    : Colors.black,
-              ),
-              color: dummyPaketData[index]['isSelected'] == true
-                  ? const Color(0xff2B3990)
-                  : Colors.white,
+        if (pulsaPaketDataProvider.users.isEmpty) {
+          return _buildEmptyTab();
+        } else {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 3 / 2,
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${data['nominal']} GB',
-                    style: blackFont18.copyWith(
-                      color: dummyPaketData[index]['isSelected'] == true
-                          ? Colors.white
+            itemCount: pulsaPaketDataProvider.users.length,
+            itemBuilder: (context, index) {
+              var data = pulsaPaketDataProvider.users[index];
+
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    data.isSelected = data.isSelected ? false : true;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: data.isSelected == true
+                          ? const Color(0xff2B3990)
                           : Colors.black,
                     ),
+                    color: data.isSelected == true
+                        ? const Color(0xff2B3990)
+                        : Colors.white,
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${data['hargaJual']}',
-                        style: blueFont14.copyWith(
-                          color: dummyPaketData[index]['isSelected'] == true
-                              ? Colors.white
-                              : const Color(0xff2B3990),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${data.name.toString()} \n(10 GB)',
+                          // data.price.toString(),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: data.isSelected == true
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        '${data['hargaCoret']}',
-                        style: blackFont12.copyWith(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              data.price.toString(),
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: data.isSelected == true
+                                    ? Colors.white
+                                    : const Color(0xff2B3990),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              data.price.toString(),
+                              style: blackFont12.copyWith(
+                                color: Colors.grey,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            const Spacer(),
+                          ],
                         ),
-                      ),
-                      const Spacer(),
-                    ],
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        );
+                ),
+              );
+            },
+          );
+        }
       },
     );
   }
