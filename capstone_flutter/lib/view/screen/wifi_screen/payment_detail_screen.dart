@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
 
 class PaymentDetailWifi extends StatefulWidget {
+  final String id;
+  final String userId;
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
@@ -20,6 +22,8 @@ class PaymentDetailWifi extends StatefulWidget {
     required this.providerName,
     required this.price,
     required this.adminFee,
+    required this.id,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -415,7 +419,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PaymentMethodWifi()));
+                      builder: (context) => PaymentMethodWifi(
+                            id: widget.id,
+                            userId: widget.userId,
+                            price: widget.price,
+                            adminFee: widget.adminFee,
+                          )));
             },
             child: Text(
               'Lanjutkan',

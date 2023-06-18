@@ -1,10 +1,21 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/const/theme.dart';
 
 class PaymentMethodWifi extends StatefulWidget {
-  const PaymentMethodWifi({super.key});
+  final String id;
+  final String userId;
+  final int price;
+  final int adminFee;
+  const PaymentMethodWifi({
+    super.key,
+    required this.price,
+    required this.adminFee,
+    required this.id,
+    required this.userId,
+  });
 
   @override
   State<PaymentMethodWifi> createState() => _PaymentMethodWifiState();
@@ -12,6 +23,21 @@ class PaymentMethodWifi extends StatefulWidget {
 
 class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
   String? selectedRadio;
+  late SharedPreferences _prefs;
+  String balance = '0';
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      balance = _prefs.getInt('balance').toString();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData(); // Panggil fungsi untuk inisialisasi data
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +116,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp 150.000)',
+                          'Saldo SkuyPay (Rp ${balance.toString()})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -143,7 +169,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          'Rp 132.500',
+                          (widget.adminFee + widget.price).toString(),
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -179,7 +205,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                               blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Rp 132.500',
+                          (widget.adminFee + widget.price).toString(),
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
@@ -205,10 +231,16 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
               ),
             ),
             onPressed: () {
+              print(widget.id);
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PinScreenWifi()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PinScreenWifi(
+                    id: widget.id,
+                    userId: widget.userId,
+                  ),
+                ),
+              );
             },
             child: Text(
               'Yuk Bayar!',

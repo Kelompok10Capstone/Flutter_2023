@@ -1145,6 +1145,8 @@ class _HomeScreenState extends State<HomeScreen>
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => PaymentDetailWifi(
+                                    id: response.id,
+                                    userId: response.userId,
                                     pelangganData: pelangganControllerWifi.text,
                                     createdAt: response.createdAt,
                                     providerName: response.providerName,

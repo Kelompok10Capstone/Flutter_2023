@@ -1,11 +1,16 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/apis/cek_pin.dart';
 import '../../../utils/const/theme.dart';
 
 class PinScreenWifi extends StatefulWidget {
-  const PinScreenWifi({super.key});
+  final String id;
+  final String userId;
+  const PinScreenWifi({Key? key, required this.id, required this.userId})
+      : super(key: key);
 
   @override
   State<PinScreenWifi> createState() => _PinScreenWifiState();
@@ -15,14 +20,78 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
   final TextEditingController otpController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     otpController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData(); // Panggil fungsi untuk inisialisasi data
+  }
+
+  late SharedPreferences _prefs;
+  String token = '';
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      print(token);
+    });
+  }
+
+  void _submitPin(String pin) async {
+    try {
+      final bool isPinCorrect = await checkPinPayment(token, pin);
+      if (isPinCorrect) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const IlustrationSuccessWifi()),
+        );
+      } else {
+        // Handle incorrect pin scenario
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Invalid PIN'),
+              content: const Text(
+                  'The PIN you entered is incorrect. Please try again.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      // Handle error scenario
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text(
+                'An error occurred while checking the PIN. Please try again later.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -73,13 +142,6 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              onChanged: (String value) {
-                setState(() {
-                  if (value.isEmpty) {
-                    otpController.text = '-';
-                  }
-                });
-              },
             ),
             const SizedBox(
               height: 20,
@@ -104,10 +166,9 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
               ),
             ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const IlustrationSuccessWifi()));
+              print(widget.userId);
+              final pin = otpController.text;
+              _submitPin(pin);
             },
             child: Text(
               'Lanjutkan',
