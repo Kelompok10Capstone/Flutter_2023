@@ -11,7 +11,22 @@ import '../../../utils/const/theme.dart';
 class PinScreenWifi extends StatefulWidget {
   final String id;
   final String userId;
-  const PinScreenWifi({Key? key, required this.id, required this.userId})
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
+  final int price;
+  final int adminFee;
+  final String customerName;
+  const PinScreenWifi(
+      {Key? key,
+      required this.id,
+      required this.userId,
+      required this.pelangganData,
+      required this.createdAt,
+      required this.providerName,
+      required this.price,
+      required this.adminFee,
+      required this.customerName})
       : super(key: key);
 
   @override
@@ -49,17 +64,30 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
       String idx = widget.id;
       if (isPinCorrect && idx.isNotEmpty) {
         final PayWifi payWifi = PayWifi(idx, token);
-        print('adalah: ${idx}');
+        // ignore: avoid_print
+        print('adalah: $idx');
         final String? payWifiResponse = await payWifi.payWifi();
+        // ignore: avoid_print
         print(payWifiResponse);
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const SuccessTransactionWifi(),
+            builder: (context) => IlustrationSuccessWifi(
+              id: widget.id,
+              userId: widget.userId,
+              pelangganData: widget.pelangganData,
+              customerName: widget.customerName,
+              createdAt: widget.createdAt,
+              providerName: widget.providerName,
+              adminFee: widget.adminFee,
+              price: widget.price,
+            ),
           ),
         );
       } else {
         // Handle incorrect pin scenario
+        // ignore: use_build_context_synchronously
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -79,6 +107,7 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
         );
       }
     } catch (error) {
+      // ignore: avoid_print
       print('Error: $error');
       showDialog(
         context: context,

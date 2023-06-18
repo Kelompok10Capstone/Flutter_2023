@@ -421,6 +421,10 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                   MaterialPageRoute(
                       builder: (context) => PaymentMethodWifi(
                             id: widget.id,
+                            createdAt: widget.createdAt,
+                            customerName: widget.customerName,
+                            pelangganData: pelangganController.text,
+                            providerName: widget.providerName,
                             userId: widget.userId,
                             price: widget.price,
                             adminFee: widget.adminFee,

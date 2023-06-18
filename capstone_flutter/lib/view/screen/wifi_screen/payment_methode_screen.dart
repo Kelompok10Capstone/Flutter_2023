@@ -8,14 +8,22 @@ import '../../../utils/const/theme.dart';
 class PaymentMethodWifi extends StatefulWidget {
   final String id;
   final String userId;
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
   final int price;
   final int adminFee;
+  final String customerName;
   const PaymentMethodWifi({
     super.key,
     required this.price,
     required this.adminFee,
     required this.id,
     required this.userId,
+    required this.pelangganData,
+    required this.createdAt,
+    required this.providerName,
+    required this.customerName,
   });
 
   @override
@@ -250,6 +258,12 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                     builder: (context) => PinScreenWifi(
                       id: widget.id,
                       userId: widget.userId,
+                      createdAt: widget.createdAt,
+                      pelangganData: widget.pelangganData,
+                      customerName: widget.customerName,
+                      providerName: widget.providerName,
+                      adminFee: widget.adminFee,
+                      price: widget.price,
                     ),
                   ),
                 );
