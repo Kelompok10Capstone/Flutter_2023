@@ -410,7 +410,12 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PaymentMethodWifi()));
+            },
             child: Text(
               'Lanjutkan',
               style: whiteFont14,

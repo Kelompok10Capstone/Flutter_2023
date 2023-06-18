@@ -1155,7 +1155,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   return AlertDialog(
                                     title: const Text('Error'),
                                     content: const Text(
-                                        'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+                                        'Maaf sepertinya ada kesalahan.'),
                                     actions: [
                                       ElevatedButton(
                                         onPressed: () {
@@ -1174,8 +1174,8 @@ class _HomeScreenState extends State<HomeScreen>
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text('Error'),
-                                  content: const Text(
-                                      'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+                                  content:
+                                      const Text('Nomor pelanggan kosong.'),
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
