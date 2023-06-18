@@ -1067,7 +1067,6 @@ class _HomeScreenState extends State<HomeScreen>
       builder: (BuildContext context) {
         final wifiProvider =
             Provider.of<WiFiInquiryProvider>(context, listen: false);
-        TextEditingController pelangganControllerWifi = TextEditingController();
 
         return SingleChildScrollView(
           padding: EdgeInsets.only(
