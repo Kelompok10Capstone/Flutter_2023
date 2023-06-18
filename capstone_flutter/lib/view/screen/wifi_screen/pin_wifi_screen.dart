@@ -56,9 +56,8 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Invalid PIN'),
-              content: const Text(
-                  'The PIN you entered is incorrect. Please try again.'),
+              title: const Text('Error'),
+              content: const Text('Pin salah.'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supercharged/supercharged.dart';
 
 import '../../../utils/const/theme.dart';
 
@@ -232,6 +233,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
             ),
             onPressed: () {
               print(widget.id);
+              var saldo = balance.toInt()! - widget.price + widget.adminFee;
+              print('saldo : $saldo');
               Navigator.push(
                 context,
                 MaterialPageRoute(
