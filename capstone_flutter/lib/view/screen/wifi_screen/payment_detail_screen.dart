@@ -48,7 +48,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     super.initState();
     initializeData();
     pelangganController.text = widget.pelangganData;
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
