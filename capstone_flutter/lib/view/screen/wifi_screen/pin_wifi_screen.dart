@@ -50,7 +50,7 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
       if (isPinCorrect && idx.isNotEmpty) {
         final PayWifi payWifi = PayWifi(idx, token);
         print('adalah: ${idx}');
-        final String payWifiResponse = await payWifi.payWifi();
+        final String? payWifiResponse = await payWifi.payWifi();
         print(payWifiResponse);
         Navigator.push(
           context,

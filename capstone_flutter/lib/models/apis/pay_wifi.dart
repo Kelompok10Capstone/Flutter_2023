@@ -11,7 +11,7 @@ class PayWifi {
 
   PayWifi(this.id, this.token);
 
-  Future<String> payWifi() async {
+  Future<String?> payWifi() async {
     final Map<String, dynamic> requestBody = {
       'partner_tx_id': id,
     };
