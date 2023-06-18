@@ -3,10 +3,12 @@ import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wif
 import 'package:capstone_flutter/view/screen/wifi_screen/success_transaction_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/cek_pin.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider.dart';
 
 class PinScreenWifi extends StatefulWidget {
   final String id;
@@ -17,6 +19,7 @@ class PinScreenWifi extends StatefulWidget {
   final int price;
   final int adminFee;
   final String customerName;
+  final int balanceNow;
   const PinScreenWifi(
       {Key? key,
       required this.id,
@@ -26,7 +29,8 @@ class PinScreenWifi extends StatefulWidget {
       required this.providerName,
       required this.price,
       required this.adminFee,
-      required this.customerName})
+      required this.customerName,
+      required this.balanceNow})
       : super(key: key);
 
   @override
@@ -69,6 +73,13 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
         final String? payWifiResponse = await payWifi.payWifi();
         // ignore: avoid_print
         print(payWifiResponse);
+
+        // Memperbarui nilai balance pada UserProvider
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        final newBalance =
+            widget.balanceNow; // Ganti dengan nilai balance yang baru
+        userProvider.updateUserInfo(
+            userProvider.name, userProvider.phone, newBalance);
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,

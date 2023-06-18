@@ -244,7 +244,8 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    final User? user = await loginController.loginUser(email, password);
+    final User? user =
+        await loginController.loginUser(email, password, context);
     // ignore: avoid_print
     print('user : $user');
 

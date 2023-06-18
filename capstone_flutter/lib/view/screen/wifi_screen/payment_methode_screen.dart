@@ -1,9 +1,11 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supercharged/supercharged.dart';
 
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider.dart';
 
 class PaymentMethodWifi extends StatefulWidget {
   final String id;
@@ -33,22 +35,20 @@ class PaymentMethodWifi extends StatefulWidget {
 class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
   String? selectedRadio;
   late SharedPreferences _prefs;
-  String balance = '0';
-  Future<void> initializeData() async {
-    _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      balance = _prefs.getInt('balance').toString();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initializeData(); // Panggil fungsi untuk inisialisasi data
-  }
+  // String balance = '0';
+  // Future<void> initializeData() async {
+  //   _prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     balance = _prefs.getInt('balance').toString();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final myBalance = userProvider.balance;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -125,7 +125,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp ${balance.toString()})',
+                          'Saldo SkuyPay (Rp ${myBalance.toString()})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -250,7 +250,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                 );
               } else {
                 print(widget.id);
-                var saldo = balance.toInt()! - widget.price + widget.adminFee;
+                var saldo = myBalance.toInt() - widget.price + widget.adminFee;
                 print('saldo : $saldo');
                 Navigator.push(
                   context,
@@ -264,6 +264,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                       providerName: widget.providerName,
                       adminFee: widget.adminFee,
                       price: widget.price,
+                      balanceNow:
+                          myBalance.toInt() - (widget.adminFee + widget.price),
                     ),
                   ),
                 );

@@ -11,6 +11,7 @@ import '../../../models/apis/wifi.dart';
 import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
+import '../../../view_model/user_provider.dart';
 import '../../../view_model/wifi_provider.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
@@ -156,6 +157,12 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final username = userProvider.name;
+    final phoneNumber = userProvider.phone;
+    final myBalance = userProvider.balance;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -204,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen>
                       child: Padding(
                         padding: const EdgeInsets.only(top: 58, left: 125),
                         child: Text(
-                          name.toUpperCase(),
+                          username.toUpperCase(),
                           style: whiteFont18.copyWith(
                             color: Colors.white,
                           ),
@@ -214,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 87, left: 125),
                       child: Text(
-                        phone,
+                        phoneNumber,
                         style: whiteFont14.copyWith(
                           color: Colors.white,
                         ),
@@ -288,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 270, left: 44),
                       child: Text(
-                        'Rp.$balance',
+                        'Rp.$myBalance',
                         style: whiteFont25.copyWith(
                           color: Colors.white,
                         ),

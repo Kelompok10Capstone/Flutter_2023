@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../view_model/user_provider.dart';
 import '../user_model.dart';
 
 class LoginController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  Future<User?> loginUser(String email, String password) async {
+  Future<User?> loginUser(
+      String email, String password, BuildContext context) async {
     final url = Uri.parse('http://34.101.78.228:2424/api/v1/login');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'email': email, 'password': password});
@@ -40,6 +43,9 @@ class LoginController {
         // ignore: avoid_print
         print('Profile Response body: ${profileResponse.body}');
         final userId = User.fromJson(profileJsonData);
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUserInfo(userId.name, userId.phone, userId.balance);
+
         saveUserInfoToSharedPreferences2(
           userId.name,
           userId.phone,
