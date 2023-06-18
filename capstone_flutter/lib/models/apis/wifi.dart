@@ -1,6 +1,7 @@
-import '../wifi_model.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../wifi_model.dart';
 
 class WifiInquiryApi {
   static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/inquiry';

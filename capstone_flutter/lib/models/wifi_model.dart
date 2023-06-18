@@ -1,12 +1,12 @@
 class WiFiInquiryRequest {
   final String customerId;
-  final String discountId;
-  final String productId;
+  late String? discountId;
+  late String? productId;
 
   WiFiInquiryRequest({
     required this.customerId,
-    required this.discountId,
-    required this.productId,
+    this.discountId,
+    this.productId,
   });
 
   Map<String, dynamic> toJson() {
@@ -31,6 +31,12 @@ class WiFiInquiryResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
   final dynamic deletedAt;
+  final String customerName;
+  final String code;
+  final String providerName;
+  final String description;
+  final int productPrice;
+  final String discountId;
 
   WiFiInquiryResponse({
     required this.id,
@@ -45,6 +51,12 @@ class WiFiInquiryResponse {
     required this.createdAt,
     required this.updatedAt,
     required this.deletedAt,
+    required this.customerName,
+    required this.code,
+    required this.providerName,
+    required this.description,
+    required this.productPrice,
+    required this.discountId,
   });
 
   factory WiFiInquiryResponse.fromJson(Map<String, dynamic> json) {
@@ -61,6 +73,12 @@ class WiFiInquiryResponse {
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
       deletedAt: json['deleted_at'],
+      customerName: json['product_detail']['customer_name'],
+      code: json['product_detail']['code'],
+      providerName: json['product_detail']['provider_name'],
+      description: json['product_detail']['description'],
+      productPrice: json['product_detail']['price'],
+      discountId: json['product_detail']['discount_id'],
     );
   }
 }

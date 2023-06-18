@@ -32,17 +32,17 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     });
   }
 
-  Future<WiFiInquiryResponse?> inquireWiFiBill(
-      WiFiInquiryRequest request) async {
-    try {
-      final response = await WifiInquiryApi.inquireWiFiBill(request, token);
-      return response;
-    } catch (e) {
-      // Tangani jika terjadi kesalahan saat memanggil API
-      print('Error: $e');
-      return null;
-    }
-  }
+  // Future<WiFiInquiryResponse?> inquireWiFiBill(
+  //     WiFiInquiryRequest request) async {
+  //   try {
+  //     final response = await WifiInquiryApi.inquireWiFiBill(request, token);
+  //     return response;
+  //   } catch (e) {
+  //     // Tangani jika terjadi kesalahan saat memanggil API
+  //     print('Error: $e');
+  //     return null;
+  //   }
+  // }
 
   @override
   void initState() {
@@ -391,63 +391,64 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () async {
-              final request = WiFiInquiryRequest(
-                customerId: pelangganController.text,
-                discountId: promoController.text,
-                productId: 'BPJSKS',
-              );
-              try {
-                final response =
-                    await WifiInquiryApi.inquireWiFiBill(request, token);
-                if (response != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PaymentMethodWifi(),
-                    ),
-                  );
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Error'),
-                        content: Text(
-                            'Terjadi kesalahan saat memproses pembayaran WiFi.'),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              } catch (e) {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Error'),
-                      content: Text(
-                          'Terjadi kesalahan saat memproses pembayaran WiFi.'),
-                      actions: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
-            },
+            onPressed: () {},
+            // onPressed: () async {
+            //   final request = WiFiInquiryRequest(
+            //     customerId: pelangganController.text,
+            //     discountId: promoController.text,
+            //     productId: 'BPJSKS',
+            //   );
+            //   try {
+            //     final response =
+            //         await WifiInquiryApi.inquireWiFiBill(request, token);
+            //     if (response != null) {
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => PaymentMethodWifi(),
+            //         ),
+            //       );
+            //     } else {
+            //       showDialog(
+            //         context: context,
+            //         builder: (context) {
+            //           return AlertDialog(
+            //             title: Text('Error'),
+            //             content: Text(
+            //                 'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+            //             actions: [
+            //               ElevatedButton(
+            //                 onPressed: () {
+            //                   Navigator.pop(context);
+            //                 },
+            //                 child: Text('OK'),
+            //               ),
+            //             ],
+            //           );
+            //         },
+            //       );
+            //     }
+            //   } catch (e) {
+            //     showDialog(
+            //       context: context,
+            //       builder: (context) {
+            //         return AlertDialog(
+            //           title: Text('Error'),
+            //           content: Text(
+            //               'Terjadi kesalahan saat memproses pembayaran WiFi 2.'),
+            //           actions: [
+            //             ElevatedButton(
+            //               onPressed: () {
+            //                 Navigator.pop(context);
+            //               },
+            //               child: Text('OK'),
+            //             ),
+            //           ],
+            //         );
+            //       },
+            //     );
+            //   }
+            // },
             child: Text(
               'Lanjutkan',
               style: whiteFont14,

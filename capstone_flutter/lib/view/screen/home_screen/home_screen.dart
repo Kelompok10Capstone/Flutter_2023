@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
+import '../../../models/apis/wifi.dart';
+import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
 import '../billing_history_screen/billing_history_screen.dart';
@@ -1118,14 +1120,70 @@ class _HomeScreenState extends State<HomeScreen>
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                        onPressed: () async {
+                          final request = WiFiInquiryRequest(
+                            customerId: pelangganControllerWifi.text,
+                            discountId: '',
+                            productId: 'Indihome',
+                          );
+                          try {
+                            final response =
+                                await WifiInquiryApi.inquireWiFiBill(
+                                    request, token);
+                            // ignore: unnecessary_null_comparison
+                            if (response != null) {
+                              // ignore: use_build_context_synchronously
+                              print(response);
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
                                   builder: (context) => PaymentDetailWifi(
-                                        pelangganData:
-                                            pelangganControllerWifi.text,
-                                      )));
+                                    pelangganData: pelangganControllerWifi.text,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              // ignore: use_build_context_synchronously
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Error'),
+                                    content: const Text(
+                                        'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                          } catch (e) {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Error'),
+                                  content: const Text(
+                                      'Terjadi kesalahan saat memproses pembayaran WiFi.'),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         },
                         child: Text(
                           'Lanjutkan',
