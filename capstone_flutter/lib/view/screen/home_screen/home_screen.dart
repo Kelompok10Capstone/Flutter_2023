@@ -1124,7 +1124,7 @@ class _HomeScreenState extends State<HomeScreen>
                           final request = WiFiInquiryRequest(
                             customerId: pelangganControllerWifi.text,
                             discountId: '',
-                            productId: 'Indihome',
+                            productId: 'BPJSKS',
                           );
                           try {
                             final response =
