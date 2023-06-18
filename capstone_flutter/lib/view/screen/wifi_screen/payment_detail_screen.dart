@@ -33,6 +33,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
 
   late SharedPreferences _prefs;
   String token = '';
+  bool isLoading = true;
 
   Future<void> initializeData() async {
     _prefs = await SharedPreferences.getInstance();
@@ -47,6 +48,11 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     super.initState();
     initializeData();
     pelangganController.text = widget.pelangganData;
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
   @override
@@ -186,194 +192,208 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 285,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 10, top: 15, bottom: 15, right: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          'DETAIL PEMBAYARAN',
-                          style:
-                              blackFont12.copyWith(fontWeight: FontWeight.w700),
-                        ),
+              isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 285,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.grey),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Divider(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, top: 5, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 15, bottom: 15, right: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Tanggal',
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'DETAIL PEMBAYARAN',
+                                style: blackFont12.copyWith(
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
-                            Text(
-                              DateFormat('dd-MM-yyyy').format(widget.createdAt),
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Divider(
+                                color: Colors.grey,
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, top: 15, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Penyedia Layanan',
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              widget.providerName,
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, top: 15, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'no. Pelanggan',
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              pelangganController.text,
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, top: 15, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Nama',
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              widget.customerName,
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, top: 15, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Nominal',
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              widget.price.toString(),
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, top: 15, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Biaya Admin',
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              widget.adminFee.toString(),
-                              style: blackFont12.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Divider(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.green[100],
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          height: 34,
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  child: Text(
-                                    'Total',
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 5, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Tanggal',
                                     style: blackFont12.copyWith(
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    DateFormat('dd-MM-yyyy')
+                                        .format(widget.createdAt),
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Penyedia Layanan',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    widget.providerName,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'no. Pelanggan',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    pelangganController.text,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Nama',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    widget.customerName,
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Nominal',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    widget.price.toString(),
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Biaya Admin',
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    widget.adminFee.toString(),
+                                    style: blackFont12.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Divider(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.green[100],
+                                ),
+                                width: MediaQuery.of(context).size.width,
+                                height: 34,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: Text(
+                                          'Total',
+                                          style: blackFont12.copyWith(
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: Text(
+                                          (widget.price + widget.adminFee)
+                                              .toString(),
+                                          style: blackFont12.copyWith(
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  child: Text(
-                                    (widget.price + widget.adminFee).toString(),
-                                    style: blackFont12.copyWith(
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
             ],
           ),
         ),
