@@ -11,6 +11,7 @@ class BillingHistory extends StatefulWidget {
 }
 
 class _BillinngHistoryState extends State<BillingHistory> {
+  // ignore: unused_field
   final int _selectedTab = 0;
 
   @override

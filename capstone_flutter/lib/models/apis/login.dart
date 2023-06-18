@@ -37,6 +37,7 @@ class LoginController {
 
       if (profileResponse.statusCode == 200) {
         final profileJsonData = jsonDecode(profileResponse.body);
+        // ignore: avoid_print
         print('Profile Response body: ${profileResponse.body}');
         final userId = User.fromJson(profileJsonData);
         saveUserInfoToSharedPreferences2(
@@ -45,18 +46,26 @@ class LoginController {
           userId.email,
           userId.balance,
         ); // Menggunakan model UserId
+        // ignore: avoid_print
         print(userId.phone);
+        // ignore: avoid_print
         print(userId.name);
+        // ignore: avoid_print
         print(userId.email);
+        // ignore: avoid_print
         print(userId.balance);
+        // ignore: avoid_print
         print(userId.pin);
         // Proses data profile sesuai kebutuhan
       } else {
+        // ignore: avoid_print
         print('Profile Response body: ${profileResponse.body}');
       }
+      // ignore: avoid_print
       print(user.token);
       return user;
     } else {
+      // ignore: avoid_print
       print('Response body: ${response.body}');
       return null;
     }

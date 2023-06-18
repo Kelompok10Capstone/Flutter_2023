@@ -39,6 +39,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       token = _prefs.getString('token') ?? '';
+      // ignore: avoid_print
       print(token);
     });
   }
@@ -48,7 +49,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     super.initState();
     initializeData();
     pelangganController.text = widget.pelangganData;
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });

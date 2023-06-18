@@ -74,9 +74,13 @@ class _HomeScreenState extends State<HomeScreen>
       token = _prefs.getString('token').toString();
       balance = _prefs.getInt('balance').toString();
       _prefs.getString('token').toString();
+      // ignore: avoid_print
       print('nama : $name');
+      // ignore: avoid_print
       print('phone : $phone');
+      // ignore: avoid_print
       print('token : $token');
+      // ignore: avoid_print
       print('balance : $balance');
     });
   }
@@ -119,8 +123,10 @@ class _HomeScreenState extends State<HomeScreen>
           _showModalBottomSheetCreatePin();
         });
       }
+      // ignore: avoid_print
       print('isPinCreated: $isPinCreated\nispinAdded: $ispinAdded');
       if (isPinCreated && ispinAdded) {
+        // ignore: avoid_print
         print('_showModalBottomSheetPinAdded');
         _showModalBottomSheetPinAdded();
       }
@@ -189,7 +195,9 @@ class _HomeScreenState extends State<HomeScreen>
                     GestureDetector(
                       onTap: () {
                         Future.delayed(const Duration(seconds: 0), () {
+                          // ignore: avoid_print
                           print(context.read<AppManajer>().ispinAdded);
+                          // ignore: avoid_print
                           print(isPinCreated);
                         });
                       },

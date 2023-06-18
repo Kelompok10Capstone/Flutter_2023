@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +47,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
 

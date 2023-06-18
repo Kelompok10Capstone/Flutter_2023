@@ -1,5 +1,4 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
-import 'package:capstone_flutter/view/screen/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,15 +70,17 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
       });
 
       await Future.delayed(const Duration(seconds: 1));
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => NavBar(
+          builder: (context) => const NavBar(
             initialIndex: 2,
           ),
         ),
       );
 
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Perubahan Berhasil'),
@@ -88,7 +89,9 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         ),
       );
     } else {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Perubahan Gagal'),
