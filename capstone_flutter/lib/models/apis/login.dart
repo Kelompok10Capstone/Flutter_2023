@@ -12,12 +12,15 @@ class LoginController {
     final url = Uri.parse('http://34.101.78.228:2424/api/v1/login');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'email': email, 'password': password});
+    // ignore: avoid_print
     print(email);
+    // ignore: avoid_print
     print(password);
     final response = await http.post(url, headers: headers, body: body);
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
+      // ignore: avoid_print
       print('Response body: ${response.body}');
       final user = User.fromJson(jsonData);
       saveUserInfoToSharedPreferences(user.token);
