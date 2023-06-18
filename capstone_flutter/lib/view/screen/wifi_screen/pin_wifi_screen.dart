@@ -1,4 +1,6 @@
+import 'package:capstone_flutter/models/apis/pay_wifi.dart';
 import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wifi_screen.dart';
+import 'package:capstone_flutter/view/screen/wifi_screen/success_transaction_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,11 +46,17 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
   void _submitPin(String pin) async {
     try {
       final bool isPinCorrect = await checkPinPayment(token, pin);
-      if (isPinCorrect) {
+      String idx = widget.id;
+      if (isPinCorrect && idx.isNotEmpty) {
+        final PayWifi payWifi = PayWifi(idx, token);
+        print('adalah: ${idx}');
+        final String payWifiResponse = await payWifi.payWifi();
+        print(payWifiResponse);
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const IlustrationSuccessWifi()),
+            builder: (context) => const SuccessTransactionWifi(),
+          ),
         );
       } else {
         // Handle incorrect pin scenario
@@ -71,14 +79,13 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
         );
       }
     } catch (error) {
-      // Handle error scenario
+      print('Error: $error');
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Error'),
-            content: const Text(
-                'An error occurred while checking the PIN. Please try again later.'),
+            content: const Text('Upss sepertinya ada yang salah.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -164,8 +171,7 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              print(widget.userId);
+            onPressed: () async {
               final pin = otpController.text;
               _submitPin(pin);
             },

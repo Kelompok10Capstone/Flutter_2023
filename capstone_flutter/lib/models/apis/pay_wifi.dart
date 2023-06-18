@@ -6,12 +6,14 @@ import '../wifi_model.dart';
 class PayWifi {
   static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/pay';
 
-  static Future<String> payWifi(
-    String partnerTxId,
-    String token,
-  ) async {
+  final String id;
+  final String token;
+
+  PayWifi(this.id, this.token);
+
+  Future<String> payWifi() async {
     final Map<String, dynamic> requestBody = {
-      'partner_tx_id': partnerTxId,
+      'partner_tx_id': id,
     };
 
     final response = await http.post(
@@ -26,12 +28,15 @@ class PayWifi {
     if (response.statusCode == 202) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
+      print('Berhasil: ${response.statusCode}');
+      print('Response: ${response.body}');
 
       if (metadata['status'] == 202) {
-        final wifiInquiryResponse =
-            WiFiInquiryResponse.fromJson(jsonData['data']);
-        final id = wifiInquiryResponse.id;
-        return id;
+        final wifiId = jsonData['id'];
+        print('Berhasil: ${response.statusCode}');
+        print('Response: ${response.body}');
+
+        return wifiId;
       } else {
         throw Exception('Payment failed: ${metadata['message']}');
       }

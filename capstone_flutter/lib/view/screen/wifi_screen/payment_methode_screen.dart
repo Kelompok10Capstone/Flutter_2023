@@ -232,18 +232,28 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
               ),
             ),
             onPressed: () {
-              print(widget.id);
-              var saldo = balance.toInt()! - widget.price + widget.adminFee;
-              print('saldo : $saldo');
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PinScreenWifi(
-                    id: widget.id,
-                    userId: widget.userId,
+              if (selectedRadio == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Pilih metode pembayaran'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
                   ),
-                ),
-              );
+                );
+              } else {
+                print(widget.id);
+                var saldo = balance.toInt()! - widget.price + widget.adminFee;
+                print('saldo : $saldo');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PinScreenWifi(
+                      id: widget.id,
+                      userId: widget.userId,
+                    ),
+                  ),
+                );
+              }
             },
             child: Text(
               'Yuk Bayar!',
