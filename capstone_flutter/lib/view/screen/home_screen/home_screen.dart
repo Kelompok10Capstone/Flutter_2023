@@ -11,6 +11,7 @@ import '../../../models/apis/wifi.dart';
 import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
+import '../../../view_model/wifi_provider.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pendidikan_screen/pendidikan_screen.dart';
@@ -1056,16 +1057,17 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       builder: (BuildContext context) {
+        final wifiProvider =
+            Provider.of<WiFiInquiryProvider>(context, listen: false);
+        TextEditingController pelangganControllerWifi = TextEditingController();
+
         return SingleChildScrollView(
           padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context)
-                .viewInsets
-                .bottom, // Adjust bottom padding based on keyboard height
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 250,
-            // height: MediaQuery.of(context).size.height / 2.7,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
               child: Column(
@@ -1103,11 +1105,8 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                   Expanded(
-                      child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                  )),
-                  // const SizedBox(height: 25),
-
+                      child:
+                          SizedBox(height: MediaQuery.of(context).size.height)),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15),
                     child: SizedBox(
@@ -1132,14 +1131,19 @@ class _HomeScreenState extends State<HomeScreen>
                                     request, token);
                             // ignore: unnecessary_null_comparison
                             if (response != null) {
-                              // ignore: use_build_context_synchronously
-                              print(response);
+                              wifiProvider.setResponse(
+                                  response); // Simpan response ke WiFiInquiryProvider
                               // ignore: use_build_context_synchronously
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => PaymentDetailWifi(
                                     pelangganData: pelangganControllerWifi.text,
+                                    createdAt: response.createdAt,
+                                    providerName: response.providerName,
+                                    price: response.price,
+                                    adminFee: response.adminFee,
+                                    customerName: response.customerName,
                                   ),
                                 ),
                               );

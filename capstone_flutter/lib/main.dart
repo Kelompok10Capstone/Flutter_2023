@@ -1,5 +1,6 @@
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
 import 'package:capstone_flutter/view_model/app_manajer.dart';
+import 'package:capstone_flutter/view_model/wifi_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => PulsaDanPaketDataViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WiFiInquiryProvider(),
         )
       ],
       child: ScreenUtilInit(

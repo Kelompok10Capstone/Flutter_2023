@@ -1,16 +1,26 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/payment_methode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../models/apis/wifi.dart';
-import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 
 class PaymentDetailWifi extends StatefulWidget {
   final String pelangganData;
-  const PaymentDetailWifi({Key? key, required this.pelangganData})
-      : super(key: key);
+  final DateTime createdAt;
+  final String providerName;
+  final int price;
+  final int adminFee;
+  final String customerName;
+  const PaymentDetailWifi({
+    Key? key,
+    required this.pelangganData,
+    required this.customerName,
+    required this.createdAt,
+    required this.providerName,
+    required this.price,
+    required this.adminFee,
+  }) : super(key: key);
 
   @override
   State<PaymentDetailWifi> createState() => _PaymentDetailWifiState();
@@ -31,18 +41,6 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
       print(token);
     });
   }
-
-  // Future<WiFiInquiryResponse?> inquireWiFiBill(
-  //     WiFiInquiryRequest request) async {
-  //   try {
-  //     final response = await WifiInquiryApi.inquireWiFiBill(request, token);
-  //     return response;
-  //   } catch (e) {
-  //     // Tangani jika terjadi kesalahan saat memanggil API
-  //     print('Error: $e');
-  //     return null;
-  //   }
-  // }
 
   @override
   void initState() {
@@ -92,6 +90,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                   border: Border.all(color: Colors.black),
                 ),
                 child: TextField(
+                  enabled: false,
                   controller: pelangganController,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
@@ -227,7 +226,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              '06-05-2023',
+                              DateFormat('dd-MM-yyyy').format(widget.createdAt),
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -246,7 +245,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Indihome',
+                              widget.providerName,
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -265,7 +264,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              '0000 2984 0368',
+                              pelangganController.text,
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -284,7 +283,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Ijat Sutresno',
+                              widget.customerName,
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -303,7 +302,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Rp 130.000',
+                              widget.price.toString(),
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -322,7 +321,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Rp 2.500',
+                              widget.adminFee.toString(),
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -361,7 +360,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    'Rp 132.500',
+                                    (widget.price + widget.adminFee).toString(),
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w700),
                                   ),
@@ -392,63 +391,6 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               ),
             ),
             onPressed: () {},
-            // onPressed: () async {
-            //   final request = WiFiInquiryRequest(
-            //     customerId: pelangganController.text,
-            //     discountId: promoController.text,
-            //     productId: 'BPJSKS',
-            //   );
-            //   try {
-            //     final response =
-            //         await WifiInquiryApi.inquireWiFiBill(request, token);
-            //     if (response != null) {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => PaymentMethodWifi(),
-            //         ),
-            //       );
-            //     } else {
-            //       showDialog(
-            //         context: context,
-            //         builder: (context) {
-            //           return AlertDialog(
-            //             title: Text('Error'),
-            //             content: Text(
-            //                 'Terjadi kesalahan saat memproses pembayaran WiFi.'),
-            //             actions: [
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   Navigator.pop(context);
-            //                 },
-            //                 child: Text('OK'),
-            //               ),
-            //             ],
-            //           );
-            //         },
-            //       );
-            //     }
-            //   } catch (e) {
-            //     showDialog(
-            //       context: context,
-            //       builder: (context) {
-            //         return AlertDialog(
-            //           title: Text('Error'),
-            //           content: Text(
-            //               'Terjadi kesalahan saat memproses pembayaran WiFi 2.'),
-            //           actions: [
-            //             ElevatedButton(
-            //               onPressed: () {
-            //                 Navigator.pop(context);
-            //               },
-            //               child: Text('OK'),
-            //             ),
-            //           ],
-            //         );
-            //       },
-            //     );
-            //   }
-            // },
             child: Text(
               'Lanjutkan',
               style: whiteFont14,
