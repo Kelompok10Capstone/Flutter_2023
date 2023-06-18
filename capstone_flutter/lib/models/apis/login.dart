@@ -9,7 +9,7 @@ class LoginController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   Future<User?> loginUser(String email, String password) async {
-    final url = Uri.parse('http://34.101.160.237:2424/api/v1/login');
+    final url = Uri.parse('http://34.101.78.228:2424/api/v1/login');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'email': email, 'password': password});
     print(email);
@@ -23,7 +23,7 @@ class LoginController {
       saveUserInfoToSharedPreferences(user.token);
 
       // Mengirim permintaan ke URL lain saat login berhasil
-      final profileUrl = Uri.parse('http://34.101.160.237:2424/api/v1/profile');
+      final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
       final profileHeaders = {
         'Content-Type': 'application/json',
         'Authorization':
@@ -71,6 +71,11 @@ class LoginController {
     await prefs.setString('phone', phones);
     await prefs.setString('email', email);
     await prefs.setInt('balance', balance);
+  }
+
+  Future<String> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("token") ?? "";
   }
 
   void dispose() {

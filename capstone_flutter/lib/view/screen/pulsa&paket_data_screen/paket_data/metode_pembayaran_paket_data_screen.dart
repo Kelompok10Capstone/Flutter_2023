@@ -37,7 +37,7 @@ class _MetodePembayaranPaketDataScreenState
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xffFDE7AA),
+                color: const Color(0xffFDE7AA),
               ),
               width: MediaQuery.of(context).size.width,
               height: 52,
@@ -52,7 +52,7 @@ class _MetodePembayaranPaketDataScreenState
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.help_outline)
+                      const Icon(Icons.help_outline)
                     ],
                   ),
                 ),
@@ -202,7 +202,7 @@ class _MetodePembayaranPaketDataScreenState
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           // color: Colors.green[100],
-                          color: Color(0xffBADDB1),
+                          color: const Color(0xffBADDB1),
                         ),
                         width: MediaQuery.of(context).size.width,
                         height: 34,

@@ -66,7 +66,7 @@ class _InputPinScreenState extends State<InputPinScreen> {
               ),
               onChanged: (String value) {
                 if (value.isEmpty) {
-                  otpController.text = '-';
+                  otpController.text = '';
                 }
               },
             ),

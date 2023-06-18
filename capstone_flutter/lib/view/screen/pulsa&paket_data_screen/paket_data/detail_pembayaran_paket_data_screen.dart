@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../../utils/const/theme.dart';
 import 'metode_pembayaran_paket_data_screen.dart';
@@ -178,8 +177,8 @@ class _DetailPembayaranPaketDataScreenState
                                   Colors.black.withOpacity(0.1), // Warna shadow
                               spreadRadius: 2, // Penyebaran shadow
                               blurRadius: 4, // Jarak blur shadow
-                              offset:
-                                  Offset(0, 2), // Posisi offset shadow (x, y)
+                              offset: const Offset(
+                                  0, 2), // Posisi offset shadow (x, y)
                             ),
                           ],
                           borderRadius: BorderRadius.circular(10),
@@ -295,7 +294,7 @@ class _DetailPembayaranPaketDataScreenState
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             // color: Colors.green[100],
-                            color: Color(0xffBADDB1),
+                            color: const Color(0xffBADDB1),
                           ),
                           width: MediaQuery.of(context).size.width,
                           height: 34,

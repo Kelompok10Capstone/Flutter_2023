@@ -58,7 +58,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.help_outline)
+                      const Icon(Icons.help_outline)
                     ],
                   ),
                 ),

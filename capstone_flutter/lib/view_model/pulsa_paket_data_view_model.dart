@@ -1,20 +1,21 @@
+import 'package:capstone_flutter/models/apis/login.dart';
 import 'package:capstone_flutter/models/apis/pulsa_paket_data_api.dart';
+import 'package:capstone_flutter/models/pulsa_paket_data.dart';
 import 'package:flutter/material.dart';
-
-import '../models/user_model.dart';
 
 enum PulsaPaketdataViewState {
   none,
+  result,
   loading,
   error,
 }
 
-class PulsaPaketDataViewModel with ChangeNotifier {
+class PulsaDanPaketDataViewModel with ChangeNotifier {
   PulsaPaketdataViewState _state = PulsaPaketdataViewState.none;
   PulsaPaketdataViewState get state => _state;
 
-  List<User> _users = [];
-  List<User> get users => _users;
+  List<PulsaPaketdataData> _users = [];
+  List<PulsaPaketdataData> get users => _users;
 
   changeState(PulsaPaketdataViewState s) {
     _state = s;
@@ -24,11 +25,19 @@ class PulsaPaketDataViewModel with ChangeNotifier {
   getPhone() async {
     changeState(PulsaPaketdataViewState.loading);
     try {
-      final token = '';
-      final c = await PulsaPaketDataApi(token).getPulsaPaketData('');
-      _users = c as List<User>;
+      final token = await LoginController().getToken();
+      final result = await PulsaPaketDataApi(token).getPulsaPaketData('');
+      debugPrint("Pulsa Paket Data Response: ${result.toJson().toString()}");
+      _users = result.data ?? [];
+      // const token = 'token';
+      // final c = await PulsaPaketDataApi(token).getPulsaPaketData('');
+      // _users = c as List<PulsaPaketdataData>;
+      if (_users.isEmpty) {
+        changeState(PulsaPaketdataViewState.none);
+      } else {
+        changeState(PulsaPaketdataViewState.result);
+      }
       notifyListeners();
-      changeState(PulsaPaketdataViewState.none);
     } catch (e) {
       changeState(PulsaPaketdataViewState.error);
     }

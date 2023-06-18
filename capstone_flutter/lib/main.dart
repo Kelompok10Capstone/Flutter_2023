@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'view_model/pulsa_paket_data_view_model.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AppManajer()),
+        ChangeNotifierProvider(
+          create: (_) => AppManajer(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PulsaDanPaketDataViewModel(),
+        )
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 800),

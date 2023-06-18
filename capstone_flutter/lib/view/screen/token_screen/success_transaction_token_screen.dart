@@ -1,7 +1,6 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
-import 'modal_bottom_token_screen.dart';
 
 class SuccessTransactionToken extends StatelessWidget {
   const SuccessTransactionToken({super.key});
@@ -91,7 +90,7 @@ class SuccessTransactionToken extends StatelessWidget {
                                     ),
                                   ),
                                   const Spacer(),
-                                  Icon(Icons.copy_rounded)
+                                  const Icon(Icons.copy_rounded)
                                 ],
                               ),
                             ),
