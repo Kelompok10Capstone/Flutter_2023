@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../view_model/user_provider.dart';
+import '../../view_model/user_provider/user_provider.dart';
 import '../user_model.dart';
 
 class LoginController {

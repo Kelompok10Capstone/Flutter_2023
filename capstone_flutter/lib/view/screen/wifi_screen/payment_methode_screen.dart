@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supercharged/supercharged.dart';
 
 import '../../../utils/const/theme.dart';
-import '../../../view_model/user_provider.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class PaymentMethodWifi extends StatefulWidget {
   final String id;

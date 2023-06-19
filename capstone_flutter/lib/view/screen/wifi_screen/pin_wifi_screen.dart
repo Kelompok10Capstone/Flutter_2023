@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/cek_pin.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/user_provider.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class PinScreenWifi extends StatefulWidget {
   final String id;
