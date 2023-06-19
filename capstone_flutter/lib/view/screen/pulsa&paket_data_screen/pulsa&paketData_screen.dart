@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -45,20 +47,16 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: GestureDetector(
-          onTap: () async {
-            pulsaPaketDataProvider.getPhone();
-          },
-          child: Text(
-            'Pulsa & Paket Data',
-            style: blackFont18.copyWith(color: Colors.black),
-          ),
+        title: Text(
+          'Pulsa & Paket Data',
+          style: blackFont18.copyWith(color: Colors.black),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
@@ -169,14 +167,15 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                             setState(() {
                               isPhoneNumberEntered = value.isNotEmpty;
                               pulsaPaketDataProvider.users.clear();
+                              pulsaPaketDataProvider.getPhone();
                             });
                           }
                         },
-                        onFieldSubmitted: (value) {
-                          if (value.length <= 4) {
-                            pulsaPaketDataProvider.getPhone();
-                          }
-                        },
+                        // onFieldSubmitted: (value) {
+                        //   if (value.length <= 4) {
+                        //     pulsaPaketDataProvider.getPhone();
+                        //   }
+                        // },
                       ),
                     ),
                   ],

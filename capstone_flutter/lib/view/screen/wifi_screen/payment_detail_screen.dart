@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
 
 class PaymentDetailWifi extends StatefulWidget {
+  final String id;
+  final String userId;
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
@@ -20,6 +22,8 @@ class PaymentDetailWifi extends StatefulWidget {
     required this.providerName,
     required this.price,
     required this.adminFee,
+    required this.id,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -39,6 +43,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       token = _prefs.getString('token') ?? '';
+      // ignore: avoid_print
       print(token);
     });
   }
@@ -48,7 +53,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
     super.initState();
     initializeData();
     pelangganController.text = widget.pelangganData;
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
@@ -414,7 +419,16 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PaymentMethodWifi()));
+                      builder: (context) => PaymentMethodWifi(
+                            id: widget.id,
+                            createdAt: widget.createdAt,
+                            customerName: widget.customerName,
+                            pelangganData: pelangganController.text,
+                            providerName: widget.providerName,
+                            userId: widget.userId,
+                            price: widget.price,
+                            adminFee: widget.adminFee,
+                          )));
             },
             child: Text(
               'Lanjutkan',

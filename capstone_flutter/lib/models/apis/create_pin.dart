@@ -17,9 +17,11 @@ class PinController {
     final response = await http.put(url, headers: headers, body: body);
 
     if (response.statusCode == 200) {
+      // ignore: avoid_print
       print('berhasil: ${response.body}');
       return true;
     } else {
+      // ignore: avoid_print
       print('gagal: ${response.body}');
       return false;
     }

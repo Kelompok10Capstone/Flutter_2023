@@ -1,10 +1,32 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supercharged/supercharged.dart';
 
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class PaymentMethodWifi extends StatefulWidget {
-  const PaymentMethodWifi({super.key});
+  final String id;
+  final String userId;
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
+  final int price;
+  final int adminFee;
+  final String customerName;
+  const PaymentMethodWifi({
+    super.key,
+    required this.price,
+    required this.adminFee,
+    required this.id,
+    required this.userId,
+    required this.pelangganData,
+    required this.createdAt,
+    required this.providerName,
+    required this.customerName,
+  });
 
   @override
   State<PaymentMethodWifi> createState() => _PaymentMethodWifiState();
@@ -12,8 +34,21 @@ class PaymentMethodWifi extends StatefulWidget {
 
 class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
   String? selectedRadio;
+  late SharedPreferences _prefs;
+  // String balance = '0';
+  // Future<void> initializeData() async {
+  //   _prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     balance = _prefs.getInt('balance').toString();
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final myBalance = userProvider.balance;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -90,7 +125,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp 150.000)',
+                          'Saldo SkuyPay (Rp ${myBalance.toString()})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -143,7 +178,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          'Rp 132.500',
+                          (widget.adminFee + widget.price).toString(),
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -179,7 +214,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                               blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Rp 132.500',
+                          (widget.adminFee + widget.price).toString(),
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
@@ -205,10 +240,45 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
               ),
             ),
             onPressed: () {
-              Navigator.push(
+              var saldo = myBalance.toInt() - widget.price + widget.adminFee;
+              var total = widget.price + widget.adminFee;
+              if (selectedRadio == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Pilih metode pembayaran'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else if (selectedRadio != null && myBalance < total) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Saldo kamu tidak cukup.'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else {
+                print(widget.id);
+                print('saldo : $saldo');
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PinScreenWifi()));
+                    builder: (context) => PinScreenWifi(
+                      id: widget.id,
+                      userId: widget.userId,
+                      createdAt: widget.createdAt,
+                      pelangganData: widget.pelangganData,
+                      customerName: widget.customerName,
+                      providerName: widget.providerName,
+                      adminFee: widget.adminFee,
+                      price: widget.price,
+                      balanceNow:
+                          myBalance.toInt() - (widget.adminFee + widget.price),
+                    ),
+                  ),
+                );
+              }
             },
             child: Text(
               'Yuk Bayar!',

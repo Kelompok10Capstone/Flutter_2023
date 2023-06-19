@@ -1,23 +1,29 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../view_model/user_provider/user_provider.dart';
 import '../user_model.dart';
 
 class LoginController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  Future<User?> loginUser(String email, String password) async {
+  Future<User?> loginUser(
+      String email, String password, BuildContext context) async {
     final url = Uri.parse('http://34.101.78.228:2424/api/v1/login');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'email': email, 'password': password});
+    // ignore: avoid_print
     print(email);
+    // ignore: avoid_print
     print(password);
     final response = await http.post(url, headers: headers, body: body);
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
+      // ignore: avoid_print
       print('Response body: ${response.body}');
       final user = User.fromJson(jsonData);
       saveUserInfoToSharedPreferences(user.token);
@@ -34,26 +40,38 @@ class LoginController {
 
       if (profileResponse.statusCode == 200) {
         final profileJsonData = jsonDecode(profileResponse.body);
+        // ignore: avoid_print
         print('Profile Response body: ${profileResponse.body}');
         final userId = User.fromJson(profileJsonData);
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUserInfo(userId.name, userId.phone, userId.balance);
+
         saveUserInfoToSharedPreferences2(
           userId.name,
           userId.phone,
           userId.email,
           userId.balance,
         ); // Menggunakan model UserId
+        // ignore: avoid_print
         print(userId.phone);
+        // ignore: avoid_print
         print(userId.name);
+        // ignore: avoid_print
         print(userId.email);
+        // ignore: avoid_print
         print(userId.balance);
+        // ignore: avoid_print
         print(userId.pin);
         // Proses data profile sesuai kebutuhan
       } else {
+        // ignore: avoid_print
         print('Profile Response body: ${profileResponse.body}');
       }
+      // ignore: avoid_print
       print(user.token);
       return user;
     } else {
+      // ignore: avoid_print
       print('Response body: ${response.body}');
       return null;
     }

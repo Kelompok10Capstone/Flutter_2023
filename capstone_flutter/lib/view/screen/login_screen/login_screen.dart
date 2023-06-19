@@ -244,7 +244,9 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    final User? user = await loginController.loginUser(email, password);
+    final User? user =
+        await loginController.loginUser(email, password, context);
+    // ignore: avoid_print
     print('user : $user');
 
     if (user != null) {
@@ -256,6 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (context) => const NavBar(initialIndex: 0),
         ),
       );
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login Berhasil'),
@@ -264,6 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login Gagal'),

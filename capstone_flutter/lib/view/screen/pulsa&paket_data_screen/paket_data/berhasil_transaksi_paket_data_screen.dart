@@ -136,7 +136,7 @@ class _BerhasilTransaksiPaketDataListrikState
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             // color: Colors.green[100],
-                            color: Color(0xffBADDB1),
+                            color: const Color(0xffBADDB1),
                           ),
                           width: MediaQuery.of(context).size.width,
                           height: 34,

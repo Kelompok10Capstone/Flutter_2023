@@ -13,12 +13,14 @@ Future<bool> checkPinStatus(String token) async {
   if (profileResponse.statusCode == 200) {
     final profileJsonData = jsonDecode(profileResponse.body);
     final pin = profileJsonData['data']['pin'] as String;
+    // ignore: avoid_print
     print('pin: $pin');
 
     final isPinCreated = pin.isNotEmpty;
     return isPinCreated;
   } else {
     // Handle error when retrieving profile data
+    // ignore: avoid_print
     print('Failed to retrieve profile');
     return false;
   }

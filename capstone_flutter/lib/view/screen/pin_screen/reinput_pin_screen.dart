@@ -1,5 +1,4 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
-import 'package:capstone_flutter/view/screen/pin_screen/reinput_pin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +36,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
     setState(() {
       token = _prefs.getString('token') ?? '';
       _pinController = PinController(token);
+      // ignore: avoid_print
       print(token);
     });
   }
@@ -50,7 +50,9 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
   Future<void> _createPin() async {
     final String pin = otpController.text;
     final String originalPin = widget.pinFromInputScreen;
+    // ignore: avoid_print
     print(pin);
+    // ignore: avoid_print
     print(originalPin);
 
     if (pin != originalPin) {
