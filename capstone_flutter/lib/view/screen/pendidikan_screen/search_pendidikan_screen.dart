@@ -80,6 +80,7 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: dummyPendidikan.length,
                   itemBuilder: (context, index) {
+                    // ignore: unused_local_variable
                     final data = dummyPendidikan[index];
                     return Column(
                       children: <Widget>[
@@ -139,6 +140,7 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     final data = dummyPendidikan[index];
+                    // ignore: unnecessary_null_comparison
                     return data == null
                         ? const CircularProgressIndicator()
                         : SizedBox(

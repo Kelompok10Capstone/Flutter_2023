@@ -18,17 +18,23 @@ class RegisterController {
     final body = jsonEncode(
         {'name': name, 'email': email, 'phone': phone, 'password': password});
 
+    // ignore: avoid_print
     print(name);
+    // ignore: avoid_print
     print(email);
+    // ignore: avoid_print
     print(password);
+    // ignore: avoid_print
     print(phone);
     final response = await http.post(url, headers: headers, body: body);
 
     if (response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
+      // ignore: avoid_print
       print('Response body: ${response.body}');
       return User.fromJson(jsonData);
     } else {
+      // ignore: avoid_print
       print('Response body: ${response.body}');
       return null;
     }

@@ -1,10 +1,53 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/const/theme.dart';
 
-class SuccessTransactionWifi extends StatelessWidget {
-  const SuccessTransactionWifi({super.key});
+class SuccessTransactionWifi extends StatefulWidget {
+  final String id;
+  final String userId;
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
+  final int price;
+  final int adminFee;
+  final String customerName;
+  SuccessTransactionWifi(
+      {super.key,
+      required this.id,
+      required this.userId,
+      required this.pelangganData,
+      required this.createdAt,
+      required this.providerName,
+      required this.price,
+      required this.adminFee,
+      required this.customerName});
+
+  @override
+  State<SuccessTransactionWifi> createState() => _SuccessTransactionWifiState();
+}
+
+class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
+  late SharedPreferences _prefs;
+
+  String phone = '';
+  String token = '';
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      phone = _prefs.getString('phone') ?? '';
+      token = _prefs.getString('token') ?? '';
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData(); // Panggil fungsi untuk inisialisasi data
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +82,13 @@ class SuccessTransactionWifi extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '04 Mei 2023 . 20.28',
+                      DateFormat('dd MMMM yyyy. HH:mm')
+                          .format(widget.createdAt),
                       style: blackFont12.copyWith(fontSize: 10),
                     ),
                     Text(
-                      'SkuyPay 0857xxxx2345',
+                      'SkuyPay $phone',
+                      // 'SkuyPay 0857xxxx2345',
                       style: blackFont12.copyWith(fontSize: 10),
                     )
                   ],
@@ -57,7 +102,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black)),
                 width: double.infinity,
-                height: 320,
+                height: 300,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
@@ -72,23 +117,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                             style: blackFont12,
                           ),
                           Text(
-                            '06-05-2023',
-                            style: blackFont12,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Harga Tagihan',
-                            style: blackFont12,
-                          ),
-                          Text(
-                            '63.000',
+                            DateFormat('dd-MM-yyyy').format(widget.createdAt),
                             style: blackFont12,
                           ),
                         ],
@@ -104,7 +133,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                             style: blackFont12,
                           ),
                           Text(
-                            'Indihome',
+                            widget.providerName,
                             style: blackFont12,
                           ),
                         ],
@@ -120,7 +149,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                             style: blackFont12,
                           ),
                           Text(
-                            '0000 2984 0368',
+                            widget.pelangganData,
                             style: blackFont12,
                           ),
                         ],
@@ -136,7 +165,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                             style: blackFont12,
                           ),
                           Text(
-                            'Ijat Sutresno',
+                            widget.customerName,
                             style: blackFont12,
                           ),
                         ],
@@ -152,7 +181,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                             style: blackFont12,
                           ),
                           Text(
-                            'Rp 130.000',
+                            widget.price.toString(),
                             style: blackFont12,
                           ),
                         ],
@@ -168,7 +197,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                             style: blackFont12,
                           ),
                           Text(
-                            'Rp 2.500',
+                            widget.adminFee.toString(),
                             style: blackFont12,
                           ),
                         ],
@@ -205,7 +234,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    'Rp 65.500',
+                                    (widget.price + widget.adminFee).toString(),
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -240,7 +269,7 @@ class SuccessTransactionWifi extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => const NavBar(
-                            initialIndex: 0,
+                            initialIndex: 1,
                           )));
               // Navigator.push(
               //     context,

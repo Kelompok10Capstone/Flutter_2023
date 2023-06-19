@@ -335,15 +335,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     final User? user =
         await registerController.registerUser(name, email, phone, password);
+    // ignore: avoid_print
     print(user);
 
     if (user != null) {
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         ),
       );
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Berhasil Mendaftar'),
@@ -352,6 +355,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       );
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Email sudah terdaftar'),

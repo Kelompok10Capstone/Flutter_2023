@@ -7,9 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
+import '../../../models/apis/wifi.dart';
+import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
-import '../../../view_model/pulsa_paketdata/user_provider.dart';
+import '../../../view_model/user_provider/user_provider.dart';
+import '../../../view_model/wifi_provider/wifi_provider.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pendidikan_screen/pendidikan_screen.dart';
@@ -72,9 +75,13 @@ class _HomeScreenState extends State<HomeScreen>
       token = _prefs.getString('token').toString();
       balance = _prefs.getInt('balance').toString();
       _prefs.getString('token').toString();
+      // ignore: avoid_print
       print('nama : $name');
+      // ignore: avoid_print
       print('phone : $phone');
+      // ignore: avoid_print
       print('token : $token');
+      // ignore: avoid_print
       print('balance : $balance');
     });
   }
@@ -117,8 +124,10 @@ class _HomeScreenState extends State<HomeScreen>
           _showModalBottomSheetCreatePin();
         });
       }
+      // ignore: avoid_print
       print('isPinCreated: $isPinCreated\nispinAdded: $ispinAdded');
       if (isPinCreated && ispinAdded) {
+        // ignore: avoid_print
         print('_showModalBottomSheetPinAdded');
         _showModalBottomSheetPinAdded();
       }
@@ -151,6 +160,8 @@ class _HomeScreenState extends State<HomeScreen>
     final userProvider = Provider.of<UserProvider>(context);
 
     //ambil data
+    final username = userProvider.name;
+    final phoneNumber = userProvider.phone;
     final myBalance = userProvider.balance;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -188,27 +199,19 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Future.delayed(const Duration(seconds: 0), () {
-                          print(context.read<AppManajer>().ispinAdded);
-                          print(isPinCreated);
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 58, left: 125),
-                        child: Text(
-                          name.toUpperCase(),
-                          style: whiteFont18.copyWith(
-                            color: Colors.white,
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 58, left: 125),
+                      child: Text(
+                        username.toUpperCase(),
+                        style: whiteFont18.copyWith(
+                          color: Colors.white,
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 87, left: 125),
                       child: Text(
-                        phone,
+                        phoneNumber,
                         style: whiteFont14.copyWith(
                           color: Colors.white,
                         ),
@@ -1059,16 +1062,16 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       builder: (BuildContext context) {
+        final wifiProvider =
+            Provider.of<WiFiInquiryProvider>(context, listen: false);
+
         return SingleChildScrollView(
           padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context)
-                .viewInsets
-                .bottom, // Adjust bottom padding based on keyboard height
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 250,
-            // height: MediaQuery.of(context).size.height / 2.7,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
               child: Column(
@@ -1106,11 +1109,8 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                   Expanded(
-                      child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                  )),
-                  // const SizedBox(height: 25),
-
+                      child:
+                          SizedBox(height: MediaQuery.of(context).size.height)),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15),
                     child: SizedBox(
@@ -1123,12 +1123,78 @@ class _HomeScreenState extends State<HomeScreen>
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const PaymentDetailWifi()));
+                        onPressed: () async {
+                          final request = WiFiInquiryRequest(
+                            customerId: pelangganControllerWifi.text,
+                            discountId: '',
+                            productId: 'BPJSKS',
+                          );
+                          try {
+                            final response =
+                                await WifiInquiryApi.inquireWiFiBill(
+                                    request, token);
+                            // ignore: unnecessary_null_comparison
+                            if (response != null) {
+                              wifiProvider.setResponse(
+                                  response); // Simpan response ke WiFiInquiryProvider
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentDetailWifi(
+                                    id: response.id,
+                                    userId: response.userId,
+                                    pelangganData: pelangganControllerWifi.text,
+                                    createdAt: response.createdAt,
+                                    providerName: response.providerName,
+                                    price: response.price,
+                                    adminFee: response.adminFee,
+                                    customerName: response.customerName,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              // ignore: use_build_context_synchronously
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Error'),
+                                    content:
+                                        const Text('Nomor pelanggan salah.'),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              pelangganControllerWifi.clear();
+                            }
+                          } catch (e) {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Error'),
+                                  content:
+                                      const Text('Nomor pelanggan kosong.'),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         },
                         child: Text(
                           'Lanjutkan',

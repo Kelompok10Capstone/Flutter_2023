@@ -136,6 +136,7 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10),
+              // ignore: avoid_unnecessary_containers
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -170,22 +171,22 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 90, bottom: 40),
               child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
-                backgroundColor: blueColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
+                  backgroundColor: blueColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Selesai',
-                style: whiteFont16,
-              ),
+                onPressed: () {},
+                child: Text(
+                  'Selesai',
+                  style: whiteFont16,
+                ),
               ),
             ),
           ],
@@ -211,8 +212,7 @@ List<Item> generateItems() {
   return <Item>[
     Item(
       headerValue: 'ATM BCA',
-      expandedValue: 
-          '1. Pada menu utama klik Transaksi lainnya > Transfer.\n'
+      expandedValue: '1. Pada menu utama klik Transaksi lainnya > Transfer.\n'
           '2. Masukkan nomor virtual akun 6239 0548 1376 9327.\n'
           '3. Masukkan jumlah saldo sesuai kebutuhan (Minimal isi saldo Rp10.000).\n'
           '4. Konfirmasikan transaksi dan periksa kembali rincian yang telah dimasukkan. Pastikan semuanya benar sebelum melanjutkan.\n'
@@ -220,8 +220,7 @@ List<Item> generateItems() {
     ),
     Item(
       headerValue: 'm-BCA (BCA Mobile)',
-      expandedValue: 
-          '1. Masuk ke akun m-banking.\n'
+      expandedValue: '1. Masuk ke akun m-banking.\n'
           '2. Pilih menu m-Transfer > BCA virtual akun.\n'
           '3. Masukkan virtual akun 6239 0548 1376 9327.\n'
           '4. Masukkan jumlah saldo sesuai kebutuhan (Minimal isi saldo Rp10.000).\n'
