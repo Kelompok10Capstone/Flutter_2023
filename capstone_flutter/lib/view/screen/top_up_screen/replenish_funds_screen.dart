@@ -1,4 +1,8 @@
+import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
+import 'package:capstone_flutter/view_model/provider/provider_topup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/const/theme.dart';
 
@@ -10,10 +14,17 @@ class ReplenishFunds extends StatefulWidget {
 }
 
 class _ReplenishFundsState extends State<ReplenishFunds> {
+  @override
+  void initState() {
+    super.initState();
+    final postModel = Provider.of<TopUpProvider>(context, listen: false);
+    postModel.getPostData();
+  }
   final List<Item> _data = generateItems();
 
   @override
   Widget build(BuildContext context) {
+    final postModel = Provider.of<TopUpProvider>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -27,168 +38,186 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Text(
-                    'Metode isi Saldo',
-                    style: blackFont14.copyWith(color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 30, left: 20),
-                  child: Image(
-                    image: AssetImage('assets/bca.png'),
-                    width: 50,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 20),
-                  child: Text(
-                    'Transfer Bank (BCA)',
-                    style: blackFont14.copyWith(color: Colors.black),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 105),
-                  child: Text(
-                    'Ganti',
-                    style: blackFont14.copyWith(color: Colors.black),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 30, left: 5),
-                  child: Icon(
-                    Icons.keyboard_arrow_right_outlined,
-                    size: 25,
-                  ),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 3, left: 20, right: 20),
-              child: Divider(
-                color: Colors.grey,
-                thickness: 1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                'Nomor Akun Virtual BCA',
-                style: blackFont14G.copyWith(color: Colors.grey),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Text(
-                '6239 0548 1376 9327',
-                style: blackFont18.copyWith(color: Colors.black),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: InkWell(
-                splashColor: Colors.green.withOpacity(0.5),
-                highlightColor: const Color(0xFF1A73E9).withOpacity(0.4),
-                onTap: () {},
-                borderRadius: BorderRadius.circular(13),
-                child: Container(
+      body: Container(
+        child: postModel.loading?Center(
+          child: Container(
+            child: SpinKitWanderingCubes(
+              duration: Duration(milliseconds: 1200),
+              itemBuilder: (BuildContext context, int index) {
+                return DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(13),
-                    border: Border.all(
-                      color: blueColor,
-                      width: 2,
+                    borderRadius: BorderRadius.circular(15),
+                    color: index.isEven ? Colors.blue : Colors.green,
+                  ),);
+              },
+            ),
+          ),
+        ):SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 20),
+                    child: Text(
+                      'Metode isi Saldo',
+                      style: blackFont14.copyWith(color: Colors.black),
                     ),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                  child: Text('SALIN KODE',
-                      style: blackFont14G.copyWith(color: blueColor)),
+                ],
+              ),
+              Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 30, left: 20),
+                    child: Image(
+                      image: AssetImage('assets/bca.png'),
+                      width: 50,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 20),
+                    child: Text(
+                      'Transfer Bank (BCA)',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 105),
+                    child: Text(
+                      'Ganti',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 30, left: 5),
+                    child: Icon(
+                      Icons.keyboard_arrow_right_outlined,
+                      size: 25,
+                    ),
+                  ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 3, left: 20, right: 20),
+                child: Divider(
+                  color: Colors.grey,
+                  thickness: 1,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                'Nama Akun : Ijat Sutresno',
-                style: blackFont14G.copyWith(color: Colors.grey),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text(
+                  'Nomor Akun Virtual BCA',
+                  style: blackFont14G.copyWith(color: Colors.grey),
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 20),
-                  child: Text(
-                    'Cara isi saldo :',
-                    style: blackFont14.copyWith(color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Text(
+                  postModel.post?.vaNumber ?? "",
+                  style: blackFont18.copyWith(color: Colors.black),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: InkWell(
+                  splashColor: Colors.green.withOpacity(0.5),
+                  highlightColor: const Color(0xFF1A73E9).withOpacity(0.4),
+                  onTap: () {},
+                  borderRadius: BorderRadius.circular(13),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13),
+                      border: Border.all(
+                        color: blueColor,
+                        width: 2,
+                      ),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    child: Text('SALIN KODE',
+                        style: blackFont14G.copyWith(color: blueColor)),
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ExpansionPanelList(
-                    elevation: 1,
-                    expandedHeaderPadding: const EdgeInsets.all(0),
-                    expansionCallback: (int index, bool isExpanded) {
-                      setState(() {
-                        _data[index].isExpanded = !isExpanded;
-                      });
-                    },
-                    children: _data.map<ExpansionPanel>((Item item) {
-                      return ExpansionPanel(
-                        headerBuilder: (BuildContext context, bool isExpanded) {
-                          return ListTile(
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text(
+                  postModel.post?.usernameDisplay ?? "",
+                  style: blackFont14G.copyWith(color: Colors.grey),
+                ),
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40, left: 20),
+                    child: Text(
+                      'Cara isi saldo :',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ExpansionPanelList(
+                      elevation: 1,
+                      expandedHeaderPadding: const EdgeInsets.all(0),
+                      expansionCallback: (int index, bool isExpanded) {
+                        setState(() {
+                          _data[index].isExpanded = !isExpanded;
+                        });
+                      },
+                      children: _data.map<ExpansionPanel>((Item item) {
+                        return ExpansionPanel(
+                          headerBuilder: (BuildContext context, bool isExpanded) {
+                            return ListTile(
+                              title: Text(
+                                item.headerValue,
+                                style: blackFont14G.copyWith(color: Colors.black),
+                              ),
+                            );
+                          },
+                          body: ListTile(
                             title: Text(
-                              item.headerValue,
-                              style: blackFont14G.copyWith(color: Colors.black),
+                              item.expandedValue,
+                              style: blackFont14.copyWith(color: Colors.black),
                             ),
-                          );
-                        },
-                        body: ListTile(
-                          title: Text(
-                            item.expandedValue,
-                            style: blackFont14.copyWith(color: Colors.black),
                           ),
-                        ),
-                        isExpanded: item.isExpanded,
-                      );
-                    }).toList(),
+                          isExpanded: item.isExpanded,
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
               ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 90, bottom: 40),
-              child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
-                backgroundColor: blueColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+        
+              Padding(
+                padding: const EdgeInsets.only(top: 90, bottom: 40),
+                child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
+                  backgroundColor: blueColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const NavBar()));
+                },
+                child: Text(
+                  'Selesai',
+                  style: whiteFont16,
+                ),
                 ),
               ),
-              onPressed: () {},
-              child: Text(
-                'Selesai',
-                style: whiteFont16,
-              ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
