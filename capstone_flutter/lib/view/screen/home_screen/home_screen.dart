@@ -199,22 +199,12 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Future.delayed(const Duration(seconds: 0), () {
-                          // ignore: avoid_print
-                          print(context.read<AppManajer>().ispinAdded);
-                          // ignore: avoid_print
-                          print(isPinCreated);
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 58, left: 125),
-                        child: Text(
-                          username.toUpperCase(),
-                          style: whiteFont18.copyWith(
-                            color: Colors.white,
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 58, left: 125),
+                      child: Text(
+                        username.toUpperCase(),
+                        style: whiteFont18.copyWith(
+                          color: Colors.white,
                         ),
                       ),
                     ),
