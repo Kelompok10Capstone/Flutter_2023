@@ -1183,6 +1183,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   );
                                 },
                               );
+                              pelangganControllerWifi.clear();
                             }
                           } catch (e) {
                             showDialog(
