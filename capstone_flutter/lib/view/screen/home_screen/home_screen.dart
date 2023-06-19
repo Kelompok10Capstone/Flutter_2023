@@ -1170,8 +1170,8 @@ class _HomeScreenState extends State<HomeScreen>
                                 builder: (context) {
                                   return AlertDialog(
                                     title: const Text('Error'),
-                                    content: const Text(
-                                        'Maaf sepertinya ada kesalahan.'),
+                                    content:
+                                        const Text('Nomor pelanggan salah.'),
                                     actions: [
                                       ElevatedButton(
                                         onPressed: () {

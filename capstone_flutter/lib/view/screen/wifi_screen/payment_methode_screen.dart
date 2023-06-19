@@ -240,6 +240,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
               ),
             ),
             onPressed: () {
+              var saldo = myBalance.toInt() - widget.price + widget.adminFee;
+              var total = widget.price + widget.adminFee;
               if (selectedRadio == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -248,9 +250,16 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                     behavior: SnackBarBehavior.floating,
                   ),
                 );
+              } else if (selectedRadio != null && myBalance < total) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Saldo kamu tidak cukup.'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
               } else {
                 print(widget.id);
-                var saldo = myBalance.toInt() - widget.price + widget.adminFee;
                 print('saldo : $saldo');
                 Navigator.push(
                   context,
