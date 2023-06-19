@@ -8,7 +8,7 @@ List<Map<String, dynamic>> dummyPaketData = [
   {
     'nominal': 5,
     'hargaJual': 'Rp 6.500',
-    'hargaCoret': 'Rp 7.500',
+    'hargaCoret': 'Rp 7.600',
     'isSelected': false
   },
   {
