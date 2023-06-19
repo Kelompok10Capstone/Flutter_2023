@@ -1,11 +1,37 @@
+import 'package:capstone_flutter/models/apis/pay_wifi.dart';
 import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wifi_screen.dart';
+import 'package:capstone_flutter/view/screen/wifi_screen/success_transaction_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/apis/cek_pin.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class PinScreenWifi extends StatefulWidget {
-  const PinScreenWifi({super.key});
+  final String id;
+  final String userId;
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
+  final int price;
+  final int adminFee;
+  final String customerName;
+  final int balanceNow;
+  const PinScreenWifi(
+      {Key? key,
+      required this.id,
+      required this.userId,
+      required this.pelangganData,
+      required this.createdAt,
+      required this.providerName,
+      required this.price,
+      required this.adminFee,
+      required this.customerName,
+      required this.balanceNow})
+      : super(key: key);
 
   @override
   State<PinScreenWifi> createState() => _PinScreenWifiState();
@@ -15,14 +41,103 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
   final TextEditingController otpController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     otpController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData(); // Panggil fungsi untuk inisialisasi data
+  }
+
+  late SharedPreferences _prefs;
+  String token = '';
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      print(token);
+    });
+  }
+
+  void _submitPin(String pin) async {
+    try {
+      final bool isPinCorrect = await checkPinPayment(token, pin);
+      String idx = widget.id;
+      if (isPinCorrect && idx.isNotEmpty) {
+        final PayWifi payWifi = PayWifi(idx, token);
+        // ignore: avoid_print
+        print('adalah: $idx');
+        final String? payWifiResponse = await payWifi.payWifi();
+        // ignore: avoid_print
+        print(payWifiResponse);
+
+        // Memperbarui nilai balance pada UserProvider
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        final newBalance =
+            widget.balanceNow; // Ganti dengan nilai balance yang baru
+        userProvider.updateUserInfo(
+            userProvider.name, userProvider.phone, newBalance);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => IlustrationSuccessWifi(
+              id: widget.id,
+              userId: widget.userId,
+              pelangganData: widget.pelangganData,
+              customerName: widget.customerName,
+              createdAt: widget.createdAt,
+              providerName: widget.providerName,
+              adminFee: widget.adminFee,
+              price: widget.price,
+            ),
+          ),
+        );
+      } else {
+        // Handle incorrect pin scenario
+        // ignore: use_build_context_synchronously
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text('Pin salah.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      // ignore: avoid_print
+      print('Error: $error');
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Upss sepertinya ada yang salah.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -73,13 +188,6 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              onChanged: (String value) {
-                setState(() {
-                  if (value.isEmpty) {
-                    otpController.text = '-';
-                  }
-                });
-              },
             ),
             const SizedBox(
               height: 20,
@@ -103,11 +211,9 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const IlustrationSuccessWifi()));
+            onPressed: () async {
+              final pin = otpController.text;
+              _submitPin(pin);
             },
             child: Text(
               'Lanjutkan',

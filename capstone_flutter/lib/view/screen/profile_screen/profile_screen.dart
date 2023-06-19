@@ -309,6 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       //* back to login page
                                       // ignore: unnecessary_nullable_for_final_variable_declarations
                                       final SharedPreferences? prefs =
+                                          // ignore: await_only_futures
                                           await _prefs;
                                       prefs?.clear();
                                       // ignore: use_build_context_synchronously

@@ -59,12 +59,14 @@ class _BerhasilTransaksiPaketDataState
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
     return Consumer<PaketDataProvider>(
       builder: (context, paketDataProvider, _) {
         final paketData = paketDataProvider.paketData;
 
+        // ignore: unused_local_variable
         String price = paketData!.price.toString();
 
         return Scaffold(
@@ -99,6 +101,7 @@ class _BerhasilTransaksiPaketDataState
                       children: [
                         Text(
                           DateFormat('dd MMMM yyyy. HH:mm')
+                              // ignore: unnecessary_cast
                               .format(widget.createdAt as DateTime),
                           style: blackFont12.copyWith(fontSize: 10),
                         ),
@@ -191,7 +194,7 @@ class _BerhasilTransaksiPaketDataState
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 // color: Colors.green[100],
-                                color: Color(0xffBADDB1),
+                                color: const Color(0xffBADDB1),
                               ),
                               width: MediaQuery.of(context).size.width,
                               height: 34,
@@ -247,7 +250,7 @@ class _BerhasilTransaksiPaketDataState
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NavBar(initialIndex: 0),
+                      builder: (context) => const NavBar(initialIndex: 1),
                     ),
                   );
                 },

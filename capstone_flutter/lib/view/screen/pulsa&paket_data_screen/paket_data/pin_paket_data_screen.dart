@@ -6,8 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../models/apis/cek_pin_api.dart';
 import '../../../../models/apis/pulsa_paket_data/pay_paket_data.dart';
-import '../../../../models/apis/pulsa_paket_data/pulsa_paket_data_api.dart';
-import '../../../../view_model/pulsa_paketdata/user_provider.dart';
+import '../../../../view_model/user_provider/user_provider.dart';
 import 'ilustration_sukses_paket_data_screen.dart';
 
 class PinPaketDataScreen extends StatefulWidget {

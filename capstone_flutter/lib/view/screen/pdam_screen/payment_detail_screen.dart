@@ -1,4 +1,4 @@
-import 'package:capstone_flutter/view/screen/pdam_screen/payment_method_screen..dart';
+import 'package:capstone_flutter/view/screen/pdam_screen/payment_method_screen.dart';
 import 'package:capstone_flutter/view/screen/pdam_screen/region_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
