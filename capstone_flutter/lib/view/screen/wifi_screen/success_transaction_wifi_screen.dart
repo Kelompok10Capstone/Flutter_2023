@@ -269,7 +269,7 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => const NavBar(
-                            initialIndex: 0,
+                            initialIndex: 1,
                           )));
               // Navigator.push(
               //     context,
