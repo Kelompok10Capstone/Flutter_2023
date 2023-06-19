@@ -321,7 +321,7 @@ class _MetodePembayaranPaketDataScreenState
                       description: widget.description,
                       createdAt: widget.createdAt,
                       balanceNow: int.parse(myBalance.toString()) -
-                          int.parse(widget.price + widget.adminFee),
+                          int.parse(widget.price),
                     ),
                   ),
                 );
