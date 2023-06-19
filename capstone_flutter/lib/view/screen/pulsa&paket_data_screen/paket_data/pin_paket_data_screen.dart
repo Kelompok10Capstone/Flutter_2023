@@ -20,7 +20,8 @@ class PinPaketDataScreen extends StatefulWidget {
   final String adminFee;
   final String description;
   final int balanceNow;
-  final String createdAt;
+  final DateTime createdAt;
+  final String token;
   // final String phone_number;
   const PinPaketDataScreen({
     super.key,
@@ -34,6 +35,7 @@ class PinPaketDataScreen extends StatefulWidget {
     required this.description,
     required this.balanceNow,
     required this.createdAt,
+    required this.token,
     // required this.phone_number
   });
 
@@ -47,6 +49,7 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
   @override
   void initState() {
     super.initState();
+    print('pin token : ${widget.token}');
   }
 
   @override
@@ -55,20 +58,9 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
     super.dispose();
   }
 
-  late SharedPreferences _prefs;
-  String token = '';
-  Future<void> initializeData() async {
-    _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      token = _prefs.getString('token') ?? '';
-      print(token);
-    });
-  }
-
   void _submitPin(String pin) async {
-    print(widget.id);
+    String token = widget.token;
     final bool isPinCorrect = await checkPinPayment(token, pin);
-
     String typex = widget.type;
     String codex = widget.code;
     String providerx = widget.provider;
@@ -76,8 +68,8 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
     if (isPinCorrect && productx.isNotEmpty) {
       final PayPaketData payPaketData = PayPaketData(
         token,
-        productx,
         typex,
+        productx,
         codex,
         providerx,
       );

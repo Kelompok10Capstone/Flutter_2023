@@ -12,7 +12,7 @@ class IlustrationSuksesPaketDataScreen extends StatefulWidget {
   final String price;
   final String adminFee;
   final String description;
-  final String createdAt;
+  final DateTime createdAt;
 
   const IlustrationSuksesPaketDataScreen({
     super.key,

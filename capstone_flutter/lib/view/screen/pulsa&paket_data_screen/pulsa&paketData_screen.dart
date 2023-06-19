@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
@@ -52,10 +53,21 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   TabController? _tabController;
 
   bool isPhoneNumberEntered = false;
+  late SharedPreferences _prefs;
+  String token = '';
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      print("token ppd : $token");
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    initializeData();
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -323,7 +335,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const DetailPembayaranPaketDataScreen(),
+                        DetailPembayaranPaketDataScreen(token: token),
                   ),
                 );
               }

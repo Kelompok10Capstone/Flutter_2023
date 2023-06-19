@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../models/pulsa_paket_data.dart';
 import '../../../../utils/const/theme.dart';
@@ -8,7 +9,8 @@ import '../../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart'
 import 'metode_pembayaran_paket_data_screen.dart';
 
 class DetailPembayaranPaketDataScreen extends StatefulWidget {
-  const DetailPembayaranPaketDataScreen({super.key});
+  final String token;
+  const DetailPembayaranPaketDataScreen({super.key, required this.token});
 
   @override
   State<DetailPembayaranPaketDataScreen> createState() =>
@@ -22,8 +24,14 @@ class _DetailPembayaranPaketDataScreenState
   @override
   void dispose() {
     super.dispose();
-
     promoController.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("detail ppd : ${widget.token}");
   }
 
   @override
@@ -366,8 +374,9 @@ class _DetailPembayaranPaketDataScreenState
                   String idText = users.isNotEmpty ? users[index].id : '';
                   String adminFeeText =
                       users.isNotEmpty ? users[index].adminFee.toString() : '';
-                  String createdAtText =
-                      users.isNotEmpty ? users[index].createdAt.toString() : '';
+                  DateTime? createdAtText = users.isNotEmpty
+                      ? users[index].createdAt as DateTime?
+                      : null;
                   // users.isNotEmpty ? users[index].adminFee.toString() : '';
 
                   Navigator.push(
@@ -382,7 +391,8 @@ class _DetailPembayaranPaketDataScreenState
                         description: descriptionText,
                         price: priceText,
                         adminFee: adminFeeText,
-                        createdAt: createdAtText,
+                        createdAt: createdAtText!,
+                        token: widget.token,
                       ),
                     ),
                   );

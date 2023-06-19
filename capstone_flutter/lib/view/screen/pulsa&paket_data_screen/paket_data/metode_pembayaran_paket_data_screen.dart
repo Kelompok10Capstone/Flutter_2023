@@ -15,7 +15,8 @@ class MetodePembayaranPaketDataScreen extends StatefulWidget {
   final String price;
   final String adminFee;
   final String description;
-  final String createdAt;
+  final DateTime createdAt;
+  final String token;
   const MetodePembayaranPaketDataScreen({
     super.key,
     required this.id,
@@ -27,6 +28,7 @@ class MetodePembayaranPaketDataScreen extends StatefulWidget {
     required this.description,
     required this.adminFee,
     required this.createdAt,
+    required this.token,
   });
 
   @override
@@ -38,6 +40,13 @@ class _MetodePembayaranPaketDataScreenState
     extends State<MetodePembayaranPaketDataScreen> {
   String? selectedRadio;
   late SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('pembayaran ppd : ${widget.token}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -301,6 +310,7 @@ class _MetodePembayaranPaketDataScreenState
                   context,
                   MaterialPageRoute(
                     builder: (context) => PinPaketDataScreen(
+                      token: widget.token,
                       id: widget.id,
                       name: widget.name,
                       price: widget.price,

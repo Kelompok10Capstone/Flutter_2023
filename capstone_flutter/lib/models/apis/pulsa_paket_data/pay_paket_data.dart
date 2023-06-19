@@ -6,7 +6,7 @@ class PayPaketData {
 
   final String paketdata;
   final String productid;
-  final String discountid;
+  final String? discountid;
   final String phonenumber;
   final String token;
 
@@ -14,8 +14,8 @@ class PayPaketData {
     this.token,
     this.paketdata,
     this.productid,
-    this.discountid,
     this.phonenumber,
+    this.discountid,
   );
 
   Future<String?> payPaketData() async {
@@ -48,10 +48,10 @@ class PayPaketData {
 
         return ppdId;
       } else {
-        throw Exception('Payment failed: ${metadata['message']}');
+        print('Payment failed: ${metadata['message']}');
       }
     } else {
-      throw Exception('Error: ${response.statusCode}');
+      print('error: ${response.statusCode}');
     }
   }
 }
