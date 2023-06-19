@@ -86,12 +86,7 @@ class _DetailPembayaranPulsaScreenState
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => const PaymentDetail()));
-                      },
+                      onPressed: () {},
                       child: Text(
                         'Klaim',
                         style: whiteFont14,

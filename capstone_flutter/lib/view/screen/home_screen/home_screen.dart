@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
+import '../../../view_model/pulsa_paketdata/user_provider.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
 import '../pendidikan_screen/pendidikan_screen.dart';
@@ -147,6 +148,10 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final myBalance = userProvider.balance;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -277,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 270, left: 44),
                       child: Text(
-                        'Rp.$balance',
+                        'Rp.$myBalance',
                         style: whiteFont25.copyWith(
                           color: Colors.white,
                         ),

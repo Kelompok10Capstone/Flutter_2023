@@ -37,6 +37,8 @@ class PulsaPaketdataData {
   final bool isActive;
   final String description;
 
+  late int adminFee = 0;
+  late DateTime createdAt;
   late bool isSelected = false;
 
   PulsaPaketdataData({
@@ -48,7 +50,9 @@ class PulsaPaketdataData {
     required this.price,
     required this.isActive,
     required this.description,
-  });
+  }) : adminFee = 0 {
+    createdAt = DateTime.now();
+  }
 
   PulsaPaketdataData copyWith({
     String? id,
@@ -94,50 +98,6 @@ class PulsaPaketdataData {
         "description": description,
       };
 }
-// class PulsaPaketdataData {
-//   String? id;
-//   String? name;
-//   String? type;
-//   String? code;
-//   String? provider;
-//   double? price;
-//   bool? isActive;
-//   String? description;
-
-//   PulsaPaketdataData(
-//       {this.id,
-//       this.name,
-//       this.type,
-//       this.code,
-//       this.provider,
-//       this.price,
-//       this.isActive,
-//       this.description});
-
-//   PulsaPaketdataData.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     name = json['name'];
-//     type = json['type'];
-//     code = json['code'];
-//     provider = json['provider'];
-//     price = json['price'];
-//     isActive = json['is_active'];
-//     description = json['description'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = <String, dynamic>{};
-//     data['id'] = id;
-//     data['name'] = name;
-//     data['type'] = type;
-//     data['code'] = code;
-//     data['provider'] = provider;
-//     data['price'] = price;
-//     data['is_active'] = isActive;
-//     data['description'] = description;
-//     return data;
-//   }
-// }
 
 class Metadata {
   int? status;

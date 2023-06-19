@@ -1,5 +1,5 @@
 import 'package:capstone_flutter/models/apis/login.dart';
-import 'package:capstone_flutter/models/apis/pulsa_paket_data_api.dart';
+import 'package:capstone_flutter/models/apis/pulsa_paket_data/pulsa_paket_data_api.dart';
 import 'package:capstone_flutter/models/pulsa_paket_data.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +22,11 @@ class PulsaDanPaketDataViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  getPhone() async {
+  getPhone(String phone) async {
     changeState(PulsaPaketdataViewState.loading);
     try {
       final token = await LoginController().getToken();
-      final result = await PulsaPaketDataApi(token).getPulsaPaketData('');
+      final result = await PulsaPaketDataApi(token).getPulsaPaketData(phone);
       debugPrint("Pulsa Paket Data Response: ${result.toJson().toString()}");
       _users = result.data ?? [];
       // const token = 'token';

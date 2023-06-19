@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paket_data_view_model.dart';
+import '../../../view_model/dummy_pulsa.dart';
+import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
+import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'detail_pembayaran_pulsa_screen.dart';
 import 'paket_data/detail_pembayaran_paket_data_screen.dart';
 
@@ -16,6 +18,28 @@ class PulsaDanPaketDataScreen extends StatefulWidget {
   @override
   State<PulsaDanPaketDataScreen> createState() =>
       _PulsaDanPaketDataScreenState();
+}
+
+class PaketData {
+  final String? phone62;
+  final String? price;
+  final String? name;
+  final String? provider;
+  final String? description;
+  final String? code;
+  final String? id;
+  final String? type;
+
+  PaketData({
+    this.phone62,
+    this.price,
+    this.name,
+    this.provider,
+    this.description,
+    this.code,
+    this.id,
+    this.type,
+  });
 }
 
 class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
@@ -47,18 +71,16 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
+    final pakeDataProvider =
+        Provider.of<PaketDataProvider>(context, listen: false);
+    // final paketdataDataProvider = Provider.of<PaketDataViewModel>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: GestureDetector(
-          onTap: () async {
-            pulsaPaketDataProvider.getPhone();
-          },
-          child: Text(
-            'Pulsa & Paket Data',
-            style: blackFont18.copyWith(color: Colors.black),
-          ),
+        title: Text(
+          'Pulsa & Paket Data',
+          style: blackFont18.copyWith(color: Colors.black),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
@@ -128,7 +150,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                         decoration: InputDecoration(
                           contentPadding:
                               const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                          hintText: 'Contoh: 81234567890',
+                          hintText: 'Contoh: 081234567890',
                           hintStyle: blackFont12.copyWith(color: Colors.grey),
                           filled: true,
                           fillColor: Colors.white,
@@ -165,16 +187,21 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                               : null,
                         ),
                         onChanged: (value) {
-                          if (value.length <= 4) {
+                          if (value.length > 9) {
                             setState(() {
                               isPhoneNumberEntered = value.isNotEmpty;
-                              pulsaPaketDataProvider.users.clear();
+                              // pulsaPaketDataProvider.users.clear();
+                              // pulsaPaketDataProvider.getPhone(phone);
+                              // paketdataDataProvider.users.clear();
+                              // paketdataDataProvider.getPhone();
                             });
                           }
                         },
                         onFieldSubmitted: (value) {
-                          if (value.length <= 4) {
-                            pulsaPaketDataProvider.getPhone();
+                          if (value.length > 9) {
+                            pulsaPaketDataProvider.getPhone(value);
+                            // pulsaPaketDataProvider.users.clear();
+                            // paketdataDataProvider.getPhone();
                           }
                         },
                       ),
@@ -219,7 +246,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                     const int index =
                         0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
                     final String providerText =
-                        users.isNotEmpty ? users[index].provider : ' Provider';
+                        users.isNotEmpty ? users[index].provider : ' ';
                     return Text(
                       providerText,
                       style: blackFont16,
@@ -249,7 +276,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
           height: 52,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: blueColor,
+              backgroundColor: isPhoneNumberEntered ? blueColor : Colors.grey,
+              // backgroundColor: blueColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -264,6 +292,32 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   ),
                 );
               } else if (_tabController?.index == 1) {
+                List<PulsaPaketdataData> users = pulsaPaketDataProvider.users;
+                int index =
+                    0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
+                String providerText =
+                    users.isNotEmpty ? users[index].provider : '';
+                String nameText = users.isNotEmpty ? users[index].name : '';
+                String descriptionText =
+                    users.isNotEmpty ? users[index].description : '';
+                String codeText = users.isNotEmpty ? users[index].code : '';
+                String priceText =
+                    users.isNotEmpty ? users[index].price.toString() : '';
+                String idText =
+                    users.isNotEmpty ? users[index].id.toString() : '';
+
+                PaketData paketData = PaketData(
+                  name: nameText,
+                  price: priceText,
+                  phone62: phone62Controller.text,
+                  provider: providerText,
+                  description: descriptionText,
+                  code: codeText,
+                  id: idText,
+                );
+
+                Provider.of<PaketDataProvider>(context, listen: false)
+                    .setPaketData(paketData);
                 // Jika tab Tagihan aktif, arahkan pengguna ke layar paket data
                 Navigator.push(
                   context,
@@ -294,101 +348,82 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   }
 
   Widget _buildPulsaTab() {
-    return Consumer<PulsaDanPaketDataViewModel>(
-      builder: (context, viewModel, _) {
-        var pulsaPaketDataProvider = viewModel;
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 3 / 2,
+      ),
+      itemCount: dummyPulsaData.length,
+      itemBuilder: (context, index) {
+        final data = dummyPulsaData[index];
 
-        if (pulsaPaketDataProvider.users.isEmpty) {
-          return _buildEmptyTab();
-        } else {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 3 / 2,
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              dummyPulsaData[index]['isSelected'] =
+                  !dummyPulsaData[index]['isSelected'];
+            });
+          },
+          child: Container(
+            // width: 15,
+            // height: 10,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: dummyPulsaData[index]['isSelected'] == true
+                    ? Color(0xff2B3990)
+                    : Colors.black,
+              ),
+              color: dummyPulsaData[index]['isSelected'] == true
+                  ? Color(0xff2B3990)
+                  : Colors.white,
             ),
-            itemCount: pulsaPaketDataProvider.users.length,
-            itemBuilder: (context, index) {
-              var data = pulsaPaketDataProvider.users[index];
-
-              return GestureDetector(
-                onTap: () {
-                  if (data.isSelected == true) {
-                    setState(() {
-                      data.isSelected = false;
-                    });
-                  } else {
-                    setState(() {
-                      data.isSelected = true;
-                    });
-                  }
-                  // setState(() {
-                  //   data.isSelected = data.isSelected ? false : true;
-                  // });
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: data.isSelected == true
-                          ? const Color(0xff2B3990)
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${data['nominal']}',
+                    style: blackFont18.copyWith(
+                      color: dummyPulsaData[index]['isSelected'] == true
+                          ? Colors.white
                           : Colors.black,
                     ),
-                    color: data.isSelected == true
-                        ? const Color(0xff2B3990)
-                        : Colors.white,
                   ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          data.price.toString(),
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: data.isSelected == true
-                                ? Colors.white
-                                : Colors.black,
-                          ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${data['hargaJual']}',
+                        style: blueFont14.copyWith(
+                          color: dummyPulsaData[index]['isSelected'] == true
+                              ? Colors.white
+                              : Color(0xff2B3990),
                         ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Rp.${data.price.toString()}',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: data.isSelected == true
-                                    ? Colors.white
-                                    : const Color(0xff2B3990),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Rp.${data.price.toString()}',
-                              style: blackFont12.copyWith(
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                            ),
-                            const Spacer(),
-                          ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '${data['hargaCoret']}',
+                        style: blackFont12.copyWith(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
                         ),
-                      ],
-                    ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
-                ),
-              );
-            },
-          );
-        }
+                ],
+              ),
+            ),
+          ),
+        );
       },
     );
   }
@@ -438,7 +473,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${data.name.toString()} \n(10 GB)',
+                          data.name.toString(),
                           // data.price.toString(),
                           style: TextStyle(
                             fontSize: 18,
@@ -452,7 +487,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              data.price.toString(),
+                              'Rp.${data.price.toString()}',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: data.isSelected == true
@@ -464,7 +499,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                               width: 10,
                             ),
                             Text(
-                              data.price.toString(),
+                              'Rp.${data.price.toString()}',
                               style: blackFont12.copyWith(
                                 color: Colors.grey,
                                 decoration: TextDecoration.lineThrough,
