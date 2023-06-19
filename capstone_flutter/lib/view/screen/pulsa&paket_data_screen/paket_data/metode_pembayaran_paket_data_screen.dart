@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../view_model/pulsa_paketdata/user_provider.dart';
+import '../../../../view_model/user_provider/user_provider.dart';
 
 class MetodePembayaranPaketDataScreen extends StatefulWidget {
   final String id;
