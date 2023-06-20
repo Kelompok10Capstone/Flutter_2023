@@ -1,10 +1,35 @@
 import 'package:capstone_flutter/view/screen/pulsa&paket_data_screen/pin_pulsa_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/const/theme.dart';
 
+import '../../../view_model/user_provider/user_provider.dart';
+
 class MetodePembayaranPulsaScreen extends StatefulWidget {
-  const MetodePembayaranPulsaScreen({super.key});
+  final String id;
+  final String name;
+  final String type;
+  final String code;
+  final String provider;
+  final String price;
+  final String adminFee;
+  final String description;
+  final DateTime createdAt;
+  final String token;
+  const MetodePembayaranPulsaScreen(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.type,
+      required this.code,
+      required this.provider,
+      required this.price,
+      required this.adminFee,
+      required this.description,
+      required this.createdAt,
+      required this.token});
 
   @override
   State<MetodePembayaranPulsaScreen> createState() =>
@@ -14,9 +39,21 @@ class MetodePembayaranPulsaScreen extends StatefulWidget {
 class _MetodePembayaranPulsaScreenState
     extends State<MetodePembayaranPulsaScreen> {
   String? selectedRadio;
+  late SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('pembayaran ppd : ${widget.token}');
+  }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final myBalance = userProvider.balance;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -85,7 +122,7 @@ class _MetodePembayaranPulsaScreenState
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp 150.000)',
+                          'Saldo SkuyPay (Rp ${myBalance.toString()})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -140,7 +177,7 @@ class _MetodePembayaranPulsaScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Pulsa 5000',
+                            'Pulsa ${widget.name.toString()}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -159,7 +196,7 @@ class _MetodePembayaranPulsaScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Rp 6.500',
+                            'Rp ${widget.price.toString()}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -218,7 +255,7 @@ class _MetodePembayaranPulsaScreenState
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
-                                  'Rp 6.500',
+                                  'Rp ${widget.price.toString()}',
                                   style: blackFont14.copyWith(
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -248,12 +285,51 @@ class _MetodePembayaranPulsaScreenState
               ),
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PinPulsaScreen(),
-                ),
-              );
+              var saldo =
+                  int.parse(myBalance.toString()) - int.parse(widget.price);
+              var total = int.parse(widget.price);
+              if (selectedRadio == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Pilih metode pembayaran'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else if (selectedRadio != null && myBalance < total) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Saldo tidak cukup'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else {
+                print(widget.id);
+                // var saldo =
+                //     int.parse(myBalance.toString()) - int.parse(widget.price);
+                // var saldo = myBalance.toInt() - widget.price + widget.adminFee;
+                print('saldo : $saldo');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PinPulsaScreen(
+                      token: widget.token,
+                      id: widget.id,
+                      name: widget.name,
+                      price: widget.price,
+                      type: widget.type,
+                      code: widget.code,
+                      adminFee: widget.adminFee,
+                      provider: widget.provider,
+                      description: widget.description,
+                      createdAt: widget.createdAt,
+                      balanceNow: int.parse(myBalance.toString()) -
+                          int.parse(widget.price),
+                    ),
+                  ),
+                );
+              }
             },
             child: Text(
               'Yuk Bayar!',

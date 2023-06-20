@@ -23,8 +23,8 @@ class _DetailPembayaranPaketDataScreenState
 
   @override
   void dispose() {
-    super.dispose();
     promoController.dispose();
+    super.dispose();
   }
 
   @override
@@ -359,7 +359,8 @@ class _DetailPembayaranPaketDataScreenState
                   ),
                 ),
                 onPressed: () {
-                  List<PulsaPaketdataData> users = pulsaPaketDataProvider.users;
+                  List<PulsaPaketdataData> users =
+                      pulsaPaketDataProvider.paketData;
                   int index =
                       0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
                   String providerText =

@@ -180,7 +180,7 @@ class _BerhasilTransaksiPaketDataState
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  paketData.price.toString(),
+                                  'Rp.${paketData.price.toString()}',
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),

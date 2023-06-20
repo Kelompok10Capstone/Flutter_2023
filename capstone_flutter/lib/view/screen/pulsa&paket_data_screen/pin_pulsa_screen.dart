@@ -1,11 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
+import '../../../models/apis/cek_pin_api.dart';
+import '../../../models/apis/pulsa_paket_data/pay_paket_data.dart';
 import '../../../utils/const/theme.dart';
+
+import '../../../view_model/user_provider/user_provider.dart';
 import 'ilustration_sukses_pulsa_screen.dart';
 
 class PinPulsaScreen extends StatefulWidget {
-  const PinPulsaScreen({super.key});
+  final String id;
+  final String name;
+  final String type;
+  final String code;
+  final String provider;
+  final String price;
+  final String adminFee;
+  final String description;
+  final int balanceNow;
+  final DateTime createdAt;
+  final String token;
+  const PinPulsaScreen(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.type,
+      required this.code,
+      required this.provider,
+      required this.price,
+      required this.adminFee,
+      required this.description,
+      required this.balanceNow,
+      required this.createdAt,
+      required this.token});
 
   @override
   State<PinPulsaScreen> createState() => _PinPulsaScreenState();
@@ -17,12 +45,81 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
   @override
   void initState() {
     super.initState();
+    print('pin token : ${widget.token}');
   }
 
   @override
   void dispose() {
     otpController.dispose();
     super.dispose();
+  }
+
+  void _submitPin(String pin) async {
+    String token = widget.token;
+    final bool isPinCorrect = await checkPinPayment(token, pin);
+    String typex = widget.type;
+    String codex = widget.code;
+    String providerx = widget.provider;
+    String productx = widget.id;
+    if (isPinCorrect && productx.isNotEmpty) {
+      final PayPaketData payPaketData = PayPaketData(
+        token,
+        typex,
+        productx,
+        codex,
+        providerx,
+      );
+      // ignore: avoid_print
+      print('adalah: $productx');
+      final String? payPaketDataResponse = await payPaketData.payPaketData();
+      // ignore: avoid_print
+      print(payPaketDataResponse);
+
+      // Memperbarui nilai balance pada UserProvider
+      // ignore: use_build_context_synchronously
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final newBalance =
+          widget.balanceNow; // Ganti dengan nilai balance yang baru
+      userProvider.updateUserInfo(
+          userProvider.name, userProvider.phone, newBalance);
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => IlustrationSuksesPulsa(
+            id: widget.id,
+            name: widget.name,
+            type: widget.type,
+            code: widget.code,
+            provider: widget.provider,
+            price: widget.price,
+            adminFee: widget.adminFee,
+            description: widget.description,
+            createdAt: widget.createdAt,
+          ),
+        ),
+      );
+    } else {
+      // Handle incorrect pin scenario
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Pin salah.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -74,7 +171,7 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
               onChanged: (String value) {
                 setState(() {
                   if (value.isEmpty) {
-                    otpController.text = '-';
+                    otpController.text = '';
                   }
                 });
               },
@@ -101,13 +198,9 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const IlustrationSuksesPulsa(),
-                ),
-              );
+            onPressed: () async {
+              final pin = otpController.text;
+              _submitPin(pin);
             },
             child: Text(
               'Lanjutkan',
