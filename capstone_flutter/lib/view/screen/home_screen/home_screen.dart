@@ -1126,63 +1126,40 @@ class _HomeScreenState extends State<HomeScreen>
                         onPressed: () async {
                           final request = WiFiInquiryRequest(
                             customerId: pelangganControllerWifi.text,
-                            discountId: '',
-                            productId: 'BPJSKS',
+                            discountId: '48b286df-6bb9-4027-b847-0820015ea68c',
+                            productId: 'TELKOM',
                           );
-                          try {
-                            final response =
-                                await WifiInquiryApi.inquireWiFiBill(
-                                    request, token);
-                            // ignore: unnecessary_null_comparison
-                            if (response != null) {
-                              wifiProvider.setResponse(
-                                  response); // Simpan response ke WiFiInquiryProvider
-                              // ignore: use_build_context_synchronously
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PaymentDetailWifi(
-                                    id: response.id,
-                                    userId: response.userId,
-                                    pelangganData: pelangganControllerWifi.text,
-                                    createdAt: response.createdAt,
-                                    providerName: response.providerName,
-                                    price: response.price,
-                                    adminFee: response.adminFee,
-                                    customerName: response.customerName,
-                                  ),
+
+                          final response = await WifiInquiryApi.inquireWiFiBill(
+                              request, token);
+                          // ignore: unnecessary_null_comparison
+                          if (response != null) {
+                            wifiProvider.setResponse(
+                                response); // Simpan response ke WiFiInquiryProvider
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaymentDetailWifi(
+                                  id: response.id,
+                                  userId: response.userId,
+                                  pelangganData: pelangganControllerWifi.text,
+                                  createdAt: response.createdAt,
+                                  providerName: response.providerName,
+                                  price: response.price,
+                                  adminFee: response.adminFee,
+                                  customerName: response.name,
                                 ),
-                              );
-                            } else {
-                              // ignore: use_build_context_synchronously
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Error'),
-                                    content:
-                                        const Text('Nomor pelanggan salah.'),
-                                    actions: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              pelangganControllerWifi.clear();
-                            }
-                          } catch (e) {
+                              ),
+                            );
+                          } else {
+                            // ignore: use_build_context_synchronously
                             showDialog(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text('Error'),
-                                  content:
-                                      const Text('Nomor pelanggan kosong.'),
+                                  content: const Text('Nomor pelanggan salah.'),
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
@@ -1194,6 +1171,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 );
                               },
                             );
+                            pelangganControllerWifi.clear();
                           }
                         },
                         child: Text(

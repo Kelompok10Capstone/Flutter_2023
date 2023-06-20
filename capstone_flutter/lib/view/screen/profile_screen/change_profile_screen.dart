@@ -170,16 +170,16 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.black),
-                  // color: Colors.grey[200],
+                  color: Colors.grey[200],
                 ),
                 child: TextField(
                   controller: emailController,
-                  // enabled: false,
-
+                  enabled: false,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: blackFont16,
-                      hintText: email),
+                    border: InputBorder.none,
+                    hintStyle: blackFont16,
+                    hintText: email,
+                  ),
                 ),
               ),
               const SizedBox(

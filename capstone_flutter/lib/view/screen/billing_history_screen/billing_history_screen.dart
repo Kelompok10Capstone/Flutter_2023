@@ -330,7 +330,7 @@ class historyWidget extends StatelessWidget {
           String imagePath = '';
           String namePath = '';
 
-          if (transaction.productType == 'bpjsks') {
+          if (transaction.productType == 'telkom') {
             imagePath = 'assets/wifi_icon.png';
             namePath = 'Wifi';
           } else if (transaction.productType == 'paket_data') {
@@ -383,14 +383,25 @@ class historyWidget extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      Text(
-                        transaction.price != null
-                            ? '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}'
-                            : '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
-                        style: blackFont16G.copyWith(color: redColor),
-                      ),
+                      if (transaction.price != 0 &&
+                          transaction.status != 'unpaid')
+                        Text(
+                          '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}',
+                          style: blackFont16G.copyWith(color: redColor),
+                        ),
+                      if (transaction.price != 0 &&
+                          transaction.status == 'unpaid')
+                        Text(
+                          'Pending',
+                          style: blackFont16G.copyWith(color: redColor),
+                        ),
+                      if (transaction.amount != 0)
+                        Text(
+                          '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
+                          style: blackFont16G.copyWith(color: Colors.green),
+                        ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

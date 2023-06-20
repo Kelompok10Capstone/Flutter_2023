@@ -32,16 +32,40 @@ class _TransactionHistoryState extends State<TransactionHistory> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 40),
-              child: Center(
-                child: Image(
-                  image: AssetImage('assets/telkomsel.png'),
-                  fit: BoxFit.contain,
-                  width: 180,
+            if (widget.transaction.productType == 'pulsa' ||
+                widget.transaction.productType == 'paket_data')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/telkomsel.png'),
+                    fit: BoxFit.contain,
+                    width: 180,
+                  ),
                 ),
               ),
-            ),
+            if (widget.transaction.productType == 'telkom')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/telkom.png'),
+                    fit: BoxFit.contain,
+                    width: 180,
+                  ),
+                ),
+              ),
+            if (widget.transaction.productType == 'topup')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/topup_money.png'),
+                    fit: BoxFit.contain,
+                    width: 180,
+                  ),
+                ),
+              ),
             Padding(
               padding: const EdgeInsets.only(top: 50),
               child: Text(
@@ -71,16 +95,50 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'No. Handphone',
+                    'Status',
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                   Text(
-                    widget.transaction.phoneNumber,
+                    widget.transaction.status,
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                 ],
               ),
             ),
+            if (widget.transaction.productType == 'telkom')
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'No. Pelanggan',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      widget.transaction.customerId,
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            if (widget.transaction.productType == 'paket_data')
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'No. Handphone',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      widget.transaction.phoneNumber,
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Row(
@@ -90,10 +148,45 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     'Harga',
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
+                  if (widget.transaction.status == 'unpaid')
+                    Text(
+                      '-',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  if (widget.transaction.status == 'successful' &&
+                      widget.transaction.productType != 'topup')
+                    Text(
+                      ('Rp. ${widget.transaction.price}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  if (widget.transaction.status == 'successful' &&
+                      widget.transaction.productType == 'topup')
+                    Text(
+                      ('Rp. ${widget.transaction.amount}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
-                    ('Rp. ${widget.transaction.price}').toString(),
+                    'Biaya Admin',
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
+                  if (widget.transaction.status == 'unpaid')
+                    Text(
+                      '-',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    )
+                  else
+                    Text(
+                      ('Rp. ${widget.transaction.adminFee}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
                 ],
               ),
             ),
@@ -106,10 +199,16 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     'Diskon',
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
-                  Text(
-                    ('Rp. ${widget.transaction.discountPrice}').toString(),
-                    style: blackFont14.copyWith(color: Colors.black),
-                  ),
+                  if (widget.transaction.status == 'unpaid')
+                    Text(
+                      '-',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    )
+                  else
+                    Text(
+                      ('Rp. ${widget.transaction.discountPrice}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
                 ],
               ),
             ),
@@ -142,11 +241,28 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                               'Total Tagihan',
                               style: blackFont14G.copyWith(color: Colors.black),
                             ),
-                            Text(
-                              ('Rp. ${widget.transaction.totalPrice + widget.transaction.discountPrice}')
-                                  .toString(),
-                              style: blackFont14G.copyWith(color: Colors.black),
-                            ),
+                            if (widget.transaction.productType != 'topup' &&
+                                widget.transaction.status != 'unpaid')
+                              Text(
+                                ('Rp. ${(widget.transaction.price + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                                    .toString(),
+                                style:
+                                    blackFont14G.copyWith(color: Colors.black),
+                              ),
+                            if (widget.transaction.status == 'unpaid')
+                              Text(
+                                '-',
+                                style:
+                                    blackFont14.copyWith(color: Colors.black),
+                              ),
+                            if (widget.transaction.productType == 'topup' &&
+                                widget.transaction.status != 'unpaid')
+                              (Text(
+                                ('Rp. ${(widget.transaction.amount + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                                    .toString(),
+                                style:
+                                    blackFont14G.copyWith(color: Colors.black),
+                              ))
                           ],
                         ),
                       ),
