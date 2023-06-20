@@ -244,7 +244,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NavBar(initialIndex: 0),
+                      builder: (context) => const NavBar(initialIndex: 1),
                     ),
                   );
                 },
