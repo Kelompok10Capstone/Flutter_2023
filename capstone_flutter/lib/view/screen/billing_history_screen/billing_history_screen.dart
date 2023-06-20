@@ -200,12 +200,8 @@ class _CompletedScreenState extends State<CompletedScreen> {
     return FutureBuilder<String>(
       future: tokenFuture,
       builder: (context, tokenSnapshot) {
-        if (tokenSnapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (tokenSnapshot.hasError) {
-          return Text('Error: ${tokenSnapshot.error}');
-        } else if (!tokenSnapshot.hasData || tokenSnapshot.data!.isEmpty) {
-          return Text('Token is empty');
+        if (!tokenSnapshot.hasData) {
+          return const Text('Token is empty');
         } else {
           final token = tokenSnapshot.data!;
 
@@ -300,6 +296,8 @@ class _CompletedScreenState extends State<CompletedScreen> {
                         ),
                       ],
                     ),
+
+                    // child row kedua
                     ...transactions.map((transaction) {
                       String imagePath = '';
 
@@ -320,49 +318,64 @@ class _CompletedScreenState extends State<CompletedScreen> {
                       } else if (transaction.productType == 'paket_data') {
                         namePath = 'Paket Data';
                       }
-                      return Padding(
-                        padding:
-                            const EdgeInsets.only(top: 30, left: 40, right: 40),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Image.asset(
-                                  imagePath,
-                                  width: 55,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      namePath,
-                                      style: blackFont16.copyWith(
-                                          color: Colors.black),
-                                    ),
-                                    Text(
-                                      DateFormat('d MMMM yyyy - HH.mm').format(
-                                        DateTime.parse(transaction.createdAt),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  TransactionHistory(transaction: transaction),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 30, left: 40, right: 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset(
+                                    imagePath,
+                                    width: 55,
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        namePath,
+                                        style: blackFont16.copyWith(
+                                            color: Colors.black),
                                       ),
-                                      style: blackFont14.copyWith(
-                                          color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Text(
-                                  transaction.price != null
-                                      ? '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}'
-                                      : '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
-                                  style: blackFont16G.copyWith(color: redColor),
-                                ),
-                              ],
-                            )
-                          ],
+                                      Text(
+                                        DateFormat('d MMMM yyyy - HH.mm')
+                                            .format(
+                                          DateTime.parse(transaction.createdAt),
+                                        ),
+                                        style: blackFont14.copyWith(
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    transaction.price != null
+                                        ? '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}'
+                                        : '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
+                                    style:
+                                        blackFont16G.copyWith(color: redColor),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       );
                     }).toList(),
