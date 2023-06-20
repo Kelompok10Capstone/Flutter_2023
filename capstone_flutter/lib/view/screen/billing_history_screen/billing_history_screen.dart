@@ -210,7 +210,13 @@ class _CompletedScreenState extends State<CompletedScreen> {
             builder: (context, transactionSnapshot) {
               if (transactionSnapshot.connectionState ==
                   ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               } else if (transactionSnapshot.hasError) {
                 return Text('Error: ${transactionSnapshot.error}');
               } else if (!transactionSnapshot.hasData) {
@@ -218,174 +224,179 @@ class _CompletedScreenState extends State<CompletedScreen> {
               } else {
                 final transactions = transactionSnapshot.data!;
 
-                return SingleChildScrollView(
-                  child: Column(children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20),
-                                ),
+                return Column(children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
                               ),
-                              context: context,
-                              builder: (context) => const SortScreen(),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(top: 25, left: 50),
-                                child: Image(
-                                  image: AssetImage('assets/sort_icon.png'),
-                                  width: 30,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 25, left: 15),
-                                child: Text(
-                                  'Urutkan',
-                                  style:
-                                      blackFont16.copyWith(color: Colors.black),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
+                            ),
+                            context: context,
+                            builder: (context) => const SortScreen(),
+                          );
+                        },
+                        child: Row(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                    ),
-                                  ),
-                                  context: context,
-                                  builder: (context) => const FilterScreen(),
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 25, left: 105),
-                                    child: Image(
-                                      image:
-                                          AssetImage('assets/filter_icon.png'),
-                                      width: 28,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 25, left: 15),
-                                    child: Text(
-                                      'Filter',
-                                      style: blackFont16.copyWith(
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                ],
+                            const Padding(
+                              padding: EdgeInsets.only(top: 25, left: 50),
+                              child: Image(
+                                image: AssetImage('assets/sort_icon.png'),
+                                width: 30,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25, left: 15),
+                              child: Text(
+                                'Urutkan',
+                                style:
+                                    blackFont16.copyWith(color: Colors.black),
                               ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
-
-                    // child row kedua
-                    ...transactions.map((transaction) {
-                      String imagePath = '';
-
-                      if (transaction.productType == 'bpjsks') {
-                        imagePath = 'assets/wifi_icon.png';
-                      } else if (transaction.productType == 'paket_data') {
-                        imagePath = 'assets/pulsa_icon.png';
-                      } else if (transaction.productType == 'pulsa') {
-                        imagePath = 'assets/pulsa_icon.png';
-                      } else if (transaction.productType == 'topup') {
-                        imagePath = 'assets/top_up_icon.png';
-                      }
-
-                      String namePath = '';
-
-                      if (transaction.productType == 'bpjsks') {
-                        namePath = 'Wifi';
-                      } else if (transaction.productType == 'paket_data') {
-                        namePath = 'Paket Data';
-                      }
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  TransactionHistory(transaction: transaction),
+                      ),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (context) => const FilterScreen(),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 25, left: 105),
+                                  child: Image(
+                                    image: AssetImage('assets/filter_icon.png'),
+                                    width: 28,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 25, left: 15),
+                                  child: Text(
+                                    'Filter',
+                                    style: blackFont16.copyWith(
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 30, left: 40, right: 40),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset(
-                                    imagePath,
-                                    width: 55,
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        namePath,
-                                        style: blackFont16.copyWith(
-                                            color: Colors.black),
-                                      ),
-                                      Text(
-                                        DateFormat('d MMMM yyyy - HH.mm')
-                                            .format(
-                                          DateTime.parse(transaction.createdAt),
-                                        ),
-                                        style: blackFont14.copyWith(
-                                            color: Colors.black),
-                                      ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    transaction.price != null
-                                        ? '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}'
-                                        : '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
-                                    style:
-                                        blackFont16G.copyWith(color: redColor),
-                                  ),
-                                ],
-                              )
-                            ],
                           ),
-                        ),
-                      );
-                    }).toList(),
-                  ]),
-                );
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  // child row kedua
+                  historyWidget(transactions: transactions),
+                ]);
               }
             },
           );
         }
       },
+    );
+  }
+}
+
+class historyWidget extends StatelessWidget {
+  const historyWidget({
+    super.key,
+    required this.transactions,
+  });
+
+  final List<Transaction> transactions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: transactions.length,
+        itemBuilder: (context, index) {
+          final transaction = transactions[index];
+          String imagePath = '';
+          String namePath = '';
+
+          if (transaction.productType == 'bpjsks') {
+            imagePath = 'assets/wifi_icon.png';
+            namePath = 'Wifi';
+          } else if (transaction.productType == 'paket_data') {
+            imagePath = 'assets/pulsa_icon.png';
+            namePath = 'Paket Data';
+          } else if (transaction.productType == 'pulsa') {
+            imagePath = 'assets/pulsa_icon.png';
+            namePath = 'Pulsa';
+          } else if (transaction.productType == 'topup') {
+            imagePath = 'assets/top_up_icon.png';
+            namePath = 'Top Up';
+          }
+
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      TransactionHistory(transaction: transaction),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30, left: 40, right: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        imagePath,
+                        width: 55,
+                      ),
+                      const SizedBox(width: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            namePath,
+                            style: blackFont16.copyWith(color: Colors.black),
+                          ),
+                          Text(
+                            DateFormat('d MMMM yyyy - HH.mm').format(
+                              DateTime.parse(transaction.createdAt),
+                            ),
+                            style: blackFont14.copyWith(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Text(
+                        transaction.price != null
+                            ? '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}'
+                            : '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
+                        style: blackFont16G.copyWith(color: redColor),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

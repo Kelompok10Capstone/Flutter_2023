@@ -45,7 +45,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
             Padding(
               padding: const EdgeInsets.only(top: 50),
               child: Text(
-                'Pembayaran Pulsa',
+                widget.transaction.description,
                 style: blackFont14G.copyWith(color: Colors.black),
               ),
             ),
@@ -59,7 +59,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                   Text(
-                    'TLKM15.00',
+                    widget.transaction.productType,
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                 ],
@@ -75,7 +75,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                   Text(
-                    '082278xxxx',
+                    widget.transaction.phoneNumber,
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                 ],
@@ -91,7 +91,23 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                   Text(
-                    'Rp 16.500',
+                    ('Rp. ${widget.transaction.price}').toString(),
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Diskon',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                  Text(
+                    ('Rp. ${widget.transaction.discountPrice}').toString(),
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                 ],
@@ -127,7 +143,8 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                               style: blackFont14G.copyWith(color: Colors.black),
                             ),
                             Text(
-                              'Rp 16.500',
+                              ('Rp. ${widget.transaction.totalPrice + widget.transaction.discountPrice}')
+                                  .toString(),
                               style: blackFont14G.copyWith(color: Colors.black),
                             ),
                           ],

@@ -9,6 +9,7 @@ class Transaction {
   final int adminFee;
   final int price;
   final int amount;
+  final String phoneNumber;
   final int totalPrice;
   final String createdAt;
   final String updatedAt;
@@ -25,6 +26,7 @@ class Transaction {
     required this.adminFee,
     required this.price,
     required this.amount,
+    required this.phoneNumber,
     required this.totalPrice,
     required this.createdAt,
     required this.updatedAt,
@@ -47,6 +49,7 @@ class Transaction {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'] ?? '',
+      phoneNumber: json['phone_number'] ?? '',
     );
   }
 }
