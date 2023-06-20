@@ -1,6 +1,11 @@
 import 'package:capstone_flutter/view/screen/billing_history_screen/transaction_history_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/apis/history.dart';
+import '../../../models/apis/login.dart';
+import '../../../models/history_model.dart';
 import '../../../utils/const/theme.dart';
 
 class BillingHistory extends StatefulWidget {
@@ -175,235 +180,233 @@ class CompletedScreen extends StatefulWidget {
 }
 
 class _CompletedScreenState extends State<CompletedScreen> {
+  late List<Transaction> transactions;
+  late SharedPreferences _prefs;
+  late Future<String> tokenFuture;
+  @override
+  void initState() {
+    super.initState();
+    tokenFuture = getToken();
+  }
+
+  Future<String> getToken() async {
+    final loginController = LoginController();
+    final token = await loginController.getToken();
+    return token;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
-                    ),
-                    context: context,
-                    builder: (context) => const SortScreen(),
-                  );
-                },
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 25, left: 50),
-                      child: Image(
-                        image: AssetImage('assets/sort_icon.png'),
-                        width: 30,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25, left: 15),
-                      child: Text(
-                        'Urutkan',
-                        style: blackFont16.copyWith(color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) => const FilterScreen(),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 25, left: 105),
-                          child: Image(
-                            image: AssetImage('assets/filter_icon.png'),
-                            width: 28,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 15),
-                          child: Text(
-                            'Filter',
-                            style: blackFont16.copyWith(color: Colors.black),
-                          ),
-                        ),
-                      ],
-                    ),
+    return FutureBuilder<String>(
+      future: tokenFuture,
+      builder: (context, tokenSnapshot) {
+        if (!tokenSnapshot.hasData) {
+          return const Text('Token is empty');
+        } else {
+          final token = tokenSnapshot.data!;
+
+          return FutureBuilder<List<Transaction>>(
+            future: TransactionApi.fetchTransactions(token),
+            builder: (context, transactionSnapshot) {
+              if (transactionSnapshot.connectionState ==
+                  ConnectionState.waiting) {
+                return const Center(
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(),
                   ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 24),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TransactionHistory()));
-                  },
-                  child: Stack(
+                );
+              } else if (transactionSnapshot.hasError) {
+                return Text('Error: ${transactionSnapshot.error}');
+              } else if (!transactionSnapshot.hasData) {
+                return const Text('No transactions available');
+              } else {
+                final transactions = transactionSnapshot.data!;
+
+                return Column(children: [
+                  Row(
                     children: [
-                      const Image(
-                        image: AssetImage('assets/pulsa_icon.png'),
-                        width: 55,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 60),
-                        child: Text(
-                          'Pulsa',
-                          style: blackFont16.copyWith(color: Colors.black),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
+                            context: context,
+                            builder: (context) => const SortScreen(),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(top: 25, left: 50),
+                              child: Image(
+                                image: AssetImage('assets/sort_icon.png'),
+                                width: 30,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25, left: 15),
+                              child: Text(
+                                'Urutkan',
+                                style:
+                                    blackFont16.copyWith(color: Colors.black),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, left: 60),
-                        child: Text(
-                          '2 Mei 2023  - 22:56',
-                          style: blackFont14.copyWith(color: Colors.black),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 260),
-                        child: Text(
-                          '- Rp. 16.500',
-                          style: blackFont16G.copyWith(color: redColor),
-                        ),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (context) => const FilterScreen(),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 25, left: 105),
+                                  child: Image(
+                                    image: AssetImage('assets/filter_icon.png'),
+                                    width: 28,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 25, left: 15),
+                                  child: Text(
+                                    'Filter',
+                                    style: blackFont16.copyWith(
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+
+                  // child row kedua
+                  historyWidget(transactions: transactions),
+                ]);
+              }
+            },
+          );
+        }
+      },
+    );
+  }
+}
+
+class historyWidget extends StatelessWidget {
+  const historyWidget({
+    super.key,
+    required this.transactions,
+  });
+
+  final List<Transaction> transactions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: transactions.length,
+        itemBuilder: (context, index) {
+          final transaction = transactions[index];
+          String imagePath = '';
+          String namePath = '';
+
+          if (transaction.productType == 'telkom') {
+            imagePath = 'assets/wifi_icon.png';
+            namePath = 'Wifi';
+          } else if (transaction.productType == 'paket_data') {
+            imagePath = 'assets/pulsa_icon.png';
+            namePath = 'Paket Data';
+          } else if (transaction.productType == 'pulsa') {
+            imagePath = 'assets/pulsa_icon.png';
+            namePath = 'Pulsa';
+          } else if (transaction.productType == 'topup') {
+            imagePath = 'assets/top_up_icon.png';
+            namePath = 'Top Up';
+          }
+
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      TransactionHistory(transaction: transaction),
                 ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30, left: 40, right: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        imagePath,
+                        width: 55,
+                      ),
+                      const SizedBox(width: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            namePath,
+                            style: blackFont16.copyWith(color: Colors.black),
+                          ),
+                          Text(
+                            DateFormat('d MMMM yyyy - HH.mm').format(
+                              DateTime.parse(transaction.createdAt),
+                            ),
+                            style: blackFont14.copyWith(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      if (transaction.price != 0 &&
+                          transaction.status != 'unpaid')
+                        Text(
+                          '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}',
+                          style: blackFont16G.copyWith(color: redColor),
+                        ),
+                      if (transaction.price != 0 &&
+                          transaction.status == 'unpaid')
+                        Text(
+                          'Pending',
+                          style: blackFont16G.copyWith(color: redColor),
+                        ),
+                      if (transaction.amount != 0)
+                        Text(
+                          '+ Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.amount)}',
+                          style: blackFont16G.copyWith(color: Colors.green),
+                        ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 24),
-                child: Stack(
-                  children: [
-                    const Image(
-                      image: AssetImage('assets/pln_icon.png'),
-                      width: 55,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 60),
-                      child: Text(
-                        'PLN',
-                        style: blackFont16.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 60),
-                      child: Text(
-                        '2 Mei 2023  - 18:56',
-                        style: blackFont14.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 250),
-                      child: Text(
-                        '- Rp. 100.000',
-                        style: blackFont16G.copyWith(color: redColor),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 24),
-                child: Stack(
-                  children: [
-                    const Image(
-                      image: AssetImage('assets/bpjs_icon.png'),
-                      width: 50,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 60),
-                      child: Text(
-                        'BPJS',
-                        style: blackFont16.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 60),
-                      child: Text(
-                        '2 Mei 2023  - 16:56',
-                        style: blackFont14.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 250),
-                      child: Text(
-                        '- Rp. 150.000',
-                        style: blackFont16G.copyWith(color: redColor),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 24),
-                child: Stack(
-                  children: [
-                    const Image(
-                      image: AssetImage('assets/top_up_icon.png'),
-                      width: 50,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 60),
-                      child: Text(
-                        'Pulsa',
-                        style: blackFont16.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 60),
-                      child: Text(
-                        '2 Mei 2023  - 10:56',
-                        style: blackFont14.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 250),
-                      child: Text(
-                        '+ Rp. 500.000',
-                        style: blackFont16G.copyWith(
-                            color: const Color(0xFF319915)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+            ),
+          );
+        },
       ),
     );
   }
