@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
-import '../../../utils/const/urls.dart';
-import '../../pulsa_paket_data.dart';
 
-class PulsaPaketDataApi {
+import '../../../utils/const/urls.dart';
+import '../../top_up_model.dart';
+
+class TopUpDioDataApi {
   late String token;
 
-  PulsaPaketDataApi(this.token);
+  TopUpDioDataApi(this.token);
 
   Dio dioApi() {
     BaseOptions options = BaseOptions(
@@ -20,27 +21,26 @@ class PulsaPaketDataApi {
     return dio;
   }
 
-  Future<PulsaPaketDataResponse> getPulsaPaketData(String phone) async {
-    final result = await _getRequest(
-      endpoint: Urls.pulsapaketdataList,
+  Future<TopUpResponse> postTopUpApi(String codeBank) async {
+    final result = await _postRequest(
+      endpoint: Urls.topUp,
       params: {
-        'phone_number': phone,
+        'bank_code': codeBank,
       },
     );
-    PulsaPaketDataResponse response =
-        PulsaPaketDataResponse.fromJson(result.data!);
+    TopUpResponse response = TopUpResponse.fromJson(result.data!);
 
     return response;
   }
 
-  Future<Response<Map<String, dynamic>>> _getRequest({
+  Future<Response<Map<String, dynamic>>> _postRequest({
     required String endpoint,
     Map<String, dynamic>? params,
   }) async {
     Dio dio = dioApi();
     try {
       Response<Map<String, dynamic>> response =
-          await dio.get(endpoint, queryParameters: params);
+          await dio.post(endpoint, queryParameters: params);
       return response;
     } catch (e) {
       if (e is DioException) {

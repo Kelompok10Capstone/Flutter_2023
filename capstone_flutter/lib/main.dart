@@ -1,5 +1,7 @@
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
 import 'package:capstone_flutter/view_model/app_manajer.dart';
+import 'package:capstone_flutter/view_model/top_up/top_up_provider.dart';
+import 'package:capstone_flutter/view_model/top_up/top_up_view_model.dart';
 import 'package:capstone_flutter/view_model/user_provider/user_provider.dart';
 import 'package:capstone_flutter/view_model/wifi_provider/wifi_provider.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => PaketDataProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TopUpViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TopUPDataViewModel(),
         )
       ],
       child: ScreenUtilInit(

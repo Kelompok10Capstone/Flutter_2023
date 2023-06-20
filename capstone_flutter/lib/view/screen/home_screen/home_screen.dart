@@ -323,9 +323,13 @@ class _HomeScreenState extends State<HomeScreen>
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TopUpScreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TopUpScreen(
+                              token: token,
+                            ),
+                          ),
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.only(top: 252, left: 314),
