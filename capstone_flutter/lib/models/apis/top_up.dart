@@ -21,6 +21,7 @@ class TopUpApi {
 
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
+      print('ini json data : $jsonData');
       return TopUpR.fromJson(jsonData['data']);
     } else {
       throw Exception('Failed to create Virtual Account');
