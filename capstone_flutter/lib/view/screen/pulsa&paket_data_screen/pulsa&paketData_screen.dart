@@ -61,6 +61,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       token = _prefs.getString('token') ?? '';
+      // ignore: avoid_print
       print("token ppd : $token");
     });
   }
@@ -171,6 +172,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
+    // ignore: unused_local_variable
     final pakeDataProvider =
         Provider.of<PaketDataProvider>(context, listen: false);
     // final paketdataDataProvider = Provider.of<PaketDataViewModel>(context);

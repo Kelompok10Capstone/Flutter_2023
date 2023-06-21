@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../wifi_model.dart';
-
 class PayWifi {
   static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/pay';
 
@@ -28,12 +26,16 @@ class PayWifi {
     if (response.statusCode == 202) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
+      // ignore: avoid_print
       print('Berhasil: ${response.statusCode}');
+      // ignore: avoid_print
       print('Response: ${response.body}');
 
       if (metadata['status'] == 202) {
         final wifiId = jsonData['id'];
+        // ignore: avoid_print
         print('Berhasil: ${response.statusCode}');
+        // ignore: avoid_print
         print('Response: ${response.body}');
 
         return wifiId;

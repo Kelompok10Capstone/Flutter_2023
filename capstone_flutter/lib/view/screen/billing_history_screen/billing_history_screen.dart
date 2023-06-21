@@ -1,8 +1,6 @@
 import 'package:capstone_flutter/view/screen/billing_history_screen/transaction_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../models/apis/history.dart';
 import '../../../models/apis/login.dart';
 import '../../../models/history_model.dart';
@@ -181,7 +179,6 @@ class CompletedScreen extends StatefulWidget {
 
 class _CompletedScreenState extends State<CompletedScreen> {
   late List<Transaction> transactions;
-  late SharedPreferences _prefs;
   late Future<String> tokenFuture;
   @override
   void initState() {
@@ -311,6 +308,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
   }
 }
 
+// ignore: camel_case_types
 class historyWidget extends StatelessWidget {
   const historyWidget({
     super.key,
@@ -392,7 +390,7 @@ class historyWidget extends StatelessWidget {
                       if (transaction.price != 0 &&
                           transaction.status == 'unpaid')
                         Text(
-                          'Pending',
+                          'Gagal',
                           style: blackFont16G.copyWith(color: redColor),
                         ),
                       if (transaction.amount != 0)

@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
@@ -285,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Padding(
                       padding: const EdgeInsets.only(top: 270, left: 44),
                       child: Text(
-                        'Rp.$myBalance',
+                        'Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)}',
                         style: whiteFont25.copyWith(
                           color: Colors.white,
                         ),

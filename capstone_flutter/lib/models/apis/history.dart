@@ -29,7 +29,9 @@ class TransactionApi {
           .map((transaction) => Transaction.fromJson(transaction))
           .toList();
     } else {
+      // ignore: avoid_print
       print(fullUri);
+      // ignore: avoid_print
       print(token);
       throw Exception('Failed to fetch transactions');
     }

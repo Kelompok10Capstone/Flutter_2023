@@ -72,6 +72,7 @@ class PulsaPaketDataApi {
       return response;
     } catch (e) {
       if (e is DioException) {
+        // ignore: avoid_print
         print(e.response?.data);
       }
       rethrow;

@@ -45,6 +45,7 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
   @override
   void initState() {
     super.initState();
+    // ignore: avoid_print
     print('pin token : ${widget.token}');
   }
 

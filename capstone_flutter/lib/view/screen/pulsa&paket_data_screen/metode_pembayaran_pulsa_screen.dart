@@ -39,14 +39,8 @@ class MetodePembayaranPulsaScreen extends StatefulWidget {
 class _MetodePembayaranPulsaScreenState
     extends State<MetodePembayaranPulsaScreen> {
   String? selectedRadio;
+  // ignore: unused_field
   late SharedPreferences _prefs;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print('pembayaran ppd : ${widget.token}');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -305,10 +299,12 @@ class _MetodePembayaranPulsaScreenState
                   ),
                 );
               } else {
+                // ignore: avoid_print
                 print(widget.id);
                 // var saldo =
                 //     int.parse(myBalance.toString()) - int.parse(widget.price);
                 // var saldo = myBalance.toInt() - widget.price + widget.adminFee;
+                // ignore: avoid_print
                 print('saldo : $saldo');
                 Navigator.push(
                   context,

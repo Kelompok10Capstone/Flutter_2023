@@ -38,20 +38,27 @@ class PayPaketData {
     if (response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
+      // ignore: avoid_print
       print('Berhasil: ${response.statusCode}');
+      // ignore: avoid_print
       print('Response: ${response.body}');
 
       if (metadata['status'] == 201) {
         final ppdId = jsonData['id'];
+        // ignore: avoid_print
         print('Berhasil: ${response.statusCode}');
+        // ignore: avoid_print
         print('Response: ${response.body}');
 
         return ppdId;
       } else {
+        // ignore: avoid_print
         print('Payment failed: ${metadata['message']}');
       }
     } else {
+      // ignore: avoid_print
       print('error: ${response.statusCode}');
     }
+    return null;
   }
 }

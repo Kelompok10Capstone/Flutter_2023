@@ -23,7 +23,9 @@ class WifiInquiryApi {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         final data = jsonData['data'];
+        // ignore: unused_local_variable
         final metadata = jsonData['metadata'];
+        // ignore: avoid_print
         print(data);
 
         return WiFiInquiryResponse.fromJson(data);
@@ -37,6 +39,7 @@ class WifiInquiryApi {
     } catch (e) {
       // Tangkap error dan tampung pesan error dalam variabel
       String errorMessage = 'Error occurred: $e';
+      // ignore: avoid_print
       print(errorMessage);
       return null;
     }

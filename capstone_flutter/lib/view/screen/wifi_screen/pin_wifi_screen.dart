@@ -1,6 +1,5 @@
 import 'package:capstone_flutter/models/apis/pay_wifi.dart';
 import 'package:capstone_flutter/view/screen/wifi_screen/ilustration_success_wifi_screen.dart';
-import 'package:capstone_flutter/view/screen/wifi_screen/success_transaction_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +57,7 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       token = _prefs.getString('token') ?? '';
+      // ignore: avoid_print
       print(token);
     });
   }
@@ -75,6 +75,7 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
         print(payWifiResponse);
 
         // Memperbarui nilai balance pada UserProvider
+        // ignore: use_build_context_synchronously
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         final newBalance =
             widget.balanceNow; // Ganti dengan nilai balance yang baru

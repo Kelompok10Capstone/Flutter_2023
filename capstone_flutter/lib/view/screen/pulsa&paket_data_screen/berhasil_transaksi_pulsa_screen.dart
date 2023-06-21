@@ -55,12 +55,14 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
     return Consumer<PaketDataProvider>(
       builder: (context, paketDataProvider, _) {
         final pulsatData = paketDataProvider.pulsa;
 
+        // ignore: unused_local_variable
         String price = pulsatData!.price.toString();
 
         return Scaffold(
@@ -95,7 +97,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                       children: [
                         Text(
                           DateFormat('dd MMMM yyyy. HH:mm')
-                              .format(widget.createdAt as DateTime),
+                              .format(widget.createdAt),
                           style: blackFont12.copyWith(fontSize: 10),
                         ),
                         Text(
@@ -188,7 +190,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 // color: Colors.green[100],
-                                color: Color(0xffBADDB1),
+                                color: const Color(0xffBADDB1),
                               ),
                               width: MediaQuery.of(context).size.width,
                               height: 34,

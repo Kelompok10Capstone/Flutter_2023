@@ -43,6 +43,7 @@ class LoginController {
         // ignore: avoid_print
         print('Profile Response body: ${profileResponse.body}');
         final userId = User.fromJson(profileJsonData);
+        // ignore: use_build_context_synchronously
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.updateUserInfo(userId.name, userId.phone, userId.balance);
 
