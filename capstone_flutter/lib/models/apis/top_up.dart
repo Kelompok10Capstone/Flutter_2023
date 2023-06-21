@@ -3,7 +3,7 @@ import 'package:capstone_flutter/models/topup_models.dart';
 import 'package:http/http.dart' as http;
 
 class TopUpApi {
-  static const String baseUrl = 'http://34.101.78.228:2424/api/v1'; // Ganti dengan URL endpoint Anda
+  static const String baseUrl = 'http://34.101.78.228:2424/api/v1/amount'; // Ganti dengan URL endpoint Anda
 
   // Fungsi untuk membuat Virtual Account
   static Future<TopUpR> createVirtualAccount(

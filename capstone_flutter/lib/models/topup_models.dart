@@ -1,5 +1,5 @@
 class TopUp {
-  final String bankCode;
+  final String? bankCode;
 
   TopUp({
     required this.bankCode,
