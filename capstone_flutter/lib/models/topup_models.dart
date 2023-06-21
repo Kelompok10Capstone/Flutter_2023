@@ -13,35 +13,35 @@ class TopUp {
 }
 
 class TopUpR {
-  String id;
-  DateTime createdAt;
-  DateTime updatedAt;
-  DateTime deletedAt;
-  String userId;
-  String vaNumber;
-  String vaStatus;
-  String bankCode;
-  double amount;
-  int expirationTime;
-  String usernameDisplay;
+  final String id;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? deletedAt;
+  final String userId;
+  final String vaNumber;
+  final String vaStatus;
+  final String bankCode;
+  final double amount;
+  final int? expirationTime;
+  final String? usernameDisplay;
 
   TopUpR({
     required this.id,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.deletedAt,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
     required this.userId,
     required this.vaNumber,
     required this.vaStatus,
     required this.bankCode,
-    required this.amount,
-    required this.expirationTime,
-    required this.usernameDisplay,
+    this.amount = 0,
+    this.expirationTime,
+    this.usernameDisplay,
   });
 
   factory TopUpR.fromJson(Map<String, dynamic> json) {
     return TopUpR(
-      id: json['data']['id'],
+      id: json['data']['id'] ?? "",
       createdAt: DateTime.parse(json['data']['CreatedAt']),
       updatedAt: DateTime.parse(json['data']['UpdatedAt']),
       deletedAt: json['data']['DeletedAt'],
