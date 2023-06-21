@@ -1126,7 +1126,7 @@ class _HomeScreenState extends State<HomeScreen>
                         onPressed: () async {
                           final request = WiFiInquiryRequest(
                             customerId: pelangganControllerWifi.text,
-                            discountId: '48b286df-6bb9-4027-b847-0820015ea68c',
+                            // discountId: '48b286df-6bb9-4027-b847-0820015ea68c',
                             productId: 'TELKOM',
                           );
 

@@ -1,11 +1,11 @@
 class WiFiInquiryRequest {
   final String customerId;
-  late String discountId;
+  late String? discountId;
   late String productId;
 
   WiFiInquiryRequest({
     required this.customerId,
-    required this.discountId,
+    this.discountId,
     required this.productId,
   });
 
