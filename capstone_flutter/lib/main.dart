@@ -7,6 +7,7 @@ import 'package:capstone_flutter/view_model/wifi_provider/wifi_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'models/apis/top_up/top_up_api_dio.dart';
 import 'view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
@@ -40,9 +41,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => TopUpViewModel(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => TopUPDataViewModel(),
-        )
+        // ChangeNotifierProvider(
+        //   create: (_) => TopUPDataViewModel(),
+        // ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 800),

@@ -2,38 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/apis/top_up/top_up_api_dio.dart';
+import '../../../models/top_up_model.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/top_up/top_up_provider.dart';
 import '../../../view_model/top_up/top_up_view_model.dart';
 import '../../../view_model/user_provider/user_provider.dart';
 
 class ReplenishFunds extends StatefulWidget {
-  final String? token;
-  final String? id;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  // final String token;
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
   final dynamic deletedAt;
-  final String? userId;
-  final String? vaNumber;
-  final String? vaStatus;
-  final String? bankCode;
-  final String? amount;
-  // final int expirationTime;
+  final String userId;
+  final String vaNumber;
+  final String vaStatus;
+  final String bankCode;
+  final int amount;
+  final int expirationTime;
   final String? usernameDisplay;
 
   const ReplenishFunds({
     super.key,
-    this.token,
-    this.id,
-    this.createdAt,
-    this.updatedAt,
+    // required this.token,
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
     this.deletedAt,
-    this.userId,
-    this.vaNumber,
-    this.vaStatus,
-    this.bankCode,
-    this.amount,
-    // required this.expirationTime,
+    required this.userId,
+    required this.vaNumber,
+    required this.vaStatus,
+    required this.bankCode,
+    required this.amount,
+    required this.expirationTime,
     this.usernameDisplay,
   });
 
@@ -41,7 +43,8 @@ class ReplenishFunds extends StatefulWidget {
   State<ReplenishFunds> createState() => _ReplenishFundsState();
 }
 
-class _ReplenishFundsState extends State<ReplenishFunds> {
+class _ReplenishFundsState extends State<ReplenishFunds>
+    with SingleTickerProviderStateMixin {
   final List<Item> _data = generateItems();
   late SharedPreferences _prefs;
 
@@ -49,12 +52,12 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print('token ngehit Va : ${widget.token}');
+    // print('token ngehit Va : ${widget.token}');
   }
 
   @override
   Widget build(BuildContext context) {
-    final topUpProvider = Provider.of<TopUPDataViewModel>(context);
+    final topUpProvider = Provider.of<TopUpViewModel>(context);
     final userProvider = Provider.of<UserProvider>(context);
 
     // Get the username
@@ -138,12 +141,29 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Text(
-                    topupData?.vaNumber ?? 'No Virtual Account',
-                    style: blackFont18.copyWith(color: Colors.black),
-                  ),
-                ),
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Text(
+                      widget.vaNumber,
+                      style: blackFont14.copyWith(color: Colors.black),
+                    )
+                    // child: Consumer<TopUPDataViewModel>(
+                    //   builder: (context, topupDataProvider, _) {
+                    //     final List<TopUpResponse> topupData =
+                    //         topupDataProvider.topupusers;
+                    //     if (topupData.isEmpty) {
+                    //       return Text(
+                    //         'No data available',
+                    //         style: blackFont18.copyWith(color: Colors.black),
+                    //       );
+                    //     }
+                    //     final String vaNumber = topupData[0].vaNumber;
+                    //     return Text(
+                    //       vaNumber,
+                    //       style: blackFont18.copyWith(color: Colors.black),
+                    //     );
+                    //   },
+                    // ),
+                    ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: InkWell(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../view/screen/top_up_screen/top_up_screen.dart';
+import '../../models/top_up_model.dart';
 
 class TopUpViewModel extends ChangeNotifier {
-  TopUPData? _response;
+  TopUpResponse? _response;
 
-  TopUPData? get response => _response;
+  TopUpResponse? get response => _response;
 
-  void setResponse(TopUPData response) {
+  void setResponse(TopUpResponse response) {
     _response = response;
     notifyListeners();
   }

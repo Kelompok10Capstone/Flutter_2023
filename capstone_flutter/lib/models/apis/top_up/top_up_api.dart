@@ -1,5 +1,7 @@
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../../top_up_model.dart';
 
 // class TopUpApi {
 //   static const baseUrl = 'http://34.101.78.228:2424/api/v1/amount';
@@ -46,3 +48,35 @@
 //     }
 //   }
 // }
+
+class TopUpApi {
+  static const baseUrl = 'http://34.101.78.228:2424/api/v1/amount';
+
+  static Future<TopUpResponse> topUpCreate(
+    TopUpRequest request,
+    String token,
+  ) async {
+    final response = await http.post(
+      Uri.parse(baseUrl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(request.bankCode),
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final data = jsonData['data'];
+      // ignore: unused_local_variable
+      final metadata = jsonData['metadata'];
+      // ignore: avoid_print
+      print(data);
+
+      return TopUpResponse.fromMap(jsonData);
+    } else {
+      throw Exception(
+          'Failed to inquire WiFi bill. Status code: ${response.statusCode}');
+    }
+  }
+}
