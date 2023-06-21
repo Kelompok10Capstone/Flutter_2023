@@ -41,12 +41,13 @@ class _TopUpScreenState extends State<TopUpScreen> {
           ),
           Row(
             children: [
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ReplenishFunds()));
+                          builder: (context) =>
+                              const ReplenishFunds(bankCode: "014")));
                 },
                 child: Row(
                   children: [

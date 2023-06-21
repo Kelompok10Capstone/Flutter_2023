@@ -1,9 +1,15 @@
+import 'package:capstone_flutter/view_model/topup_provider/topup_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider/user_provider.dart';
+import '../home_screen/home_screen.dart';
 
 class ReplenishFunds extends StatefulWidget {
-  const ReplenishFunds({super.key});
+  final String bankCode;
+  const ReplenishFunds({super.key, required this.bankCode});
 
   @override
   State<ReplenishFunds> createState() => _ReplenishFundsState();
@@ -11,6 +17,13 @@ class ReplenishFunds extends StatefulWidget {
 
 class _ReplenishFundsState extends State<ReplenishFunds> {
   final List<Item> _data = generateItems();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<TopUpProvider>().createVirtualAccount(widget.bankCode);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +102,17 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Text(
-                '6239 0548 1376 9327',
-                style: blackFont18.copyWith(color: Colors.black),
+              child: Consumer<TopUpProvider>(
+                builder: (context, value, child) {
+                  return Text(
+                    value.topUp?.vaNumber ?? "",
+                    style: blackFont18.copyWith(color: Colors.black),
+                  );
+                },
+                // child: Text(
+                //   '6239 0548 1376 9327',
+                //   style: blackFont18.copyWith(color: Colors.black),
+                // ),
               ),
             ),
             Padding(
@@ -99,7 +120,10 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
               child: InkWell(
                 splashColor: Colors.green.withOpacity(0.5),
                 highlightColor: const Color(0xFF1A73E9).withOpacity(0.4),
-                onTap: () {},
+                onTap: () {
+                  final va = context.read<TopUpProvider>().topUp?.vaNumber;
+                  Clipboard.setData(ClipboardData(text: va ?? ""));
+                },
                 borderRadius: BorderRadius.circular(13),
                 child: Container(
                   decoration: BoxDecoration(
@@ -118,10 +142,12 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                'Nama Akun : Ijat Sutresno',
-                style: blackFont14G.copyWith(color: Colors.grey),
-              ),
+              child: Consumer<UserProvider>(builder: (context, value, child) {
+                return Text(
+                  'Nama Akun : ${value.name}',
+                  style: blackFont14G.copyWith(color: Colors.grey),
+                );
+              }),
             ),
             Row(
               children: [
@@ -182,7 +208,12 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const NavBar(initialIndex: 0)),
+                  );
+                },
                 child: Text(
                   'Selesai',
                   style: whiteFont16,
