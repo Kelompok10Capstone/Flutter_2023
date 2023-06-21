@@ -2,8 +2,6 @@ import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supercharged/supercharged.dart';
-
 import '../../../utils/const/theme.dart';
 import '../../../view_model/user_provider/user_provider.dart';
 
@@ -34,6 +32,7 @@ class PaymentMethodWifi extends StatefulWidget {
 
 class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
   String? selectedRadio;
+  // ignore: unused_field
   late SharedPreferences _prefs;
   // String balance = '0';
   // Future<void> initializeData() async {
@@ -259,7 +258,9 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                   ),
                 );
               } else {
+                // ignore: avoid_print
                 print(widget.id);
+                // ignore: avoid_print
                 print('saldo : $saldo');
                 Navigator.push(
                   context,

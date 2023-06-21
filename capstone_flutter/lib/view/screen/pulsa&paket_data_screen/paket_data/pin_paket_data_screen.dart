@@ -2,8 +2,6 @@ import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../models/apis/cek_pin_api.dart';
 import '../../../../models/apis/pulsa_paket_data/pay_paket_data.dart';
 import '../../../../view_model/user_provider/user_provider.dart';
@@ -48,6 +46,7 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
   @override
   void initState() {
     super.initState();
+    // ignore: avoid_print
     print('pin token : ${widget.token}');
   }
 

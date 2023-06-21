@@ -6,31 +6,42 @@ import '../wifi_model.dart';
 class WifiInquiryApi {
   static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/inquiry';
 
-  static Future<WiFiInquiryResponse> inquireWiFiBill(
+  static Future<WiFiInquiryResponse?> inquireWiFiBill(
     WiFiInquiryRequest request,
     String token,
   ) async {
-    final response = await http.post(
-      Uri.parse(baseUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode(request.toJson()),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(baseUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(request.toJson()),
+      );
 
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      final data = jsonData['data'];
-      // ignore: unused_local_variable
-      final metadata = jsonData['metadata'];
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        final data = jsonData['data'];
+        // ignore: unused_local_variable
+        final metadata = jsonData['metadata'];
+        // ignore: avoid_print
+        print(data);
+
+        return WiFiInquiryResponse.fromJson(data);
+      } else if (response.statusCode == 500) {
+        throw Exception(
+            'Failed to inquire WiFi bill. Status code: ${response.statusCode}. Invalid customer ID.');
+      } else {
+        throw Exception(
+            'Failed to inquire WiFi bill. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Tangkap error dan tampung pesan error dalam variabel
+      String errorMessage = 'Error occurred: $e';
       // ignore: avoid_print
-      print(data);
-
-      return WiFiInquiryResponse.fromJson(data);
-    } else {
-      throw Exception(
-          'Failed to inquire WiFi bill. Status code: ${response.statusCode}');
+      print(errorMessage);
+      return null;
     }
   }
 }

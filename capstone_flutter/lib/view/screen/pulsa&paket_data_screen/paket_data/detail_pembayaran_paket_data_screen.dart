@@ -1,8 +1,6 @@
 import 'package:capstone_flutter/view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../models/pulsa_paket_data.dart';
 import '../../../../utils/const/theme.dart';
 import '../../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
@@ -23,15 +21,8 @@ class _DetailPembayaranPaketDataScreenState
 
   @override
   void dispose() {
-    super.dispose();
     promoController.dispose();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print("detail ppd : ${widget.token}");
+    super.dispose();
   }
 
   @override
@@ -42,8 +33,6 @@ class _DetailPembayaranPaketDataScreenState
     return Consumer<PaketDataProvider>(
       builder: (context, paketDataProvider, _) {
         final paketData = paketDataProvider.paketData;
-
-        String price = paketData!.price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -58,7 +47,7 @@ class _DetailPembayaranPaketDataScreenState
             elevation: 0,
           ),
           body: paketData == null
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : SingleChildScrollView(
@@ -359,7 +348,8 @@ class _DetailPembayaranPaketDataScreenState
                   ),
                 ),
                 onPressed: () {
-                  List<PulsaPaketdataData> users = pulsaPaketDataProvider.users;
+                  List<PulsaPaketdataData> users =
+                      pulsaPaketDataProvider.paketData;
                   int index =
                       0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
                   String providerText =
@@ -374,9 +364,8 @@ class _DetailPembayaranPaketDataScreenState
                   String idText = users.isNotEmpty ? users[index].id : '';
                   String adminFeeText =
                       users.isNotEmpty ? users[index].adminFee.toString() : '';
-                  DateTime? createdAtText = users.isNotEmpty
-                      ? users[index].createdAt as DateTime?
-                      : null;
+                  DateTime? createdAtText =
+                      users.isNotEmpty ? users[index].createdAt : null;
                   // users.isNotEmpty ? users[index].adminFee.toString() : '';
 
                   Navigator.push(

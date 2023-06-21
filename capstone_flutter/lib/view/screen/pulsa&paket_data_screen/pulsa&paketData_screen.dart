@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/dummy_pulsa.dart';
 import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'detail_pembayaran_pulsa_screen.dart';
@@ -62,6 +61,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       token = _prefs.getString('token') ?? '';
+      // ignore: avoid_print
       print("token ppd : $token");
     });
   }
@@ -81,11 +81,98 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     phone62Controller.dispose();
   }
 
+  // String getProviderFromPhoneNumber(String phone) {
+  //   switch (phone) {
+  //     case "0852":
+  //     case "0853":
+  //     case "0823":
+  //     case "0851":
+  //       return "AS";
+  //     case "0811":
+  //       return "Halo";
+  //     case "0812":
+  //     case "0813":
+  //     case "0821":
+  //     case "0822":
+  //       return "Telkomsel";
+  //     case "0814":
+  //     case "0815":
+  //     case "0816":
+  //     case "0855":
+  //     case "0856":
+  //     case "0857":
+  //     case "0858":
+  //       return "Indosat";
+  //     case "0817":
+  //     case "0818":
+  //     case "0859":
+  //     case "0877":
+  //     case "0878":
+  //       return "XL";
+  //     case "0838":
+  //     case "0831":
+  //     case "0832":
+  //     case "0833":
+  //       return "Axis";
+  //     case "0895":
+  //     case "0896":
+  //     case "0897":
+  //     case "0898":
+  //     case "0899":
+  //       return "Three";
+  //     case "0881":
+  //     case "0882":
+  //     case "0883":
+  //     case "0884":
+  //     case "0885":
+  //     case "0886":
+  //     case "0887":
+  //     case "0888":
+  //     case "0889":
+  //       return "Smatfren";
+  //     default:
+  //       return "Unknown";
+  //   }
+  // }
+
+  // void checkPhoneNumber(String phoneNumber) {
+  //   final provider = getProviderFromPhoneNumber(phoneNumber);
+  //   if (provider != "Unknown") {
+  //     setState(() {
+  //       isPhoneNumberEntered = true;
+  //     });
+  //   } else {
+  //     showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text('Error'),
+  //           content: Text('Invalid phone number'),
+  //           actions: [
+  //             ElevatedButton(
+  //               onPressed: () {
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: Text('OK'),
+  //             ),
+  //           ],
+  //         );
+  //       },
+  //     );
+  //   }
+  // }
+
+  // void handlePhoneNumberSubmit() {
+  //   final phone62Number = phone62Controller.text;
+  //   checkPhoneNumber(phone62Number);
+  // }
+
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
+    // ignore: unused_local_variable
     final pakeDataProvider =
         Provider.of<PaketDataProvider>(context, listen: false);
     // final paketdataDataProvider = Provider.of<PaketDataViewModel>(context);
@@ -205,18 +292,12 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           if (value.length > 9) {
                             setState(() {
                               isPhoneNumberEntered = value.isNotEmpty;
-                              // pulsaPaketDataProvider.users.clear();
-                              // pulsaPaketDataProvider.getPhone(phone);
-                              // paketdataDataProvider.users.clear();
-                              // paketdataDataProvider.getPhone();
                             });
                           }
                         },
                         onFieldSubmitted: (value) {
                           if (value.length > 9) {
                             pulsaPaketDataProvider.getPhone(value);
-                            // pulsaPaketDataProvider.users.clear();
-                            // paketdataDataProvider.getPhone();
                           }
                         },
                       ),
@@ -257,7 +338,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                 Consumer<PulsaDanPaketDataViewModel>(
                   builder: (context, pulsaPaketDataProvider, _) {
                     final List<PulsaPaketdataData> users =
-                        pulsaPaketDataProvider.users;
+                        pulsaPaketDataProvider.paketData;
                     const int index =
                         0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
                     final String providerText =
@@ -292,57 +373,91 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: isPhoneNumberEntered ? blueColor : Colors.grey,
-              // backgroundColor: blueColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              if (_tabController?.index == 0) {
-                // Jika tab Token aktif, arahkan pengguna ke layar Pulsa
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DetailPembayaranPulsaScreen(),
-                  ),
-                );
-              } else if (_tabController?.index == 1) {
-                List<PulsaPaketdataData> users = pulsaPaketDataProvider.users;
-                int index =
-                    0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
-                String providerText =
-                    users.isNotEmpty ? users[index].provider : '';
-                String nameText = users.isNotEmpty ? users[index].name : '';
-                String descriptionText =
-                    users.isNotEmpty ? users[index].description : '';
-                String codeText = users.isNotEmpty ? users[index].code : '';
-                String priceText =
-                    users.isNotEmpty ? users[index].price.toString() : '';
-                String idText =
-                    users.isNotEmpty ? users[index].id.toString() : '';
+            onPressed: isPhoneNumberEntered
+                ? () {
+                    if (_tabController?.index == 0) {
+                      List<PulsaPaketdataData> users =
+                          pulsaPaketDataProvider.pulsa;
+                      int index =
+                          0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
+                      String providerText =
+                          users.isNotEmpty ? users[index].provider : '';
+                      String nameText =
+                          users.isNotEmpty ? users[index].name : '';
+                      String descriptionText =
+                          users.isNotEmpty ? users[index].description : '';
+                      String codeText =
+                          users.isNotEmpty ? users[index].code : '';
+                      String priceText =
+                          users.isNotEmpty ? users[index].price.toString() : '';
+                      String idText =
+                          users.isNotEmpty ? users[index].id.toString() : '';
 
-                PaketData paketData = PaketData(
-                  name: nameText,
-                  price: priceText,
-                  phone62: phone62Controller.text,
-                  provider: providerText,
-                  description: descriptionText,
-                  code: codeText,
-                  id: idText,
-                );
+                      PaketData pulsa = PaketData(
+                        name: nameText,
+                        price: priceText,
+                        phone62: phone62Controller.text,
+                        provider: providerText,
+                        description: descriptionText,
+                        code: codeText,
+                        id: idText,
+                      );
 
-                Provider.of<PaketDataProvider>(context, listen: false)
-                    .setPaketData(paketData);
-                // Jika tab Tagihan aktif, arahkan pengguna ke layar paket data
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        DetailPembayaranPaketDataScreen(token: token),
-                  ),
-                );
-              }
-            },
+                      Provider.of<PaketDataProvider>(context, listen: false)
+                          .setPulsa(pulsa);
+                      // Jika tab Token aktif, arahkan pengguna ke layar Pulsa
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailPembayaranPulsaScreen(token: token),
+                        ),
+                      );
+                    } else if (_tabController?.index == 1) {
+                      List<PulsaPaketdataData> users =
+                          pulsaPaketDataProvider.paketData;
+                      int index =
+                          0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
+                      String providerText =
+                          users.isNotEmpty ? users[index].provider : '';
+                      String nameText =
+                          users.isNotEmpty ? users[index].name : '';
+                      String descriptionText =
+                          users.isNotEmpty ? users[index].description : '';
+                      String codeText =
+                          users.isNotEmpty ? users[index].code : '';
+                      String priceText =
+                          users.isNotEmpty ? users[index].price.toString() : '';
+                      String idText =
+                          users.isNotEmpty ? users[index].id.toString() : '';
+
+                      PaketData paketData = PaketData(
+                        name: nameText,
+                        price: priceText,
+                        phone62: phone62Controller.text,
+                        provider: providerText,
+                        description: descriptionText,
+                        code: codeText,
+                        id: idText,
+                      );
+
+                      Provider.of<PaketDataProvider>(context, listen: false)
+                          .setPaketData(paketData);
+                      // Jika tab Tagihan aktif, arahkan pengguna ke layar paket data
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailPembayaranPaketDataScreen(token: token),
+                        ),
+                      );
+                    }
+                  }
+                : null,
             child: Text(
               'Lanjutkan',
               style: whiteFont14,
@@ -363,92 +478,11 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   }
 
   Widget _buildPulsaTab() {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 3 / 2,
-      ),
-      itemCount: dummyPulsaData.length,
-      itemBuilder: (context, index) {
-        final data = dummyPulsaData[index];
-
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              dummyPulsaData[index]['isSelected'] =
-                  !dummyPulsaData[index]['isSelected'];
-            });
-          },
-          child: Container(
-            // width: 15,
-            // height: 10,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: dummyPulsaData[index]['isSelected'] == true
-                    ? Color(0xff2B3990)
-                    : Colors.black,
-              ),
-              color: dummyPulsaData[index]['isSelected'] == true
-                  ? Color(0xff2B3990)
-                  : Colors.white,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${data['nominal']}',
-                    style: blackFont18.copyWith(
-                      color: dummyPulsaData[index]['isSelected'] == true
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${data['hargaJual']}',
-                        style: blueFont14.copyWith(
-                          color: dummyPulsaData[index]['isSelected'] == true
-                              ? Colors.white
-                              : Color(0xff2B3990),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        '${data['hargaCoret']}',
-                        style: blackFont12.copyWith(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildDataTab() {
     return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, viewModel, _) {
         var pulsaPaketDataProvider = viewModel;
 
-        if (pulsaPaketDataProvider.users.isEmpty) {
+        if (pulsaPaketDataProvider.pulsa.isEmpty) {
           return _buildEmptyTab();
         } else {
           return GridView.builder(
@@ -458,9 +492,9 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
               mainAxisSpacing: 10,
               childAspectRatio: 3 / 2,
             ),
-            itemCount: pulsaPaketDataProvider.users.length,
+            itemCount: pulsaPaketDataProvider.pulsa.length,
             itemBuilder: (context, index) {
-              var data = pulsaPaketDataProvider.users[index];
+              var data = pulsaPaketDataProvider.pulsa[index];
 
               return GestureDetector(
                 onTap: () {
@@ -513,13 +547,105 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                             const SizedBox(
                               width: 10,
                             ),
+                            // Text(
+                            //   'Rp.${data.price.toString()}',
+                            //   style: blackFont12.copyWith(
+                            //     color: Colors.grey,
+                            //     decoration: TextDecoration.lineThrough,
+                            //   ),
+                            // ),
+                            const Spacer(),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildDataTab() {
+    return Consumer<PulsaDanPaketDataViewModel>(
+      builder: (context, viewModel, _) {
+        var pulsaPaketDataProvider = viewModel;
+
+        if (pulsaPaketDataProvider.paketData.isEmpty) {
+          return _buildEmptyTab();
+        } else {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 3 / 2,
+            ),
+            itemCount: pulsaPaketDataProvider.paketData.length,
+            itemBuilder: (context, index) {
+              var data = pulsaPaketDataProvider.paketData[index];
+
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    data.isSelected = data.isSelected ? false : true;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: data.isSelected == true
+                          ? const Color(0xff2B3990)
+                          : Colors.black,
+                    ),
+                    color: data.isSelected == true
+                        ? const Color(0xff2B3990)
+                        : Colors.white,
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          data.name.toString(),
+                          // data.price.toString(),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: data.isSelected == true
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                             Text(
                               'Rp.${data.price.toString()}',
-                              style: blackFont12.copyWith(
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: data.isSelected == true
+                                    ? Colors.white
+                                    : const Color(0xff2B3990),
                               ),
                             ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            // Text(
+                            //   'Rp.${data.price.toString()}',
+                            //   style: blackFont12.copyWith(
+                            //     color: Colors.grey,
+                            //     decoration: TextDecoration.lineThrough,
+                            //   ),
+                            // ),
                             const Spacer(),
                           ],
                         ),
