@@ -38,7 +38,7 @@ class _DetailPembayaranPulsaScreenState
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-
+    debugPrint(pulsaPaketDataProvider.selectPulsaData?.toJson().toString());
     return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, pulsaDataProvider, _) {
         final pulsatData = pulsaDataProvider.pulsa;
@@ -338,7 +338,7 @@ class _DetailPembayaranPulsaScreenState
                         price: priceText,
                         adminFee: adminFeeText,
                         createdAt: createdAtText!,
-                        token: "",
+                        token: widget.token,
                       ),
                     ),
                   );
