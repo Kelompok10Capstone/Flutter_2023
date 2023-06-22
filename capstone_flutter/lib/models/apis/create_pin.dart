@@ -7,7 +7,7 @@ class PinController {
   PinController(this.token);
 
   Future<bool> createPin(String pin) async {
-    final url = Uri.parse('http://34.101.160.237:2424/api/v1/user/pin');
+    final url = Uri.parse('http://34.101.78.228:2424/api/v1/user/pin');
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
@@ -17,9 +17,11 @@ class PinController {
     final response = await http.put(url, headers: headers, body: body);
 
     if (response.statusCode == 200) {
+      // ignore: avoid_print
       print('berhasil: ${response.body}');
       return true;
     } else {
+      // ignore: avoid_print
       print('gagal: ${response.body}');
       return false;
     }

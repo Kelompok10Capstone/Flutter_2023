@@ -72,6 +72,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
 
+    // ketik ulang password field
+    final confirmPasswordField = TextFormField(
+      autofocus: false,
+      controller: registerController.confirmPasswordController,
+      obscureText: true,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
+        filled: true,
+        fillColor: const Color(0xffFFFFFF),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    );
+
     final numberField = TextFormField(
       autofocus: false,
       controller: registerController.numberController,
@@ -167,6 +183,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 10),
               const SizedBox(height: 10),
               Text(
+                'Nomor Hp',
+                style: blackFormFont12,
+              ),
+              const SizedBox(height: 8),
+              numberField,
+              const SizedBox(height: 10),
+              Text(
                 'Kata Sandi',
                 style: blackFormFont12,
               ),
@@ -174,13 +197,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               passwordField,
               const SizedBox(height: 10),
               Text(
-                'Nomor Hp',
+                'Ketik Ulang Kata Sandi',
                 style: blackFormFont12,
               ),
               const SizedBox(height: 8),
-              numberField,
-              const SizedBox(height: 10),
-              const SizedBox(height: 10),
+              confirmPasswordField,
               const SizedBox(height: 30),
               daftarButton,
               const SizedBox(height: 10),
@@ -230,18 +251,102 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final String name = registerController.nameController.text;
     final String email = registerController.emailController.text;
     final String password = registerController.passwordController.text;
+    final String confirmPassword =
+        registerController.confirmPasswordController.text;
     final String phone = registerController.numberController.text;
+
+    // validasi name
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Nama tidak boleh kosong'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    // validasi email
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Email tidak boleh kosong'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    // validasi Nomor Hp
+    if (phone.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Nomor Hp tidak boleh kosong'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    // validasi password
+    if (password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Kata sandi tidak boleh kosong'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    } else if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Kata sandi minimal 6 karakter'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    // validasi ketik ulang password
+    if (confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Ketik ulang kata sandi tidak boleh kosong'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    } else if (confirmPassword != password) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Kata Sandi tidak sama'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
     final User? user =
         await registerController.registerUser(name, email, phone, password);
+    // ignore: avoid_print
     print(user);
 
     if (user != null) {
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => const LoginScreen(),
         ),
       );
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Berhasil Mendaftar'),
@@ -250,6 +355,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       );
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Email sudah terdaftar'),

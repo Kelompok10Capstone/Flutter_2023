@@ -28,7 +28,7 @@ class _ModalBottomCreatePinState extends State<ModalBottomCreatePin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: ElevatedButton(
@@ -102,7 +102,7 @@ class _ModalBottomCreatePinState extends State<ModalBottomCreatePin> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => InputPinScreen()));
+                                builder: (context) => const InputPinScreen()));
                       },
                       child: Text(
                         'Lanjutkan',

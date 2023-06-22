@@ -1,9 +1,7 @@
-import 'package:capstone_flutter/view/screen/wifi_screen/modal_bottom_wifi_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
 import '../home_screen/home_screen.dart';
-import 'modal_bottom_bpjs_screen.dart';
 
 class SuccessTransactionBpjs extends StatelessWidget {
   const SuccessTransactionBpjs({super.key});

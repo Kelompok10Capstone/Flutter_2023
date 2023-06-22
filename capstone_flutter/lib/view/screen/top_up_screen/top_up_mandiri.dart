@@ -1,16 +1,30 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/const/theme.dart';
+import '../../../view_model/topup_provider/topup_provider.dart';
+import '../../../view_model/user_provider/user_provider.dart';
+import '../home_screen/home_screen.dart';
 
-class ReplenishFunds extends StatefulWidget {
-  const ReplenishFunds({super.key});
+class TopUpMandiri extends StatefulWidget {
+  final String bankCode;
+  const TopUpMandiri({super.key, required this.bankCode});
 
   @override
-  State<ReplenishFunds> createState() => _ReplenishFundsState();
+  State<TopUpMandiri> createState() => _TopUpMandiriState();
 }
 
-class _ReplenishFundsState extends State<ReplenishFunds> {
+class _TopUpMandiriState extends State<TopUpMandiri> {
   final List<Item> _data = generateItems();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<TopUpProvider>().createVirtualAccount(widget.bankCode);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,19 +60,19 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
                 const Padding(
                   padding: EdgeInsets.only(top: 30, left: 20),
                   child: Image(
-                    image: AssetImage('assets/bca.png'),
+                    image: AssetImage('assets/mandiri.png'),
                     width: 50,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, left: 20),
                   child: Text(
-                    'Transfer Bank (BCA)',
+                    'Transfer Bank (MANDIRI)',
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 105),
+                  padding: const EdgeInsets.only(top: 30, left: 70),
                   child: Text(
                     'Ganti',
                     style: blackFont14.copyWith(color: Colors.black),
@@ -83,15 +97,23 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                'Nomor Akun Virtual BCA',
+                'Nomor Akun Virtual MANDIRI',
                 style: blackFont14G.copyWith(color: Colors.grey),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Text(
-                '6239 0548 1376 9327',
-                style: blackFont18.copyWith(color: Colors.black),
+              child: Consumer<TopUpProvider>(
+                builder: (context, value, child) {
+                  return Text(
+                    value.topUp?.vaNumber ?? "",
+                    style: blackFont18.copyWith(color: Colors.black),
+                  );
+                },
+                // child: Text(
+                //   '6239 0548 1376 9327',
+                //   style: blackFont18.copyWith(color: Colors.black),
+                // ),
               ),
             ),
             Padding(
@@ -99,7 +121,10 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
               child: InkWell(
                 splashColor: Colors.green.withOpacity(0.5),
                 highlightColor: const Color(0xFF1A73E9).withOpacity(0.4),
-                onTap: () {},
+                onTap: () {
+                  final va = context.read<TopUpProvider>().topUp?.vaNumber;
+                  Clipboard.setData(ClipboardData(text: va ?? ""));
+                },
                 borderRadius: BorderRadius.circular(13),
                 child: Container(
                   decoration: BoxDecoration(
@@ -118,10 +143,12 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                'Nama Akun : Ijat Sutresno',
-                style: blackFont14G.copyWith(color: Colors.grey),
-              ),
+              child: Consumer<UserProvider>(builder: (context, value, child) {
+                return Text(
+                  'Nama Akun : ${value.name}',
+                  style: blackFont14G.copyWith(color: Colors.grey),
+                );
+              }),
             ),
             Row(
               children: [
@@ -136,6 +163,7 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10),
+              // ignore: avoid_unnecessary_containers
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -170,22 +198,27 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 90, bottom: 40),
               child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
-                backgroundColor: blueColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 155, vertical: 17),
+                  backgroundColor: blueColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Selesai',
-                style: whiteFont16,
-              ),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const NavBar(initialIndex: 0)),
+                  );
+                },
+                child: Text(
+                  'Selesai',
+                  style: whiteFont16,
+                ),
               ),
             ),
           ],
@@ -210,19 +243,17 @@ class Item {
 List<Item> generateItems() {
   return <Item>[
     Item(
-      headerValue: 'ATM BCA',
-      expandedValue: 
-          '1. Pada menu utama klik Transaksi lainnya > Transfer.\n'
+      headerValue: 'ATM MANDIRI',
+      expandedValue: '1. Pada menu utama klik Transaksi lainnya > Transfer.\n'
           '2. Masukkan nomor virtual akun 6239 0548 1376 9327.\n'
           '3. Masukkan jumlah saldo sesuai kebutuhan (Minimal isi saldo Rp10.000).\n'
           '4. Konfirmasikan transaksi dan periksa kembali rincian yang telah dimasukkan. Pastikan semuanya benar sebelum melanjutkan.\n'
           '5. Setelah transaksi dikonfirmasi, mesin ATM akan memproses. Tunggu hingga proses selesai.',
     ),
     Item(
-      headerValue: 'm-BCA (BCA Mobile)',
-      expandedValue: 
-          '1. Masuk ke akun m-banking.\n'
-          '2. Pilih menu m-Transfer > BCA virtual akun.\n'
+      headerValue: 'm-MANDIRI (MANDIRI Mobile)',
+      expandedValue: '1. Masuk ke akun m-banking.\n'
+          '2. Pilih menu m-Transfer > MANDIRI virtual akun.\n'
           '3. Masukkan virtual akun 6239 0548 1376 9327.\n'
           '4. Masukkan jumlah saldo sesuai kebutuhan (Minimal isi saldo Rp10.000).\n'
           '5. Konfirmasikan transaksi dan periksa kembali rincian yang telah dimasukkan. Pastikan semuanya benar sebelum melanjutkan.\n'

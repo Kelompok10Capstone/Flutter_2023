@@ -6,7 +6,6 @@ import '../../../models/apis/login.dart';
 import '../../../models/user_model.dart';
 import '../../../utils/const/theme.dart';
 import '../atur_ulang_screen/email_screen.dart';
-import '../atur_ulang_screen/input_pin_atur_ulang_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -68,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(10, 15, 20, 15),
-        hintText: "Enter Your Password",
+        hintText: "Masukan Password",
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
@@ -202,7 +201,52 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> loginWithEmail(BuildContext context) async {
     final String email = loginController.emailController.text;
     final String password = loginController.passwordController.text;
-    final User? user = await loginController.loginUser(email, password);
+
+    // Validasi email
+    if (email.isEmpty || !isValidEmail(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Masukkan email terlebih dahulu'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    } else if (!email.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Masukkan email yang valid'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    // Validasi password
+    if (password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Masukkan Kata Sandi'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    } else if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Kata sandi minimal 6 karakter'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    final User? user =
+        await loginController.loginUser(email, password, context);
+    // ignore: avoid_print
     print('user : $user');
 
     if (user != null) {
@@ -211,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => NavBar(initialIndex: 0),
+          builder: (context) => const NavBar(initialIndex: 0),
         ),
       );
       // ignore: use_build_context_synchronously
@@ -224,23 +268,12 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } else {
       // ignore: use_build_context_synchronously
-      return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: const Text('Unknown Error'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Tindakan yang akan dilakukan ketika tombol ditekan
-                  Navigator.of(context).pop(); // Menutup dialog
-                },
-                child: const Text('Try Again!'),
-              ),
-            ],
-          );
-        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login Gagal'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
       );
     }
   }
@@ -267,4 +300,10 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+bool isValidEmail(String email) {
+  // Implementasi validasi email sesuai kebutuhan Anda
+  final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+  return emailRegex.hasMatch(email);
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/history_model.dart';
 import '../../../utils/const/theme.dart';
 
 class TransactionHistory extends StatefulWidget {
-  const TransactionHistory({super.key});
+  final Transaction transaction;
+  const TransactionHistory({super.key, required this.transaction});
 
   @override
   State<TransactionHistory> createState() => _TransactionHistoryState();
@@ -25,115 +27,252 @@ class _TransactionHistoryState extends State<TransactionHistory> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 40),
-            child: Center(
-              child: Image(
-                image: AssetImage('assets/telkomsel.png'),
-                fit: BoxFit.contain,
-                width: 180,
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 50, left: 30),
-                child: Text(
-                  'Pembayaran Pulsa',
-                  style: blackFont14G.copyWith(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 30, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Jenis',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-                Text(
-                  'TLKM15.00',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 30, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'No. Handphone',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-                Text(
-                  '082278xxxx',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 30, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Harga',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-                Text(
-                  'Rp 16.500',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 5, left: 30, right: 30),
-            child: Divider(
-              color: Colors.black,
-              thickness: 1,
-            ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 20, right: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFBADDB1),
-                    borderRadius: BorderRadius.circular(7),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.transaction.productType == 'pulsa' ||
+                widget.transaction.productType == 'paket_data')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/telkomsel.png'),
+                    fit: BoxFit.contain,
+                    width: 180,
                   ),
-                  alignment: Alignment.center,
-                  width: 352,
-                  height: 45,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25, right: 25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Total Tagihan',
-                        style: blackFont14G.copyWith(color: Colors.black),
+                ),
+              ),
+            if (widget.transaction.productType == 'telkom')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/telkom.png'),
+                    fit: BoxFit.contain,
+                    width: 180,
+                  ),
+                ),
+              ),
+            if (widget.transaction.productType == 'topup')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/topup_money.png'),
+                    fit: BoxFit.contain,
+                    width: 180,
+                  ),
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Text(
+                widget.transaction.description,
+                style: blackFont14G.copyWith(color: Colors.black),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Jenis',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                  Text(
+                    widget.transaction.productType,
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Status',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                  Text(
+                    widget.transaction.status,
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            if (widget.transaction.productType == 'telkom')
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'No. Pelanggan',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      widget.transaction.customerId,
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            if (widget.transaction.productType == 'paket_data')
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'No. Handphone',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      widget.transaction.phoneNumber,
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Harga',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                  if (widget.transaction.status == 'unpaid')
+                    Text(
+                      '-',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  if (widget.transaction.status == 'successful' &&
+                      widget.transaction.productType != 'topup')
+                    Text(
+                      ('Rp. ${widget.transaction.price}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                  if (widget.transaction.status == 'successful' &&
+                      widget.transaction.productType == 'topup')
+                    Text(
+                      ('Rp. ${widget.transaction.amount}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Biaya Admin',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                  if (widget.transaction.status == 'unpaid')
+                    Text(
+                      '-',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    )
+                  else
+                    Text(
+                      ('Rp. ${widget.transaction.adminFee}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Diskon',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                  if (widget.transaction.status == 'unpaid')
+                    Text(
+                      '-',
+                      style: blackFont14.copyWith(color: Colors.black),
+                    )
+                  else
+                    Text(
+                      ('Rp. ${widget.transaction.discountPrice}').toString(),
+                      style: blackFont14.copyWith(color: Colors.black),
+                    ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: Divider(
+                color: Colors.black,
+                thickness: 1,
+              ),
+            ),
+            Center(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFBADDB1),
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      alignment: Alignment.center,
+                      width: 350,
+                      height: 45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 25, right: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Total Tagihan',
+                              style: blackFont14G.copyWith(color: Colors.black),
+                            ),
+                            if (widget.transaction.productType != 'topup' &&
+                                widget.transaction.status != 'unpaid')
+                              Text(
+                                ('Rp. ${(widget.transaction.price + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                                    .toString(),
+                                style:
+                                    blackFont14G.copyWith(color: Colors.black),
+                              ),
+                            if (widget.transaction.status == 'unpaid')
+                              Text(
+                                '-',
+                                style:
+                                    blackFont14.copyWith(color: Colors.black),
+                              ),
+                            if (widget.transaction.productType == 'topup' &&
+                                widget.transaction.status != 'unpaid')
+                              (Text(
+                                ('Rp. ${(widget.transaction.amount + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                                    .toString(),
+                                style:
+                                    blackFont14G.copyWith(color: Colors.black),
+                              ))
+                          ],
                         ),
-                        Text('Rp 16.500',
-                        style: blackFont14G.copyWith(color: Colors.black),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

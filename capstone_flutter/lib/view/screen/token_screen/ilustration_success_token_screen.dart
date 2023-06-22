@@ -1,4 +1,3 @@
-import 'package:capstone_flutter/view/screen/bpjs_screen/success_transaction_bpjs_screen.dart';
 import 'package:capstone_flutter/view/screen/token_screen/success_transaction_token_screen.dart';
 import 'package:flutter/material.dart';
 

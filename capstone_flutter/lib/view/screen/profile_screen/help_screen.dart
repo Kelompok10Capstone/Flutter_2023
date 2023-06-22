@@ -90,7 +90,7 @@ class HelpScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,7 +187,7 @@ class HelpScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HelpScreen()));
+                                  builder: (context) => const HelpScreen()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(
@@ -213,7 +213,7 @@ class HelpScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HelpScreen()));
+                                  builder: (context) => const HelpScreen()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(

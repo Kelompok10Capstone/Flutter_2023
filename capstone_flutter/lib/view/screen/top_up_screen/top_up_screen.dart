@@ -1,4 +1,7 @@
-import 'package:capstone_flutter/view/screen/top_up_screen/replenish_funds_screen.dart';
+import 'package:capstone_flutter/view/screen/top_up_screen/top_up_bca.dart';
+import 'package:capstone_flutter/view/screen/top_up_screen/top_up_bni.dart';
+import 'package:capstone_flutter/view/screen/top_up_screen/top_up_bri.dart';
+import 'package:capstone_flutter/view/screen/top_up_screen/top_up_mandiri.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
@@ -41,12 +44,13 @@ class _TopUpScreenState extends State<TopUpScreen> {
           ),
           Row(
             children: [
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ReplenishFunds()));
+                          builder: (context) =>
+                              const TopUpBca(bankCode: "014")));
                 },
                 child: Row(
                   children: [
@@ -85,57 +89,38 @@ class _TopUpScreenState extends State<TopUpScreen> {
           ),
           Row(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 30),
-                child: Image(
-                  image: AssetImage('assets/bni.png'),
-                  width: 50,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Text(
-                  'BNI',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 225),
-                child: Icon(
-                  Icons.keyboard_arrow_right_outlined,
-                  size: 25,
-                ),
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 3, left: 30, right: 30),
-            child: Divider(
-              color: Colors.grey,
-              thickness: 1,
-            ),
-          ),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 30),
-                child: Image(
-                  image: AssetImage('assets/mandiri.png'),
-                  width: 50,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Text(
-                  'Mandiri',
-                  style: blackFont14.copyWith(color: Colors.black),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 200),
-                child: Icon(
-                  Icons.keyboard_arrow_right_outlined,
-                  size: 25,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const TopUpBni(bankCode: "009")));
+                },
+                child: Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20, left: 30),
+                      child: Image(
+                        image: AssetImage('assets/bni.png'),
+                        width: 50,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 20),
+                      child: Text(
+                        'BNI',
+                        style: blackFont14.copyWith(color: Colors.black),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20, left: 225),
+                      child: Icon(
+                        Icons.keyboard_arrow_right_outlined,
+                        size: 25,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -147,30 +132,80 @@ class _TopUpScreenState extends State<TopUpScreen> {
               thickness: 1,
             ),
           ),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 30),
-                child: Image(
-                  image: AssetImage('assets/bri.png'),
-                  width: 50,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const TopUpMandiri(bankCode: "008")));
+            },
+            child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 30),
+                  child: Image(
+                    image: AssetImage('assets/mandiri.png'),
+                    width: 50,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Text(
-                  'BRI',
-                  style: blackFont14.copyWith(color: Colors.black),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    'Mandiri',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 225),
-                child: Icon(
-                  Icons.keyboard_arrow_right_outlined,
-                  size: 25,
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 200),
+                  child: Icon(
+                    Icons.keyboard_arrow_right_outlined,
+                    size: 25,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 3, left: 30, right: 30),
+            child: Divider(
+              color: Colors.grey,
+              thickness: 1,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const TopUpBri(bankCode: "002")));
+            },
+            child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 30),
+                  child: Image(
+                    image: AssetImage('assets/bri.png'),
+                    width: 50,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    'BRI',
+                    style: blackFont14.copyWith(color: Colors.black),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 225),
+                  child: Icon(
+                    Icons.keyboard_arrow_right_outlined,
+                    size: 25,
+                  ),
+                ),
+              ],
+            ),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 3, left: 30, right: 30),

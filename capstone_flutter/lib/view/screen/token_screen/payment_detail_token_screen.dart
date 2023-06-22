@@ -1,4 +1,3 @@
-import 'package:capstone_flutter/view/screen/bpjs_screen/payment_methode_bpjs_screen.dart';
 import 'package:capstone_flutter/view/screen/token_screen/payment_methode_token_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

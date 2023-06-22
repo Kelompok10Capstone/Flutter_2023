@@ -1,11 +1,12 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
-import 'package:capstone_flutter/view/screen/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/update_user_data.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class ChangeProfileScreen extends StatefulWidget {
   const ChangeProfileScreen({super.key});
@@ -63,23 +64,31 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         await userController.updateUserById(newName, newEmail, newPhone);
 
     if (success) {
+      UserProvider userProvider =
+          // ignore: use_build_context_synchronously
+          Provider.of<UserProvider>(context, listen: false);
       setState(() {
         // Simpan data baru ke SharedPreferences
         _prefs.setString('name', newName);
         _prefs.setString('phone', newPhone);
         _prefs.setString('email', newEmail);
+
+        // Memperbarui nilai di UserProvider
+        userProvider.updateUserInfo(newName, newPhone, userProvider.balance);
       });
 
       await Future.delayed(const Duration(seconds: 1));
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => NavBar(
+          builder: (context) => const NavBar(
             initialIndex: 2,
           ),
         ),
       );
 
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Perubahan Berhasil'),
@@ -88,7 +97,9 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         ),
       );
     } else {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Perubahan Gagal'),
@@ -167,16 +178,16 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.black),
-                  // color: Colors.grey[200],
+                  color: Colors.grey[200],
                 ),
                 child: TextField(
                   controller: emailController,
-                  // enabled: false,
-
+                  enabled: false,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: blackFont16,
-                      hintText: email),
+                    border: InputBorder.none,
+                    hintStyle: blackFont16,
+                    hintText: email,
+                  ),
                 ),
               ),
               const SizedBox(

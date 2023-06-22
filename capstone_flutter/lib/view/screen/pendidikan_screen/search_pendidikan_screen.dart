@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../utils/const/theme.dart';
 import '../../../view_model/dummy_pendidikan.dart';
@@ -76,12 +74,13 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                     fontWeight: FontWeight.w700, fontSize: 14),
               ),
               const SizedBox(height: 16),
-              Container(
+              SizedBox(
                 height: 45,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: dummyPendidikan.length,
                   itemBuilder: (context, index) {
+                    // ignore: unused_local_variable
                     final data = dummyPendidikan[index];
                     return Column(
                       children: <Widget>[
@@ -103,7 +102,7 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                                         ? const Color(0xff727BB5)
                                         : blueColor,
                               ),
-                              borderRadius: BorderRadius.all(
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(10),
                               ),
                               color:
@@ -135,12 +134,13 @@ class _SearchPendidikanScreenState extends State<SearchPendidikanScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: ListView.separated(
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     final data = dummyPendidikan[index];
+                    // ignore: unnecessary_null_comparison
                     return data == null
                         ? const CircularProgressIndicator()
                         : SizedBox(

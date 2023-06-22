@@ -66,7 +66,7 @@ class _InputPinScreenState extends State<InputPinScreen> {
               ),
               onChanged: (String value) {
                 if (value.isEmpty) {
-                  otpController.text = '-';
+                  otpController.text = '';
                 }
               },
             ),
@@ -94,6 +94,7 @@ class _InputPinScreenState extends State<InputPinScreen> {
             ),
             onPressed: () {
               String pin = otpController.text;
+              // ignore: avoid_print
               print(pin);
               Navigator.push(
                   context,

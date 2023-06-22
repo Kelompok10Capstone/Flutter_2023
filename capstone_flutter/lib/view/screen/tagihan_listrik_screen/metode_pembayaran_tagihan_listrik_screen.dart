@@ -1,7 +1,5 @@
 import 'package:capstone_flutter/view/screen/tagihan_listrik_screen/pin_tagihan_listrik_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../utils/const/theme.dart';
 
@@ -49,7 +47,7 @@ class _MetodePembayaranTagihanScreenState
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xffFDE7AA),
+                color: const Color(0xffFDE7AA),
               ),
               width: MediaQuery.of(context).size.width,
               height: 52,
@@ -64,7 +62,7 @@ class _MetodePembayaranTagihanScreenState
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.help_outline)
+                      const Icon(Icons.help_outline)
                     ],
                   ),
                 ),
@@ -181,13 +179,13 @@ class _MetodePembayaranTagihanScreenState
                           'Total',
                           style: blackFont12.copyWith(
                               fontWeight: FontWeight.w700,
-                              color: Color(0xff111111)),
+                              color: const Color(0xff111111)),
                         ),
                         Text(
                           'Rp 72.500',
                           style: blackFont12.copyWith(
                               fontWeight: FontWeight.w700,
-                              color: Color(0xff111111)),
+                              color: const Color(0xff111111)),
                         ),
                       ],
                     ),

@@ -1,5 +1,4 @@
 import 'package:capstone_flutter/view/screen/bpjs_screen/success_transaction_bpjs_screen.dart';
-import 'package:capstone_flutter/view/screen/wifi_screen/success_transaction_wifi_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';

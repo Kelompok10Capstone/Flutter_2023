@@ -1,11 +1,12 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
-import 'package:capstone_flutter/view/screen/pin_screen/reinput_pin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/create_pin.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/app_manajer.dart';
 
 class ReinputPinScreen extends StatefulWidget {
   final String pinFromInputScreen;
@@ -35,6 +36,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
     setState(() {
       token = _prefs.getString('token') ?? '';
       _pinController = PinController(token);
+      // ignore: avoid_print
       print(token);
     });
   }
@@ -48,7 +50,9 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
   Future<void> _createPin() async {
     final String pin = otpController.text;
     final String originalPin = widget.pinFromInputScreen;
+    // ignore: avoid_print
     print(pin);
+    // ignore: avoid_print
     print(originalPin);
 
     if (pin != originalPin) {
@@ -71,7 +75,9 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
       );
     } else if (pin == originalPin) {
       final bool success = await _pinController.createPin(pin);
-      if (success) {
+      if (success && context.mounted) {
+        // Provider.of<AppManajer>(context, listen: false).changePin(true);
+        context.read<AppManajer>().changePinTrue();
         // Pin berhasil dibuat
         Navigator.push(
           context,
@@ -94,9 +100,14 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text(
-          'Kode PIN',
-          style: blackFontAppbar18,
+        title: GestureDetector(
+          onTap: () {
+            context.read<AppManajer>().changePin(true);
+          },
+          child: Text(
+            'Kode PIN',
+            style: blackFontAppbar18,
+          ),
         ),
         elevation: 0,
       ),

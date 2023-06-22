@@ -1,9 +1,35 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/pulsa&paket_data_screen/paket_data/pin_paket_data_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../view_model/user_provider/user_provider.dart';
 
 class MetodePembayaranPaketDataScreen extends StatefulWidget {
-  const MetodePembayaranPaketDataScreen({super.key});
+  final String id;
+  final String name;
+  final String type;
+  final String code;
+  final String provider;
+  final String price;
+  final String adminFee;
+  final String description;
+  final DateTime createdAt;
+  final String token;
+  const MetodePembayaranPaketDataScreen({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.code,
+    required this.provider,
+    required this.price,
+    required this.description,
+    required this.adminFee,
+    required this.createdAt,
+    required this.token,
+  });
 
   @override
   State<MetodePembayaranPaketDataScreen> createState() =>
@@ -13,9 +39,15 @@ class MetodePembayaranPaketDataScreen extends StatefulWidget {
 class _MetodePembayaranPaketDataScreenState
     extends State<MetodePembayaranPaketDataScreen> {
   String? selectedRadio;
+  // ignore: unused_field
+  late SharedPreferences _prefs;
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final myBalance = userProvider.balance;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -37,7 +69,7 @@ class _MetodePembayaranPaketDataScreenState
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xffFDE7AA),
+                color: const Color(0xffFDE7AA),
               ),
               width: MediaQuery.of(context).size.width,
               height: 52,
@@ -52,7 +84,7 @@ class _MetodePembayaranPaketDataScreenState
                         style:
                             blackFont12.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.help_outline)
+                      const Icon(Icons.help_outline)
                     ],
                   ),
                 ),
@@ -84,7 +116,7 @@ class _MetodePembayaranPaketDataScreenState
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp 150.000)',
+                          'Saldo SkuyPay (Rp ${myBalance.toString()})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -141,7 +173,7 @@ class _MetodePembayaranPaketDataScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Data 2 GB',
+                            'Data ${widget.name.toString()}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -162,7 +194,7 @@ class _MetodePembayaranPaketDataScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Rp 10.000',
+                            'Rp ${widget.price.toString()}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -202,7 +234,7 @@ class _MetodePembayaranPaketDataScreenState
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           // color: Colors.green[100],
-                          color: Color(0xffBADDB1),
+                          color: const Color(0xffBADDB1),
                         ),
                         width: MediaQuery.of(context).size.width,
                         height: 34,
@@ -223,7 +255,8 @@ class _MetodePembayaranPaketDataScreenState
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
-                                  'Rp 10.000',
+                                  'Rp ${widget.price.toString()}',
+                                  // (widget.adminFee + widget.price).toString(),
                                   style: blackFont14.copyWith(
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -253,10 +286,53 @@ class _MetodePembayaranPaketDataScreenState
               ),
             ),
             onPressed: () {
-              Navigator.push(
+              var saldo =
+                  int.parse(myBalance.toString()) - int.parse(widget.price);
+              var total = int.parse(widget.price);
+              if (selectedRadio == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Pilih metode pembayaran'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else if (selectedRadio != null && myBalance < total) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Saldo tidak cukup'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else {
+                // ignore: avoid_print
+                print(widget.id);
+                // var saldo =
+                //     int.parse(myBalance.toString()) - int.parse(widget.price);
+                // var saldo = myBalance.toInt() - widget.price + widget.adminFee;
+                // ignore: avoid_print
+                print('saldo : $saldo');
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PinPaketDataScreen()));
+                    builder: (context) => PinPaketDataScreen(
+                      token: widget.token,
+                      id: widget.id,
+                      name: widget.name,
+                      price: widget.price,
+                      type: widget.type,
+                      code: widget.code,
+                      adminFee: widget.adminFee,
+                      provider: widget.provider,
+                      description: widget.description,
+                      createdAt: widget.createdAt,
+                      balanceNow: int.parse(myBalance.toString()) -
+                          int.parse(widget.price),
+                    ),
+                  ),
+                );
+              }
             },
             child: Text(
               'Yuk Bayar!',
