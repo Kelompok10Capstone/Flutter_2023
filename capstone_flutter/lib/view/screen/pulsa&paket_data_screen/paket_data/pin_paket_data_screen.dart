@@ -2,11 +2,9 @@ import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../models/apis/cek_pin_api.dart';
 import '../../../../models/apis/pulsa_paket_data/pay_paket_data.dart';
-import '../../../../models/apis/pulsa_paket_data/pulsa_paket_data_api.dart';
 import '../../../../view_model/pulsa_paketdata/user_provider.dart';
 import 'ilustration_sukses_paket_data_screen.dart';
 
@@ -22,7 +20,7 @@ class PinPaketDataScreen extends StatefulWidget {
   final int balanceNow;
   final DateTime createdAt;
   final String token;
-  // final String phone_number;
+
   const PinPaketDataScreen({
     super.key,
     required this.id,
@@ -36,7 +34,6 @@ class PinPaketDataScreen extends StatefulWidget {
     required this.balanceNow,
     required this.createdAt,
     required this.token,
-    // required this.phone_number
   });
 
   @override

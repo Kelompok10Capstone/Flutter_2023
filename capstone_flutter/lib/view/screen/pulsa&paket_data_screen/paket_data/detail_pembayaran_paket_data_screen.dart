@@ -1,7 +1,5 @@
-import 'package:capstone_flutter/view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../models/pulsa_paket_data.dart';
 import '../../../../utils/const/theme.dart';
@@ -42,9 +40,8 @@ class _DetailPembayaranPaketDataScreenState
     return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         final paketData = paketDataProvider.paketData;
-        int index = 0;
-
-        String price = paketDataProvider.paketData[index].price.toString();
+        // int index = 0;
+        // String price = paketDataProvider.paketData[index].price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -74,14 +71,6 @@ class _DetailPembayaranPaketDataScreenState
                             'assets/images/ic_telkomsel.png',
                             width: 132,
                           ),
-                          // Text(
-                          //   pulsaPaketDataProvider.paketData[index].provider
-                          //       .toString(),
-                          //   // paketData.provider.toString(),
-                          //   style: blackFont18.copyWith(
-                          //     fontSize: 25,
-                          //   ),
-                          // ),
                         ),
                         const SizedBox(
                           height: 24,
@@ -247,12 +236,6 @@ class _DetailPembayaranPaketDataScreenState
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                // pulsaPaketDataProvider
-                                                //     .paketData[index]
-                                                //     .description
-                                                //     .toString(),
-                                                // paketData.description
-                                                //     .toString(),
                                                 pulsaPaketDataProvider
                                                         .selectPaketData
                                                         ?.description ??
@@ -284,8 +267,6 @@ class _DetailPembayaranPaketDataScreenState
                                         pulsaPaketDataProvider
                                                 .selectPaketData?.phone62 ??
                                             "",
-                                        // paketData.phone62.toString(),
-                                        // paketData?.phone62 ?? '',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -305,10 +286,7 @@ class _DetailPembayaranPaketDataScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsaPaketDataProvider
-                                            .paketData[index].price
-                                            .toString(),
-                                        // paketData.price.toString(),
+                                        'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -350,8 +328,7 @@ class _DetailPembayaranPaketDataScreenState
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12),
                                             child: Text(
-                                              'Rp.${pulsaPaketDataProvider.paketData[index].price.toString()}',
-                                              // 'Rp.${paketData.price.toString()}',
+                                              'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                               style: blackFont14.copyWith(
                                                   fontWeight: FontWeight.bold),
                                             ),

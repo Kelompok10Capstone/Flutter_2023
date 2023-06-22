@@ -8,8 +8,8 @@ import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'metode_pembayaran_pulsa_screen.dart';
 
 class DetailPembayaranPulsaScreen extends StatefulWidget {
-  // final String token;
-  const DetailPembayaranPulsaScreen({super.key});
+  final String token;
+  const DetailPembayaranPulsaScreen({super.key, required this.token});
 
   @override
   State<DetailPembayaranPulsaScreen> createState() =>
@@ -31,7 +31,7 @@ class _DetailPembayaranPulsaScreenState
   void initState() {
     // TODO: implement initState
     super.initState();
-    // print("detail ppd : ${widget.token}");
+    print("detail pulsa token : ${widget.token}");
   }
 
   @override
@@ -39,9 +39,9 @@ class _DetailPembayaranPulsaScreenState
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
 
-    return Consumer<PaketDataProvider>(
-      builder: (context, paketDataProvider, _) {
-        final pulsatData = paketDataProvider.pulsa;
+    return Consumer<PulsaDanPaketDataViewModel>(
+      builder: (context, pulsaDataProvider, _) {
+        final pulsatData = pulsaDataProvider.pulsa;
 
         // String price = pulsatData!.price.toString();
 
@@ -185,7 +185,7 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsatData.code.toString(),
+                                        'Pulsa ${pulsaPaketDataProvider.selectPulsaData?.name ?? ""}',
                                         // 'Pulsa 5000',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -208,7 +208,7 @@ class _DetailPembayaranPulsaScreenState
                                       Text(
                                         // pulsatData.phone62.toString(),
                                         pulsaPaketDataProvider
-                                                .selectPaketData?.phone62 ??
+                                                .selectPulsaData?.phone62 ??
                                             "",
                                         // 'O85278xxxxx',
                                         style: blackFont12.copyWith(
@@ -230,7 +230,7 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsatData.price.toString(),
+                                        'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
                                         // 'Rp 6.500',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -273,7 +273,7 @@ class _DetailPembayaranPulsaScreenState
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12),
                                             child: Text(
-                                              'Rp.${pulsatData.price.toString()}',
+                                              'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
                                               // 'Rp 6.500',
                                               style: blackFont14.copyWith(
                                                   fontWeight: FontWeight.bold),

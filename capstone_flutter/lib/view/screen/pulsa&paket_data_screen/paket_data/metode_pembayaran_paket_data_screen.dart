@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import '../../../../view_model/pulsa_paketdata/user_provider.dart';
 
 class MetodePembayaranPaketDataScreen extends StatefulWidget {
@@ -39,17 +40,20 @@ class MetodePembayaranPaketDataScreen extends StatefulWidget {
 class _MetodePembayaranPaketDataScreenState
     extends State<MetodePembayaranPaketDataScreen> {
   String? selectedRadio;
+  // ignore: unused_field
   late SharedPreferences _prefs;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print('pembayaran ppd : ${widget.token}');
+    // ignore: avoid_print
+    print('pembayaran pulsa token: ${widget.token}');
   }
 
   @override
   Widget build(BuildContext context) {
+    final pulsaPaketDataProvider =
+        Provider.of<PulsaDanPaketDataViewModel>(context);
     final userProvider = Provider.of<UserProvider>(context);
 
     //ambil data
@@ -122,7 +126,7 @@ class _MetodePembayaranPaketDataScreenState
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp ${myBalance.toString()})',
+                          'Saldo SkuyPay (Rp.${myBalance.toString()})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -179,7 +183,7 @@ class _MetodePembayaranPaketDataScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Data ${widget.name.toString()}',
+                            'Data ${pulsaPaketDataProvider.selectPaketData?.name.toString() ?? ""}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -200,7 +204,7 @@ class _MetodePembayaranPaketDataScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Rp ${widget.price.toString()}',
+                            'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -261,7 +265,7 @@ class _MetodePembayaranPaketDataScreenState
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
-                                  'Rp ${widget.price.toString()}',
+                                  'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                   // (widget.adminFee + widget.price).toString(),
                                   style: blackFont14.copyWith(
                                       fontWeight: FontWeight.bold),
@@ -312,10 +316,9 @@ class _MetodePembayaranPaketDataScreenState
                   ),
                 );
               } else {
+                // ignore: avoid_print
                 print(widget.id);
-                // var saldo =
-                //     int.parse(myBalance.toString()) - int.parse(widget.price);
-                // var saldo = myBalance.toInt() - widget.price + widget.adminFee;
+                // ignore: avoid_print
                 print('saldo : $saldo');
                 Navigator.push(
                   context,
