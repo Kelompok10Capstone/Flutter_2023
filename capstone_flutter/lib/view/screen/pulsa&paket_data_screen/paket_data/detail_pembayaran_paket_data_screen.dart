@@ -1,4 +1,3 @@
-import 'package:capstone_flutter/view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../models/pulsa_paket_data.dart';
@@ -29,10 +28,12 @@ class _DetailPembayaranPaketDataScreenState
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-
-    return Consumer<PaketDataProvider>(
+    debugPrint(pulsaPaketDataProvider.selectPaketData?.toJson().toString());
+    return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         final paketData = paketDataProvider.paketData;
+        // int index = 0;
+        // String price = paketDataProvider.paketData[index].price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -58,11 +59,9 @@ class _DetailPembayaranPaketDataScreenState
                       children: [
                         const SizedBox(height: 16),
                         Center(
-                          child: Text(
-                            paketData.provider.toString(),
-                            style: blackFont18.copyWith(
-                              fontSize: 25,
-                            ),
+                          child: Image.asset(
+                            'assets/images/ic_telkomsel.png',
+                            width: 132,
                           ),
                         ),
                         const SizedBox(
@@ -176,7 +175,9 @@ class _DetailPembayaranPaketDataScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        paketData.code.toString(),
+                                        pulsaPaketDataProvider
+                                                .selectPaketData?.code ??
+                                            "",
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -227,8 +228,10 @@ class _DetailPembayaranPaketDataScreenState
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                paketData.description
-                                                    .toString(),
+                                                pulsaPaketDataProvider
+                                                        .selectPaketData
+                                                        ?.description ??
+                                                    "",
                                                 style: blackFont12.copyWith(
                                                     fontWeight:
                                                         FontWeight.w400),
@@ -253,8 +256,9 @@ class _DetailPembayaranPaketDataScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        paketData.phone62.toString(),
-                                        // paketData?.phone62 ?? '',
+                                        pulsaPaketDataProvider
+                                                .selectPaketData?.phone62 ??
+                                            "",
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -274,7 +278,7 @@ class _DetailPembayaranPaketDataScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        paketData.price.toString(),
+                                        'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -316,7 +320,7 @@ class _DetailPembayaranPaketDataScreenState
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12),
                                             child: Text(
-                                              'Rp.${paketData.price.toString()}',
+                                              'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                               style: blackFont14.copyWith(
                                                   fontWeight: FontWeight.bold),
                                             ),

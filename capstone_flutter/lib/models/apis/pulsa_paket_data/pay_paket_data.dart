@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -18,7 +19,7 @@ class PayPaketData {
     this.discountid,
   );
 
-  Future<String?> payPaketData() async {
+  Future<PayPaketData?> payPaketData() async {
     final Map<String, dynamic> requestBody = {
       "type": paketdata,
       "product_id": productid,
@@ -38,27 +39,22 @@ class PayPaketData {
     if (response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
-      // ignore: avoid_print
-      print('Berhasil: ${response.statusCode}');
-      // ignore: avoid_print
-      print('Response: ${response.body}');
+      debugPrint('Berhasil: ${response.statusCode}');
+      debugPrint('Response: ${response.body}');
 
       if (metadata['status'] == 201) {
         final ppdId = jsonData['id'];
-        // ignore: avoid_print
-        print('Berhasil: ${response.statusCode}');
-        // ignore: avoid_print
-        print('Response: ${response.body}');
+        debugPrint('Berhasil: ${response.statusCode}');
+        debugPrint('Response: ${response.body}');
 
         return ppdId;
       } else {
-        // ignore: avoid_print
-        print('Payment failed: ${metadata['message']}');
+        debugPrint('Payment failed: ${metadata['message']}');
+        return null;
       }
     } else {
-      // ignore: avoid_print
-      print('error: ${response.statusCode}');
+      debugPrint('error: ${response.statusCode}');
+      return null;
     }
-    return null;
   }
 }

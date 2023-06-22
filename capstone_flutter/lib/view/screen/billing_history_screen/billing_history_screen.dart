@@ -22,6 +22,7 @@ class _BillinngHistoryState extends State<BillingHistory> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           iconTheme: const IconThemeData(
@@ -369,7 +370,7 @@ class historyWidget extends StatelessWidget {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.only(top: 30, left: 40, right: 40),
+              padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

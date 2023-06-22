@@ -22,6 +22,7 @@ class TopUpApi {
 
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
+      // ignore: avoid_print
       print('ini json data : $jsonData');
       return TopUpR.fromJson(jsonData);
     } else {

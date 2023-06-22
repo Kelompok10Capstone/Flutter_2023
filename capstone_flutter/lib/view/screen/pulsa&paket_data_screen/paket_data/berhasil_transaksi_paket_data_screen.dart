@@ -62,12 +62,11 @@ class _BerhasilTransaksiPaketDataState
     // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-    return Consumer<PaketDataProvider>(
+    return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         final paketData = paketDataProvider.paketData;
-
-        // ignore: unused_local_variable
-        String price = paketData!.price.toString();
+        // int index = 0;
+        // String price = paketDataProvider.paketData[index].price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -142,7 +141,7 @@ class _BerhasilTransaksiPaketDataState
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  paketData.code.toString(),
+                                  'Data ${pulsaPaketDataProvider.selectPaketData?.name.toString() ?? ""}',
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -161,7 +160,9 @@ class _BerhasilTransaksiPaketDataState
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  paketData.phone62.toString(),
+                                  pulsaPaketDataProvider
+                                          .selectPaketData?.phone62 ??
+                                      "",
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -180,7 +181,7 @@ class _BerhasilTransaksiPaketDataState
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  'Rp.${paketData.price.toString()}',
+                                  'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -216,7 +217,7 @@ class _BerhasilTransaksiPaketDataState
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       child: Text(
-                                        'Rp.${paketData.price.toString()}',
+                                        'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.bold),
                                       ),
