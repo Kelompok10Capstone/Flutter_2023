@@ -38,7 +38,6 @@ final List<String> imageList = [
   'assets/promo_5.png',
 ];
 
-String? selectedMonth;
 List<String> months = [
   'Januari',
   'Februari',
@@ -63,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen>
   String phone = '';
   String token = '';
   String balance = '0';
+
+  String? selectedMonth;
 
   void initial() async {
     _prefs = await SharedPreferences.getInstance();
@@ -922,128 +923,139 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       builder: (BuildContext context) {
-        return SingleChildScrollView(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context)
-                .viewInsets
-                .bottom, // Adjust bottom padding based on keyboard height
-          ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 350,
-            // height: MediaQuery.of(context).size.height / 2.7,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      'BPJS Kesehatan',
-                      style: blackText24.copyWith(fontSize: 18),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'No. Pelanggan',
-                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: TextField(
-                      controller: pelangganControllerBpjs,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintStyle: blackFont12,
-                        hintText: 'Masukkan No Pelanggan',
+        return StatefulBuilder(builder: (context, StateSetter setState) {
+          return SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context)
+                  .viewInsets
+                  .bottom, // Adjust bottom padding based on keyboard height
+            ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 350,
+              // height: MediaQuery.of(context).size.height / 2.7,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        'BPJS Kesehatan',
+                        style: blackText24.copyWith(fontSize: 18),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Periode',
-                    style: blackFont14.copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.black),
+                    const SizedBox(height: 20),
+                    Text(
+                      'No. Pelanggan',
+                      style: blackFont14.copyWith(fontWeight: FontWeight.w500),
                     ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        value: selectedMonth,
-                        hint: Text(
-                          'Pilih Bulan',
-                          style: blackFont12,
+                    const SizedBox(height: 5),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: TextField(
+                        controller: pelangganControllerBpjs,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintStyle: blackFont12,
+                          hintText: 'Masukkan No Pelanggan',
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedMonth = value!;
-                          });
-                        },
-                        items: months.map((String month) {
-                          return DropdownMenuItem<String>(
-                            value: month,
-                            child: Text(
-                              month,
-                              style: blackFont12,
-                            ),
-                          );
-                        }).toList(),
                       ),
                     ),
-                  ),
-                  Expanded(
-                      child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                  )),
-                  // const SizedBox(height: 25),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Periode',
+                      style: blackFont14.copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          value: selectedMonth,
+                          hint: Text(
+                            'Pilih Bulan',
+                            style: blackFont12,
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedMonth = value!;
+                              print(selectedMonth);
+                            });
+                            // Future.delayed(const Duration(seconds: 1), () {
+                            //   setState(() {
+                            //     selectedMonth = value!;
+                            //     print(selectedMonth);
+                            //   });
+                            // });
+                          },
+                          items: months.map((String month) {
+                            return DropdownMenuItem<String>(
+                              value: month,
+                              child: Text(
+                                month,
+                                style: blackFont12,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                    )),
+                    // const SizedBox(height: 25),
 
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 52,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: blueColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 52,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: blueColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PaymentDetailBpjs()));
+                          },
+                          child: Text(
+                            'Lanjutkan',
+                            style: whiteFont14,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const PaymentDetailBpjs()));
-                        },
-                        child: Text(
-                          'Lanjutkan',
-                          style: whiteFont14,
-                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        );
+          );
+        });
       },
     );
   }
