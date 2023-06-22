@@ -86,7 +86,7 @@ class PulsaDanPaketDataViewModel with ChangeNotifier {
   }
 
   void chagePhoneNumber(String phone, bool isPaketData) {
-    if (!isPaketData) {
+    if (isPaketData) {
       _selectPaketData = _selectPaketData?.copyWith(phone62: phone);
     } else {
       _selectPulsaData = _selectPulsaData?.copyWith(phone62: phone);

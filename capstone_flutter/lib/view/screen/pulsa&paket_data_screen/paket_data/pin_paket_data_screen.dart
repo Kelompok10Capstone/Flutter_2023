@@ -72,7 +72,8 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
       );
       // ignore: avoid_print
       print('adalah: $productx');
-      final String? payPaketDataResponse = await payPaketData.payPaketData();
+      final PayPaketData? payPaketDataResponse =
+          await payPaketData.payPaketData();
       // ignore: avoid_print
       print(payPaketDataResponse);
 

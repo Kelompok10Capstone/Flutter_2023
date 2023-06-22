@@ -62,7 +62,7 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
     String providerp = widget.provider;
     String productp = widget.id;
     if (isPinCorrect && productp.isNotEmpty) {
-      final PayPaketData payPulsatData = PayPaketData(
+      final PayPaketData payPaketData = PayPaketData(
         token,
         typep,
         productp,
@@ -71,7 +71,8 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
       );
       // ignore: avoid_print
       print('adalah: $productp');
-      final String? payPaketDataResponse = await payPulsatData.payPaketData();
+      final PayPaketData? payPaketDataResponse =
+          await payPaketData.payPaketData();
       // final String? payPaketDataResponse = await payPaketData.payPaketData();
       // ignore: avoid_print
       print(payPaketDataResponse);

@@ -19,7 +19,7 @@ class PayPaketData {
     this.discountid,
   );
 
-  Future<String?> payPaketData() async {
+  Future<PayPaketData?> payPaketData() async {
     final Map<String, dynamic> requestBody = {
       "type": paketdata,
       "product_id": productid,

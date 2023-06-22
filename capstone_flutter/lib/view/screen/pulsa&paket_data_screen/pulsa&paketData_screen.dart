@@ -291,46 +291,11 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
             onPressed: isPhoneNumberEntered
                 ? () {
                     if (_tabController?.index == 0) {
-                      // List<PulsaPaketdataData> users =
-                      //     pulsaPaketDataProvider.pulsa;
-                      // int index =
-                      //     0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
-                      // String providerText =
-                      //     users.isNotEmpty ? users[index].provider : '';
-                      // String nameText =
-                      //     users.isNotEmpty ? users[index].name : '';
-                      // String descriptionText =
-                      //     users.isNotEmpty ? users[index].description : '';
-                      // String codeText =
-                      //     users.isNotEmpty ? users[index].code : '';
-                      // String priceText =
-                      //     users.isNotEmpty ? users[index].price.toString() : '';
-                      // String idText =
-                      //     users.isNotEmpty ? users[index].id.toString() : '';
-                      // String typeText =
-                      //     users.isNotEmpty ? users[index].type : '';
-                      // String phone62 = phone62Controller.text;
-
-                      // PulsaPaketdataData pulsa = PulsaPaketdataData(
-                      //   name: nameText,
-                      //   // phone62: phone62Controller.text,
-                      //   price: int.parse(priceText),
-                      //   provider: providerText,
-                      //   description: descriptionText,
-                      //   code: codeText,
-                      //   id: idText,
-                      //   type: typeText,
-                      // );
-
-                      // Provider.of<PulsaDanPaketDataViewModel>(context,
-                      //         listen: false)
-                      //     .pulsa;
-
                       debugPrint(
                           "phone62Controller.text: ${phone62Controller.text}");
                       context
                           .read<PulsaDanPaketDataViewModel>()
-                          .chagePhoneNumber(phone62Controller.text, true);
+                          .chagePhoneNumber(phone62Controller.text, false);
                       // Jika tab Token aktif, arahkan pengguna ke layar Pulsa
                       Navigator.push(
                         context,
@@ -341,48 +306,12 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                         ),
                       );
                     } else if (_tabController?.index == 1) {
-                      // List<PulsaPaketdataData> users =
-                      //     pulsaPaketDataProvider.paketData;
-                      // int index =
-                      //     0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
-                      // String providerText =
-                      //     users.isNotEmpty ? users[index].provider : '';
-                      // String nameText =
-                      //     users.isNotEmpty ? users[index].name : '';
-                      // String descriptionText =
-                      //     users.isNotEmpty ? users[index].description : '';
-                      // String codeText =
-                      //     users.isNotEmpty ? users[index].code : '';
-                      // String priceText =
-                      //     users.isNotEmpty ? users[index].price.toString() : '';
-                      // String idText =
-                      //     users.isNotEmpty ? users[index].id.toString() : '';
-                      // String typeText =
-                      //     users.isNotEmpty ? users[index].type : '';
-
-                      // PulsaPaketdataData paketData = PulsaPaketdataData(
-                      //   name: nameText,
-                      //   price: int.parse(priceText),
-                      //   provider: providerText,
-                      //   description: descriptionText,
-                      //   code: codeText,
-                      //   id: idText,
-                      //   type: typeText,
-                      // );
-
-                      // Provider.of<PulsaDanPaketDataViewModel>(context,
-                      //         listen: false)
-                      //     .paketData;
-
-                      // final params = context
-                      //     .read<PulsaDanPaketDataViewModel>()
-                      //     .selectPaketData;
                       // Jika tab Tagihan aktif, arahkan pengguna ke layar paket data
                       debugPrint(
                           "phone62Controller.text: ${phone62Controller.text}");
                       context
                           .read<PulsaDanPaketDataViewModel>()
-                          .chagePhoneNumber(phone62Controller.text, false);
+                          .chagePhoneNumber(phone62Controller.text, true);
 
                       Navigator.push(
                         context,
