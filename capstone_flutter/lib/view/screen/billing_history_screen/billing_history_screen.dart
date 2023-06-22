@@ -334,6 +334,9 @@ class historyWidget extends StatelessWidget {
           } else if (transaction.productType == 'paket_data') {
             imagePath = 'assets/pulsa_icon.png';
             namePath = 'Paket Data';
+          } else if (transaction.productType == 'bpjsks') {
+            imagePath = 'assets/pulsa_icon.png';
+            namePath = 'Bpjs';
           } else if (transaction.productType == 'pulsa') {
             imagePath = 'assets/pulsa_icon.png';
             namePath = 'Pulsa';
@@ -341,6 +344,19 @@ class historyWidget extends StatelessWidget {
             imagePath = 'assets/top_up_icon.png';
             namePath = 'Top Up';
           }
+
+          //zona waktu di lokasi saya GMT+7
+          final timeZone = Duration(hours: 7);
+
+          // parse dari string ke date time
+          DateTime dateTime = DateTime.parse(transaction.createdAt);
+
+          // mengubah zona waktu
+          dateTime = dateTime.add(timeZone);
+
+          // format final dalam gmt+7
+          final formatDateTime =
+              DateFormat('d MMMM yyyy - HH.mm').format(dateTime);
 
           return GestureDetector(
             onTap: () {
@@ -373,9 +389,7 @@ class historyWidget extends StatelessWidget {
                             style: blackFont16.copyWith(color: Colors.black),
                           ),
                           Text(
-                            DateFormat('d MMMM yyyy - HH.mm').format(
-                              DateTime.parse(transaction.createdAt),
-                            ),
+                            formatDateTime,
                             style: blackFont14.copyWith(color: Colors.black),
                           ),
                         ],
