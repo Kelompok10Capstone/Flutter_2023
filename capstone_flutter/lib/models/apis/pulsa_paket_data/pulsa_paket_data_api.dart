@@ -39,6 +39,7 @@ class PulsaPaketDataApi {
         'phone_number': phone,
       },
     );
+    print('result: $result');
     PulsaPaketDataResponse response =
         PulsaPaketDataResponse.fromJson(result.data!);
 

@@ -3,67 +3,6 @@ import 'package:capstone_flutter/models/apis/pulsa_paket_data/pulsa_paket_data_a
 import 'package:capstone_flutter/models/pulsa_paket_data.dart';
 import 'package:flutter/material.dart';
 
-// enum PulsaPaketdataViewState {
-//   none,
-//   result,
-//   loading,
-//   error,
-// }
-
-// class PulsaDanPaketDataViewModel with ChangeNotifier {
-//   PulsaPaketdataViewState _state = PulsaPaketdataViewState.none;
-//   PulsaPaketdataViewState get state => _state;
-
-//   // List<PulsaPaketdataData> _users = [];
-//   // List<PulsaPaketdataData> get users => _users;
-
-//   List<PulsaPaketdataData> _pulsa = [];
-//   List<PulsaPaketdataData> get pulsa => _pulsa;
-
-//   List<PulsaPaketdataData> _paketData = [];
-//   List<PulsaPaketdataData> get paketData => _paketData;
-
-//   changeState(PulsaPaketdataViewState s) {
-//     _state = s;
-//     notifyListeners();
-//   }
-
-//   getPhone(String phone) async {
-//     changeState(PulsaPaketdataViewState.loading);
-//     try {
-//       final token = await LoginController().getToken();
-//       final result = await PulsaPaketDataApi(token).getPulsaPaketData(phone);
-//       debugPrint("Pulsa Paket Data Response: ${result.toJson().toString()}");
-//       // _users = result.data ?? [];
-//       _pulsa = [];
-//       _paketData = [];
-//       for (PulsaPaketdataData element in result.data ?? []) {
-//         if (element.type == "pulsa") {
-//           _pulsa.add(element);
-//         } else {
-//           _paketData.add(element);
-//         }
-//       }
-
-//       if (_pulsa.isNotEmpty) {
-//         changeState(PulsaPaketdataViewState.result);
-//       } else if (_paketData.isNotEmpty) {
-//         changeState(PulsaPaketdataViewState.result);
-//       } else {
-//         changeState(PulsaPaketdataViewState.none);
-//       }
-//       // if (_users.isEmpty) {
-//       //   changeState(PulsaPaketdataViewState.none);
-//       // } else {
-//       //   changeState(PulsaPaketdataViewState.result);
-//       // }
-//       // notifyListeners();
-//     } catch (e) {
-//       changeState(PulsaPaketdataViewState.error);
-//     }
-//   }
-// }
-
 enum PulsaPaketdataViewState {
   none,
   result,
