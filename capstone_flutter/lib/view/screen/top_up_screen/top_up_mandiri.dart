@@ -1,21 +1,22 @@
-import 'package:capstone_flutter/view_model/topup_provider/topup_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/const/theme.dart';
+import '../../../view_model/topup_provider/topup_provider.dart';
 import '../../../view_model/user_provider/user_provider.dart';
 import '../home_screen/home_screen.dart';
 
-class ReplenishFunds extends StatefulWidget {
+class TopUpMandiri extends StatefulWidget {
   final String bankCode;
-  const ReplenishFunds({super.key, required this.bankCode});
+  const TopUpMandiri({super.key, required this.bankCode});
 
   @override
-  State<ReplenishFunds> createState() => _ReplenishFundsState();
+  State<TopUpMandiri> createState() => _TopUpMandiriState();
 }
 
-class _ReplenishFundsState extends State<ReplenishFunds> {
+class _TopUpMandiriState extends State<TopUpMandiri> {
   final List<Item> _data = generateItems();
   @override
   void initState() {
@@ -59,19 +60,19 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
                 const Padding(
                   padding: EdgeInsets.only(top: 30, left: 20),
                   child: Image(
-                    image: AssetImage('assets/bca.png'),
+                    image: AssetImage('assets/mandiri.png'),
                     width: 50,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, left: 20),
                   child: Text(
-                    'Transfer Bank (BCA)',
+                    'Transfer Bank (MANDIRI)',
                     style: blackFont14.copyWith(color: Colors.black),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 105),
+                  padding: const EdgeInsets.only(top: 30, left: 70),
                   child: Text(
                     'Ganti',
                     style: blackFont14.copyWith(color: Colors.black),
@@ -96,7 +97,7 @@ class _ReplenishFundsState extends State<ReplenishFunds> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                'Nomor Akun Virtual BCA',
+                'Nomor Akun Virtual MANDIRI',
                 style: blackFont14G.copyWith(color: Colors.grey),
               ),
             ),
@@ -242,7 +243,7 @@ class Item {
 List<Item> generateItems() {
   return <Item>[
     Item(
-      headerValue: 'ATM BCA',
+      headerValue: 'ATM MANDIRI',
       expandedValue: '1. Pada menu utama klik Transaksi lainnya > Transfer.\n'
           '2. Masukkan nomor virtual akun 6239 0548 1376 9327.\n'
           '3. Masukkan jumlah saldo sesuai kebutuhan (Minimal isi saldo Rp10.000).\n'
@@ -250,9 +251,9 @@ List<Item> generateItems() {
           '5. Setelah transaksi dikonfirmasi, mesin ATM akan memproses. Tunggu hingga proses selesai.',
     ),
     Item(
-      headerValue: 'm-BCA (BCA Mobile)',
+      headerValue: 'm-MANDIRI (MANDIRI Mobile)',
       expandedValue: '1. Masuk ke akun m-banking.\n'
-          '2. Pilih menu m-Transfer > BCA virtual akun.\n'
+          '2. Pilih menu m-Transfer > MANDIRI virtual akun.\n'
           '3. Masukkan virtual akun 6239 0548 1376 9327.\n'
           '4. Masukkan jumlah saldo sesuai kebutuhan (Minimal isi saldo Rp10.000).\n'
           '5. Konfirmasikan transaksi dan periksa kembali rincian yang telah dimasukkan. Pastikan semuanya benar sebelum melanjutkan.\n'
