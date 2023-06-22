@@ -1,10 +1,12 @@
 import 'package:capstone_flutter/view/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/update_user_data.dart';
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class ChangeProfileScreen extends StatefulWidget {
   const ChangeProfileScreen({super.key});
@@ -62,11 +64,17 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         await userController.updateUserById(newName, newEmail, newPhone);
 
     if (success) {
+      UserProvider userProvider =
+          // ignore: use_build_context_synchronously
+          Provider.of<UserProvider>(context, listen: false);
       setState(() {
         // Simpan data baru ke SharedPreferences
         _prefs.setString('name', newName);
         _prefs.setString('phone', newPhone);
         _prefs.setString('email', newEmail);
+
+        // Memperbarui nilai di UserProvider
+        userProvider.updateUserInfo(newName, newPhone, userProvider.balance);
       });
 
       await Future.delayed(const Duration(seconds: 1));
