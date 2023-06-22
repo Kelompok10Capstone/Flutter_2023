@@ -63,29 +63,10 @@ class _HomeScreenState extends State<HomeScreen>
   bool isPinCreated = false;
   bool isPinAdded = false;
   late SharedPreferences _prefs;
-  String name = '';
-  String phone = '';
+  // String name = '';
+  // String phone = '';
   String token = '';
-  String balance = '0';
-
-  void initial() async {
-    _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      name = _prefs.getString('name').toString();
-      phone = _prefs.getString('phone').toString();
-      token = _prefs.getString('token').toString();
-      balance = _prefs.getInt('balance').toString();
-      _prefs.getString('token').toString();
-      // ignore: avoid_print
-      print('nama : $name');
-      // ignore: avoid_print
-      print('phone : $phone');
-      // ignore: avoid_print
-      print('token : $token');
-      // ignore: avoid_print
-      print('balance : $balance');
-    });
-  }
+  // String balance = '0';
 
   TabController? _tabController;
   TextEditingController pelangganControllerToken = TextEditingController();
@@ -149,10 +130,10 @@ class _HomeScreenState extends State<HomeScreen>
   Future<void> initializeData() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      name = _prefs.getString('name') ?? '';
-      phone = _prefs.getString('phone') ?? '';
+      // name = _prefs.getString('name') ?? '';
+      // phone = _prefs.getString('phone') ?? '';
       token = _prefs.getString('token') ?? '';
-      balance = _prefs.getInt('balance').toString();
+      // balance = _prefs.getInt('balance').toString();
     });
   }
 
