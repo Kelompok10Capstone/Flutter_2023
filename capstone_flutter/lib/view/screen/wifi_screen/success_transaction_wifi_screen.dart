@@ -181,7 +181,8 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                             style: blackFont12,
                           ),
                           Text(
-                            widget.price.toString(),
+                            // widget.price.toString(),
+                            'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.price)}',
                             style: blackFont12,
                           ),
                         ],
@@ -197,7 +198,8 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                             style: blackFont12,
                           ),
                           Text(
-                            widget.adminFee.toString(),
+                            // widget.adminFee.toString(),
+                            'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee)}',
                             style: blackFont12,
                           ),
                         ],
@@ -234,7 +236,8 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    (widget.price + widget.adminFee).toString(),
+                                    // (widget.price + widget.adminFee).toString(),
+                                    'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.price + widget.adminFee)}',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.bold),
                                   ),

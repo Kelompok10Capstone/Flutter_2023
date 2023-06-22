@@ -1,5 +1,6 @@
 import 'package:capstone_flutter/view/screen/wifi_screen/pin_wifi_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
@@ -124,7 +125,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp ${myBalance.toString()})',
+                          'Saldo SkuyPay (Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -177,7 +178,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          (widget.adminFee + widget.price).toString(),
+                          // (widget.adminFee + widget.price).toString(),
+                          'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee + widget.price)}',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -213,7 +215,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                               blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          (widget.adminFee + widget.price).toString(),
+                          // (widget.adminFee + widget.price).toString(),
+                          'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee + widget.price)}',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.bold),
                         ),
