@@ -43,7 +43,7 @@ class PulsaPaketdataData {
 
   PulsaPaketdataData({
     required this.id,
-    // required this.phone62,
+    this.phone62 = "",
     required this.name,
     required this.type,
     required this.code,
@@ -56,7 +56,7 @@ class PulsaPaketdataData {
 
   PulsaPaketdataData copyWith({
     String? id,
-    // String? phone62,
+    String? phone62,
     String? name,
     String? type,
     String? code,
@@ -66,7 +66,7 @@ class PulsaPaketdataData {
   }) =>
       PulsaPaketdataData(
         id: id ?? this.id,
-        // phone62: phone62 ?? this.phone62,
+        phone62: phone62 ?? this.phone62,
         name: name ?? this.name,
         type: type ?? this.type,
         code: code ?? this.code,
@@ -89,7 +89,7 @@ class PulsaPaketdataData {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        // "phone62": phone62,
+        "phone62": phone62,
         "name": name,
         "type": type,
         "code": code,

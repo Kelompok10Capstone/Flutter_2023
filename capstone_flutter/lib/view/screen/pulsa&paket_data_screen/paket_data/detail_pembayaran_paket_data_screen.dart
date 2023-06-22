@@ -38,7 +38,7 @@ class _DetailPembayaranPaketDataScreenState
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-
+    debugPrint(pulsaPaketDataProvider.selectPaketData?.toJson().toString());
     return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         final paketData = paketDataProvider.paketData;
@@ -195,9 +195,8 @@ class _DetailPembayaranPaketDataScreenState
                                       ),
                                       Text(
                                         pulsaPaketDataProvider
-                                            .paketData[index].code
-                                            .toString(),
-                                        // paketData.code.toString(),
+                                                .selectPaketData?.code ??
+                                            "",
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -248,12 +247,16 @@ class _DetailPembayaranPaketDataScreenState
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                pulsaPaketDataProvider
-                                                    .paketData[index]
-                                                    .description
-                                                    .toString(),
+                                                // pulsaPaketDataProvider
+                                                //     .paketData[index]
+                                                //     .description
+                                                //     .toString(),
                                                 // paketData.description
                                                 //     .toString(),
+                                                pulsaPaketDataProvider
+                                                        .selectPaketData
+                                                        ?.description ??
+                                                    "",
                                                 style: blackFont12.copyWith(
                                                     fontWeight:
                                                         FontWeight.w400),
@@ -279,8 +282,8 @@ class _DetailPembayaranPaketDataScreenState
                                       ),
                                       Text(
                                         pulsaPaketDataProvider
-                                            .paketData[index].phone62
-                                            .toString(),
+                                                .selectPaketData?.phone62 ??
+                                            "",
                                         // paketData.phone62.toString(),
                                         // paketData?.phone62 ?? '',
                                         style: blackFont12.copyWith(

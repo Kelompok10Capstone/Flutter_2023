@@ -8,8 +8,8 @@ import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'metode_pembayaran_pulsa_screen.dart';
 
 class DetailPembayaranPulsaScreen extends StatefulWidget {
-  final String token;
-  const DetailPembayaranPulsaScreen({super.key, required this.token});
+  // final String token;
+  const DetailPembayaranPulsaScreen({super.key});
 
   @override
   State<DetailPembayaranPulsaScreen> createState() =>
@@ -31,7 +31,7 @@ class _DetailPembayaranPulsaScreenState
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("detail ppd : ${widget.token}");
+    // print("detail ppd : ${widget.token}");
   }
 
   @override
@@ -43,7 +43,7 @@ class _DetailPembayaranPulsaScreenState
       builder: (context, paketDataProvider, _) {
         final pulsatData = paketDataProvider.pulsa;
 
-        String price = pulsatData!.price.toString();
+        // String price = pulsatData!.price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -206,7 +206,10 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsatData.phone62.toString(),
+                                        // pulsatData.phone62.toString(),
+                                        pulsaPaketDataProvider
+                                                .selectPaketData?.phone62 ??
+                                            "",
                                         // 'O85278xxxxx',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -335,7 +338,7 @@ class _DetailPembayaranPulsaScreenState
                         price: priceText,
                         adminFee: adminFeeText,
                         createdAt: createdAtText!,
-                        token: widget.token,
+                        token: "",
                       ),
                     ),
                   );

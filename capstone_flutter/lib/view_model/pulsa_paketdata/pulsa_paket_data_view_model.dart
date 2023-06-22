@@ -20,6 +20,9 @@ class PulsaDanPaketDataViewModel with ChangeNotifier {
   List<PulsaPaketdataData> _paketData = [];
   List<PulsaPaketdataData> get paketData => _paketData;
 
+  PulsaPaketdataData? _selectPaketData;
+  PulsaPaketdataData? get selectPaketData => _selectPaketData;
+
   changeState(PulsaPaketdataViewState s) {
     _state = s;
     notifyListeners();
@@ -53,5 +56,28 @@ class PulsaDanPaketDataViewModel with ChangeNotifier {
         changeState(PulsaPaketdataViewState.error);
       }
     });
+  }
+
+  void selectPpd(String id, bool isPulsa) {
+    if (!isPulsa) {
+      for (var i = 0; i < _paketData.length; i++) {
+        if (_paketData[i].id == id) {
+          _paketData[i].isSelected = true;
+          _selectPaketData = _paketData[i];
+        } else {
+          _paketData[i].isSelected = false;
+        }
+      }
+
+      notifyListeners();
+    }
+  }
+
+  void chagePhoneNumber(String phone, bool isPulsa) {
+    if (!isPulsa) {
+      _selectPaketData = _selectPaketData?.copyWith(phone62: phone);
+    }
+
+    notifyListeners();
   }
 }

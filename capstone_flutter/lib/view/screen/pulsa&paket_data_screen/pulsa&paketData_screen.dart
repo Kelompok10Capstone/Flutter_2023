@@ -332,43 +332,53 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              DetailPembayaranPulsaScreen(token: token),
+                              const DetailPembayaranPulsaScreen(),
                         ),
                       );
                     } else if (_tabController?.index == 1) {
-                      List<PulsaPaketdataData> users =
-                          pulsaPaketDataProvider.paketData;
-                      int index =
-                          0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
-                      String providerText =
-                          users.isNotEmpty ? users[index].provider : '';
-                      String nameText =
-                          users.isNotEmpty ? users[index].name : '';
-                      String descriptionText =
-                          users.isNotEmpty ? users[index].description : '';
-                      String codeText =
-                          users.isNotEmpty ? users[index].code : '';
-                      String priceText =
-                          users.isNotEmpty ? users[index].price.toString() : '';
-                      String idText =
-                          users.isNotEmpty ? users[index].id.toString() : '';
-                      String typeText =
-                          users.isNotEmpty ? users[index].type : '';
+                      // List<PulsaPaketdataData> users =
+                      //     pulsaPaketDataProvider.paketData;
+                      // int index =
+                      //     0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
+                      // String providerText =
+                      //     users.isNotEmpty ? users[index].provider : '';
+                      // String nameText =
+                      //     users.isNotEmpty ? users[index].name : '';
+                      // String descriptionText =
+                      //     users.isNotEmpty ? users[index].description : '';
+                      // String codeText =
+                      //     users.isNotEmpty ? users[index].code : '';
+                      // String priceText =
+                      //     users.isNotEmpty ? users[index].price.toString() : '';
+                      // String idText =
+                      //     users.isNotEmpty ? users[index].id.toString() : '';
+                      // String typeText =
+                      //     users.isNotEmpty ? users[index].type : '';
 
-                      PulsaPaketdataData paketData = PulsaPaketdataData(
-                        name: nameText,
-                        price: int.parse(priceText),
-                        provider: providerText,
-                        description: descriptionText,
-                        code: codeText,
-                        id: idText,
-                        type: typeText,
-                      );
+                      // PulsaPaketdataData paketData = PulsaPaketdataData(
+                      //   name: nameText,
+                      //   price: int.parse(priceText),
+                      //   provider: providerText,
+                      //   description: descriptionText,
+                      //   code: codeText,
+                      //   id: idText,
+                      //   type: typeText,
+                      // );
 
-                      Provider.of<PulsaDanPaketDataViewModel>(context,
-                              listen: false)
-                          .paketData;
+                      // Provider.of<PulsaDanPaketDataViewModel>(context,
+                      //         listen: false)
+                      //     .paketData;
+
+                      // final params = context
+                      //     .read<PulsaDanPaketDataViewModel>()
+                      //     .selectPaketData;
                       // Jika tab Tagihan aktif, arahkan pengguna ke layar paket data
+                      debugPrint(
+                          "phone62Controller.text: ${phone62Controller.text}");
+                      context
+                          .read<PulsaDanPaketDataViewModel>()
+                          .chagePhoneNumber(phone62Controller.text, false);
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -504,8 +514,12 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
 
               return GestureDetector(
                 onTap: () {
+                  context
+                      .read<PulsaDanPaketDataViewModel>()
+                      .selectPpd(data.id, false);
                   setState(() {
-                    data.isSelected = data.isSelected ? false : true;
+                    debugPrint("asdsa");
+                    //   data.isSelected = data.isSelected ? false : true;
                   });
                 },
                 child: Container(

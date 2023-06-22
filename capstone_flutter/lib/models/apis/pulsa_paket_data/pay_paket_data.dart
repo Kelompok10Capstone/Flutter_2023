@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -38,20 +39,22 @@ class PayPaketData {
     if (response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
-      print('Berhasil: ${response.statusCode}');
-      print('Response: ${response.body}');
+      debugPrint('Berhasil: ${response.statusCode}');
+      debugPrint('Response: ${response.body}');
 
       if (metadata['status'] == 201) {
         final ppdId = jsonData['id'];
-        print('Berhasil: ${response.statusCode}');
-        print('Response: ${response.body}');
+        debugPrint('Berhasil: ${response.statusCode}');
+        debugPrint('Response: ${response.body}');
 
         return ppdId;
       } else {
-        print('Payment failed: ${metadata['message']}');
+        debugPrint('Payment failed: ${metadata['message']}');
+        return null;
       }
     } else {
-      print('error: ${response.statusCode}');
+      debugPrint('error: ${response.statusCode}');
+      return null;
     }
   }
 }

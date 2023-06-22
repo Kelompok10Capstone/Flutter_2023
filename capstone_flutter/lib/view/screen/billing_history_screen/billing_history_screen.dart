@@ -11,8 +11,6 @@ class BillingHistory extends StatefulWidget {
 }
 
 class _BillinngHistoryState extends State<BillingHistory> {
-  final int _selectedTab = 0;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

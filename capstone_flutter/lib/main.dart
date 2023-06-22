@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/view/screen/splash_screen/splash_screen.dart';
 import 'package:capstone_flutter/view_model/app_manajer.dart';
 import 'package:capstone_flutter/view_model/pulsa_paketdata/user_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,9 @@ import 'view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
 void main() {
+  if (kReleaseMode) {
+    debugPrint = (String? message, {int? wrapWidth}) {};
+  }
   runApp(const MyApp());
 }
 
