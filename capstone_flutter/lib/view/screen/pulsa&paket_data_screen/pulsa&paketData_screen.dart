@@ -20,27 +20,27 @@ class PulsaDanPaketDataScreen extends StatefulWidget {
       _PulsaDanPaketDataScreenState();
 }
 
-class PaketData {
-  final String? phone62;
-  final String? price;
-  final String? name;
-  final String? provider;
-  final String? description;
-  final String? code;
-  final String? id;
-  final String? type;
+// class PaketData {
+//   final String? phone62;
+//   final String? price;
+//   final String? name;
+//   final String? provider;
+//   final String? description;
+//   final String? code;
+//   final String? id;
+//   final String? type;
 
-  PaketData({
-    this.phone62,
-    this.price,
-    this.name,
-    this.provider,
-    this.description,
-    this.code,
-    this.id,
-    this.type,
-  });
-}
+//   PaketData({
+//     this.phone62,
+//     this.price,
+//     this.name,
+//     this.provider,
+//     this.description,
+//     this.code,
+//     this.id,
+//     this.type,
+//   });
+// }
 
 class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     with SingleTickerProviderStateMixin {
@@ -60,7 +60,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       token = _prefs.getString('token') ?? '';
-      print("token ppd : $token");
+      print("token screen ppd : $token");
     });
   }
 
@@ -83,8 +83,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-    final pakeDataProvider =
-        Provider.of<PaketDataProvider>(context, listen: false);
+    // final pakeDataProvider =
+    //     Provider.of<PaketDataProvider>(context, listen: false);
     // final paketdataDataProvider = Provider.of<PaketDataViewModel>(context);
 
     return Scaffold(

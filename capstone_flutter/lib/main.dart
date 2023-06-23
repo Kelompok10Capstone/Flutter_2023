@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'models/apis/pulsa_paket_data/pay_paket_data.dart';
+import 'view_model/cek_pin/cek_pin_view_model.dart';
 import 'view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import 'view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
@@ -30,11 +32,23 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => PulsaDanPaketDataViewModel(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => PaketDataProvider(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (_) => PaketDataProvider(),
+        // ),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CekPinViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PayPaketDataProvider(
+            token: '',
+            paketdata: '',
+            productid: '',
+            phonenumber: '',
+            discountid: '', // Optional
+          ),
         ),
       ],
       child: ScreenUtilInit(

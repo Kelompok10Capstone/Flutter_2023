@@ -63,19 +63,19 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
     String providerx = widget.provider;
     String productx = widget.id;
     if (isPinCorrect && productx.isNotEmpty) {
-      final PayPaketData payPaketData = PayPaketData(
-        token,
-        typex,
-        productx,
-        codex,
-        providerx,
-      );
+      // final PayPaketData payPaketData = PayPaketData(
+      //   token,
+      //   typex,
+      //   productx,
+      //   codex,
+      //   providerx,
+      // );
       // ignore: avoid_print
       print('adalah: $productx');
-      final PayPaketData? payPaketDataResponse =
-          await payPaketData.payPaketData();
+      // final PayPaketData? payPaketDataResponse =
+      //     await payPaketData.payPaketData();
       // ignore: avoid_print
-      print(payPaketDataResponse);
+      // print(payPaketDataResponse);
 
       // Memperbarui nilai balance pada UserProvider
       // ignore: use_build_context_synchronously

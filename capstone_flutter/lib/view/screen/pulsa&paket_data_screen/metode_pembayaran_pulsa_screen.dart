@@ -8,28 +8,30 @@ import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import '../../../view_model/pulsa_paketdata/user_provider.dart';
 
 class MetodePembayaranPulsaScreen extends StatefulWidget {
-  final String id;
-  final String name;
-  final String type;
-  final String code;
-  final String provider;
-  final String price;
-  final String adminFee;
-  final String description;
-  final DateTime createdAt;
   final String token;
-  const MetodePembayaranPulsaScreen(
-      {super.key,
-      required this.id,
-      required this.name,
-      required this.type,
-      required this.code,
-      required this.provider,
-      required this.price,
-      required this.adminFee,
-      required this.description,
-      required this.createdAt,
-      required this.token});
+  // final String id;
+  // final String name;
+  // final String type;
+  // final String code;
+  // final String provider;
+  // final String price;
+  // final String adminFee;
+  // final String description;
+  // final DateTime createdAt;
+
+  const MetodePembayaranPulsaScreen({
+    super.key,
+    required this.token,
+    // required this.id,
+    // required this.name,
+    // required this.type,
+    // required this.code,
+    // required this.provider,
+    // required this.price,
+    // required this.adminFee,
+    // required this.description,
+    // required this.createdAt,
+  });
 
   @override
   State<MetodePembayaranPulsaScreen> createState() =>
@@ -40,12 +42,21 @@ class _MetodePembayaranPulsaScreenState
     extends State<MetodePembayaranPulsaScreen> {
   String? selectedRadio;
   late SharedPreferences _prefs;
+  String token = '';
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print('pembayaran pulsa : ${widget.token}');
+    initializeData();
+    // print("detail pulsa token : ${token}");
+  }
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      print("token metode screen pulsa : $token");
+    });
   }
 
   @override
@@ -287,9 +298,17 @@ class _MetodePembayaranPulsaScreenState
               ),
             ),
             onPressed: () {
-              var saldo =
-                  int.parse(myBalance.toString()) - int.parse(widget.price);
-              var total = int.parse(widget.price);
+              var saldo = int.parse(myBalance.toString()) -
+                  int.parse(pulsaPaketDataProvider.selectPulsaData?.price
+                          .toString() ??
+                      "");
+              var total = int.parse(
+                  pulsaPaketDataProvider.selectPulsaData?.price.toString() ??
+                      "");
+              var balanceNow = int.parse(myBalance.toString()) -
+                  int.parse(pulsaPaketDataProvider.selectPulsaData?.price
+                          .toString() ??
+                      "");
               if (selectedRadio == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -307,25 +326,25 @@ class _MetodePembayaranPulsaScreenState
                   ),
                 );
               } else {
-                print(widget.id);
-                print(widget.name);
+                // print(widget.id);
+                // print(widget.name);
                 print('saldo : $saldo');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => PinPulsaScreen(
-                      token: widget.token,
-                      id: widget.id,
-                      name: widget.name,
-                      price: widget.price,
-                      type: widget.type,
-                      code: widget.code,
-                      adminFee: widget.adminFee,
-                      provider: widget.provider,
-                      description: widget.description,
-                      createdAt: widget.createdAt,
-                      balanceNow: int.parse(myBalance.toString()) -
-                          int.parse(widget.price),
+                      token: token,
+                      // id: widget.id,
+                      // name: widget.name,
+                      // price: widget.price,
+                      // type: widget.type,
+                      // code: widget.code,
+                      // adminFee: widget.adminFee,
+                      // provider: widget.provider,
+                      // description: widget.description,
+                      // createdAt: widget.createdAt,
+                      // balanceNow: int.parse(myBalance.toString()) -
+                      //     int.parse(widget.price),
                     ),
                   ),
                 );

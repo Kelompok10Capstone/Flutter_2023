@@ -36,6 +36,7 @@ class PulsaPaketdataData {
   final int price;
   final String description;
 
+  late String balaceNow = '';
   late String phone62 = '';
   late int adminFee = 0;
   late DateTime createdAt;

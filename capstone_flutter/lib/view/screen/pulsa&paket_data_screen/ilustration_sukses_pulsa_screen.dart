@@ -4,26 +4,27 @@ import 'package:flutter/material.dart';
 import '../../../utils/const/theme.dart';
 
 class IlustrationSuksesPulsa extends StatefulWidget {
-  final String id;
-  final String name;
-  final String type;
-  final String code;
-  final String provider;
-  final String price;
-  final String adminFee;
-  final String description;
-  final DateTime createdAt;
-  const IlustrationSuksesPulsa(
-      {super.key,
-      required this.id,
-      required this.name,
-      required this.type,
-      required this.code,
-      required this.provider,
-      required this.price,
-      required this.adminFee,
-      required this.description,
-      required this.createdAt});
+  // final String id;
+  // final String name;
+  // final String type;
+  // final String code;
+  // final String provider;
+  // final String price;
+  // final String adminFee;
+  // final String description;
+  // final DateTime createdAt;
+  const IlustrationSuksesPulsa({
+    super.key,
+    // required this.id,
+    // required this.name,
+    // required this.type,
+    // required this.code,
+    // required this.provider,
+    // required this.price,
+    // required this.adminFee,
+    // required this.description,
+    // required this.createdAt,
+  });
 
   @override
   State<IlustrationSuksesPulsa> createState() => _IlustrationSuksesPulsaState();
@@ -92,16 +93,16 @@ class _IlustrationSuksesPulsaState extends State<IlustrationSuksesPulsa> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BerhasilTransaksiPulsa(
-                          id: widget.id,
-                          name: widget.name,
-                          type: widget.type,
-                          code: widget.code,
-                          provider: widget.provider,
-                          price: widget.price,
-                          adminFee: widget.adminFee,
-                          description: widget.description,
-                          createdAt: widget.createdAt,
-                        ),
+                            // id: widget.id,
+                            // name: widget.name,
+                            // type: widget.type,
+                            // code: widget.code,
+                            // provider: widget.provider,
+                            // price: widget.price,
+                            // adminFee: widget.adminFee,
+                            // description: widget.description,
+                            // createdAt: widget.createdAt,
+                            ),
                       ),
                     );
                   },

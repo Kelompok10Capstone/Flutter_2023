@@ -8,26 +8,27 @@ import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
 class BerhasilTransaksiPulsa extends StatefulWidget {
-  final String id;
-  final String name;
-  final String type;
-  final String code;
-  final String provider;
-  final String price;
-  final String adminFee;
-  final String description;
-  final DateTime createdAt;
-  const BerhasilTransaksiPulsa(
-      {super.key,
-      required this.id,
-      required this.name,
-      required this.type,
-      required this.code,
-      required this.provider,
-      required this.price,
-      required this.adminFee,
-      required this.description,
-      required this.createdAt});
+  // final String id;
+  // final String name;
+  // final String type;
+  // final String code;
+  // final String provider;
+  // final String price;
+  // final String adminFee;
+  // final String description;
+  // final DateTime createdAt;
+  const BerhasilTransaksiPulsa({
+    super.key,
+    // required this.id,
+    // required this.name,
+    // required this.type,
+    // required this.code,
+    // required this.provider,
+    // required this.price,
+    // required this.adminFee,
+    // required this.description,
+    // required this.createdAt,
+  });
 
   @override
   State<BerhasilTransaksiPulsa> createState() => _BerhasilTransaksiPulsaState();
@@ -57,7 +58,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-    return Consumer<PaketDataProvider>(
+    return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         final pulsatData = paketDataProvider.pulsa;
 
@@ -94,8 +95,9 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          DateFormat('dd MMMM yyyy. HH:mm')
-                              .format(widget.createdAt as DateTime),
+                          DateFormat('dd MMMM yyyy. HH:mm').format(
+                              pulsaPaketDataProvider.selectPulsaData?.createdAt
+                                  as DateTime),
                           style: blackFont12.copyWith(fontSize: 10),
                         ),
                         Text(

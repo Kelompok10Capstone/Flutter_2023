@@ -5,4 +5,5 @@ class Urls {
   /// Endpoints =====================================================
   ///
   static String pulsapaketdataList = 'user/ppd';
+  static String cekPin = 'user/pin';
 }

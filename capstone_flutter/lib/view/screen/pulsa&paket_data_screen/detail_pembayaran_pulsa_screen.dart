@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
@@ -20,6 +21,8 @@ class _DetailPembayaranPulsaScreenState
     extends State<DetailPembayaranPulsaScreen> {
   // text editing controller
   TextEditingController promoController = TextEditingController();
+  String token = '';
+  late SharedPreferences _prefs;
 
   @override
   void dispose() {
@@ -29,9 +32,17 @@ class _DetailPembayaranPulsaScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print("detail pulsa token : ${widget.token}");
+    initializeData();
+    // print("detail pulsa token : ${token}");
+  }
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = _prefs.getString('token') ?? '';
+      print("token detail screen pulsa : $token");
+    });
   }
 
   @override
@@ -306,39 +317,39 @@ class _DetailPembayaranPulsaScreenState
                   ),
                 ),
                 onPressed: () {
-                  List<PulsaPaketdataData> users = pulsaPaketDataProvider.pulsa;
-                  int index =
-                      0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
-                  String providerText =
-                      users.isNotEmpty ? users[index].provider : '';
-                  String nameText = users.isNotEmpty ? users[index].name : '';
-                  String descriptionText =
-                      users.isNotEmpty ? users[index].description : '';
-                  String codeText = users.isNotEmpty ? users[index].code : '';
-                  String priceText =
-                      users.isNotEmpty ? users[index].price.toString() : '';
-                  String typeText = users.isNotEmpty ? users[index].type : '';
-                  String idText = users.isNotEmpty ? users[index].id : '';
-                  String adminFeeText =
-                      users.isNotEmpty ? users[index].adminFee.toString() : '';
-                  DateTime? createdAtText = users.isNotEmpty
-                      ? users[index].createdAt as DateTime?
-                      : null;
+                  // List<PulsaPaketdataData> users = pulsaPaketDataProvider.pulsa;
+                  // int index =
+                  //     0; // Ganti dengan indeks yang sesuai dengan kebutuhan Anda
+                  // String providerText =
+                  //     users.isNotEmpty ? users[index].provider : '';
+                  // String nameText = users.isNotEmpty ? users[index].name : '';
+                  // String descriptionText =
+                  //     users.isNotEmpty ? users[index].description : '';
+                  // String codeText = users.isNotEmpty ? users[index].code : '';
+                  // String priceText =
+                  //     users.isNotEmpty ? users[index].price.toString() : '';
+                  // String typeText = users.isNotEmpty ? users[index].type : '';
+                  // String idText = users.isNotEmpty ? users[index].id : '';
+                  // String adminFeeText =
+                  //     users.isNotEmpty ? users[index].adminFee.toString() : '';
+                  // DateTime? createdAtText = users.isNotEmpty
+                  //     ? users[index].createdAt as DateTime?
+                  //     : null;
 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => MetodePembayaranPulsaScreen(
-                        id: idText,
-                        name: nameText,
-                        type: typeText,
-                        code: codeText,
-                        provider: providerText,
-                        description: descriptionText,
-                        price: priceText,
-                        adminFee: adminFeeText,
-                        createdAt: createdAtText!,
-                        token: widget.token,
+                        token: token,
+                        // id: idText,
+                        // name: nameText,
+                        // type: typeText,
+                        // code: codeText,
+                        // provider: providerText,
+                        // description: descriptionText,
+                        // price: priceText,
+                        // adminFee: adminFeeText,
+                        // createdAt: createdAtText!,
                       ),
                     ),
                   );
