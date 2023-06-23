@@ -44,10 +44,12 @@ class _TopUpScreenState extends State<TopUpScreen> {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const ReplenishFunds(bankCode: "014")));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const ReplenishFunds(bankCode: "014"),
+                    ),
+                  );
                 },
                 child: Row(
                   children: [
@@ -65,9 +67,13 @@ class _TopUpScreenState extends State<TopUpScreen> {
                         style: blackFont14.copyWith(color: Colors.black),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 20, left: 220),
-                      child: Icon(
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 20,
+                        left: MediaQuery.of(context).size.width * 0.55,
+                        // left: 190,
+                      ),
+                      child: const Icon(
                         Icons.keyboard_arrow_right_outlined,
                         size: 25,
                       ),

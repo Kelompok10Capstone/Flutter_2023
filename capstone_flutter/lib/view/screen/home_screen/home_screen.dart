@@ -211,21 +211,38 @@ class _HomeScreenState extends State<HomeScreen>
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.18,
-                          // left: 40,
+                      // Padding(
+                      //   padding: EdgeInsets.only(
+                      //     left: MediaQuery.of(context).size.width * 0.18,
+                      //     // left: 40,
+                      //   ),
+                      //   child: const SizedBox(
+                      //     // width: 18,
+                      //     height: 48,
+                      //     child: Icon(
+                      //       Icons.notifications_outlined,
+                      //       color: Colors.white,
+                      //       size: 28,
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 70,
+                    left: MediaQuery.of(context).size.width * 0.85,
+                  ),
+                  child: Row(
+                    children: const [
+                      SizedBox(
+                        child: Icon(
+                          Icons.notifications_outlined,
+                          color: Colors.white,
+                          size: 28,
                         ),
-                        child: const SizedBox(
-                          // width: 18,
-                          height: 48,
-                          child: Icon(
-                            Icons.notifications_outlined,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -277,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 250,
+                    top: 260,
                     left: 44,
                   ),
                   child: Text(
@@ -288,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 270, left: 44),
+                  padding: const EdgeInsets.only(top: 280, left: 44),
                   child: Text(
                     'Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)}',
                     style: whiteFont25.copyWith(
@@ -307,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: 252,
+                      top: 262,
                       left: MediaQuery.of(context).size.width * 0.6,
                       // left: 224,
                     ),
@@ -324,8 +341,8 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: 294,
-                    left: MediaQuery.of(context).size.width * 0.6,
+                    top: 305,
+                    left: MediaQuery.of(context).size.width * 0.61,
                   ),
                   child: Text(
                     'Transfer',
@@ -346,7 +363,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: 252,
+                      top: 262,
                       left: MediaQuery.of(context).size.width * 0.75,
                       // left: 280,
                     ),
@@ -363,8 +380,8 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: 294,
-                    left: MediaQuery.of(context).size.width * 0.76,
+                    top: 305,
+                    left: MediaQuery.of(context).size.width * 0.77,
                     // left: 284,
                   ),
                   child: Text(

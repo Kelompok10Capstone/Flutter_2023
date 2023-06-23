@@ -41,7 +41,8 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              // padding: const EdgeInsets.only(top: 20),
               child: Text(
                 'Masukkan Kata Sandi untuk bisa lanjut ubah Kode Pin, ya.',
                 style: blackFont14.copyWith(color: Colors.black),
@@ -55,11 +56,15 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                 child: Column(
                   children: [
                     TextFormField(
-                      cursorColor: Colors.black,
+                      // cursorColor: Colors.black,
                       obscureText: _obscureText,
                       decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
                         hintText: 'Kata Sandi',
                         suffixIcon: IconButton(
                             icon: Icon(
@@ -76,7 +81,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                         labelStyle: const TextStyle(color: Colors.grey),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                            Radius.circular(8),
                           ),
                         ),
                       ),
@@ -91,8 +96,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 19),
+                  padding: const EdgeInsets.symmetric(vertical: 19),
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
