@@ -7,6 +7,7 @@ import '../../../models/apis/cek_pin_api.dart';
 import '../../../models/apis/pulsa_paket_data/pay_paket_data.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/cek_pin/cek_pin_view_model.dart';
+import '../../../view_model/pulsa_paketdata/pay_transaksi_ppd_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import '../../../view_model/pulsa_paketdata/user_provider.dart';
 import 'ilustration_sukses_pulsa_screen.dart';
@@ -73,26 +74,33 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
     final cekPinProvider = Provider.of<CekPinViewModel>(context, listen: false);
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final createTransaksiProvider =
+        Provider.of<CekTransaksiPpdViewModel>(context, listen: false);
 
     final bool isPinCorrect = await cekPinProvider.postcekPin(pin);
-    String typep = pulsaPaketDataProvider.pulsa[0].type;
-    String codep = pulsaPaketDataProvider.pulsa[0].code;
-    String providerp = pulsaPaketDataProvider.pulsa[0].provider;
-    String productp = pulsaPaketDataProvider.pulsa[0].id;
+    if (isPinCorrect) {
+      if (createTransaksiProvider.cekTransaksiPpd != null) {
+        String typep =
+            createTransaksiProvider.cekTransaksiPpd!.productType.isNotEmpty
+                ? createTransaksiProvider.cekTransaksiPpd!.productType[0]
+                : "";
+        String userId = createTransaksiProvider.cekTransaksiPpd!.userId;
+        String productp =
+            createTransaksiProvider.cekTransaksiPpd!.productDetail.isNotEmpty
+                ? createTransaksiProvider.cekTransaksiPpd!.productDetail[0]
+                : "";
+        String idP = createTransaksiProvider.cekTransaksiPpd!.id;
 
-    if (isPinCorrect && productp.isNotEmpty) {
-      final payPaketDataProvider = PayPaketDataProvider(
-        token: widget.token,
-        paketdata: typep,
-        productid: productp,
-        phonenumber: codep,
-        discountid: providerp,
-      );
+        final payPulsaProvider = CekTransaksiPpdViewModel();
 
-      await payPaketDataProvider.payPaketData();
+        await payPulsaProvider.createTransaksiPpd(
+          typep,
+          userId,
+          productp,
+          idP,
+        );
 
-      if (payPaketDataProvider.productid != null) {
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         final newBalance = int.parse(userProvider.balance.toString()) -
             int.parse(
@@ -105,25 +113,6 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
           MaterialPageRoute(
             builder: (context) => IlustrationSuksesPulsa(),
           ),
-        );
-      } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Error'),
-              content: Text(
-                  'Payment failed: ${payPaketDataProvider.errorMessage ?? ""}'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
         );
       }
     } else {

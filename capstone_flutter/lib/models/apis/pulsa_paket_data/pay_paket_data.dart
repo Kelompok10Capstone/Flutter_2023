@@ -1,117 +1,101 @@
-import 'package:flutter/cupertino.dart';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../../../utils/const/urls.dart';
+import '../../pay_ppd_models.dart';
 
 // class PayPaketData {
 //   static const baseUrl = 'http://34.101.78.228:2424/api/v1/user/ppd';
 
-//   final String paketdata;
-//   final String productid;
-//   final String? discountid;
-//   final String phonenumber;
-//   final String token;
-
-//   PayPaketData(
-//     this.token,
-//     this.paketdata,
-//     this.productid,
-//     this.phonenumber,
-//     this.discountid,
-//   );
-
-//   Future<PayPaketData?> payPaketData() async {
-//     final Map<String, dynamic> requestBody = {
-//       "type": paketdata,
-//       "product_id": productid,
-//       "discount_id": discountid,
-//       "phone_number": phonenumber,
-//     };
-
+//   // Fungsi untuk create transaction
+//   static Future<CreateTransaksiData> createTransaksiPPd(
+//     String token,
+//     String type,
+//     String phoneNumber,
+//     String productId,
+//     String discontId,
+//   ) async {
 //     final response = await http.post(
 //       Uri.parse(baseUrl),
 //       headers: {
 //         'Content-Type': 'application/json',
 //         'Authorization': 'Bearer $token',
 //       },
-//       body: jsonEncode(requestBody),
+//       body: json.encode({
+//         'type': type,
+//         'phone_number': phoneNumber,
+//         'product_id': productId,
+//         'discont_id': discontId,
+//       }),
 //     );
 
-//     if (response.statusCode == 201) {
-//       final jsonData = jsonDecode(response.body);
-//       final metadata = jsonData['metadata'];
-//       debugPrint('Berhasil: ${response.statusCode}');
-//       debugPrint('Response: ${response.body}');
-
-//       if (metadata['status'] == 201) {
-//         final ppdId = jsonData['id'];
-//         debugPrint('Berhasil: ${response.statusCode}');
-//         debugPrint('Response: ${response.body}');
-
-//         return ppdId;
-//       } else {
-//         debugPrint('Payment failed: ${metadata['message']}');
-//         return null;
-//       }
+//     if (response.statusCode == 200) {
+//       final data = json.decode(response.body);
+//       return CreateTransaksiData.fromJson(data['data']);
 //     } else {
-//       debugPrint('error: ${response.statusCode}');
-//       return null;
+//       throw Exception('Gagal membuat transaksi');
 //     }
 //   }
 // }
 
-class PayPaketDataProvider extends ChangeNotifier {
-  static const baseUrl = 'http://34.101.78.228:2424/api/v1/user/ppd';
+class PayPaketData {
+  late String token;
 
-  String token;
-  String paketdata;
-  String productid;
-  String? discountid;
-  String phonenumber;
+  PayPaketData(
+    this.token,
+  );
 
-  String? errorMessage;
+  Dio dioApi() {
+    BaseOptions options = BaseOptions(
+      baseUrl: Urls.baseUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      responseType: ResponseType.json,
+    );
+    final dio = Dio(options);
+    return dio;
+  }
 
-  PayPaketDataProvider({
-    required this.token,
-    required this.paketdata,
-    required this.productid,
-    required this.phonenumber,
-    this.discountid,
-  });
-
-  Future<void> payPaketData() async {
-    final Map<String, dynamic> requestBody = {
-      "type": paketdata,
-      "product_id": productid,
-      "discount_id": discountid,
-      "phone_number": phonenumber,
-    };
-
+  Future<Response<Map<String, dynamic>>> _postCreateTransaksiPpd({
+    required String endpoint,
+    Map<String, dynamic>? body,
+  }) async {
+    Dio dio = dioApi();
     try {
-      final response = await http.post(
-        Uri.parse(baseUrl),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-        body: jsonEncode(requestBody),
-      );
-
-      final jsonData = jsonDecode(response.body);
-      final metadata = jsonData['metadata'];
-
-      if (response.statusCode == 201 && metadata['status'] == 201) {
-        final ppdId = jsonData['id'];
-        debugPrint('Berhasil: ${response.statusCode}');
-        debugPrint('Response: ${response.body}');
-      } else {
-        errorMessage = metadata['message'];
-        debugPrint('Payment failed: $errorMessage');
+      Response<Map<String, dynamic>> response =
+          await dio.post(endpoint, data: body);
+      return response;
+    } catch (e) {
+      if (e is DioException) {
+        // ignore: avoid_print
+        print(e.response?.data);
       }
-    } catch (error) {
-      errorMessage = 'Error: $error';
-      debugPrint('Error: $error');
+      rethrow;
     }
+  }
 
-    notifyListeners();
+  Future<CreateTransaksiData> postcreateTransaksiPPd(
+    String type,
+    String phoneNumber,
+    String productId,
+    String discontId,
+  ) async {
+    final result = await _postCreateTransaksiPpd(
+      endpoint: Urls.pulsapaketdataList,
+      body: {
+        'type': type,
+        'phone_number': phoneNumber,
+        'product_id': productId,
+        'discont_id': discontId,
+      },
+    );
+    // ignore: avoid_print
+    print('result: $result');
+    CreateTransaksiData response = CreateTransaksiData.fromJson(result.data!);
+
+    return response;
   }
 }
