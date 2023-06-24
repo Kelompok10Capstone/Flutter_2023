@@ -47,6 +47,7 @@ class _DetailPembayaranPaketDataScreenState
             centerTitle: true,
             elevation: 0,
           ),
+          // ignore: unnecessary_null_comparison
           body: paketData == null
               ? const Center(
                   child: CircularProgressIndicator(),

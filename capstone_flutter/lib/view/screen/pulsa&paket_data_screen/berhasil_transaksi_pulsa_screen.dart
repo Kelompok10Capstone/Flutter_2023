@@ -60,8 +60,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
         Provider.of<PulsaDanPaketDataViewModel>(context);
     return Consumer<PaketDataProvider>(
       builder: (context, paketDataProvider, _) {
-        final pulsatData = paketDataProvider.pulsa;
-
+        // final pulsatData = paketDataProvider.pulsa;
         // String price = pulsatData!.price.toString();
 
         return Scaffold(

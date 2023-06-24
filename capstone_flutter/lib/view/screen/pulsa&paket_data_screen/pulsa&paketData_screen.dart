@@ -214,6 +214,7 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                         },
                         onFieldSubmitted: (value) {
                           if (value.length > 9) {
+                            // ignore: avoid_print
                             print('phone: $value');
                             pulsaPaketDataProvider.getPhone(value);
                           }

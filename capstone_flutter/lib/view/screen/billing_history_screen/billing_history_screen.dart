@@ -347,7 +347,7 @@ class historyWidget extends StatelessWidget {
           }
 
           //zona waktu di lokasi saya GMT+7
-          final timeZone = Duration(hours: 7);
+          const timeZone = Duration(hours: 7);
 
           // parse dari string ke date time
           DateTime dateTime = DateTime.parse(transaction.createdAt);

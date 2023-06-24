@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
 class BerhasilTransaksiPaketData extends StatefulWidget {
@@ -64,6 +63,7 @@ class _BerhasilTransaksiPaketDataState
         Provider.of<PulsaDanPaketDataViewModel>(context);
     return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
+        // ignore: unused_local_variable
         final paketData = paketDataProvider.paketData;
         // int index = 0;
         // String price = paketDataProvider.paketData[index].price.toString();

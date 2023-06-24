@@ -44,8 +44,8 @@ class _MetodePembayaranPulsaScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    // ignore: avoid_print
     print('pembayaran pulsa : ${widget.token}');
   }
 
@@ -310,7 +310,9 @@ class _MetodePembayaranPulsaScreenState
               } else {
                 // ignore: avoid_print
                 print(widget.id);
+                // ignore: avoid_print
                 print(widget.name);
+                // ignore: avoid_print
                 print('saldo : $saldo');
                 Navigator.push(
                   context,

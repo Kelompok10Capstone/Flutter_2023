@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'metode_pembayaran_pulsa_screen.dart';
 
@@ -28,8 +27,8 @@ class _DetailPembayaranPulsaScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    // ignore: avoid_print
     print("detail pulsa token : ${widget.token}");
   }
 
@@ -56,6 +55,7 @@ class _DetailPembayaranPulsaScreenState
             centerTitle: true,
             elevation: 0,
           ),
+          // ignore: unnecessary_null_comparison
           body: pulsatData == null
               ? const Center(
                   child: CircularProgressIndicator(),
