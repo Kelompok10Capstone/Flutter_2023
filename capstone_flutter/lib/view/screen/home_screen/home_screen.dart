@@ -211,21 +211,6 @@ class _HomeScreenState extends State<HomeScreen>
                           ],
                         ),
                       ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(
-                      //     left: MediaQuery.of(context).size.width * 0.18,
-                      //     // left: 40,
-                      //   ),
-                      //   child: const SizedBox(
-                      //     // width: 18,
-                      //     height: 48,
-                      //     child: Icon(
-                      //       Icons.notifications_outlined,
-                      //       color: Colors.white,
-                      //       size: 28,
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
