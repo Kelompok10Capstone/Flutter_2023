@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/apis/wifi.dart';
@@ -30,6 +29,7 @@ class WiFiInquiryProvider extends ChangeNotifier {
 
     if (response != null) {
       setResponse(response);
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -46,6 +46,7 @@ class WiFiInquiryProvider extends ChangeNotifier {
         ),
       );
     } else {
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (context) {

@@ -8,8 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
-import '../../../models/apis/wifi.dart';
-import '../../../models/wifi_model.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
 import '../../../view_model/user_provider/user_provider.dart';
@@ -24,7 +22,6 @@ import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/product_detail_screen.dart';
 import '../top_up_screen/top_up_screen.dart';
 import '../transfer_screen/transfer_screen.dart';
-import '../wifi_screen/payment_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -140,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       body: Consumer<UserProvider>(
         builder: (context, userProvider, _) {

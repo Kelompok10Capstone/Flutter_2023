@@ -21,6 +21,7 @@ class PinPulsaScreen extends StatefulWidget {
   final int balanceNow;
   final DateTime createdAt;
   final String token;
+
   const PinPulsaScreen(
       {super.key,
       required this.id,
@@ -58,21 +59,23 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
   void _submitPin(String pin) async {
     String token = widget.token;
     final bool isPinCorrect = await checkPinPayment(token, pin);
-    String typex = widget.type;
-    String codex = widget.code;
-    String providerx = widget.provider;
-    String productx = widget.id;
-    if (isPinCorrect && productx.isNotEmpty) {
+    String typep = widget.type;
+    String codep = widget.code;
+    String providerp = widget.provider;
+    String productp = widget.id;
+    if (isPinCorrect && productp.isNotEmpty) {
       final PayPaketData payPaketData = PayPaketData(
         token,
-        typex,
-        productx,
-        codex,
-        providerx,
+        typep,
+        productp,
+        codep,
+        providerp,
       );
       // ignore: avoid_print
-      print('adalah: $productx');
-      final String? payPaketDataResponse = await payPaketData.payPaketData();
+      print('adalah: $productp');
+      final PayPaketData? payPaketDataResponse =
+          await payPaketData.payPaketData();
+      // final String? payPaketDataResponse = await payPaketData.payPaketData();
       // ignore: avoid_print
       print(payPaketDataResponse);
 
