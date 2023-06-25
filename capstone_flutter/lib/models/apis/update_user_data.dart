@@ -1,5 +1,9 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'login.dart';
 
 class UpdateUserController {
   late String token;
@@ -24,6 +28,38 @@ class UpdateUserController {
       // ignore: avoid_print
       print('gagal: ${response.body}');
       return false;
+    }
+  }
+
+  Future<String> updateUserImage(String image) async {
+    try {
+      final dio = Dio(BaseOptions(contentType: Headers.jsonContentType));
+      dio.interceptors.add(LogInterceptor(
+          requestBody: true,
+          logPrint: (object) => debugPrint(object.toString())));
+
+      final filename = image.split("/").last;
+      final fileImage = await MultipartFile.fromFile(image, filename: filename);
+      final fileData = FormData.fromMap({'image': fileImage});
+
+      var response = await dio.put(
+        'http://34.101.78.228:2424/api/v1/user/image',
+        data: fileData,
+        options: Options(
+          contentType: Headers.jsonContentType,
+          headers: {"Authorization": 'Bearer $token'},
+        ),
+      );
+      String result = response.data["data"]["image"] ?? "";
+      debugPrint("response updateUserImage1: $result");
+      debugPrint("response updateUserImage2: ${response.data}");
+
+      LoginController().saveUserImageToSharedPreference(result);
+
+      return result;
+    } catch (e, s) {
+      debugPrint("Error: $e\nStackrace: $s");
+      throw 'Error: $e\nStackrace: $s';
     }
   }
 }

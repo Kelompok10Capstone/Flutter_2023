@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
+import 'view_model/user_provider/user_update_image_provider.dart';
 
 void main() {
   if (kReleaseMode) {
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         // ),
         ChangeNotifierProvider(
           create: (_) => TopUpProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserUpdateImageProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => TagihanListrikInquiryProvider(),
