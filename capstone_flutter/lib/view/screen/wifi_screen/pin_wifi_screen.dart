@@ -15,10 +15,10 @@ class PinScreenWifi extends StatefulWidget {
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
-  final int price;
-  final int adminFee;
+  final double price;
+  final double adminFee;
   final String customerName;
-  final int balanceNow;
+  final double balanceNow;
   const PinScreenWifi(
       {Key? key,
       required this.id,
@@ -63,70 +63,47 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
   }
 
   void _submitPin(String pin) async {
-    try {
-      final bool isPinCorrect = await checkPinPayment(token, pin);
-      String idx = widget.id;
-      if (isPinCorrect && idx.isNotEmpty) {
-        final PayWifi payWifi = PayWifi(idx, token);
-        // ignore: avoid_print
-        print('adalah: $idx');
-        final String? payWifiResponse = await payWifi.payWifi();
-        // ignore: avoid_print
-        print(payWifiResponse);
-
-        // Memperbarui nilai balance pada UserProvider
-        // ignore: use_build_context_synchronously
-        final userProvider = Provider.of<UserProvider>(context, listen: false);
-        final newBalance =
-            widget.balanceNow; // Ganti dengan nilai balance yang baru
-        userProvider.updateUserInfo(
-            userProvider.name, userProvider.phone, newBalance);
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => IlustrationSuccessWifi(
-              id: widget.id,
-              userId: widget.userId,
-              pelangganData: widget.pelangganData,
-              customerName: widget.customerName,
-              createdAt: widget.createdAt,
-              providerName: widget.providerName,
-              adminFee: widget.adminFee,
-              price: widget.price,
-            ),
-          ),
-        );
-      } else {
-        // Handle incorrect pin scenario
-        // ignore: use_build_context_synchronously
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Error'),
-              content: const Text('Pin salah.'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
+    final bool isPinCorrect = await checkPinPayment(token, pin);
+    String idx = widget.id;
+    if (isPinCorrect && idx.isNotEmpty) {
+      final PayWifi payWifi = PayWifi(idx, token);
       // ignore: avoid_print
-      print('Error: $error');
+      print('adalah: $idx');
+      final String? payWifiResponse = await payWifi.payWifi();
+      // ignore: avoid_print
+      print(payWifiResponse);
+
+      // Memperbarui nilai balance pada UserProvider
+      // ignore: use_build_context_synchronously
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final newBalance =
+          widget.balanceNow; // Ganti dengan nilai balance yang baru
+      userProvider.updateUserInfo(
+          userProvider.name, userProvider.phone, newBalance);
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => IlustrationSuccessWifi(
+            id: widget.id,
+            userId: widget.userId,
+            pelangganData: widget.pelangganData,
+            customerName: widget.customerName,
+            createdAt: widget.createdAt,
+            providerName: widget.providerName,
+            adminFee: widget.adminFee,
+            price: widget.price,
+          ),
+        ),
+      );
+    } else {
+      // Handle incorrect pin scenario
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Error'),
-            content: const Text('Upss sepertinya ada yang salah.'),
+            content: const Text('Pin salah.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {

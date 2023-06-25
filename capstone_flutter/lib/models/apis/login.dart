@@ -45,7 +45,8 @@ class LoginController {
         final userId = User.fromJson(profileJsonData);
         // ignore: use_build_context_synchronously
         final userProvider = Provider.of<UserProvider>(context, listen: false);
-        userProvider.updateUserInfo(userId.name, userId.phone, userId.balance);
+        userProvider.updateUserInfo(
+            userId.name, userId.phone, userId.balance.toDouble());
 
         saveUserInfoToSharedPreferences2(
           userId.name,
@@ -84,12 +85,12 @@ class LoginController {
   }
 
   void saveUserInfoToSharedPreferences2(
-      String name, String phones, String email, int balance) async {
+      String name, String phones, String email, double balance) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('phone', phones);
     await prefs.setString('email', email);
-    await prefs.setInt('balance', balance);
+    await prefs.setDouble('balance', balance);
   }
 
   Future<String> getToken() async {
