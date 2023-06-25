@@ -13,8 +13,8 @@ class MetodePembayaranPulsaScreen extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
   final String token;
@@ -288,9 +288,9 @@ class _MetodePembayaranPulsaScreenState
               ),
             ),
             onPressed: () {
-              var saldo =
-                  int.parse(myBalance.toString()) - int.parse(widget.price);
-              var total = int.parse(widget.price);
+              var saldo = double.parse(myBalance.toString()) -
+                  double.parse(widget.price.toString());
+              var total = double.parse(widget.price.toString());
               if (selectedRadio == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -328,8 +328,8 @@ class _MetodePembayaranPulsaScreenState
                       provider: widget.provider,
                       description: widget.description,
                       createdAt: widget.createdAt,
-                      balanceNow: int.parse(myBalance.toString()) -
-                          int.parse(widget.price),
+                      balanceNow: double.parse(myBalance.toString()) -
+                          double.parse(widget.price.toString()),
                     ),
                   ),
                 );

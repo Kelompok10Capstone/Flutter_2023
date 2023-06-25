@@ -363,12 +363,20 @@ class _DetailPembayaranPaketDataScreenState
                   String descriptionText =
                       users.isNotEmpty ? users[index].description : '';
                   String codeText = users.isNotEmpty ? users[index].code : '';
-                  String priceText =
-                      users.isNotEmpty ? users[index].price.toString() : '';
+                  // String priceText =
+                  //     users.isNotEmpty ? users[index].price.toString() : '';
+                  double priceText =
+                      users.isNotEmpty ? users[index].price : 0.0;
                   String typeText = users.isNotEmpty ? users[index].type : '';
                   String idText = users.isNotEmpty ? users[index].id : '';
-                  String adminFeeText =
-                      users.isNotEmpty ? users[index].adminFee.toString() : '';
+                  // String adminFeeText =
+                  //     users.isNotEmpty ? users[index].adminFee.toString() : '';
+                  double adminFeeText;
+                  if (users.isNotEmpty) {
+                    adminFeeText = users[index].adminFee;
+                  } else {
+                    adminFeeText = 0.0;
+                  }
                   DateTime? createdAtText =
                       users.isNotEmpty ? users[index].createdAt : null;
                   // users.isNotEmpty ? users[index].adminFee.toString() : '';

@@ -23,7 +23,7 @@ class PayWifi {
       body: jsonEncode(requestBody),
     );
 
-    if (response.statusCode == 202) {
+    if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
       // ignore: avoid_print
@@ -31,7 +31,7 @@ class PayWifi {
       // ignore: avoid_print
       print('Response: ${response.body}');
 
-      if (metadata['status'] == 202) {
+      if (metadata['status'] == 200) {
         final wifiId = jsonData['id'];
         // ignore: avoid_print
         print('Berhasil: ${response.statusCode}');

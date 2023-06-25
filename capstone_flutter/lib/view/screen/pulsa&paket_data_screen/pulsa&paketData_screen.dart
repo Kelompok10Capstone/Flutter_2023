@@ -22,27 +22,27 @@ class PulsaDanPaketDataScreen extends StatefulWidget {
       _PulsaDanPaketDataScreenState();
 }
 
-class PaketData {
-  final String? phone62;
-  final String? price;
-  final String? name;
-  final String? provider;
-  final String? description;
-  final String? code;
-  final String? id;
-  final String? type;
+// class PaketData {
+//   final String? phone62;
+//   final String? price;
+//   final String? name;
+//   final String? provider;
+//   final String? description;
+//   final String? code;
+//   final String? id;
+//   final String? type;
 
-  PaketData({
-    this.phone62,
-    this.price,
-    this.name,
-    this.provider,
-    this.description,
-    this.code,
-    this.id,
-    this.type,
-  });
-}
+//   PaketData({
+//     this.phone62,
+//     this.price,
+//     this.name,
+//     this.provider,
+//     this.description,
+//     this.code,
+//     this.id,
+//     this.type,
+//   });
+// }
 
 class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     with SingleTickerProviderStateMixin {
@@ -90,8 +90,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
     // ignore: unused_local_variable
-    final pakeDataProvider =
-        Provider.of<PaketDataProvider>(context, listen: false);
+    // final pakeDataProvider =
+    //     Provider.of<PaketDataProvider>(context, listen: false);
     // final paketdataDataProvider = Provider.of<PaketDataViewModel>(context);
 
     return Scaffold(
@@ -459,10 +459,6 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   context
                       .read<PulsaDanPaketDataViewModel>()
                       .selectPpd(data.id, true);
-                  // setState(() {
-                  //   debugPrint("asdsa");
-                  //   //   data.isSelected = data.isSelected ? false : true;
-                  // });
                 },
                 child: Container(
                   decoration: BoxDecoration(

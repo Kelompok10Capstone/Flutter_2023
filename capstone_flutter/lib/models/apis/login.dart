@@ -84,12 +84,12 @@ class LoginController {
   }
 
   void saveUserInfoToSharedPreferences2(
-      String name, String phones, String email, int balance) async {
+      String name, String phones, String email, double balance) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('phone', phones);
     await prefs.setString('email', email);
-    await prefs.setInt('balance', balance);
+    await prefs.setDouble('balance', balance);
   }
 
   Future<String> getToken() async {

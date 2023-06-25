@@ -33,11 +33,11 @@ class PulsaPaketdataData {
   final String type;
   final String code;
   final String provider;
-  final int price;
+  final double price;
   final String description;
 
   late String phone62 = '';
-  late int adminFee = 0;
+  late double adminFee = 0.0;
   late DateTime createdAt;
   late bool isSelected = false;
 
@@ -50,7 +50,7 @@ class PulsaPaketdataData {
     required this.provider,
     required this.price,
     required this.description,
-  }) : adminFee = 0 {
+  }) : adminFee = 0.0 {
     createdAt = DateTime.now();
   }
 
@@ -61,7 +61,7 @@ class PulsaPaketdataData {
     String? type,
     String? code,
     String? provider,
-    int? price,
+    double? price,
     String? description,
   }) =>
       PulsaPaketdataData(
@@ -83,7 +83,7 @@ class PulsaPaketdataData {
         type: json["type"],
         code: json["code"],
         provider: json["provider"],
-        price: json["price"],
+        price: json["price"].toDouble(),
         description: json["description"],
       );
 

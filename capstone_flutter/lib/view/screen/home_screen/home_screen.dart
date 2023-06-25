@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
 import '../../../utils/const/theme.dart';
 import '../../../view_model/app_manajer.dart';
+import '../../../view_model/token_dan_tagihan_listrik/tagihan_listrik/tagihan_listrik_view_model.dart';
 import '../../../view_model/user_provider/user_provider.dart';
 import '../../../view_model/wifi_provider/wifi_provider.dart';
 import '../billing_history_screen/billing_history_screen.dart';
@@ -18,7 +19,6 @@ import '../pendidikan_screen/pendidikan_screen.dart';
 import '../pin_screen/input_pin_screen.dart';
 import '../promo_screen/all_promo_screen.dart';
 import '../pulsa&paket_data_screen/pulsa&paketData_screen.dart';
-import '../tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 import '../token_screen/product_detail_screen.dart';
 import '../top_up_screen/top_up_screen.dart';
 import '../transfer_screen/transfer_screen.dart';
@@ -93,11 +93,7 @@ class _HomeScreenState extends State<HomeScreen>
       setState(() {
         isPinCreated = pinStatus;
       });
-      // bool ispinAdded = false;
-      // Future.microtask(() => ispinAdded =
-      //     Provider.of<AppManajer>(context, listen: false).ispinAdded);
 
-      // bool ispinAdded = Provider.of<AppManajer>(context, listen: false).ispinAdded;
       if (!isPinCreated) {
         Future.delayed(const Duration(seconds: 1), () {
           _showModalBottomSheetCreatePin();
@@ -110,16 +106,6 @@ class _HomeScreenState extends State<HomeScreen>
         print('_showModalBottomSheetPinAdded');
         _showModalBottomSheetPinAdded();
       }
-      // Future.microtask(() =>
-      //     Provider.of<AppManajer>(context, listen: false).changePin(false));
-
-      // else if (isPinCreated && !isPinAdded) {
-      //   print('pin created');
-      //   _showModalBottomSheetPinAdded();
-      //   setState(() {
-      //     isPinAdded = true;
-      //   });
-      // }
     });
     _tabController = TabController(length: 2, vsync: this);
   }
@@ -814,6 +800,9 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       builder: (BuildContext context) {
+        final tagihanListrikProvider =
+            Provider.of<TagihanListrikInquiryProvider>(context, listen: false);
+
         return SingleChildScrollView(
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context)
@@ -878,7 +867,7 @@ class _HomeScreenState extends State<HomeScreen>
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_tabController?.index == 0) {
                             // Jika tab Token aktif, arahkan pengguna ke layar Token
                             Navigator.push(
@@ -889,13 +878,12 @@ class _HomeScreenState extends State<HomeScreen>
                               ),
                             );
                           } else if (_tabController?.index == 1) {
-                            // Jika tab Tagihan aktif, arahkan pengguna ke layar Tagihan
-                            Navigator.push(
+                            await tagihanListrikProvider
+                                .handleTagihanListrikIquiry(
+                              pelangganControllerTagihanListrik.text,
+                              token,
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const DetailPembayaranTagihanListrik(),
-                              ),
+                              pelangganControllerTagihanListrik,
                             );
                           }
                         },

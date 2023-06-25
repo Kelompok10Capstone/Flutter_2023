@@ -11,8 +11,8 @@ class SuccessTransactionWifi extends StatefulWidget {
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
-  final int price;
-  final int adminFee;
+  final double price;
+  final double adminFee;
   final String customerName;
   const SuccessTransactionWifi(
       {super.key,

@@ -344,6 +344,9 @@ class historyWidget extends StatelessWidget {
           } else if (transaction.productType == 'topup') {
             imagePath = 'assets/top_up_icon.png';
             namePath = 'Top Up';
+          } else if (transaction.productType == 'plnpost') {
+            imagePath = 'assets/pln_icon.png';
+            namePath = 'Tagihan Listrik';
           }
 
           //zona waktu di lokasi saya GMT+7

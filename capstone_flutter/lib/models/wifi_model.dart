@@ -24,10 +24,10 @@ class WiFiInquiryResponse {
   final String status;
   final String productType;
   final Map<String, dynamic> productDetail;
-  final int discountPrice;
-  final int adminFee;
-  final int price;
-  final int totalPrice;
+  final double discountPrice;
+  final double adminFee;
+  final double price;
+  final double totalPrice;
   final DateTime createdAt;
   final DateTime updatedAt;
   final dynamic deletedAt;
@@ -35,7 +35,7 @@ class WiFiInquiryResponse {
   final String code;
   final String providerName;
   final String description;
-  final int productPrice;
+  final double productPrice;
   final String discountId;
 
   WiFiInquiryResponse({
@@ -66,10 +66,10 @@ class WiFiInquiryResponse {
       status: json['status'],
       productType: json['product_type'],
       productDetail: json['product_detail'],
-      discountPrice: json['discount_price'],
-      adminFee: json['admin_fee'],
-      price: json['price'],
-      totalPrice: json['total_price'],
+      discountPrice: json['discount_price'].toDouble(),
+      adminFee: json['admin_fee'].toDouble(),
+      price: json['price'].toDouble(),
+      totalPrice: json['total_price'].toDouble(),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
       deletedAt: json['deleted_at'],
@@ -79,7 +79,7 @@ class WiFiInquiryResponse {
       description: json['product_detail'] != null
           ? json['product_detail']['description'] ?? ''
           : '',
-      productPrice: json['product_detail']['price'],
+      productPrice: json['product_detail']['price'].toDouble(),
       discountId: json['product_detail']['discount_id'],
     );
   }

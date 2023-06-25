@@ -13,8 +13,8 @@ class BerhasilTransaksiPulsa extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
   const BerhasilTransaksiPulsa(
@@ -58,7 +58,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
     // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-    return Consumer<PaketDataProvider>(
+    return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         // final pulsatData = paketDataProvider.pulsa;
         // String price = pulsatData!.price.toString();

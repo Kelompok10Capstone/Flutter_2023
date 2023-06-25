@@ -15,10 +15,10 @@ class PinScreenWifi extends StatefulWidget {
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
-  final int price;
-  final int adminFee;
+  final double price;
+  final double adminFee;
   final String customerName;
-  final int balanceNow;
+  final double balanceNow;
   const PinScreenWifi(
       {Key? key,
       required this.id,
@@ -77,8 +77,8 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
         // Memperbarui nilai balance pada UserProvider
         // ignore: use_build_context_synchronously
         final userProvider = Provider.of<UserProvider>(context, listen: false);
-        final newBalance =
-            widget.balanceNow; // Ganti dengan nilai balance yang baru
+        final newBalance = widget.balanceNow
+            .toDouble(); // Ganti dengan nilai balance yang baru
         userProvider.updateUserInfo(
             userProvider.name, userProvider.phone, newBalance);
         // ignore: use_build_context_synchronously
