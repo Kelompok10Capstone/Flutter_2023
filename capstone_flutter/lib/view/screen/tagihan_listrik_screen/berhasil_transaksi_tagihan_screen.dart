@@ -57,6 +57,16 @@ class _BerhasilTransaksiTagihanListrikState
 
   @override
   Widget build(BuildContext context) {
+    const timeZone = Duration(hours: 7);
+
+    // parse dari string ke date time
+    DateTime dateTime = DateTime.parse(widget.createdAt.toString());
+
+    // mengubah zona waktu
+    dateTime = dateTime.add(timeZone);
+
+    // format final dalam gmt+7
+    final formatDateTime = DateFormat('d MMMM yyyy - HH.mm').format(dateTime);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -88,8 +98,7 @@ class _BerhasilTransaksiTagihanListrikState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      DateFormat('dd MMMM yyyy. HH:mm')
-                          .format(widget.createdAt),
+                      formatDateTime,
                       // '04 Mei 2023 . 20.28',
                       style: blackFont12,
                     ),
@@ -150,7 +159,7 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              widget.providerName,
+                              widget.providerName.toUpperCase(),
                               // 'PLN Tagihan',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
@@ -210,7 +219,7 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              widget.customerName,
+                              widget.customerName.toUpperCase(),
                               // 'Ijat Sutresno',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
@@ -345,7 +354,7 @@ class _BerhasilTransaksiTagihanListrikState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NavBar(initialIndex: 1),
+                  builder: (context) => const NavBar(initialIndex: 0),
                 ),
               );
             },

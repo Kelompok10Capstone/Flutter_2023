@@ -143,7 +143,7 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                             style: blackFont12,
                           ),
                           Text(
-                            widget.providerName,
+                            widget.providerName.toUpperCase(),
                             style: blackFont12,
                           ),
                         ],
@@ -175,7 +175,7 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                             style: blackFont12,
                           ),
                           Text(
-                            widget.customerName,
+                            widget.customerName.toUpperCase(),
                             style: blackFont12,
                           ),
                         ],

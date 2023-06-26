@@ -268,7 +268,7 @@ class _DetailPembayaranTagihanListrikState
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    widget.providerName,
+                                    widget.providerName.toUpperCase(),
                                     // 'PLN Tagihan',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
@@ -330,7 +330,7 @@ class _DetailPembayaranTagihanListrikState
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    widget.customerName,
+                                    widget.customerName.toUpperCase(),
                                     // 'Ijat Sutresno',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
@@ -371,7 +371,8 @@ class _DetailPembayaranTagihanListrikState
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Rp.${widget.price.toString()}',
+                                    // 'Rp.${widget.price.toString()}',
+                                    'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.price.toInt())}',
                                     // 'Rp 70.000',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
@@ -392,7 +393,8 @@ class _DetailPembayaranTagihanListrikState
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Rp.${widget.adminFee.toString()}',
+                                    // 'Rp.${widget.adminFee.toString()}',
+                                    'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee.toInt())}',
                                     // 'Rp 2.500',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
@@ -434,7 +436,8 @@ class _DetailPembayaranTagihanListrikState
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 15),
                                         child: Text(
-                                          'Rp.${(widget.price + widget.adminFee).toString()}',
+                                          // 'Rp.${(widget.price + widget.adminFee).toString()}',
+                                          'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee + widget.price.toInt())}',
                                           // 'Rp 72.500',
                                           style: blackFont12.copyWith(
                                               fontWeight: FontWeight.bold),

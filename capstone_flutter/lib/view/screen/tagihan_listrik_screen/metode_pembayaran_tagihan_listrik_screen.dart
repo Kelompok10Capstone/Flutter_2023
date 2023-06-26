@@ -71,7 +71,7 @@ class _MetodePembayaranTagihanScreenState
               style: blackFont12.copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
-              'Tagihan Listrik 0000 2984 0368',
+              'Tagihan Listrik ${widget.pelangganData}',
               style: blackFont12.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 32),
@@ -125,7 +125,8 @@ class _MetodePembayaranTagihanScreenState
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)})',
+                          // 'Saldo SkuyPay (Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)})',
+                          'Saldo SkuyPay (Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance.toInt())})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
