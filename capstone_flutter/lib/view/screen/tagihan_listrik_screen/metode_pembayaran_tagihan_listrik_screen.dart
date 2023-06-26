@@ -1,10 +1,35 @@
 import 'package:capstone_flutter/view/screen/tagihan_listrik_screen/pin_tagihan_listrik_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/const/theme.dart';
+import '../../../view_model/user_provider/user_provider.dart';
 
 class MetodePembayaranTagihanScreen extends StatefulWidget {
-  const MetodePembayaranTagihanScreen({super.key});
+  final String id;
+  final String userId;
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
+  final double price;
+  final double adminFee;
+  final String customerName;
+  final int elecricalPower;
+
+  const MetodePembayaranTagihanScreen({
+    super.key,
+    required this.id,
+    required this.userId,
+    required this.pelangganData,
+    required this.createdAt,
+    required this.providerName,
+    required this.price,
+    required this.adminFee,
+    required this.customerName,
+    required this.elecricalPower,
+  });
 
   @override
   State<MetodePembayaranTagihanScreen> createState() =>
@@ -15,8 +40,14 @@ class _MetodePembayaranTagihanScreenState
     extends State<MetodePembayaranTagihanScreen> {
   String? selectedRadio;
 
+  late SharedPreferences _prefs;
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    //ambil data
+    final myBalance = userProvider.balance;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -94,7 +125,7 @@ class _MetodePembayaranTagihanScreenState
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp 150.000)',
+                          'Saldo SkuyPay (Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -145,7 +176,7 @@ class _MetodePembayaranTagihanScreenState
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          'Rp 72.500',
+                          'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee + widget.price)}',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -182,7 +213,7 @@ class _MetodePembayaranTagihanScreenState
                               color: const Color(0xff111111)),
                         ),
                         Text(
-                          'Rp 72.500',
+                          'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee + widget.price)}',
                           style: blackFont12.copyWith(
                               fontWeight: FontWeight.w700,
                               color: const Color(0xff111111)),
@@ -209,10 +240,50 @@ class _MetodePembayaranTagihanScreenState
               ),
             ),
             onPressed: () {
-              Navigator.push(
+              var saldo = myBalance.toDouble() -
+                  widget.price.toDouble() +
+                  widget.adminFee.toDouble();
+              var total = widget.price.toDouble() + widget.adminFee.toDouble();
+              if (selectedRadio == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Pilih metode pembayaran'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else if (selectedRadio != null && myBalance < total) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Saldo kamu tidak cukup.'),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } else {
+                // ignore: avoid_print
+                print(widget.id);
+                // ignore: avoid_print
+                print('saldo : $saldo');
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PinTagihanListrikScreen()));
+                    builder: (context) => PinTagihanListrikScreen(
+                      id: widget.id,
+                      userId: widget.userId,
+                      price: widget.price,
+                      adminFee: widget.adminFee,
+                      customerName: widget.customerName,
+                      pelangganData: widget.pelangganData,
+                      providerName: widget.providerName,
+                      elecricalPower: widget.elecricalPower,
+                      createdAt: widget.createdAt,
+                      balanceNow: myBalance.toDouble() -
+                          (widget.adminFee + widget.price).toDouble(),
+                    ),
+                  ),
+                );
+              }
             },
             child: Text(
               'Yuk Bayar!',
