@@ -51,6 +51,17 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
 
   @override
   Widget build(BuildContext context) {
+    const timeZone = Duration(hours: 7);
+
+    // parse dari string ke date time
+    DateTime dateTime = DateTime.parse(widget.createdAt.toString());
+
+    // mengubah zona waktu
+    dateTime = dateTime.add(timeZone);
+
+    // format final dalam gmt+7
+    final formatDateTime = DateFormat('d MMMM yyyy - HH.mm').format(dateTime);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -82,8 +93,7 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      DateFormat('dd MMMM yyyy. HH:mm')
-                          .format(widget.createdAt),
+                      formatDateTime,
                       style: blackFont12.copyWith(fontSize: 10),
                     ),
                     Text(
@@ -272,12 +282,8 @@ class _SuccessTransactionWifiState extends State<SuccessTransactionWifi> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => const NavBar(
-                            initialIndex: 1,
+                            initialIndex: 0,
                           )));
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const ModalBottomWifi()));
             },
             child: Text(
               'Selesai',

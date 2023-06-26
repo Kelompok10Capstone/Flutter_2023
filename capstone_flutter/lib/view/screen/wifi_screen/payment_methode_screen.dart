@@ -71,7 +71,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
               style: blackFont12.copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
-              'Indihome 0000 2984 0368',
+              'Telkom ${widget.pelangganData}',
               style: blackFont12.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
