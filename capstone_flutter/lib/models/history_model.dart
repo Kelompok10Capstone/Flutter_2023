@@ -5,13 +5,13 @@ class Transaction {
   final String productType;
   final Map<String, dynamic> productDetail;
   final String description;
-  final int discountPrice;
-  final int adminFee;
-  final int price;
+  final double discountPrice;
+  final double adminFee;
+  final double price;
   final int amount;
   final String phoneNumber;
   final String customerId;
-  final int totalPrice;
+  final double totalPrice;
   final String createdAt;
   final String updatedAt;
   final String deletedAt;
@@ -43,11 +43,11 @@ class Transaction {
       productType: json['product_type'],
       productDetail: json['product_detail'],
       description: json['description'],
-      discountPrice: json['discount_price'],
-      adminFee: json['admin_fee'],
-      price: json['price'],
-      amount: json['product_detail']['amount'] ?? 0,
-      totalPrice: json['total_price'],
+      discountPrice: json['discount_price'].toDouble(),
+      adminFee: json['admin_fee'].toDouble(),
+      price: json['price'].toDouble(),
+      amount: (json['product_detail']['amount'] ?? 0.0).toInt(),
+      totalPrice: json['total_price'].toDouble(),
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'] ?? '',

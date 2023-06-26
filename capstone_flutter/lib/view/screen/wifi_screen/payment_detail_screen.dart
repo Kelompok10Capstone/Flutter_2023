@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supercharged/supercharged.dart';
 import '../../../utils/const/theme.dart';
 
 class PaymentDetailWifi extends StatefulWidget {
@@ -264,7 +265,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    widget.providerName,
+                                    widget.providerName.toUpperCase(),
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -304,7 +305,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    widget.customerName,
+                                    widget.customerName.toUpperCase(),
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -324,7 +325,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Rp.${widget.price.toString()}',
+                                    'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.price.toInt())}',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -344,7 +345,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Rp.${widget.adminFee.toString()}',
+                                    'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee.toInt())}',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -384,7 +385,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 15),
                                         child: Text(
-                                          'Rp.${(widget.price + widget.adminFee).toString()}',
+                                          'Rp.${(widget.price + widget.adminFee).toInt()}',
                                           style: blackFont12.copyWith(
                                               fontWeight: FontWeight.w700),
                                         ),

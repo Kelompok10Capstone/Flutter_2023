@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppManajer extends ChangeNotifier {
+class PinProvider extends ChangeNotifier {
   bool _ispinAdded = false;
   bool get ispinAdded => _ispinAdded;
 

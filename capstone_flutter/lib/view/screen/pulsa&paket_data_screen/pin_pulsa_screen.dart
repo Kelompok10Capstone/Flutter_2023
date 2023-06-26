@@ -15,10 +15,10 @@ class PinPulsaScreen extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
-  final int balanceNow;
+  final double balanceNow;
   final DateTime createdAt;
   final String token;
 
@@ -84,8 +84,8 @@ class _PinPulsaScreenState extends State<PinPulsaScreen> {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
       final newBalance =
           widget.balanceNow; // Ganti dengan nilai balance yang baru
-      // userProvider.updateUserInfo(
-      //     userProvider.name, userProvider.phone, newBalance.toDouble());
+      userProvider.updateUserInfo(
+          userProvider.name, userProvider.phone, newBalance as double);
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,

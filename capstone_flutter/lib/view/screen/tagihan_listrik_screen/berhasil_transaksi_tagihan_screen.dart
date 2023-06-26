@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/const/theme.dart';
 import '../home_screen/home_screen.dart';
 
 class BerhasilTransaksiTagihanListrik extends StatefulWidget {
-  const BerhasilTransaksiTagihanListrik({super.key});
+  final String id;
+  final String userId;
+  final String pelangganData;
+  final DateTime createdAt;
+  final String providerName;
+  final double price;
+  final double adminFee;
+  final String customerName;
+  final int elecricalPower;
+
+  const BerhasilTransaksiTagihanListrik({
+    super.key,
+    required this.id,
+    required this.userId,
+    required this.pelangganData,
+    required this.createdAt,
+    required this.providerName,
+    required this.price,
+    required this.adminFee,
+    required this.customerName,
+    required this.elecricalPower,
+  });
 
   @override
   State<BerhasilTransaksiTagihanListrik> createState() =>
@@ -13,6 +36,25 @@ class BerhasilTransaksiTagihanListrik extends StatefulWidget {
 
 class _BerhasilTransaksiTagihanListrikState
     extends State<BerhasilTransaksiTagihanListrik> {
+  String phone = '';
+  String token = '';
+
+  late SharedPreferences _prefs;
+
+  Future<void> initializeData() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      phone = _prefs.getString('phone') ?? '';
+      token = _prefs.getString('token') ?? '';
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData(); // Panggil fungsi untuk inisialisasi data
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +88,14 @@ class _BerhasilTransaksiTagihanListrikState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '04 Mei 2023 . 20.28',
+                      DateFormat('dd MMMM yyyy. HH:mm')
+                          .format(widget.createdAt),
+                      // '04 Mei 2023 . 20.28',
                       style: blackFont12,
                     ),
                     Text(
-                      'SkuyPay 0857xxxx2345',
+                      'SkuyPay $phone',
+                      // 'SkuyPay 0857xxxx2345',
                       style: blackFont12,
                     )
                   ],
@@ -85,7 +130,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              '04-05-2023',
+                              DateFormat('dd-MM-yyyy').format(widget.createdAt),
+                              // '04-05-2023',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -104,7 +150,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'PLN Tagihan',
+                              widget.providerName,
+                              // 'PLN Tagihan',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -123,7 +170,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              '2136 2938 9836',
+                              widget.pelangganData,
+                              // '2136 2938 9836',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -142,7 +190,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              '0000 2984 0368',
+                              widget.pelangganData,
+                              // '0000 2984 0368',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -161,7 +210,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Ijat Sutresno',
+                              widget.customerName,
+                              // 'Ijat Sutresno',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -180,7 +230,7 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'R1/000001300 VA',
+                              'R1/${widget.elecricalPower} VA',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -199,7 +249,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Rp 70.000',
+                              'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.price)}',
+                              // 'Rp 70.000',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -218,7 +269,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'Rp 2.500',
+                              'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.adminFee)}',
+                              // 'Rp 2.500',
                               style: blackFont12.copyWith(
                                   fontWeight: FontWeight.w400),
                             ),
@@ -258,7 +310,8 @@ class _BerhasilTransaksiTagihanListrikState
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    'Rp 72.500',
+                                    'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.price + widget.adminFee)}',
+                                    // 'Rp 72.500',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -292,7 +345,7 @@ class _BerhasilTransaksiTagihanListrikState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NavBar(initialIndex: 0),
+                  builder: (context) => const NavBar(initialIndex: 1),
                 ),
               );
             },

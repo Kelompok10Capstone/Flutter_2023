@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'detail_pembayaran_pulsa_screen.dart';
 import 'paket_data/detail_pembayaran_paket_data_screen.dart';
@@ -22,27 +22,27 @@ class PulsaDanPaketDataScreen extends StatefulWidget {
       _PulsaDanPaketDataScreenState();
 }
 
-class PaketData {
-  final String? phone62;
-  final String? price;
-  final String? name;
-  final String? provider;
-  final String? description;
-  final String? code;
-  final String? id;
-  final String? type;
+// class PaketData {
+//   final String? phone62;
+//   final String? price;
+//   final String? name;
+//   final String? provider;
+//   final String? description;
+//   final String? code;
+//   final String? id;
+//   final String? type;
 
-  PaketData({
-    this.phone62,
-    this.price,
-    this.name,
-    this.provider,
-    this.description,
-    this.code,
-    this.id,
-    this.type,
-  });
-}
+//   PaketData({
+//     this.phone62,
+//     this.price,
+//     this.name,
+//     this.provider,
+//     this.description,
+//     this.code,
+//     this.id,
+//     this.type,
+//   });
+// }
 
 class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     with SingleTickerProviderStateMixin {
@@ -90,8 +90,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
     // ignore: unused_local_variable
-    final pakeDataProvider =
-        Provider.of<PaketDataProvider>(context, listen: false);
+    // final pakeDataProvider =
+    //     Provider.of<PaketDataProvider>(context, listen: false);
     // final paketdataDataProvider = Provider.of<PaketDataViewModel>(context);
 
     return Scaffold(
@@ -409,7 +409,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Rp.${data.price.toString()}',
+                              'Rp. ${NumberFormat('#,###', 'id_ID').format(data.price.toInt())}',
+                              // 'Rp.${data.price.toInt()}',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: data.isSelected == true
@@ -459,10 +460,6 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                   context
                       .read<PulsaDanPaketDataViewModel>()
                       .selectPpd(data.id, true);
-                  // setState(() {
-                  //   debugPrint("asdsa");
-                  //   //   data.isSelected = data.isSelected ? false : true;
-                  // });
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -498,7 +495,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Rp.${data.price.toString()}',
+                              'Rp. ${NumberFormat('#,###', 'id_ID').format(data.price.toInt())}',
+                              // 'Rp.${data.price.toInt()}',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: data.isSelected == true

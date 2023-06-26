@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
 class BerhasilTransaksiPulsa extends StatefulWidget {
@@ -13,8 +12,8 @@ class BerhasilTransaksiPulsa extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
   const BerhasilTransaksiPulsa(
@@ -58,7 +57,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
     // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-    return Consumer<PaketDataProvider>(
+    return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
         // final pulsatData = paketDataProvider.pulsa;
         // String price = pulsatData!.price.toString();
@@ -177,7 +176,8 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                  // 'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                  'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPulsaData?.price.toInt() ?? "")}',
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -213,7 +213,8 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       child: Text(
-                                        'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                        // 'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                        'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPulsaData?.price.toInt() ?? "")}',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -247,7 +248,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NavBar(initialIndex: 1),
+                      builder: (context) => const NavBar(initialIndex: 0),
                     ),
                   );
                 },

@@ -13,8 +13,8 @@ class BerhasilTransaksiPaketData extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
 
@@ -181,7 +181,8 @@ class _BerhasilTransaksiPaketDataState
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                                  // 'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                                  'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPaketData?.price.toInt() ?? "")}',
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -217,7 +218,8 @@ class _BerhasilTransaksiPaketDataState
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       child: Text(
-                                        'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                                        // 'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                                        'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPaketData?.price.toInt() ?? "")}',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -251,7 +253,7 @@ class _BerhasilTransaksiPaketDataState
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NavBar(initialIndex: 1),
+                      builder: (context) => const NavBar(initialIndex: 0),
                     ),
                   );
                 },

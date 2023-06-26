@@ -1,9 +1,9 @@
-class WiFiInquiryRequest {
+class TagihanListrikInquiryRequest {
   final String customerId;
   late String? discountId;
   late String productId;
 
-  WiFiInquiryRequest({
+  TagihanListrikInquiryRequest({
     required this.customerId,
     this.discountId,
     required this.productId,
@@ -18,12 +18,13 @@ class WiFiInquiryRequest {
   }
 }
 
-class WiFiInquiryResponse {
+class TagihanListrikInquiryResponse {
   final String id;
   final String userId;
   final String status;
   final String productType;
   final Map<String, dynamic> productDetail;
+  final String description;
   final double discountPrice;
   final double adminFee;
   final double price;
@@ -32,18 +33,19 @@ class WiFiInquiryResponse {
   final DateTime updatedAt;
   final dynamic deletedAt;
   final String name;
-  final String code;
+  final String token;
+  final int electricalPower;
   final String providerName;
-  final String description;
   final double productPrice;
   final String discountId;
 
-  WiFiInquiryResponse({
+  TagihanListrikInquiryResponse({
     required this.id,
     required this.userId,
     required this.status,
     required this.productType,
     required this.productDetail,
+    required this.description,
     required this.discountPrice,
     required this.adminFee,
     required this.price,
@@ -52,20 +54,23 @@ class WiFiInquiryResponse {
     required this.updatedAt,
     required this.deletedAt,
     required this.name,
-    required this.code,
+    required this.token,
+    required this.electricalPower,
     required this.providerName,
-    required this.description,
     required this.productPrice,
     required this.discountId,
   });
 
-  factory WiFiInquiryResponse.fromJson(Map<String, dynamic> json) {
-    return WiFiInquiryResponse(
+  factory TagihanListrikInquiryResponse.fromJson(Map<String, dynamic> json) {
+    return TagihanListrikInquiryResponse(
       id: json['id'],
       userId: json['user_id'],
       status: json['status'],
       productType: json['product_type'],
-      productDetail: json['product_detail'],
+      productDetail: json['product_detail'] != null
+          ? Map<String, dynamic>.from(json['product_detail'])
+          : {},
+      description: json['description'] ?? '',
       discountPrice: json['discount_price'].toDouble(),
       adminFee: json['admin_fee'].toDouble(),
       price: json['price'].toDouble(),
@@ -74,13 +79,11 @@ class WiFiInquiryResponse {
       updatedAt: DateTime.parse(json['updated_at']),
       deletedAt: json['deleted_at'],
       name: json['product_detail']['name'],
-      code: json['product_detail']['code'],
+      token: json['token'] ?? '',
+      electricalPower: json['product_detail']['electrical_power'],
       providerName: json['product_detail']['provider_name'],
-      description: json['product_detail'] != null
-          ? json['product_detail']['description'] ?? ''
-          : '',
       productPrice: json['product_detail']['price'].toDouble(),
-      discountId: json['product_detail']['discount_id'],
+      discountId: json['discount_id'] ?? '',
     );
   }
 }

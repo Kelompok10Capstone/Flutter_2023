@@ -1,6 +1,7 @@
 import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/pulsa&paket_data_screen/paket_data/pin_paket_data_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,8 +14,8 @@ class MetodePembayaranPaketDataScreen extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
   final String token;
@@ -126,7 +127,8 @@ class _MetodePembayaranPaketDataScreenState
                           width: 10,
                         ),
                         Text(
-                          'Saldo SkuyPay (Rp.${myBalance.toString()})',
+                          // 'Saldo SkuyPay (Rp.${myBalance.toString()})',
+                          'Saldo SkuyPay (Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)})',
                           style:
                               blackFont12.copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -204,7 +206,8 @@ class _MetodePembayaranPaketDataScreenState
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                            // 'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                            'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPaketData?.price.toInt() ?? "")}',
                             style: blackFont12.copyWith(
                                 fontWeight: FontWeight.w400),
                           ),
@@ -265,7 +268,8 @@ class _MetodePembayaranPaketDataScreenState
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
-                                  'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                                  // 'Rp.${pulsaPaketDataProvider.selectPaketData?.price.toString() ?? ""}',
+                                  'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPaketData?.price.toInt() ?? "")}',
                                   // (widget.adminFee + widget.price).toString(),
                                   style: blackFont14.copyWith(
                                       fontWeight: FontWeight.bold),
@@ -296,9 +300,12 @@ class _MetodePembayaranPaketDataScreenState
               ),
             ),
             onPressed: () {
-              var saldo =
-                  int.parse(myBalance.toString()) - int.parse(widget.price);
-              var total = int.parse(widget.price);
+              var saldo = double.parse(myBalance.toString()) -
+                  double.parse(widget.price.toString());
+              var total = double.parse(widget.price.toString());
+              // var saldo =
+              //     int.parse(myBalance.toString()) - int.parse(widget.price);
+              // var total = int.parse(widget.price);
               if (selectedRadio == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -334,8 +341,8 @@ class _MetodePembayaranPaketDataScreenState
                       provider: widget.provider,
                       description: widget.description,
                       createdAt: widget.createdAt,
-                      balanceNow: int.parse(myBalance.toString()) -
-                          int.parse(widget.price),
+                      balanceNow: double.parse(myBalance.toString()) -
+                          double.parse(widget.price.toString()),
                     ),
                   ),
                 );

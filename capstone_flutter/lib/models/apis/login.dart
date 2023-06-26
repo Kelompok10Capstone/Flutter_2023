@@ -53,6 +53,7 @@ class LoginController {
           userId.phone,
           userId.email,
           userId.balance,
+          userId.image,
         ); // Menggunakan model UserId
         // ignore: avoid_print
         print(userId.phone);
@@ -84,13 +85,19 @@ class LoginController {
     await prefs.setString('token', token);
   }
 
-  void saveUserInfoToSharedPreferences2(
-      String name, String phones, String email, double balance) async {
+  void saveUserInfoToSharedPreferences2(String name, String phones,
+      String email, double balance, String image) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('phone', phones);
     await prefs.setString('email', email);
     await prefs.setDouble('balance', balance);
+    await prefs.setString('image', image);
+  }
+
+  void saveUserImageToSharedPreference(String image) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('image', image);
   }
 
   Future<String> getToken() async {
