@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/apis/create_pin.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/app_manajer.dart';
+import '../../../view_model/pin_provider/pin_provider.dart';
 
 class ReinputPinScreen extends StatefulWidget {
   final String pinFromInputScreen;
@@ -77,7 +77,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
       final bool success = await _pinController.createPin(pin);
       if (success && context.mounted) {
         // Provider.of<AppManajer>(context, listen: false).changePin(true);
-        context.read<AppManajer>().changePinTrue();
+        context.read<PinProvider>().changePinTrue();
         // Pin berhasil dibuat
         Navigator.push(
           context,
@@ -102,7 +102,7 @@ class _ReinputPinScreenState extends State<ReinputPinScreen> {
         centerTitle: true,
         title: GestureDetector(
           onTap: () {
-            context.read<AppManajer>().changePin(true);
+            context.read<PinProvider>().changePin(true);
           },
           child: Text(
             'Kode PIN',

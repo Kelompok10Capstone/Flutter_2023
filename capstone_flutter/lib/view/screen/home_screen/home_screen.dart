@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/apis/pin.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/app_manajer.dart';
+import '../../../view_model/pin_provider/pin_provider.dart';
 import '../../../view_model/token_dan_tagihan_listrik/tagihan_listrik/tagihan_listrik_view_model.dart';
 import '../../../view_model/user_provider/user_provider.dart';
 import '../../../view_model/wifi_provider/wifi_provider.dart';
@@ -25,7 +25,6 @@ import '../transfer_screen/transfer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  // set isPinCreated(bool isPinCreated) {}
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -60,11 +59,7 @@ class _HomeScreenState extends State<HomeScreen>
   bool isPinAdded = false;
   late SharedPreferences _prefs;
   String? selectedMonth;
-  // String name = '';
-  // String phone = '';
   String token = '';
-  // String balance = '0';
-
   TabController? _tabController;
   TextEditingController pelangganControllerToken = TextEditingController();
   TextEditingController pelangganControllerTagihanListrik =
@@ -85,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    bool ispinAdded = context.read<AppManajer>().ispinAdded;
+    bool ispinAdded = context.read<PinProvider>().ispinAdded;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await initializeData(); // Panggil fungsi untuk inisialisasi data
@@ -113,10 +108,7 @@ class _HomeScreenState extends State<HomeScreen>
   Future<void> initializeData() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      // name = _prefs.getString('name') ?? '';
-      // phone = _prefs.getString('phone') ?? '';
       token = _prefs.getString('token') ?? '';
-      // balance = _prefs.getInt('balance').toString();
     });
   }
 
@@ -449,13 +441,6 @@ class _HomeScreenState extends State<HomeScreen>
                                             onTap: () {
                                               _showModalBottomSheetBpjs(
                                                   context);
-                                              // //ModalBottomBpjs
-                                              // Navigator.of(context).push(
-                                              //   MaterialPageRoute(
-                                              //     builder: (context) =>
-                                              //         const ModalBottomBpjs(),
-                                              //   ),
-                                              // );
                                             },
                                           ),
                                         ),
@@ -511,13 +496,6 @@ class _HomeScreenState extends State<HomeScreen>
                                               Colors.blue.withOpacity(0.4),
                                           onTap: () {
                                             _showModalBottomSheetToken(context);
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //     builder: (context) =>
-                                            //         const ModalBottomToken(),
-                                            //   ),
-                                            // );
                                           },
                                         ),
                                       ),
@@ -577,13 +555,6 @@ class _HomeScreenState extends State<HomeScreen>
                                                 Colors.blue.withOpacity(0.4),
                                             onTap: () {
                                               _showModalBottomSheetWifi();
-                                              // Navigator.push(
-                                              //   context,
-                                              //   MaterialPageRoute(
-                                              //     builder: (context) =>
-                                              //         const ModalBottomWifi(),
-                                              //   ),
-                                              // );
                                             },
                                           ),
                                         ),
@@ -1273,7 +1244,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       onPressed: () {
-                        context.read<AppManajer>().changePin(false);
+                        context.read<PinProvider>().changePin(false);
                         setState(() {
                           isPinAdded = true;
                         });
