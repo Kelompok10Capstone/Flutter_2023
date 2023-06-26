@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'detail_pembayaran_pulsa_screen.dart';
 import 'paket_data/detail_pembayaran_paket_data_screen.dart';

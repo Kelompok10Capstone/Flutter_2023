@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 
 class BerhasilTransaksiPulsa extends StatefulWidget {
