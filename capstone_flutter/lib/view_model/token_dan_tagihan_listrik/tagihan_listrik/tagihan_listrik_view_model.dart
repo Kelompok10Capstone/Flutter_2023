@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 
-import '../../models/apis/wifi.dart';
-import '../../models/wifi_model.dart';
-import '../../view/screen/wifi_screen/payment_detail_screen.dart';
+import '../../../models/apis/tagihan_listrik/tagihan_listrik_api.dart';
+import '../../../models/tagihan_listrik_model.dart';
+import '../../../view/screen/tagihan_listrik_screen/detail_pembayaran_tagihan_screen.dart';
 
-class WiFiInquiryProvider extends ChangeNotifier {
-  WiFiInquiryResponse? _response;
+class TagihanListrikInquiryProvider extends ChangeNotifier {
+  TagihanListrikInquiryResponse? _response;
+  TagihanListrikInquiryResponse? get response => _response;
 
-  WiFiInquiryResponse? get response => _response;
-
-  void setResponse(WiFiInquiryResponse response) {
+  void setResponse(TagihanListrikInquiryResponse response) {
     _response = response;
     notifyListeners();
   }
 
-  Future<void> handleInquiry(
+  Future<void> handleTagihanListrikIquiry(
       String customerId,
       String token,
       BuildContext context,
-      TextEditingController pelangganControllerWifi) async {
-    final request = WiFiInquiryRequest(
+      TextEditingController pelangganControllerTagihanListrik) async {
+    final request = TagihanListrikInquiryRequest(
       customerId: customerId,
       // discountId: '48b286df-6bb9-4027-b847-0820015ea68c',
-      productId: 'TELKOM',
+      productId: 'plnpost',
     );
 
-    final response = await WifiInquiryApi.inquireWiFiBill(request, token);
+    final response = await TagihanListrikInquiryApi.inquireTagihanListrikBill(
+        request, token);
 
     if (response != null) {
       setResponse(response);
@@ -33,7 +33,7 @@ class WiFiInquiryProvider extends ChangeNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PaymentDetailWifi(
+          builder: (context) => DetailPembayaranTagihanListrik(
             id: response.id,
             userId: response.userId,
             pelangganData: customerId,
@@ -42,6 +42,7 @@ class WiFiInquiryProvider extends ChangeNotifier {
             price: response.price,
             adminFee: response.adminFee,
             customerName: response.name,
+            elecricalPower: response.electricalPower,
           ),
         ),
       );
@@ -64,7 +65,7 @@ class WiFiInquiryProvider extends ChangeNotifier {
           );
         },
       );
-      pelangganControllerWifi.clear();
+      pelangganControllerTagihanListrik.clear();
     }
   }
 }

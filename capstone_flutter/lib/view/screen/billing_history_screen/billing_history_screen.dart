@@ -22,6 +22,7 @@ class _BillinngHistoryState extends State<BillingHistory> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           iconTheme: const IconThemeData(
@@ -343,10 +344,13 @@ class historyWidget extends StatelessWidget {
           } else if (transaction.productType == 'topup') {
             imagePath = 'assets/top_up_icon.png';
             namePath = 'Top Up';
+          } else if (transaction.productType == 'plnpost') {
+            imagePath = 'assets/pln_icon.png';
+            namePath = 'Tagihan Listrik';
           }
 
           //zona waktu di lokasi saya GMT+7
-          final timeZone = Duration(hours: 7);
+          const timeZone = Duration(hours: 7);
 
           // parse dari string ke date time
           DateTime dateTime = DateTime.parse(transaction.createdAt);
@@ -369,7 +373,7 @@ class historyWidget extends StatelessWidget {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.only(top: 30, left: 40, right: 40),
+              padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

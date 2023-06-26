@@ -5,7 +5,7 @@ class User {
   final String phone;
   final String password;
   final String token;
-  final int balance;
+  final double balance;
   final String pin;
   final String image;
   final String address;
@@ -36,7 +36,7 @@ class User {
       phone: userData['phone'] ?? '',
       password: userData['password'] ?? '',
       token: userData['token'] ?? '',
-      balance: userData['balance'] ?? 0,
+      balance: double.tryParse(userData['balance'].toString()) ?? 0.0,
       pin: userData['pin'] ?? '',
       image: userData['image'] ?? '',
       address: userData['address'] ?? '',

@@ -9,8 +9,8 @@ class IlustrationSuksesPulsa extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
   const IlustrationSuksesPulsa(

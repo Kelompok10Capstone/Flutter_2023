@@ -2,6 +2,7 @@ import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../models/apis/cek_pin_api.dart';
 import '../../../../models/apis/pulsa_paket_data/pay_paket_data.dart';
 import '../../../../view_model/user_provider/user_provider.dart';
@@ -13,13 +14,13 @@ class PinPaketDataScreen extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
-  final int balanceNow;
+  final double balanceNow;
   final DateTime createdAt;
   final String token;
-  // final String phone_number;
+
   const PinPaketDataScreen({
     super.key,
     required this.id,
@@ -33,7 +34,6 @@ class PinPaketDataScreen extends StatefulWidget {
     required this.balanceNow,
     required this.createdAt,
     required this.token,
-    // required this.phone_number
   });
 
   @override
@@ -73,7 +73,8 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
       );
       // ignore: avoid_print
       print('adalah: $productx');
-      final String? payPaketDataResponse = await payPaketData.payPaketData();
+      final PayPaketData? payPaketDataResponse =
+          await payPaketData.payPaketData();
       // ignore: avoid_print
       print(payPaketDataResponse);
 
@@ -83,7 +84,7 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
       final newBalance =
           widget.balanceNow; // Ganti dengan nilai balance yang baru
       userProvider.updateUserInfo(
-          userProvider.name, userProvider.phone, newBalance);
+          userProvider.name, userProvider.phone, newBalance as double);
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,

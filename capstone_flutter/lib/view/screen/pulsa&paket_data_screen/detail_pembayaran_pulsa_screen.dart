@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:supercharged/supercharged.dart';
 import '../../../models/pulsa_paket_data.dart';
 import '../../../utils/const/theme.dart';
-import '../../../view_model/pulsa_paketdata/paket_data_detail_view_model.dart';
 import '../../../view_model/pulsa_paketdata/pulsa_paket_data_view_model.dart';
 import 'metode_pembayaran_pulsa_screen.dart';
 
@@ -27,13 +27,22 @@ class _DetailPembayaranPulsaScreenState
   }
 
   @override
+  void initState() {
+    super.initState();
+    // ignore: avoid_print
+    print("detail pulsa token : ${widget.token}");
+  }
+
+  @override
   Widget build(BuildContext context) {
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
+    debugPrint(pulsaPaketDataProvider.selectPulsaData?.toJson().toString());
+    return Consumer<PulsaDanPaketDataViewModel>(
+      builder: (context, pulsaDataProvider, _) {
+        final pulsatData = pulsaDataProvider.pulsa;
 
-    return Consumer<PaketDataProvider>(
-      builder: (context, paketDataProvider, _) {
-        final pulsatData = paketDataProvider.pulsa;
+        // String price = pulsatData!.price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -47,6 +56,7 @@ class _DetailPembayaranPulsaScreenState
             centerTitle: true,
             elevation: 0,
           ),
+          // ignore: unnecessary_null_comparison
           body: pulsatData == null
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -175,7 +185,7 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsatData.code.toString(),
+                                        'Pulsa ${pulsaPaketDataProvider.selectPulsaData?.name ?? ""}',
                                         // 'Pulsa 5000',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -196,7 +206,10 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsatData.phone62.toString(),
+                                        // pulsatData.phone62.toString(),
+                                        pulsaPaketDataProvider
+                                                .selectPulsaData?.phone62 ??
+                                            "",
                                         // 'O85278xxxxx',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -217,7 +230,7 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        pulsatData.price.toString(),
+                                        'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
                                         // 'Rp 6.500',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -260,7 +273,7 @@ class _DetailPembayaranPulsaScreenState
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12),
                                             child: Text(
-                                              'Rp.${pulsatData.price.toString()}',
+                                              'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
                                               // 'Rp 6.500',
                                               style: blackFont14.copyWith(
                                                   fontWeight: FontWeight.bold),
@@ -302,12 +315,16 @@ class _DetailPembayaranPulsaScreenState
                   String descriptionText =
                       users.isNotEmpty ? users[index].description : '';
                   String codeText = users.isNotEmpty ? users[index].code : '';
-                  String priceText =
-                      users.isNotEmpty ? users[index].price.toString() : '';
+                  double priceText =
+                      users.isNotEmpty ? users[index].price : 0.0;
                   String typeText = users.isNotEmpty ? users[index].type : '';
                   String idText = users.isNotEmpty ? users[index].id : '';
-                  String adminFeeText =
-                      users.isNotEmpty ? users[index].adminFee.toString() : '';
+                  double adminFeeText;
+                  if (users.isNotEmpty) {
+                    adminFeeText = users[index].adminFee;
+                  } else {
+                    adminFeeText = 0.0;
+                  }
                   DateTime? createdAtText =
                       users.isNotEmpty ? users[index].createdAt : null;
 

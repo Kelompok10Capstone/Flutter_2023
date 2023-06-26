@@ -12,8 +12,8 @@ class PaymentMethodWifi extends StatefulWidget {
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
-  final int price;
-  final int adminFee;
+  final double price;
+  final double adminFee;
   final String customerName;
   const PaymentMethodWifi({
     super.key,
@@ -242,8 +242,13 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
               ),
             ),
             onPressed: () {
-              var saldo = myBalance.toInt() - widget.price + widget.adminFee;
-              var total = widget.price + widget.adminFee;
+              // var saldo = double.parse(myBalance.toString()) -
+              //     double.parse(widget.price.toString());
+
+              var saldo = myBalance.toDouble() -
+                  widget.price.toDouble() +
+                  widget.adminFee.toDouble();
+              var total = widget.price.toDouble() + widget.adminFee.toDouble();
               if (selectedRadio == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -277,8 +282,8 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                       providerName: widget.providerName,
                       adminFee: widget.adminFee,
                       price: widget.price,
-                      balanceNow:
-                          myBalance.toInt() - (widget.adminFee + widget.price),
+                      balanceNow: myBalance.toDouble() -
+                          (widget.adminFee + widget.price).toDouble(),
                     ),
                   ),
                 );

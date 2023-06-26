@@ -13,8 +13,8 @@ class BerhasilTransaksiPulsa extends StatefulWidget {
   final String type;
   final String code;
   final String provider;
-  final String price;
-  final String adminFee;
+  final double price;
+  final double adminFee;
   final String description;
   final DateTime createdAt;
   const BerhasilTransaksiPulsa(
@@ -58,12 +58,10 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
     // ignore: unused_local_variable
     final pulsaPaketDataProvider =
         Provider.of<PulsaDanPaketDataViewModel>(context);
-    return Consumer<PaketDataProvider>(
+    return Consumer<PulsaDanPaketDataViewModel>(
       builder: (context, paketDataProvider, _) {
-        final pulsatData = paketDataProvider.pulsa;
-
-        // ignore: unused_local_variable
-        String price = pulsatData!.price.toString();
+        // final pulsatData = paketDataProvider.pulsa;
+        // String price = pulsatData!.price.toString();
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -137,7 +135,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  'Pulsa ${widget.name.toString()}',
+                                  'Pulsa ${pulsaPaketDataProvider.selectPulsaData?.name.toString() ?? ""}',
                                   // pulsatData.name.toString(),
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
@@ -157,7 +155,10 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  pulsatData.phone62.toString(),
+                                  pulsaPaketDataProvider
+                                          .selectPulsaData?.phone62 ??
+                                      "",
+                                  // pulsatData.phone62.toString(),
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -176,7 +177,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  'Rp.${pulsatData.price.toString()}',
+                                  'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
                                   style: blackFont12.copyWith(
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -212,7 +213,7 @@ class _BerhasilTransaksiPulsaState extends State<BerhasilTransaksiPulsa> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       child: Text(
-                                        'Rp.${pulsatData.price.toString()}',
+                                        'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.bold),
                                       ),

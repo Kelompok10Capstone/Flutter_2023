@@ -5,8 +5,7 @@ import '../../models/topup_models.dart';
 
 //
 class TopUpProvider extends ChangeNotifier {
-  static const String baseUrl =
-      'http://34.101.78.228:2424/api/v1/amount'; 
+  static const String baseUrl = 'http://34.101.78.228:2424/api/v1/amount';
 
   String? vaNumber;
   String? usernameDisplay;
@@ -26,8 +25,8 @@ class TopUpProvider extends ChangeNotifier {
       _topUp = result;
       notifyListeners();
     } catch (error) {
+      // ignore: avoid_print
       print(error);
-
     } finally {
       isLoading = false;
       notifyListeners();

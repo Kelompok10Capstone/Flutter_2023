@@ -11,8 +11,8 @@ class PaymentDetailWifi extends StatefulWidget {
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
-  final int price;
-  final int adminFee;
+  final double price;
+  final double adminFee;
   final String customerName;
   const PaymentDetailWifi({
     Key? key,
@@ -324,7 +324,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    widget.price.toString(),
+                                    'Rp.${widget.price.toString()}',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -344,7 +344,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    widget.adminFee.toString(),
+                                    'Rp.${widget.adminFee.toString()}',
                                     style: blackFont12.copyWith(
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -384,8 +384,7 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 15),
                                         child: Text(
-                                          (widget.price + widget.adminFee)
-                                              .toString(),
+                                          'Rp.${(widget.price + widget.adminFee).toString()}',
                                           style: blackFont12.copyWith(
                                               fontWeight: FontWeight.w700),
                                         ),
@@ -417,18 +416,20 @@ class _PaymentDetailWifiState extends State<PaymentDetailWifi> {
             ),
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PaymentMethodWifi(
-                            id: widget.id,
-                            createdAt: widget.createdAt,
-                            customerName: widget.customerName,
-                            pelangganData: pelangganController.text,
-                            providerName: widget.providerName,
-                            userId: widget.userId,
-                            price: widget.price,
-                            adminFee: widget.adminFee,
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentMethodWifi(
+                    id: widget.id,
+                    createdAt: widget.createdAt,
+                    customerName: widget.customerName,
+                    pelangganData: pelangganController.text,
+                    providerName: widget.providerName,
+                    userId: widget.userId,
+                    price: widget.price,
+                    adminFee: widget.adminFee,
+                  ),
+                ),
+              );
             },
             child: Text(
               'Lanjutkan',

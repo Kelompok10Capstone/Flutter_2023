@@ -1,15 +1,16 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class PayWifi {
-  static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/pay';
+class PayTokenTagihanListrik {
+  static const baseUrl =
+      'http://34.101.78.228:2424/api/v1/electricity/postpaid/pay';
 
   final String id;
   final String token;
 
-  PayWifi(this.id, this.token);
+  PayTokenTagihanListrik(this.id, this.token);
 
-  Future<String?> payWifi() async {
+  Future<String?> payTokenTagihanListrik() async {
     final Map<String, dynamic> requestBody = {
       'partner_tx_id': id,
     };
@@ -23,7 +24,7 @@ class PayWifi {
       body: jsonEncode(requestBody),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 202) {
       final jsonData = jsonDecode(response.body);
       final metadata = jsonData['metadata'];
       // ignore: avoid_print
@@ -31,7 +32,7 @@ class PayWifi {
       // ignore: avoid_print
       print('Response: ${response.body}');
 
-      if (metadata['status'] == 200) {
+      if (metadata['status'] == 202) {
         final wifiId = jsonData['id'];
         // ignore: avoid_print
         print('Berhasil: ${response.statusCode}');
