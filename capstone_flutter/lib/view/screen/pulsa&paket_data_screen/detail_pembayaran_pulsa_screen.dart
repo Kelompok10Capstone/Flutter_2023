@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../../models/pulsa_paket_data.dart';
@@ -230,7 +231,8 @@ class _DetailPembayaranPulsaScreenState
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                        // 'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                        'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPulsaData?.price.toInt())}',
                                         // 'Rp 6.500',
                                         style: blackFont12.copyWith(
                                             fontWeight: FontWeight.w400),
@@ -273,7 +275,8 @@ class _DetailPembayaranPulsaScreenState
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12),
                                             child: Text(
-                                              'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                              // 'Rp.${pulsaPaketDataProvider.selectPulsaData?.price.toString() ?? ""}',
+                                              'Rp. ${NumberFormat('#,###', 'id_ID').format(pulsaPaketDataProvider.selectPulsaData?.price.toInt())}',
                                               // 'Rp 6.500',
                                               style: blackFont14.copyWith(
                                                   fontWeight: FontWeight.bold),
