@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -409,7 +410,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Rp.${data.price.toString()}',
+                              'Rp. ${NumberFormat('#,###', 'id_ID').format(data.price.toInt())}',
+                              // 'Rp.${data.price.toInt()}',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: data.isSelected == true
@@ -494,7 +496,8 @@ class _PulsaDanPaketDataScreenState extends State<PulsaDanPaketDataScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Rp.${data.price.toString()}',
+                              'Rp. ${NumberFormat('#,###', 'id_ID').format(data.price.toInt())}',
+                              // 'Rp.${data.price.toInt()}',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: data.isSelected == true
