@@ -16,6 +16,7 @@ import '../../../view_model/user_provider/user_provider.dart';
 import '../../../view_model/wifi_provider/wifi_provider.dart';
 import '../billing_history_screen/billing_history_screen.dart';
 import '../bpjs_screen/payment_detail_bpjs_screen.dart';
+import '../notification_screen/notification_screen.dart';
 import '../pendidikan_screen/pendidikan_screen.dart';
 import '../pin_screen/input_pin_screen.dart';
 import '../promo_screen/all_promo_screen.dart';
@@ -212,13 +213,23 @@ class _HomeScreenState extends State<HomeScreen>
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 58, left: 338),
-                            child: SizedBox(
-                              width: 48,
-                              height: 48,
-                              child: Icon(Icons.notifications_outlined,
-                                  color: Colors.white, size: 28),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const NotificationScreen(),
+                                ),
+                              );
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.only(top: 58, left: 338),
+                              child: SizedBox(
+                                width: 48,
+                                height: 48,
+                                child: Icon(Icons.notifications_outlined,
+                                    color: Colors.white, size: 28),
+                              ),
                             ),
                           ),
                           Padding(
