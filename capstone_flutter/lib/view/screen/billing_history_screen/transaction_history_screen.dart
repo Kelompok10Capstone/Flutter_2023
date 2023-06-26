@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/history_model.dart';
 import '../../../utils/const/theme.dart';
@@ -15,6 +16,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.black,
@@ -63,6 +65,17 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     image: AssetImage('assets/topup_money.png'),
                     fit: BoxFit.contain,
                     width: 180,
+                  ),
+                ),
+              ),
+            if (widget.transaction.productType == 'plnpost')
+              const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Image(
+                    image: AssetImage('assets/pln_image.png'),
+                    fit: BoxFit.contain,
+                    width: 100,
                   ),
                 ),
               ),
@@ -156,7 +169,8 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                   if (widget.transaction.status == 'successful' &&
                       widget.transaction.productType != 'topup')
                     Text(
-                      ('Rp. ${widget.transaction.price}').toString(),
+                      'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.transaction.price)}',
+                      // ('Rp. ${widget.transaction.price}').toString(),
                       style: blackFont14.copyWith(color: Colors.black),
                     ),
                   if (widget.transaction.status == 'successful' &&
@@ -184,7 +198,8 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     )
                   else
                     Text(
-                      ('Rp. ${widget.transaction.adminFee}').toString(),
+                      'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.transaction.adminFee)}',
+                      // ('Rp. ${widget.transaction.adminFee}').toString(),
                       style: blackFont14.copyWith(color: Colors.black),
                     ),
                 ],
@@ -206,7 +221,8 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     )
                   else
                     Text(
-                      ('Rp. ${widget.transaction.discountPrice}').toString(),
+                      'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.transaction.discountPrice)}',
+                      // ('Rp. ${widget.transaction.discountPrice}').toString(),
                       style: blackFont14.copyWith(color: Colors.black),
                     ),
                 ],
@@ -220,55 +236,49 @@ class _TransactionHistoryState extends State<TransactionHistory> {
               ),
             ),
             Center(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFBADDB1),
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      alignment: Alignment.center,
-                      width: 350,
-                      height: 45,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 25, right: 25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total Tagihan',
-                              style: blackFont14G.copyWith(color: Colors.black),
-                            ),
-                            if (widget.transaction.productType != 'topup' &&
-                                widget.transaction.status != 'unpaid')
-                              Text(
-                                ('Rp. ${(widget.transaction.price + widget.transaction.adminFee) - widget.transaction.discountPrice}')
-                                    .toString(),
-                                style:
-                                    blackFont14G.copyWith(color: Colors.black),
-                              ),
-                            if (widget.transaction.status == 'unpaid')
-                              Text(
-                                '-',
-                                style:
-                                    blackFont14.copyWith(color: Colors.black),
-                              ),
-                            if (widget.transaction.productType == 'topup' &&
-                                widget.transaction.status != 'unpaid')
-                              (Text(
-                                ('Rp. ${(widget.transaction.amount + widget.transaction.adminFee) - widget.transaction.discountPrice}')
-                                    .toString(),
-                                style:
-                                    blackFont14G.copyWith(color: Colors.black),
-                              ))
-                          ],
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFBADDB1),
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: 45,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total Tagihan',
+                          style: blackFont14G.copyWith(color: Colors.black),
                         ),
-                      ),
+                        if (widget.transaction.productType != 'topup' &&
+                            widget.transaction.status != 'unpaid')
+                          Text(
+                            'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.transaction.price + widget.transaction.adminFee - widget.transaction.discountPrice)}',
+                            // ('Rp. ${(widget.transaction.price + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                            // .toString(),
+                            style: blackFont14G.copyWith(color: Colors.black),
+                          ),
+                        if (widget.transaction.status == 'unpaid')
+                          Text(
+                            '-',
+                            style: blackFont14.copyWith(color: Colors.black),
+                          ),
+                        if (widget.transaction.productType == 'topup' &&
+                            widget.transaction.status != 'unpaid')
+                          (Text(
+                            ('Rp. ${(widget.transaction.amount + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                                .toString(),
+                            style: blackFont14G.copyWith(color: Colors.black),
+                          ))
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ],

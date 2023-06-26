@@ -137,17 +137,27 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Consumer<UserUpdateImageProvider>(
-                  builder: (context, value, child) {
-                if (value.state == ImageState.result) {
-                  return UserImage(
-                      image: value.image, onTap: () => popUpPicker());
-                } else if (value.state == ImageState.loading) {
-                  return const ImageLoading();
-                } else {
-                  return UserImage(image: image, onTap: () => popUpPicker());
-                }
-              }),
+              Column(
+                children: [
+                  Consumer<UserUpdateImageProvider>(
+                      builder: (context, value, child) {
+                    if (value.state == ImageState.result) {
+                      return UserImage(
+                          image: value.image, onTap: () => popUpPicker());
+                    } else if (value.state == ImageState.loading) {
+                      return const ImageLoading();
+                    } else {
+                      return UserImage(
+                          image: image, onTap: () => popUpPicker());
+                    }
+                  }),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Ubah Foto Profil',
+                    style: blueFont14.copyWith(fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 20,
               ),
