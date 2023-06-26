@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:capstone_flutter/utils/const/theme.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/change_profile_screen.dart';
 import 'package:capstone_flutter/view/screen/profile_screen/help_screen.dart';
@@ -6,8 +7,10 @@ import 'package:capstone_flutter/view/screen/profile_screen/security_setting_scr
 import 'package:capstone_flutter/view/screen/profile_screen/terms_condition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../view_model/user_provider/user_provider.dart';
 import '../login_screen/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -19,21 +22,21 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late SharedPreferences _prefs;
-  String name = '';
-  String phone = '';
+  // String name = '';
+  // String phone = '';
   @override
   void initState() {
     super.initState();
-    initial();
+    // initial();
   }
 
   void initial() async {
-    _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      name = _prefs.getString('name').toString();
-      phone = _prefs.getString('phone').toString();
-      _prefs.getString('token').toString();
-    });
+    // _prefs = await SharedPreferences.getInstance();
+    // setState(() {
+    //   name = _prefs.getString('name').toString();
+    //   phone = _prefs.getString('phone').toString();
+    //   _prefs.getString('token').toString();
+    // });
   }
 
   @override
@@ -56,25 +59,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(
               height: 50,
             ),
-            SizedBox(
-              width: 60,
-              child: Image.asset('assets/profile.png'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              name,
-              style: blackFont16.copyWith(fontSize: 14),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              phone,
-              style: blackFont16.copyWith(
-                  fontSize: 12, fontWeight: FontWeight.w400),
-            ),
+            Consumer<UserProvider>(builder: (context, value, child) {
+              return Column(
+                children: [
+                  CachedNetworkImage(
+                    imageUrl: value.image,
+                    imageBuilder: (_, imageProvider) => Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => SizedBox(
+                      width: 60,
+                      child: Image.asset('assets/profile.png'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    value.name,
+                    style: blackFont16.copyWith(fontSize: 14),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    value.phone,
+                    style: blackFont16.copyWith(
+                        fontSize: 12, fontWeight: FontWeight.w400),
+                  ),
+                ],
+              );
+            }),
             const SizedBox(
               height: 20,
             ),
@@ -310,7 +333,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       // ignore: unnecessary_nullable_for_final_variable_declarations
                                       final SharedPreferences? prefs =
                                           // ignore: await_only_futures
-                                          await _prefs;
+                                          await SharedPreferences.getInstance();
                                       prefs?.clear();
                                       // ignore: use_build_context_synchronously
                                       Navigator.pushAndRemoveUntil(

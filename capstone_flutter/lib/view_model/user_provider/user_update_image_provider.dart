@@ -1,4 +1,3 @@
-// enum
 import 'package:flutter/material.dart';
 
 import '../../models/apis/login.dart';

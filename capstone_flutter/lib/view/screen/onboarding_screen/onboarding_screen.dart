@@ -51,7 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    checkLogin();
+    // checkLogin();
   }
 
   void checkLogin() async {

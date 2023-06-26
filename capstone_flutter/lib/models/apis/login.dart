@@ -28,48 +28,48 @@ class LoginController {
       final user = User.fromJson(jsonData);
       saveUserInfoToSharedPreferences(user.token);
 
-      // Mengirim permintaan ke URL lain saat login berhasil
-      final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
-      final profileHeaders = {
-        'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer ${user.token}', // Menggunakan token JWT pada header
-      };
-      final profileResponse =
-          await http.get(profileUrl, headers: profileHeaders);
+      // // Mengirim permintaan ke URL lain saat login berhasil
+      // final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
+      // final profileHeaders = {
+      //   'Content-Type': 'application/json',
+      //   'Authorization':
+      //       'Bearer ${user.token}', // Menggunakan token JWT pada header
+      // };
+      // final profileResponse =
+      //     await http.get(profileUrl, headers: profileHeaders);
 
-      if (profileResponse.statusCode == 200) {
-        final profileJsonData = jsonDecode(profileResponse.body);
-        // ignore: avoid_print
-        print('Profile Response body: ${profileResponse.body}');
-        final userId = User.fromJson(profileJsonData);
-        // ignore: use_build_context_synchronously
-        final userProvider = Provider.of<UserProvider>(context, listen: false);
-        userProvider.updateUserInfo(
-            userId.name, userId.phone, userId.balance.toDouble());
+      // if (profileResponse.statusCode == 200) {
+      //   final profileJsonData = jsonDecode(profileResponse.body);
+      //   // ignore: avoid_print
+      //   print('Profile Response body: ${profileResponse.body}');
+      //   final userId = User.fromJson(profileJsonData);
+      //   // ignore: use_build_context_synchronously
+      //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+      //   userProvider.updateUserInfo(
+      //       userId.name, userId.phone, userId.balance.toDouble());
 
-        saveUserInfoToSharedPreferences2(
-          userId.name,
-          userId.phone,
-          userId.email,
-          userId.balance,
-          userId.image,
-        ); // Menggunakan model UserId
-        // ignore: avoid_print
-        print(userId.phone);
-        // ignore: avoid_print
-        print(userId.name);
-        // ignore: avoid_print
-        print(userId.email);
-        // ignore: avoid_print
-        print(userId.balance);
-        // ignore: avoid_print
-        print(userId.pin);
-        // Proses data profile sesuai kebutuhan
-      } else {
-        // ignore: avoid_print
-        print('Profile Response body: ${profileResponse.body}');
-      }
+      //   saveUserInfoToSharedPreferences2(
+      //     userId.name,
+      //     userId.phone,
+      //     userId.email,
+      //     userId.balance,
+      //     userId.image,
+      //   ); // Menggunakan model UserId
+      //   // ignore: avoid_print
+      //   print(userId.phone);
+      //   // ignore: avoid_print
+      //   print(userId.name);
+      //   // ignore: avoid_print
+      //   print(userId.email);
+      //   // ignore: avoid_print
+      //   print(userId.balance);
+      //   // ignore: avoid_print
+      //   print(userId.pin);
+      //   // Proses data profile sesuai kebutuhan
+      // } else {
+      //   // ignore: avoid_print
+      //   print('Profile Response body: ${profileResponse.body}');
+      // }
       // ignore: avoid_print
       print(user.token);
       return user;

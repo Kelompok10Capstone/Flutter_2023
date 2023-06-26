@@ -415,6 +415,7 @@ class UserImage extends StatelessWidget {
                 image:
                     DecorationImage(image: imageProvider, fit: BoxFit.cover)),
           ),
+          progressIndicatorBuilder: (_, __, ___) => const ImageLoading(),
           errorWidget: (context, url, error) => Image.asset(
             'assets/profile.png',
             width: 80,
