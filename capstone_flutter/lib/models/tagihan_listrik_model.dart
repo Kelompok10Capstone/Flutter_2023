@@ -25,10 +25,10 @@ class TagihanListrikInquiryResponse {
   final String productType;
   final Map<String, dynamic> productDetail;
   final String description;
-  final int discountPrice;
-  final int adminFee;
-  final int price;
-  final int totalPrice;
+  final double discountPrice;
+  final double adminFee;
+  final double price;
+  final double totalPrice;
   final DateTime createdAt;
   final DateTime updatedAt;
   final dynamic deletedAt;
@@ -36,7 +36,7 @@ class TagihanListrikInquiryResponse {
   final String token;
   final int electricalPower;
   final String providerName;
-  final int productPrice;
+  final double productPrice;
   final String discountId;
 
   TagihanListrikInquiryResponse({
@@ -71,10 +71,10 @@ class TagihanListrikInquiryResponse {
           ? Map<String, dynamic>.from(json['product_detail'])
           : {},
       description: json['description'] ?? '',
-      discountPrice: json['discount_price'] ?? 0,
-      adminFee: json['admin_fee'] ?? 0,
-      price: json['price'] ?? 0,
-      totalPrice: json['total_price'] ?? 0,
+      discountPrice: json['discount_price'].toDouble(),
+      adminFee: json['admin_fee'].toDouble(),
+      price: json['price'].toDouble(),
+      totalPrice: json['total_price'].toDouble(),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
       deletedAt: json['deleted_at'],
@@ -82,48 +82,8 @@ class TagihanListrikInquiryResponse {
       token: json['token'] ?? '',
       electricalPower: json['product_detail']['electrical_power'],
       providerName: json['product_detail']['provider_name'],
-      productPrice: json['product_price'] ?? 0,
+      productPrice: json['product_detail']['price'].toDouble(),
       discountId: json['discount_id'] ?? '',
-      // id: json['id'],
-      // userId: json['user_id'],
-      // status: json['status'],
-      // productType: json['product_type'],
-      // productDetail: json['product_detail'] != null
-      //     ? Map<String, dynamic>.from(json['product_detail'])
-      //     : {},
-      // // productDetail: json['product_detail'],
-      // description: json['product_detail'] != null
-      //     ? json['product_detail']['description']
-      //     : '',
-      // discountPrice: json['discount_price'],
-      // adminFee: json['admin_fee'],
-      // price: json['price'],
-      // totalPrice: json['total_price'],
-      // createdAt: DateTime.parse(json['created_at']),
-      // updatedAt: DateTime.parse(json['updated_at']),
-      // deletedAt: json['deleted_at'],
-      // name:
-      //     json['product_detail'] != null ? json['product_detail']['name'] : '',
-      // token:
-      //     json['product_detail'] != null ? json['product_detail']['token'] : '',
-      // electricalPower: json['product_detail'] != null
-      //     ? json['product_detail']['electrical_power']
-      //     : '',
-      // providerName: json['product_detail'] != null
-      //     ? json['product_detail']['provider_name']
-      //     : '',
-      // productPrice: json['product_detail'] != null
-      //     ? json['product_detail']['product_price']
-      //     : 0,
-      // discountId: json['product_detail'] != null
-      //     ? json['product_detail']['discount_id']
-      //     : '',
-      // name: json['product_detail']['name'],
-      // token: json['product_detail']['token'],
-      // electricalPower: json['product_detail']['electrical_power'],
-      // providerName: json['product_detail']['provider_name'],
-      // productPrice: json['product_detail']['product_price'],
-      // discountId: json['product_detail']['discount_id'],
     );
   }
 }

@@ -11,8 +11,8 @@ class DetailPembayaranTagihanListrik extends StatefulWidget {
   final String pelangganData;
   final DateTime createdAt;
   final String providerName;
-  final int price;
-  final int adminFee;
+  final double price;
+  final double adminFee;
   final String customerName;
   final int elecricalPower;
 
@@ -470,7 +470,17 @@ class _DetailPembayaranTagihanListrikState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MetodePembayaranTagihanScreen(),
+                  builder: (context) => MetodePembayaranTagihanScreen(
+                    id: widget.id,
+                    customerName: widget.customerName,
+                    providerName: widget.providerName,
+                    elecricalPower: widget.elecricalPower,
+                    price: widget.price,
+                    adminFee: widget.adminFee,
+                    createdAt: widget.createdAt,
+                    pelangganData: pelangganController.text,
+                    userId: widget.userId,
+                  ),
                 ),
               );
             },
