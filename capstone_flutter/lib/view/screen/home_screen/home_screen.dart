@@ -68,6 +68,16 @@ class _HomeScreenState extends State<HomeScreen>
   TextEditingController pelangganControllerBpjs = TextEditingController();
   TextEditingController pelangganControllerWifi = TextEditingController();
 
+  GlobalKey transferKey = GlobalKey();
+  GlobalKey topupKey = GlobalKey();
+  GlobalKey ppdKey = GlobalKey();
+  GlobalKey bpjsKey = GlobalKey();
+  GlobalKey plnKey = GlobalKey();
+  GlobalKey wifiKey = GlobalKey();
+  GlobalKey pdamKey = GlobalKey();
+  GlobalKey pendidikanKey = GlobalKey();
+  GlobalKey promoKey = GlobalKey();
+
   @override
   void dispose() {
     super.dispose();
@@ -280,6 +290,7 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           GestureDetector(
+                            key: transferKey,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -309,6 +320,7 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           GestureDetector(
+                            key: topupKey,
                             onTap: () {
                               Navigator.push(
                                   context,
@@ -363,6 +375,7 @@ class _HomeScreenState extends State<HomeScreen>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
+                                  key: ppdKey,
                                   padding: const EdgeInsets.only(right: 40),
                                   child: InkWell(
                                     onTap: () {},
@@ -421,6 +434,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 Padding(
+                                  key: bpjsKey,
                                   padding: const EdgeInsets.only(right: 40),
                                   child: InkWell(
                                     onTap: () {},
@@ -479,6 +493,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 InkWell(
+                                  key: plnKey,
                                   onTap: () {},
                                   child: Stack(
                                     children: [
@@ -542,6 +557,7 @@ class _HomeScreenState extends State<HomeScreen>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
+                                  key: wifiKey,
                                   padding: const EdgeInsets.only(right: 40),
                                   child: InkWell(
                                     onTap: () {},
@@ -594,6 +610,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 Padding(
+                                  key: pdamKey,
                                   padding: const EdgeInsets.only(right: 40),
                                   child: InkWell(
                                     onTap: () {},
@@ -651,6 +668,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 InkWell(
+                                  key: pendidikanKey,
                                   onTap: () {},
                                   child: Stack(
                                     children: [
@@ -716,6 +734,7 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           Padding(
+                            key: promoKey,
                             padding: const EdgeInsets.only(top: 555, left: 280),
                             child: InkWell(
                               onTap: () {
