@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,8 +9,10 @@ import '../../view_model/user_provider/user_provider.dart';
 import '../user_model.dart';
 
 class LoginController {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController =
+      TextEditingController(text: kDebugMode ? "user3@gmail.com" : "");
+  TextEditingController passwordController =
+      TextEditingController(text: kDebugMode ? "12345678" : "");
   Future<User?> loginUser(
       String email, String password, BuildContext context) async {
     final url = Uri.parse('http://34.101.78.228:2424/api/v1/login');
@@ -29,46 +32,50 @@ class LoginController {
       saveUserInfoToSharedPreferences(user.token);
 
       // Mengirim permintaan ke URL lain saat login berhasil
-      final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
-      final profileHeaders = {
-        'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer ${user.token}', // Menggunakan token JWT pada header
-      };
-      final profileResponse =
-          await http.get(profileUrl, headers: profileHeaders);
+      // final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
+      // final profileHeaders = {
+      //   'Content-Type': 'application/json',
+      //   'Authorization':
+      //       'Bearer ${user.token}', // Menggunakan token JWT pada header
+      // };
+      // final profileResponse =
+      //     await http.get(profileUrl, headers: profileHeaders);
 
-      if (profileResponse.statusCode == 200) {
-        final profileJsonData = jsonDecode(profileResponse.body);
-        // ignore: avoid_print
-        print('Profile Response body: ${profileResponse.body}');
-        final userId = User.fromJson(profileJsonData);
-        // ignore: use_build_context_synchronously
-        final userProvider = Provider.of<UserProvider>(context, listen: false);
-        userProvider.updateUserInfo(userId.name, userId.phone, userId.balance);
+      // if (profileResponse.statusCode == 200) {
+      //   final profileJsonData = jsonDecode(profileResponse.body);
+      //   // ignore: avoid_print
+      //   print('Profile Response body: ${profileResponse.body}');
+      //   final userId = User.fromJson(profileJsonData);
+      //   print('Profile Response body23: $userId');
+      //   print('Profile Response body23: ${userId.name}');
+      //   print('Profile Response body23: ${userId.balance}');
 
-        saveUserInfoToSharedPreferences2(
-          userId.name,
-          userId.phone,
-          userId.email,
-          userId.balance,
-          userId.image,
-        ); // Menggunakan model UserId
-        // ignore: avoid_print
-        print(userId.phone);
-        // ignore: avoid_print
-        print(userId.name);
-        // ignore: avoid_print
-        print(userId.email);
-        // ignore: avoid_print
-        print(userId.balance);
-        // ignore: avoid_print
-        print(userId.pin);
-        // Proses data profile sesuai kebutuhan
-      } else {
-        // ignore: avoid_print
-        print('Profile Response body: ${profileResponse.body}');
-      }
+      //   // ignore: use_build_context_synchronously
+      //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+      //   userProvider.updateUserInfo(userId.name, userId.phone, userId.balance);
+
+      //   saveUserInfoToSharedPreferences2(
+      //     userId.name,
+      //     userId.phone,
+      //     userId.email,
+      //     userId.balance,
+      //     userId.image,
+      //   ); // Menggunakan model UserId
+      //   // ignore: avoid_print
+      //   print(userId.phone);
+      //   // ignore: avoid_print
+      //   print(userId.name);
+      //   // ignore: avoid_print
+      //   print(userId.email);
+      //   // ignore: avoid_print
+      //   print(userId.balance);
+      //   // ignore: avoid_print
+      //   print(userId.pin);
+      //   // Proses data profile sesuai kebutuhan
+      // } else {
+      //   // ignore: avoid_print
+      //   print('Profile Response body: ${profileResponse.body}');
+      // }
       // ignore: avoid_print
       print(user.token);
       return user;
@@ -85,12 +92,12 @@ class LoginController {
   }
 
   void saveUserInfoToSharedPreferences2(String name, String phones,
-      String email, int balance, String image) async {
+      String email, double balance, String image) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('phone', phones);
     await prefs.setString('email', email);
-    await prefs.setInt('balance', balance);
+    await prefs.setDouble('balance', balance);
     await prefs.setString('image', image);
   }
 

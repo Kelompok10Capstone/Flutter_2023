@@ -18,7 +18,7 @@ class PinScreenWifi extends StatefulWidget {
   final int price;
   final int adminFee;
   final String customerName;
-  final int balanceNow;
+  final double balanceNow;
   const PinScreenWifi(
       {Key? key,
       required this.id,

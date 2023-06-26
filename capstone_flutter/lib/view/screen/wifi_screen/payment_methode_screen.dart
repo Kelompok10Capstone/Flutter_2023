@@ -277,8 +277,7 @@ class _PaymentMethodWifiState extends State<PaymentMethodWifi> {
                       providerName: widget.providerName,
                       adminFee: widget.adminFee,
                       price: widget.price,
-                      balanceNow:
-                          myBalance.toInt() - (widget.adminFee + widget.price),
+                      balanceNow: myBalance - (widget.adminFee + widget.price),
                     ),
                   ),
                 );

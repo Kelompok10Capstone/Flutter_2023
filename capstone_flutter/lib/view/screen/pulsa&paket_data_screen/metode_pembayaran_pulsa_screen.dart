@@ -328,8 +328,8 @@ class _MetodePembayaranPulsaScreenState
                       provider: widget.provider,
                       description: widget.description,
                       createdAt: widget.createdAt,
-                      balanceNow: int.parse(myBalance.toString()) -
-                          int.parse(widget.price),
+                      balanceNow: double.parse(myBalance.toString()) -
+                          double.parse(widget.price),
                     ),
                   ),
                 );

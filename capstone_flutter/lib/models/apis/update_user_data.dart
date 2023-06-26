@@ -33,7 +33,12 @@ class UpdateUserController {
 
   Future<String> updateUserImage(String image) async {
     try {
-      final dio = Dio(BaseOptions(contentType: Headers.jsonContentType));
+      final dio = Dio(BaseOptions(
+        contentType: Headers.jsonContentType,
+        connectTimeout: const Duration(minutes: 2),
+        receiveTimeout: const Duration(minutes: 2),
+        sendTimeout: const Duration(minutes: 2),
+      ));
       dio.interceptors.add(LogInterceptor(
           requestBody: true,
           logPrint: (object) => debugPrint(object.toString())));

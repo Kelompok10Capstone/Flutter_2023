@@ -33,7 +33,7 @@ class PulsaPaketdataData {
   final String type;
   final String code;
   final String provider;
-  final int price;
+  final double price;
   final String description;
 
   late String phone62 = '';
@@ -61,7 +61,7 @@ class PulsaPaketdataData {
     String? type,
     String? code,
     String? provider,
-    int? price,
+    double? price,
     String? description,
   }) =>
       PulsaPaketdataData(
@@ -83,7 +83,7 @@ class PulsaPaketdataData {
         type: json["type"],
         code: json["code"],
         provider: json["provider"],
-        price: json["price"],
+        price: json["price"].toDouble(),
         description: json["description"],
       );
 

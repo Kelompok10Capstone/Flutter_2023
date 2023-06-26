@@ -18,7 +18,7 @@ class PinPulsaScreen extends StatefulWidget {
   final String price;
   final String adminFee;
   final String description;
-  final int balanceNow;
+  final double balanceNow;
   final DateTime createdAt;
   final String token;
 
