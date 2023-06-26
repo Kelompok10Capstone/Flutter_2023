@@ -21,7 +21,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late SharedPreferences _prefs;
+  // late SharedPreferences _prefs;
   // String name = '';
   // String phone = '';
   @override

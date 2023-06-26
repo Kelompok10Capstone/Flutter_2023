@@ -5,10 +5,10 @@ void main() {
   testWidgets('Text Widget Test', (WidgetTester tester) async {
     // Build the widget
     await tester.pumpWidget(
-      const MaterialApp(
+      MaterialApp(
         home: Scaffold(
           body: Column(
-            children: [
+            children: const [
               Padding(
                 padding: EdgeInsets.only(left: 20, top: 5),
                 child: Text(

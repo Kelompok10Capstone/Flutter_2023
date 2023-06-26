@@ -84,7 +84,7 @@ class _PinPaketDataScreenState extends State<PinPaketDataScreen> {
       final newBalance =
           widget.balanceNow; // Ganti dengan nilai balance yang baru
       userProvider.updateUserInfo(
-          userProvider.name, userProvider.phone, newBalance as double);
+          userProvider.name, userProvider.phone, newBalance);
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,

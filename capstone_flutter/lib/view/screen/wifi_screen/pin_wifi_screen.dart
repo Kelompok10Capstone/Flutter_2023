@@ -98,6 +98,7 @@ class _PinScreenWifiState extends State<PinScreenWifi> {
       );
     } else {
       // Handle incorrect pin scenario
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
