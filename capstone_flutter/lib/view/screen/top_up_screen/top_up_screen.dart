@@ -29,6 +29,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Row(
@@ -92,10 +93,10 @@ class _TopUpScreenState extends State<TopUpScreen> {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const TopUpBni(bankCode: "009")));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const TopUpBni(bankCode: "009")));
                 },
                 child: Row(
                   children: [
@@ -135,10 +136,10 @@ class _TopUpScreenState extends State<TopUpScreen> {
           InkWell(
             onTap: () {
               Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const TopUpMandiri(bankCode: "008")));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const TopUpMandiri(bankCode: "008")));
             },
             child: Row(
               children: [
@@ -176,10 +177,9 @@ class _TopUpScreenState extends State<TopUpScreen> {
           InkWell(
             onTap: () {
               Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const TopUpBri(bankCode: "002")));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TopUpBri(bankCode: "002")));
             },
             child: Row(
               children: [

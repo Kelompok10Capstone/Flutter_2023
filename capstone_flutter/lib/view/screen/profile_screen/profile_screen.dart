@@ -53,6 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: [
@@ -68,6 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
+                        border: Border.all(color: blueColor),
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.cover,

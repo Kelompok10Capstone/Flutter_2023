@@ -18,6 +18,7 @@ class TermsCondition extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           Padding(

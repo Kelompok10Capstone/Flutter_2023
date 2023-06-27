@@ -40,6 +40,7 @@ class _TopUpBcaState extends State<TopUpBca> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -211,7 +212,8 @@ class _TopUpBcaState extends State<TopUpBca> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const NavBar(initialIndex: 0)),
+                    MaterialPageRoute(
+                        builder: (context) => const NavBar(initialIndex: 0)),
                   );
                 },
                 child: Text(

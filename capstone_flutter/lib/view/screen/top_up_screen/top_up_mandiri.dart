@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +40,7 @@ class _TopUpMandiriState extends State<TopUpMandiri> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -212,7 +212,8 @@ class _TopUpMandiriState extends State<TopUpMandiri> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const NavBar(initialIndex: 0)),
+                    MaterialPageRoute(
+                        builder: (context) => const NavBar(initialIndex: 0)),
                   );
                 },
                 child: Text(

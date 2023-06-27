@@ -20,6 +20,7 @@ class SecuritySettingScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 50),
         child: Container(
@@ -61,9 +62,9 @@ class SecuritySettingScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ForgotPinScreen()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPinScreen()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(

@@ -128,6 +128,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),

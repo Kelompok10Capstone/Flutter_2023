@@ -25,6 +25,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(

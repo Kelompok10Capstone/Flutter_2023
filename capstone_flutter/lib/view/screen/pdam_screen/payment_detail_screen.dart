@@ -37,6 +37,7 @@ class _PaymentDetailPdamState extends State<PaymentDetailPdam> {
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
