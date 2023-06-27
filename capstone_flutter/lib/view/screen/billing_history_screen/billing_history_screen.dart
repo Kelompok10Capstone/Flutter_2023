@@ -400,7 +400,8 @@ class historyWidget extends StatelessWidget {
                       ),
                       const Spacer(),
                       if (transaction.price != 0 &&
-                          transaction.status != 'unpaid')
+                          transaction.status != 'unpaid' &&
+                          transaction.productType != 'topup')
                         Text(
                           '- Rp. ${NumberFormat('#,###', 'id_ID').format(transaction.price)}',
                           style: blackFont16G.copyWith(color: redColor),
