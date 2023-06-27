@@ -176,7 +176,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                   if (widget.transaction.status == 'successful' &&
                       widget.transaction.productType == 'topup')
                     Text(
-                      ('Rp. ${widget.transaction.amount}').toString(),
+                      'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.transaction.amount)}',
                       style: blackFont14.copyWith(color: Colors.black),
                     ),
                 ],
@@ -271,8 +271,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                         if (widget.transaction.productType == 'topup' &&
                             widget.transaction.status != 'unpaid')
                           (Text(
-                            ('Rp. ${(widget.transaction.amount + widget.transaction.adminFee) - widget.transaction.discountPrice}')
-                                .toString(),
+                            // ('Rp. ${(widget.transaction.amount + widget.transaction.adminFee) - widget.transaction.discountPrice}')
+                            // .toString(),
+                            'Rp. ${NumberFormat('#,###', 'id_ID').format(widget.transaction.amount + widget.transaction.adminFee - widget.transaction.discountPrice)}',
                             style: blackFont14G.copyWith(color: Colors.black),
                           ))
                       ],
