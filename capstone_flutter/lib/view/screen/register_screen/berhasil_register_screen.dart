@@ -1,7 +1,7 @@
+import 'package:capstone_flutter/view/screen/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const/theme.dart';
-import '../home_screen/home_screen.dart';
 
 class BerhasilRegisterScreen extends StatefulWidget {
   const BerhasilRegisterScreen({super.key});
@@ -51,7 +51,7 @@ class _BerhasilRegisterScreenState extends State<BerhasilRegisterScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NavBar(initialIndex: 0),
+                  builder: (context) => const LoginScreen(),
                 ),
               );
             },
