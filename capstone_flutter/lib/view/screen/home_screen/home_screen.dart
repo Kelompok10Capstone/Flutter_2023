@@ -143,23 +143,24 @@ class _HomeScreenState extends State<HomeScreen>
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
+                  Stack(
                     children: [
-                      Stack(
+                      Row(
                         children: [
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 1,
-                            child: AspectRatio(
-                              aspectRatio: 17 / 11,
-                              child: Image.asset(
-                                'assets/motif_berwarna.png',
-                                fit: BoxFit.contain,
-                              ),
+                            child: Image.asset(
+                              'assets/motif_berwarna.png',
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 22.w, top: 45.w),
-                            child: CachedNetworkImage(
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
+                        child: Row(
+                          children: [
+                            CachedNetworkImage(
                               imageUrl: userProvider.image,
                               imageBuilder: (context, imageProvider) =>
                                   Container(
@@ -179,12 +180,13 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               ),
                               errorWidget: (_, __, ___) => Container(
-                                height: 75.r,
-                                width: 75.r,
+                                height: 80,
+                                width: 80,
                                 decoration: BoxDecoration(
                                   image: const DecorationImage(
-                                      image: AssetImage(
-                                          'assets/profile_home.png')),
+                                    image:
+                                        AssetImage('assets/profile_home.png'),
+                                  ),
                                   borderRadius: BorderRadius.circular(50),
                                   border: Border.all(
                                     color: const Color(0xFF1D2660),
@@ -194,27 +196,35 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 58, left: 125),
-                            child: Text(
-                              username.toUpperCase(),
-                              style: whiteFont18.copyWith(
-                                color: Colors.white,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    username.toUpperCase(),
+                                    style: whiteFont18.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    phoneNumber,
+                                    style: whiteFont18.copyWith(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 87, left: 125),
-                            child: Text(
-                              phoneNumber,
-                              style: whiteFont14.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -222,560 +232,601 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               );
                             },
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 58, left: 338),
-                              child: SizedBox(
-                                width: 48,
-                                height: 48,
-                                child: Icon(Icons.notifications_outlined,
-                                    color: Colors.white, size: 28),
-                              ),
-                            ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 70,
+                            left: MediaQuery.of(context).size.width * 0.85,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 110,
-                            ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 1,
-                              child: AspectRatio(
-                                aspectRatio: 17 / 11,
-                                child: Image.asset(
-                                  'assets/motif_polos.png',
-                                  fit: BoxFit.cover,
+                          child: const Row(
+                            children: [
+                              SizedBox(
+                                child: Icon(
+                                  Icons.notifications_outlined,
+                                  color: Colors.white,
+                                  size: 28,
                                 ),
-                              ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 130),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 1,
+                          child: AspectRatio(
+                            aspectRatio: 17 / 11,
+                            child: Image.asset(
+                              'assets/motif_polos.png',
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.22,
-                                left: MediaQuery.of(context).size.width * 0.06),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 2,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.11,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.22,
+                          left: MediaQuery.of(context).size.width * 0.06,
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 2,
+                              width: MediaQuery.of(context).size.width * 0.11,
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Text(
+                                "skuypay",
+                                style: whiteFont16.copyWith(
                                   color: Colors.white,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: Text(
-                                    "skuypay",
-                                    style: whiteFont16.copyWith(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width *
-                                          0.04),
-                                  child: Container(
-                                    height: 2,
-                                    width: MediaQuery.of(context).size.height *
-                                        0.275,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 250, left: 44),
-                            child: Text(
-                              'Saldo',
-                              style: whiteFont16.copyWith(
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.03),
+                              child: Container(
+                                height: 2,
+                                width:
+                                    MediaQuery.of(context).size.height * 0.25,
                                 color: Colors.white,
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 260,
+                          left: 44,
+                        ),
+                        child: Text(
+                          'Saldo',
+                          style: whiteFont16.copyWith(
+                            color: Colors.white,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 270, left: 44),
-                            child: Text(
-                              'Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)}',
-                              style: whiteFont25.copyWith(
-                                color: Colors.white,
-                              ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 280, left: 44),
+                        child: Text(
+                          'Rp. ${NumberFormat('#,###', 'id_ID').format(myBalance)}',
+                          style: whiteFont25.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TransferScreen(),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 262,
+                            left: MediaQuery.of(context).size.width * 0.6,
+                            // left: 224,
+                          ),
+                          child: const SizedBox(
+                            width: 48,
+                            height: 48,
+                            child: Icon(
+                              Icons.send_to_mobile_outlined,
+                              color: Color(0xFFFCDB80),
+                              size: 26,
                             ),
                           ),
-                          GestureDetector(
-                            key: transferKey,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const TransferScreen(),
-                                ),
-                              );
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 252, left: 254),
-                              child: SizedBox(
-                                width: 48,
-                                height: 48,
-                                child: Icon(Icons.send_to_mobile_outlined,
-                                    color: Color(0xFFFCDB80), size: 26),
-                              ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 305,
+                          left: MediaQuery.of(context).size.width * 0.61,
+                        ),
+                        child: Text(
+                          'Transfer',
+                          style: whiteFont12M.copyWith(
+                            // fontSize: 10,
+                            color: const Color(0xFFFCDB80),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TopUpScreen(),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 262,
+                            left: MediaQuery.of(context).size.width * 0.75,
+                            // left: 280,
+                          ),
+                          child: const SizedBox(
+                            width: 48,
+                            height: 48,
+                            child: Icon(
+                              Icons.add_card_outlined,
+                              color: Color(0xFFFCDB80),
+                              size: 26,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 294, left: 256),
-                            child: Text(
-                              'Transfer',
-                              style: whiteFont12M.copyWith(
-                                // fontSize: 10,
-                                color: const Color(0xFFFCDB80),
-                              ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 305,
+                          left: MediaQuery.of(context).size.width * 0.77,
+                        ),
+                        child: Text(
+                          'Top Up',
+                          style: whiteFont12M.copyWith(
+                            color: const Color(0xFFFCDB80),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.45,
+                        ),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 4,
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.only(top: 25),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.18),
+                                  spreadRadius: 1,
+                                  blurRadius: 9,
+                                  offset: const Offset(0, -8)),
+                            ],
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(22),
+                              topRight: Radius.circular(22),
                             ),
                           ),
-                          GestureDetector(
-                            key: topupKey,
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const TopUpScreen()));
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 252, left: 314),
-                              child: SizedBox(
-                                width: 48,
-                                height: 48,
-                                child: Icon(Icons.add_card_outlined,
-                                    color: Color(0xFFFCDB80), size: 26),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 294, left: 318),
-                            child: Text(
-                              'Top Up',
-                              style: whiteFont12M.copyWith(
-                                color: const Color(0xFFFCDB80),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 345),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height / 4,
-                              width: MediaQuery.of(context).size.width,
-                              padding: const EdgeInsets.only(top: 25),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.18),
-                                      spreadRadius: 1,
-                                      blurRadius: 9,
-                                      offset: const Offset(0, -8)),
-                                ],
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(22),
-                                  topRight: Radius.circular(22),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 360, left: 28),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  key: ppdKey,
-                                  padding: const EdgeInsets.only(right: 40),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: 85,
-                                          height: 85,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFEDF8FB),
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Icon(
-                                                  Icons.phone_iphone_outlined,
-                                                  color: Color(0xFF2B3990),
-                                                  size: 30),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                'Pulsa & Data',
-                                                style: whiteFont12E.copyWith(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.48,
+                          left: MediaQuery.of(context).size.width * 0.07,
+                          right: MediaQuery.of(context).size.width * 0.07,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 26),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 85,
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFEDF8FB),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                              Icons.phone_iphone_outlined,
+                                              color: Color(0xFF2B3990),
+                                              size: 30),
+                                          const SizedBox(
+                                            height: 7,
                                           ),
-                                        ),
-                                        Positioned.fill(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            child: InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(42),
-                                              splashColor:
-                                                  Colors.green.withOpacity(0.5),
-                                              highlightColor:
-                                                  Colors.blue.withOpacity(0.4),
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const PulsaDanPaketDataScreen(),
-                                                  ),
-                                                );
-                                              },
+                                          Text(
+                                            'Pulsa & Data',
+                                            style: whiteFont12E.copyWith(
+                                              color: Colors.black,
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  key: bpjsKey,
-                                  padding: const EdgeInsets.only(right: 40),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: 85,
-                                          height: 85,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFEDF8FB),
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Image(
-                                                image: AssetImage(
-                                                  'assets/family_restroom.png',
-                                                ),
-                                                fit: BoxFit.cover,
-                                                height: 30,
-                                                width: 30,
+                                    Positioned.fill(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(42),
+                                          splashColor:
+                                              Colors.green.withOpacity(0.5),
+                                          highlightColor:
+                                              Colors.blue.withOpacity(0.4),
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const PulsaDanPaketDataScreen(),
                                               ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                'BPJS',
-                                                style: whiteFont12E.copyWith(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Positioned.fill(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            child: InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(42),
-                                              splashColor:
-                                                  Colors.green.withOpacity(0.5),
-                                              highlightColor:
-                                                  Colors.blue.withOpacity(0.4),
-                                              onTap: () {
-                                                _showModalBottomSheetBpjs(
-                                                    context);
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  key: plnKey,
-                                  onTap: () {},
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width: 85,
-                                        height: 85,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xFFEDF8FB),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Image(
-                                              image: AssetImage(
-                                                'assets/flash_on.png',
-                                              ),
-                                              fit: BoxFit.contain,
-                                              height: 30,
-                                              width: 30,
-                                            ),
-                                            const SizedBox(
-                                              height: 7,
-                                            ),
-                                            Text(
-                                              'PLN',
-                                              style: whiteFont12E.copyWith(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
+                                            );
+                                          },
                                         ),
                                       ),
-                                      Positioned.fill(
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          child: InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(42),
-                                            splashColor:
-                                                Colors.green.withOpacity(0.5),
-                                            highlightColor:
-                                                Colors.blue.withOpacity(0.4),
-                                            onTap: () {
-                                              _showModalBottomSheetToken(
-                                                  context);
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 460, left: 28),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  key: wifiKey,
-                                  padding: const EdgeInsets.only(right: 40),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: 85,
-                                          height: 85,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFEDF8FB),
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Icon(Icons.wifi,
-                                                  color: Color(0xFF21660E),
-                                                  size: 30),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                'Wifi',
-                                                style: whiteFont12E.copyWith(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Positioned.fill(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            child: InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(42),
-                                              splashColor:
-                                                  Colors.green.withOpacity(0.5),
-                                              highlightColor:
-                                                  Colors.blue.withOpacity(0.4),
-                                              onTap: () {
-                                                _showModalBottomSheetWifi();
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Padding(
-                                  key: pdamKey,
-                                  padding: const EdgeInsets.only(right: 40),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: 85,
-                                          height: 85,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFEDF8FB),
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Icon(
-                                                  Icons.water_drop_outlined,
-                                                  color: Color(0xFF27AAE1),
-                                                  size: 30),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                'PDAM',
-                                                style: whiteFont12E.copyWith(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Positioned.fill(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            child: InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(42),
-                                              splashColor:
-                                                  Colors.green.withOpacity(0.5),
-                                              highlightColor:
-                                                  Colors.blue.withOpacity(0.4),
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const PdamScreen()));
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  key: pendidikanKey,
-                                  onTap: () {},
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width: 85,
-                                        height: 85,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xFFEDF8FB),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(Icons.school_outlined,
-                                                color: Color(0xFFE07664),
-                                                size: 30),
-                                            const SizedBox(
-                                              height: 7,
-                                            ),
-                                            Text(
-                                              'Pendidikan',
-                                              style: whiteFont12E.copyWith(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Positioned.fill(
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          child: InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(42),
-                                            splashColor:
-                                                Colors.green.withOpacity(0.5),
-                                            highlightColor:
-                                                Colors.blue.withOpacity(0.4),
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const PendidikanScreen()));
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 555, left: 30),
-                            child: Text(
-                              'Promo',
-                              style: whiteFont16M.copyWith(
-                                color: Colors.black,
                               ),
                             ),
-                          ),
-                          Padding(
-                            key: promoKey,
-                            padding: const EdgeInsets.only(top: 555, left: 280),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AllPromoScreen()));
-                              },
-                              child: Row(
+                            Padding(
+                              key: bpjsKey,
+                              padding: const EdgeInsets.only(right: 26),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 85,
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFEDF8FB),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Image(
+                                            image: AssetImage(
+                                              'assets/family_restroom.png',
+                                            ),
+                                            fit: BoxFit.cover,
+                                            height: 30,
+                                            width: 30,
+                                          ),
+                                          const SizedBox(
+                                            height: 7,
+                                          ),
+                                          Text(
+                                            'BPJS',
+                                            style: whiteFont12E.copyWith(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned.fill(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(42),
+                                          splashColor:
+                                              Colors.green.withOpacity(0.5),
+                                          highlightColor:
+                                              Colors.blue.withOpacity(0.4),
+                                          onTap: () {
+                                            _showModalBottomSheetBpjs(context);
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              key: plnKey,
+                              onTap: () {},
+                              child: Stack(
                                 children: [
-                                  Text(
-                                    'Lihat Semua',
-                                    style: whiteFont14.copyWith(
-                                      color: const Color(0xFF2B3990),
+                                  Container(
+                                    width: 85,
+                                    height: 85,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFEDF8FB),
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Image(
+                                          image: AssetImage(
+                                            'assets/flash_on.png',
+                                          ),
+                                          fit: BoxFit.contain,
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        const SizedBox(
+                                          height: 7,
+                                        ),
+                                        Text(
+                                          'PLN',
+                                          style: whiteFont12E.copyWith(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  const Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Color(0xFF2B3990),
-                                    size: 16,
+                                  Positioned.fill(
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        borderRadius: BorderRadius.circular(42),
+                                        splashColor:
+                                            Colors.green.withOpacity(0.5),
+                                        highlightColor:
+                                            Colors.blue.withOpacity(0.4),
+                                        onTap: () {
+                                          _showModalBottomSheetToken(context);
+                                        },
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.61,
+                          left: MediaQuery.of(context).size.width * 0.07,
+                          right: MediaQuery.of(context).size.width * 0.07,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              key: wifiKey,
+                              padding: const EdgeInsets.only(right: 26),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 85,
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFEDF8FB),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.wifi,
+                                            color: Color(0xFF21660E),
+                                            size: 30,
+                                          ),
+                                          const SizedBox(
+                                            height: 7,
+                                          ),
+                                          Text(
+                                            'Wifi',
+                                            style: whiteFont12E.copyWith(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned.fill(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(42),
+                                          splashColor:
+                                              Colors.green.withOpacity(0.5),
+                                          highlightColor:
+                                              Colors.blue.withOpacity(0.4),
+                                          onTap: () {
+                                            _showModalBottomSheetWifi();
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              key: pdamKey,
+                              padding: const EdgeInsets.only(right: 26),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 85,
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFEDF8FB),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(Icons.water_drop_outlined,
+                                              color: Color(0xFF27AAE1),
+                                              size: 30),
+                                          const SizedBox(
+                                            height: 7,
+                                          ),
+                                          Text(
+                                            'PDAM',
+                                            style: whiteFont12E.copyWith(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned.fill(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(42),
+                                          splashColor:
+                                              Colors.green.withOpacity(0.5),
+                                          highlightColor:
+                                              Colors.blue.withOpacity(0.4),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const PdamScreen(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              key: pendidikanKey,
+                              onTap: () {},
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: 85,
+                                    height: 85,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFEDF8FB),
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.school_outlined,
+                                            color: Color(0xFFE07664), size: 30),
+                                        const SizedBox(
+                                          height: 7,
+                                        ),
+                                        Text(
+                                          'Pendidikan',
+                                          style: whiteFont12E.copyWith(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Positioned.fill(
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        borderRadius: BorderRadius.circular(42),
+                                        splashColor:
+                                            Colors.green.withOpacity(0.5),
+                                        highlightColor:
+                                            Colors.blue.withOpacity(0.4),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PendidikanScreen(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.74,
+                          left: 20,
+                        ),
+                        child: Text(
+                          'Promo',
+                          style: whiteFont16M.copyWith(
+                            color: Colors.black,
                           ),
-                        ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.74,
+                          left: MediaQuery.of(context).size.width * 0.7,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AllPromoScreen(),
+                              ),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                'Lihat Semua',
+                                style: whiteFont14.copyWith(
+                                  color: const Color(0xFF2B3990),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: Color(0xFF2B3990),
+                                size: 16,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -786,8 +837,7 @@ class _HomeScreenState extends State<HomeScreen>
                       height: 160,
                       aspectRatio: 16 / 9,
                       scrollDirection: Axis.horizontal,
-                      // scrollPhysics: const NeverScrollableScrollPhysics(),
-                      viewportFraction: 0.9,
+                      viewportFraction: 0.92,
                       pauseAutoPlayOnTouch: true,
                       autoPlayAnimationDuration: const Duration(seconds: 1),
                       autoPlay: true,
@@ -805,10 +855,11 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AllPromoScreen()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AllPromoScreen(),
+                            ),
+                          );
                         },
                       );
                     },
@@ -911,6 +962,7 @@ class _HomeScreenState extends State<HomeScreen>
                               ),
                             );
                           } else if (_tabController?.index == 1) {
+                            // Jika tab Tagihan aktif, arahkan pengguna ke layar Tagihan
                             await tagihanListrikProvider
                                 .handleTagihanListrikIquiry(
                               pelangganControllerTagihanListrik.text,
@@ -947,132 +999,135 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       builder: (BuildContext context) {
-        return StatefulBuilder(builder: (context, StateSetter setState) {
-          return SingleChildScrollView(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context)
-                  .viewInsets
-                  .bottom, // Adjust bottom padding based on keyboard height
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 350,
-              // height: MediaQuery.of(context).size.height / 2.7,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        'BPJS Kesehatan',
-                        style: blackText24.copyWith(fontSize: 18),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'No. Pelanggan',
-                      style: blackFont14.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(height: 5),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black),
-                      ),
-                      child: TextField(
-                        controller: pelangganControllerBpjs,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintStyle: blackFont12,
-                          hintText: 'Masukkan No Pelanggan',
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context)
+                    .viewInsets
+                    .bottom, // Adjust bottom padding based on keyboard height
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 350,
+                // height: MediaQuery.of(context).size.height / 2.7,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          'BPJS Kesehatan',
+                          style: blackText24.copyWith(fontSize: 18),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Periode',
-                      style: blackFont14.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(height: 5),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black),
+                      const SizedBox(height: 20),
+                      Text(
+                        'No. Pelanggan',
+                        style:
+                            blackFont14.copyWith(fontWeight: FontWeight.w500),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          value: selectedMonth,
-                          hint: Text(
-                            'Pilih Bulan',
-                            style: blackFont12,
+                      const SizedBox(height: 5),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: TextField(
+                          controller: pelangganControllerBpjs,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintStyle: blackFont12,
+                            hintText: 'Masukkan No Pelanggan',
                           ),
-                          onChanged: (value) {
-                            setState(() {
-                              selectedMonth = value!;
-                            });
-                          },
-                          items: months.map((String month) {
-                            return DropdownMenuItem<String>(
-                              value: month,
-                              child: Text(
-                                month,
-                                style: blackFont12,
-                              ),
-                            );
-                          }).toList(),
                         ),
                       ),
-                    ),
-                    Expanded(
-                        child: SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                    )),
-                    // const SizedBox(height: 25),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Periode',
+                        style:
+                            blackFont14.copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: 5),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            value: selectedMonth,
+                            hint: Text(
+                              'Pilih Bulan',
+                              style: blackFont12,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedMonth = value!;
+                              });
+                            },
+                            items: months.map((String month) {
+                              return DropdownMenuItem<String>(
+                                value: month,
+                                child: Text(
+                                  month,
+                                  style: blackFont12,
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                      )),
 
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 52,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: blueColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 15),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 52,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: blueColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PaymentDetailBpjs()));
+                            },
+                            child: Text(
+                              'Lanjutkan',
+                              style: whiteFont14,
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PaymentDetailBpjs()));
-                          },
-                          child: Text(
-                            'Lanjutkan',
-                            style: whiteFont14,
-                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          },
+        );
       },
     );
   }
