@@ -4,7 +4,7 @@ import 'dart:convert';
 import '../wifi_model.dart';
 
 class WifiInquiryApi {
-  static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/inquiry';
+  static const baseUrl = 'http://34.101.114.216:2424/api/v1/wifi/inquiry';
 
   static Future<WiFiInquiryResponse?> inquireWiFiBill(
     WiFiInquiryRequest request,

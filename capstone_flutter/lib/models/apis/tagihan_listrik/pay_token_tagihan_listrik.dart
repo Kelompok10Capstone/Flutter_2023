@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class PayTokenTagihanListrik {
   static const baseUrl =
-      'http://34.101.78.228:2424/api/v1/electricity/postpaid/pay';
+      'http://34.101.114.216:2424/api/v1/electricity/postpaid/pay';
 
   final String id;
   final String token;

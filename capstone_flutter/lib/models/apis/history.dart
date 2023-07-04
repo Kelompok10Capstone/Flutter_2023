@@ -6,7 +6,7 @@ import '../history_model.dart';
 class TransactionApi {
   static Future<List<Transaction>> fetchTransactions(String token) async {
     const String baseUrl =
-        'http://34.101.78.228:2424/api/v1/user/transactions/';
+        'http://34.101.114.216:2424/api/v1/user/transactions/';
 
     final Uri uri = Uri.parse(baseUrl);
     final Map<String, String> queryParams = {

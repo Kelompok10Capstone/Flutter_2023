@@ -6,7 +6,7 @@ Future<bool> checkPinPayment(String token, String pin) async {
     'pin': pin,
   };
 
-  final pinUrl = Uri.parse('http://34.101.78.228:2424/api/v1/user/pin');
+  final pinUrl = Uri.parse('http://34.101.114.216:2424/api/v1/user/pin');
   final pinHeaders = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $token',

@@ -7,7 +7,7 @@ class PinController {
   PinController(this.token);
 
   Future<bool> createPin(String pin) async {
-    final url = Uri.parse('http://34.101.78.228:2424/api/v1/user/pin');
+    final url = Uri.parse('http://34.101.114.216:2424/api/v1/user/pin');
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

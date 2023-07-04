@@ -10,7 +10,7 @@ class LoginController {
   TextEditingController passwordController = TextEditingController();
   Future<User?> loginUser(
       String email, String password, BuildContext context) async {
-    final url = Uri.parse('http://34.101.78.228:2424/api/v1/login');
+    final url = Uri.parse('http://34.101.114.216:2424/api/v1/login');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'email': email, 'password': password});
     // ignore: avoid_print

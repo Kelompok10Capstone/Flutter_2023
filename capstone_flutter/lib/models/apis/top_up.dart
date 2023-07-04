@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class TopUpApi {
   static const String baseUrl =
-      'http://34.101.78.228:2424/api/v1/amount'; // Ganti dengan URL endpoint Anda
+      'http://34.101.114.216:2424/api/v1/amount'; // Ganti dengan URL endpoint Anda
 
   // Fungsi untuk membuat Virtual Account
   static Future<TopUpR> createVirtualAccount(

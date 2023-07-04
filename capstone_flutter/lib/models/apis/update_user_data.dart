@@ -11,7 +11,7 @@ class UpdateUserController {
   UpdateUserController(this.token);
 
   Future<bool> updateUserById(String name, String email, String phone) async {
-    final url = Uri.parse('http://34.101.78.228:2424/api/v1/user');
+    final url = Uri.parse('http://34.101.114.216:2424/api/v1/user');
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
@@ -48,7 +48,7 @@ class UpdateUserController {
       final fileData = FormData.fromMap({'image': fileImage});
 
       var response = await dio.put(
-        'http://34.101.78.228:2424/api/v1/user/image',
+        'http://34.101.114.216:2424/api/v1/user/image',
         data: fileData,
         options: Options(
           contentType: Headers.jsonContentType,

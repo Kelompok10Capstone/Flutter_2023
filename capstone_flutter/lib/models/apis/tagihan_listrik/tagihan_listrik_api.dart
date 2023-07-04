@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class TagihanListrikInquiryApi {
   static const baseUrl =
-      'http://34.101.78.228:2424/api/v1/electricity/postpaid/inquiry';
+      'http://34.101.114.216:2424/api/v1/electricity/postpaid/inquiry';
 
   static Future<TagihanListrikInquiryResponse?> inquireTagihanListrikBill(
     TagihanListrikInquiryRequest request,

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PayPaketData {
-  static const baseUrl = 'http://34.101.78.228:2424/api/v1/user/ppd';
+  static const baseUrl = 'http://34.101.114.216:2424/api/v1/user/ppd';
 
   final String paketdata;
   final String productid;

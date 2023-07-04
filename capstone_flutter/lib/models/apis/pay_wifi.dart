@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PayWifi {
-  static const baseUrl = 'http://34.101.78.228:2424/api/v1/wifi/pay';
+  static const baseUrl = 'http://34.101.114.216:2424/api/v1/wifi/pay';
 
   final String id;
   final String token;

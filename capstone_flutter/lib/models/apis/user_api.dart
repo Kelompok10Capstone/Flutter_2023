@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class UserApiController {
   Future<User?> getUserProfile(String token) async {
     try {
-      final profileUrl = Uri.parse('http://34.101.78.228:2424/api/v1/profile');
+      final profileUrl = Uri.parse('http://34.101.114.216:2424/api/v1/profile');
       final profileHeaders = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token', // Menggunakan token JWT pada header
